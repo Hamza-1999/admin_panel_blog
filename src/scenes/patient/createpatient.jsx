@@ -1,18 +1,38 @@
 import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
+import { useState } from "react";
 
-const CreatePatient= () => {
-  const isNonMobile = useMediaQuery("(min-width:600px)");
+const CreatePatient = () => {
+  // const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  const [selectedDate, setSelectedDate] = useState("Jan");
+
+  const handleDateChange = (event) => {
+    setSelectedDate(event.target.value);
+  };
 
   const handleFormSubmit = (values) => {
     console.log(values);
   };
 
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   return (
-    
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
 
@@ -33,13 +53,17 @@ const CreatePatient= () => {
             <Box
               display="grid"
               gap="30px"
-              gridTemplateColumns="repeat(4, minmax(0, 1fr))"
               sx={{
-                "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                // "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(4, minmax(0, 1fr))",
+                },
               }}
             >
               <TextField
-               size="small"
+                size="small"
                 fullWidth
                 variant="filled"
                 type="text"
@@ -47,20 +71,26 @@ const CreatePatient= () => {
                 onBlur={handleBlur}
                 onChange={handleChange}
                 value={values.firstName}
-                  name="firstName"
+                name="firstName"
                 error={!!touched.firstName && !!errors.firstName}
                 helperText={touched.firstName && errors.firstName}
                 sx={{ gridColumn: "span 1" }}
               />
-                <Select value={2} style={{ marginTop: 100, marginLeft: 100 }}>
-      <MenuItem value={1}>Jan</MenuItem>
-      <MenuItem value={2}>Feb</MenuItem>
-      <MenuItem value={3}>March</MenuItem>
-      <MenuItem value={4}>April</MenuItem>
-      <MenuItem value={5}>May</MenuItem>
-    </Select>
+              <Select
+                value={selectedDate}
+                onChange={handleDateChange}
+                sx={{
+                  height: "45px",
+                }}
+              >
+                {months.map((name) => (
+                  <MenuItem key={name} value={name}>
+                    {name}
+                  </MenuItem>
+                ))}
+              </Select>
               <TextField
-               size="small"
+                size="small"
                 fullWidth
                 variant="filled"
                 type="text"
@@ -74,7 +104,7 @@ const CreatePatient= () => {
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
-               size="small"
+                size="small"
                 fullWidth
                 variant="filled"
                 type="text"
@@ -88,7 +118,7 @@ const CreatePatient= () => {
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
-               size="small"
+                size="small"
                 fullWidth
                 variant="filled"
                 type="text"
@@ -102,7 +132,7 @@ const CreatePatient= () => {
                 sx={{ gridColumn: "span 1" }}
               />
               <TextField
-               size="small"
+                size="small"
                 fullWidth
                 variant="filled"
                 type="text"
@@ -129,10 +159,13 @@ const CreatePatient= () => {
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 1" }}
               />
-  
-              
             </Box>
-            <Box display="flex" justifyContent="end" mt="20px">
+            <Box
+              display="flex"
+              justifyContent="end"
+              mt="20px"
+              paddingBottom={"20px"}
+            >
               <Button type="submit" color="secondary" variant="contained">
                 Create Patient
               </Button>
@@ -165,7 +198,6 @@ const initialValues = {
   contact: "",
   address1: "",
   address2: "",
-  
 };
 
 export default CreatePatient;
