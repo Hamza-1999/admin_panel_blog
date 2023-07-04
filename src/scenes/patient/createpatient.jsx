@@ -32,6 +32,7 @@ const CreatePatient = () => {
     "Nov",
     "Dec",
   ];
+
   return (
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
@@ -79,8 +80,17 @@ const CreatePatient = () => {
               <Select
                 value={selectedDate}
                 onChange={handleDateChange}
+                MenuProps={{
+                  getContentAnchorEl: null,
+                  PaperProps: {
+                    style: {
+                      maxHeight: 200,
+                    },
+                  },
+                }}
                 sx={{
                   height: "45px",
+                  gridColumn: "span 1",
                 }}
               >
                 {months.map((name) => (
