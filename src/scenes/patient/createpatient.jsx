@@ -1,9 +1,10 @@
-import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
+import { Box, Button, TextField, Select, MenuItem, Stack } from "@mui/material";
 import { Formik } from "formik";
 import * as yup from "yup";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState } from "react";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 const CreatePatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -52,18 +53,67 @@ const CreatePatient = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Box
-              display="grid"
-              gap="30px"
+              display="flex"
+              flexDirection="column"
+              gap={4}
               sx={{
-                // "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-                gridTemplateColumns: {
-                  xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(2, minmax(0, 1fr))",
-                  md: "repeat(4, minmax(0, 1fr))",
-                },
+                border: "1px solid red",
               }}
             >
-              <TextField
+              <Stack
+                width={"100%"}
+                gap={5}
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <CustomDatePicker labelText="Date Of Birth" />
+                <CustomDatePicker labelText="Date Of Death" />
+              </Stack>
+
+              <Box
+                display="grid"
+                gap="30px"
+                sx={{
+                  // "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
+                  gridTemplateColumns: {
+                    xs: "repeat(1, minmax(0, 1fr))",
+                    sm: "repeat(2, minmax(0, 1fr))",
+                    md: "repeat(4, minmax(0, 1fr))",
+                  },
+                }}
+              >
+                <TextField
+                  size="small"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="First Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.firstName}
+                  name="firstName"
+                  error={!!touched.firstName && !!errors.firstName}
+                  helperText={touched.firstName && errors.firstName}
+                  sx={{ gridColumn: "span 1" }}
+                />
+                <TextField
+                  size="small"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Last Name"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.lastName}
+                  name="lastName"
+                  error={!!touched.lastName && !!errors.lastName}
+                  helperText={touched.lastName && errors.lastName}
+                  sx={{ gridColumn: "span 1" }}
+                />
+              </Box>
+
+              {/* <TextField
                 size="small"
                 fullWidth
                 variant="filled"
@@ -168,7 +218,7 @@ const CreatePatient = () => {
                 error={!!touched.address2 && !!errors.address2}
                 helperText={touched.address2 && errors.address2}
                 sx={{ gridColumn: "span 1" }}
-              />
+              /> */}
             </Box>
             <Box
               display="flex"
