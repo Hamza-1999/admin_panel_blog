@@ -1,7 +1,6 @@
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import * as React from "react";
-import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 
 export default function CustomDatePicker({ labelText }) {
