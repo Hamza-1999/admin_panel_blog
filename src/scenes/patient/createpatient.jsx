@@ -1,63 +1,63 @@
-import {
-  Box,
-  Button,
-  TextField,
-  Select,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Stack, Typography } from "@mui/material";
 import { Formik } from "formik";
-import * as yup from "yup";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import { useState } from "react";
+// import { useState } from "react";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import FormInfoHeading from "../../components/FormInfoHeading";
+import { useDispatch } from "react-redux";
+import { newPatientAction } from "../../features/actions/createPatientAction";
+// import { createPatientSchema } from "../../schemas";
 
 const CreatePatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
-  const [selectGender, setSelectGender] = useState("");
-  const [selectCity, setSelectCity] = useState("");
-  const [selectState, setSelectState] = useState("");
-  const [selectCountry, setSelectCountry] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [raceStatus, setRaceStatus] = useState("");
-  const [residenceType, setResidenceType] = useState("");
-  const [emergencyContactCity, setEmergencyContactCity] = useState("");
-  const [emergencyContactState, setEmergencyContactState] = useState("");
+  const dispatch = useDispatch();
 
-  const handleGenderChange = (value) => {
-    setSelectGender(value);
-  };
-  const handleCityChange = (value) => {
-    setSelectCity(value);
-  };
-  const handleStateChange = (value) => {
-    setSelectState(value);
-  };
-  const handleCountryChange = (value) => {
-    setSelectCountry(value);
-  };
-  const handleMaritalChange = (value) => {
-    setMaritalStatus(value);
-  };
-  const handleRaceChange = (value) => {
-    setRaceStatus(value);
-  };
-  const handleResidenceType = (value) => {
-    setResidenceType(value);
-  };
-  const handleEmergencyCity = (value) => {
-    setEmergencyContactCity(value);
-  };
-  const handleEmergencyState = (value) => {
-    setEmergencyContactState(value);
+  // initial formik values
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    dateOfBirth: "",
+    dateOfDeath: "",
+    address: "",
+    zipCode: "",
+    homePhone: "",
+    cellPhone: "",
+    workPhone: "",
+    ext: "",
+    email: "",
+    drivingLicense: "",
+    emergencyContactFirstName: "",
+    emergencyContactLastName: "",
+    emergencyContactAddress: "",
+    emergencyContactCity: "",
+    emergencyContactState: "",
+    emergencyContactZipCode: "",
+
+    // ids field values
+    companyId: "",
+    branchId: "",
+    countryId: "",
+    cityId: "",
+    stateId: "",
+    accountTypeId: "",
+    employmentStatusId: "",
+    ethnicityId: "",
+    genderIdentityId: "",
+    maritalStatusId: "",
+    raceStatusId: "",
+    referralSourceId: "",
+    relationShipToPatientId: "",
+    residenceTypeId: "",
+    sexualOrientationId: "",
+    studentStatusId: "",
   };
 
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = (values, action) => {
+    dispatch(newPatientAction(values));
+    console.log(values, "checking submit values");
+    action.resetForm();
   };
 
   // gender options array
@@ -105,7 +105,7 @@ const CreatePatient = () => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        validationSchema={checkoutSchema}
+        // validationSchema={createPatientSchema}
       >
         {({
           values,
@@ -185,22 +185,25 @@ const CreatePatient = () => {
                   sx={{ gridColumn: "span 1" }}
                 />
                 <CustomSelectBox
-                  value={selectGender}
-                  onChange={handleGenderChange}
+                  value={values.genderIdentityId}
+                  handleChange={handleChange}
                   selectLabel="Gender"
                   selectOptions={genderOptions}
+                  name="genderIdentityId"
                 />
                 <CustomSelectBox
-                  value={maritalStatus}
-                  onChange={handleMaritalChange}
+                  value={values.maritalStatusId}
+                  handleChange={handleChange}
                   selectLabel="Marital Status"
                   selectOptions={maritalOptions}
+                  name="maritalStatusId"
                 />
                 <CustomSelectBox
-                  value={raceStatus}
-                  onChange={handleRaceChange}
+                  value={values.raceStatusId}
+                  handleChange={handleChange}
                   selectLabel="Race Status"
                   selectOptions={raceOptions}
+                  name="raceStatusId"
                 />
               </Box>
               {/* contact details */}
@@ -224,11 +227,11 @@ const CreatePatient = () => {
                   label="Phone Number"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.phoneNumber}
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  error={!!touched.phoneNumber && !!errors.phoneNumber}
-                  helperText={touched.phoneNumber && errors.phoneNumber}
+                  value={values.cellPhone}
+                  id="cellPhone"
+                  name="cellPhone"
+                  error={!!touched.cellPhone && !!errors.cellPhone}
+                  helperText={touched.cellPhone && errors.cellPhone}
                   sx={{ gridColumn: "span 1" }}
                 />
                 <TextField
@@ -321,28 +324,32 @@ const CreatePatient = () => {
                   sx={{ gridColumn: "span 1" }}
                 />
                 <CustomSelectBox
-                  value={selectCity}
-                  onChange={handleCityChange}
+                  value={values.cityId}
+                  handleChange={handleChange}
                   selectLabel={"City"}
                   selectOptions={cityOptions}
+                  name="cityId"
                 />
                 <CustomSelectBox
-                  value={selectState}
-                  onChange={handleStateChange}
+                  value={values.stateId}
+                  handleChange={handleChange}
                   selectLabel={"State"}
                   selectOptions={stateOptions}
+                  name="stateId"
                 />
                 <CustomSelectBox
-                  value={selectCountry}
-                  onChange={handleCountryChange}
+                  value={values.countryId}
+                  handleChange={handleChange}
                   selectLabel={"Country"}
                   selectOptions={countryOption}
+                  name="countryId"
                 />
                 <CustomSelectBox
-                  value={residenceType}
-                  onChange={handleResidenceType}
+                  value={values.residenceTypeId}
+                  handleChange={handleChange}
                   selectLabel={"Residence Type"}
                   selectOptions={residenceOptions}
+                  name="residenceTypeId"
                 />
 
                 <TextField
@@ -419,16 +426,18 @@ const CreatePatient = () => {
                 />
 
                 <CustomSelectBox
-                  value={emergencyContactCity}
-                  onChange={handleEmergencyCity}
+                  value={values.emergencyContactCity}
+                  handleChange={handleChange}
                   selectLabel={"City"}
                   selectOptions={cityOptions}
+                  name="emergencyContactCity"
                 />
                 <CustomSelectBox
-                  value={emergencyContactState}
-                  onChange={handleEmergencyState}
+                  value={values.emergencyContactState}
+                  handleChange={handleChange}
                   selectLabel={"State"}
                   selectOptions={stateOptions}
+                  name="emergencyContactState"
                 />
 
                 <TextField
@@ -461,16 +470,16 @@ const CreatePatient = () => {
                   label="Zipcode"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.emegencyContactZipCode}
-                  id="emegencyContactZipCode"
-                  name="emegencyContactZipCode"
+                  value={values.emergencyContactZipCode}
+                  id="emergencyContactZipCode"
+                  name="emergencyContactZipCode"
                   error={
-                    !!touched.emegencyContactZipCode &&
-                    !!errors.emegencyContactZipCode
+                    !!touched.emergencyContactZipCode &&
+                    !!errors.emergencyContactZipCode
                   }
                   helperText={
-                    touched.emegencyContactZipCode &&
-                    errors.emegencyContactZipCode
+                    touched.emergencyContactZipCode &&
+                    errors.emergencyContactZipCode
                   }
                   sx={{ gridColumn: "span 1" }}
                 />
@@ -491,29 +500,6 @@ const CreatePatient = () => {
       </Formik>
     </Box>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
 };
 
 export default CreatePatient;
