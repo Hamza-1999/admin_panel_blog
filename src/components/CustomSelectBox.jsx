@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 const CustomSelectBox = ({
-  value,
+  values,
   handleChange,
   selectLabel,
   selectOptions,
@@ -14,14 +14,14 @@ const CustomSelectBox = ({
     <FormControl fullWidth>
       <InputLabel>{selectLabel}</InputLabel>
       <Select
-        value={value}
+        value={values}
         name={name}
         label={selectLabel}
         onChange={handleChange}
       >
-        {selectOptions.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
+        {selectOptions.map((el) => (
+          <MenuItem key={el} value={el}>
+            {el}
           </MenuItem>
         ))}
       </Select>

@@ -107,10 +107,10 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                 Ariz
+                  Ariz
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                IT Dep
+                  IT Dep
                 </Typography>
               </Box>
             </Box>
@@ -146,9 +146,16 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-               <Item
+            <Item
               title="Create Patient"
               to="/createpatient"
+              icon={<ContactsOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Patient"
+              to="/managepatient  "
               icon={<ContactsOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -3,7 +3,6 @@ import { Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 // import { useState } from "react";
-import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import FormInfoHeading from "../../components/FormInfoHeading";
 import { useDispatch } from "react-redux";
@@ -18,46 +17,35 @@ const CreatePatient = () => {
   const initialValues = {
     firstName: "",
     lastName: "",
-    dateOfBirth: "",
-    dateOfDeath: "",
-    address: "",
-    zipCode: "",
-    homePhone: "",
+    email: "",
     cellPhone: "",
+    homePhone: "",
     workPhone: "",
     ext: "",
-    email: "",
-    drivingLicense: "",
+    address: "",
+    zipCode: "",
     emergencyContactFirstName: "",
     emergencyContactLastName: "",
     emergencyContactAddress: "",
-    emergencyContactCity: "",
-    emergencyContactState: "",
     emergencyContactZipCode: "",
 
-    // ids field values
-    companyId: "",
-    branchId: "",
-    countryId: "",
-    cityId: "",
-    stateId: "",
-    accountTypeId: "",
-    employmentStatusId: "",
-    ethnicityId: "",
-    genderIdentityId: "",
-    maritalStatusId: "",
-    raceStatusId: "",
-    referralSourceId: "",
-    relationShipToPatientId: "",
-    residenceTypeId: "",
-    sexualOrientationId: "",
-    studentStatusId: "",
+    // dropdowns
+    genderIdentityName: "",
+    maritalStatusName: "",
+    raceStatusName: "",
+    accountType: "",
+    cityName: "",
+    stateName: "",
+    countryName: "",
+    residenceTypeName: "",
+    emergencyContactCity: "",
+    emergencyContactState: "",
   };
 
   const handleFormSubmit = (values, action) => {
     dispatch(newPatientAction(values));
-    console.log(values, "checking submit values");
-    action.resetForm();
+    console.log(values, "checking submit values of createPatient");
+    // action.resetForm();
   };
 
   // gender options array
@@ -185,25 +173,32 @@ const CreatePatient = () => {
                   sx={{ gridColumn: "span 1" }}
                 />
                 <CustomSelectBox
-                  value={values.genderIdentityId}
+                  value={values.genderIdentityName}
                   handleChange={handleChange}
                   selectLabel="Gender"
                   selectOptions={genderOptions}
-                  name="genderIdentityId"
+                  name="genderIdentityName"
                 />
                 <CustomSelectBox
-                  value={values.maritalStatusId}
+                  value={values.maritalStatusName}
                   handleChange={handleChange}
                   selectLabel="Marital Status"
                   selectOptions={maritalOptions}
-                  name="maritalStatusId"
+                  name="maritalStatusName"
                 />
                 <CustomSelectBox
-                  value={values.raceStatusId}
+                  value={values.raceStatusName}
                   handleChange={handleChange}
                   selectLabel="Race Status"
                   selectOptions={raceOptions}
-                  name="raceStatusId"
+                  name="raceStatusName"
+                />
+                <CustomSelectBox
+                  value={values.accountType}
+                  handleChange={handleChange}
+                  selectLabel="Account Type"
+                  selectOptions={raceOptions}
+                  name="accountType"
                 />
               </Box>
               {/* contact details */}
@@ -281,7 +276,7 @@ const CreatePatient = () => {
                 />
               </Box>
 
-              <Stack
+              {/* <Stack
                 width={"100%"}
                 gap={5}
                 sx={{
@@ -294,7 +289,7 @@ const CreatePatient = () => {
                 </Typography>
                 <CustomDatePicker labelText="Date Of Birth" />
                 <CustomDatePicker labelText="Date Of Death" />
-              </Stack>
+              </Stack> */}
 
               <FormInfoHeading>Address Details:</FormInfoHeading>
               <Box
@@ -324,32 +319,32 @@ const CreatePatient = () => {
                   sx={{ gridColumn: "span 1" }}
                 />
                 <CustomSelectBox
-                  value={values.cityId}
+                  value={values.cityName}
                   handleChange={handleChange}
                   selectLabel={"City"}
                   selectOptions={cityOptions}
-                  name="cityId"
+                  name="cityName"
                 />
                 <CustomSelectBox
-                  value={values.stateId}
+                  value={values.stateName}
                   handleChange={handleChange}
                   selectLabel={"State"}
                   selectOptions={stateOptions}
-                  name="stateId"
+                  name="stateName"
                 />
                 <CustomSelectBox
-                  value={values.countryId}
+                  value={values.countryName}
                   handleChange={handleChange}
                   selectLabel={"Country"}
                   selectOptions={countryOption}
-                  name="countryId"
+                  name="countryName"
                 />
                 <CustomSelectBox
-                  value={values.residenceTypeId}
+                  value={values.residenceTypeName}
                   handleChange={handleChange}
                   selectLabel={"Residence Type"}
                   selectOptions={residenceOptions}
-                  name="residenceTypeId"
+                  name="residenceTypeName"
                 />
 
                 <TextField
