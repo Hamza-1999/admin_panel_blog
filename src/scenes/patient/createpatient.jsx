@@ -1,67 +1,62 @@
-import {
-  Box,
-  Button,
-  TextField,
-  Select,
-  MenuItem,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Button, TextField, Stack, Typography } from "@mui/material";
 import { Formik } from "formik";
-import * as yup from "yup";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
-import { useState } from "react";
-import CustomDatePicker from "../../components/CustomDatePicker";
+// import { useState } from "react";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import FormInfoHeading from "../../components/FormInfoHeading";
+import { useDispatch, useSelector } from "react-redux";
+import { newPatientAction } from "../../features/actions/createPatientAction";
+import { toast } from "react-toastify";
+import { getData } from "../../config/axiosFunctions";
+import { useEffect } from "react";
+// import { createPatientSchema } from "../../schemas";
 
 const CreatePatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
-  const [selectGender, setSelectGender] = useState("");
-  const [selectCity, setSelectCity] = useState("");
-  const [selectState, setSelectState] = useState("");
-  const [selectCountry, setSelectCountry] = useState("");
-  const [maritalStatus, setMaritalStatus] = useState("");
-  const [raceStatus, setRaceStatus] = useState("");
-  const [residenceType, setResidenceType] = useState("");
-  const [emergencyContactCity, setEmergencyContactCity] = useState("");
-  const [emergencyContactState, setEmergencyContactState] = useState("");
+  // const [accountTypesOption, setAccountTypesOption]
+  const dispatch = useDispatch();
+  const { loading } = useSelector((state) => state.patient);
+  // initial formik values
+  const initialValues = {
+    firstName: "",
+    lastName: "",
+    // email: "",
+    // cellPhone: "",
+    // homePhone: "",
+    // workPhone: "",
+    // ext: "",
+    // address: "",
+    // zipCode: "",
+    // emergencyContactFirstName: "",
+    // emergencyContactLastName: "",
+    // emergencyContactAddress: "",
+    // emergencyContactZipCode: "",
 
-  const handleGenderChange = (value) => {
-    setSelectGender(value);
+    // dropdowns
+    // genderIdentityName: "",
+    // maritalStatusName: "",
+    // raceStatusName: "",
+    accountName: "",
+    // cityName: "",
+    // stateName: "",
+    // countryName: "",
+    // residenceTypeName: "",
+    // emergencyContactCity: "",
+    // emergencyContactState: "",
   };
-  const handleCityChange = (value) => {
-    setSelectCity(value);
-  };
-  const handleStateChange = (value) => {
-    setSelectState(value);
-  };
-  const handleCountryChange = (value) => {
-    setSelectCountry(value);
-  };
-  const handleMaritalChange = (value) => {
-    setMaritalStatus(value);
-  };
-  const handleRaceChange = (value) => {
-    setRaceStatus(value);
-  };
-  const handleResidenceType = (value) => {
-    setResidenceType(value);
-  };
-  const handleEmergencyCity = (value) => {
-    setEmergencyContactCity(value);
-  };
-  const handleEmergencyState = (value) => {
-    setEmergencyContactState(value);
-  };
-
-  const handleFormSubmit = (values) => {
-    console.log(values);
+  const handleFormSubmit = (values, actions) => {
+    try {
+      dispatch(newPatientAction(values));
+      console.log(values, "checking submit values of createPatient");
+      actions.resetForm();
+    } catch (error) {
+      console.error("Error creating patient:", error);
+    }
   };
 
   // gender options array
-  const genderOptions = ["Male", "Female", "Other"];
+  // const genderOptions = ["Male", "Female", "Other"];
   const cityOptions = [
     "Hyderabad",
     "Karachi",
@@ -73,31 +68,48 @@ const CreatePatient = () => {
   ];
   const stateOptions = ["Sindh", "Punjab", "KPK", "Balochistan"];
   const countryOption = ["Pakistan", "USA", "Dubai", "UK"];
-  const raceOptions = [
-    " American Indian or Eskimo or Aleut",
-    "Asian or Native Hawaiian or Pacific Islander",
-    "Black or African American",
-    "White",
-    "Other Race",
-    "Undetermined",
-  ];
-  const maritalOptions = [
-    "Unknown",
-    "Married",
-    "Single",
-    "Divorced",
-    "Widowed",
-    "Legally Separated",
-  ];
-  const residenceOptions = [
-    "Private Home",
-    "Nursing Home",
-    " Residential Treatment Patient",
-    "Skilled Nursing Home",
-    "   Homeless",
-    " Prefer not to answer",
-    "Unkown",
-  ];
+  // const raceOptions = [
+  //   " American Indian or Eskimo or Aleut",
+  //   "Asian or Native Hawaiian or Pacific Islander",
+  //   "Black or African American",
+  //   "White",
+  //   "Other Race",
+  //   "Undetermined",
+  // ];
+  // const maritalOptions = [
+  //   "Unknown",
+  //   "Married",
+  //   "Single",
+  //   "Divorced",
+  //   "Widowed",
+  //   "Legally Separated",
+  // ];
+  // const residenceOptions = [
+  //   "Private Home",
+  //   "Nursing Home",
+  //   " Residential Treatment Patient",
+  //   "Skilled Nursing Home",
+  //   "   Homeless",
+  //   " Prefer not to answer",
+  //   "Unkown",
+  // ];
+
+  const fetchAccountTypeOptions = async () => {
+    try {
+      const accountTypeOptions = await getData(
+        "http://192.168.3.73:86/api/ct-accountType"
+      );
+      console.log(accountTypeOptions, "account types");
+      // Handle the accountTypeOptions data here
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAccountTypeOptions();
+  }, []);
+
   return (
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
@@ -105,7 +117,7 @@ const CreatePatient = () => {
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
-        validationSchema={checkoutSchema}
+        // validationSchema={createPatientSchema}
       >
         {({
           values,
@@ -169,7 +181,7 @@ const CreatePatient = () => {
                   helperText={touched.lastName && errors.lastName}
                   sx={{ gridColumn: "span 1" }}
                 />
-                <TextField
+                {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -183,29 +195,39 @@ const CreatePatient = () => {
                   error={!!touched.email && !!errors.email}
                   helperText={touched.email && errors.email}
                   sx={{ gridColumn: "span 1" }}
-                />
-                <CustomSelectBox
-                  value={selectGender}
-                  onChange={handleGenderChange}
-                  selectLabel="Gender"
-                  selectOptions={genderOptions}
-                />
-                <CustomSelectBox
-                  value={maritalStatus}
-                  onChange={handleMaritalChange}
+                /> */}
+                {/* <CustomSelectBox
+                  value={values.accountName}
+                  handleChange={handleChange}
+                  selectLabel="Account Type"
+                  selectOptions={accountTypeOptions}
+                  name="accountName"
+                /> */}
+                {/* <CustomSelectBox
+                  value={values.maritalStatusName}
+                  handleChange={handleChange}
                   selectLabel="Marital Status"
                   selectOptions={maritalOptions}
-                />
-                <CustomSelectBox
-                  value={raceStatus}
-                  onChange={handleRaceChange}
+                  name="maritalStatusName"
+                /> */}
+                {/* <CustomSelectBox
+                  value={values.raceStatusName}
+                  handleChange={handleChange}
                   selectLabel="Race Status"
                   selectOptions={raceOptions}
-                />
+                  name="raceStatusName"
+                /> */}
+                {/* <CustomSelectBox
+                  value={values.accountType}
+                  handleChange={handleChange}
+                  selectLabel="Account Type"
+                  selectOptions={raceOptions}
+                  name="accountType"
+                /> */}
               </Box>
               {/* contact details */}
-              <FormInfoHeading>Contact Details:</FormInfoHeading>
-              <Box
+              {/* <FormInfoHeading>Contact Details:</FormInfoHeading> */}
+              {/* <Box
                 display="grid"
                 gap="30px"
                 sx={{
@@ -215,23 +237,23 @@ const CreatePatient = () => {
                     md: "repeat(4, minmax(0, 1fr))",
                   },
                 }}
-              >
-                <TextField
-                  size="small"
-                  fullWidth
-                  variant="filled"
-                  type="number"
-                  label="Phone Number"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.phoneNumber}
-                  id="phoneNumber"
-                  name="phoneNumber"
-                  error={!!touched.phoneNumber && !!errors.phoneNumber}
-                  helperText={touched.phoneNumber && errors.phoneNumber}
-                  sx={{ gridColumn: "span 1" }}
-                />
-                <TextField
+              > */}
+              {/* <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="number"
+                label="Phone Number"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.cellPhone}
+                id="cellPhone"
+                name="cellPhone"
+                error={!!touched.cellPhone && !!errors.cellPhone}
+                helperText={touched.cellPhone && errors.cellPhone}
+                sx={{ gridColumn: "span 1" }}
+              /> */}
+              {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -245,23 +267,23 @@ const CreatePatient = () => {
                   error={!!touched.homePhone && !!errors.homePhone}
                   helperText={touched.homePhone && errors.homePhone}
                   sx={{ gridColumn: "span 1" }}
-                />
-                <TextField
-                  size="small"
-                  fullWidth
-                  variant="filled"
-                  type="number"
-                  label="Work Phone"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.workPhone}
-                  name="workPhone"
-                  id="workPhone"
-                  error={!!touched.workPhone && !!errors.workPhone}
-                  helperText={touched.workPhone && errors.workPhone}
-                  sx={{ gridColumn: "span 1" }}
-                />
-                <TextField
+                /> */}
+              {/* <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="number"
+                label="Work Phone"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.workPhone}
+                name="workPhone"
+                id="workPhone"
+                error={!!touched.workPhone && !!errors.workPhone}
+                helperText={touched.workPhone && errors.workPhone}
+                sx={{ gridColumn: "span 1" }}
+              /> */}
+              {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -275,10 +297,10 @@ const CreatePatient = () => {
                   error={!!touched.ext && !!errors.ext}
                   helperText={touched.ext && errors.ext}
                   sx={{ gridColumn: "span 1" }}
-                />
-              </Box>
+                /> */}
+              {/* </Box> */}
 
-              <Stack
+              {/* <Stack
                 width={"100%"}
                 gap={5}
                 sx={{
@@ -291,10 +313,10 @@ const CreatePatient = () => {
                 </Typography>
                 <CustomDatePicker labelText="Date Of Birth" />
                 <CustomDatePicker labelText="Date Of Death" />
-              </Stack>
+              </Stack> */}
 
-              <FormInfoHeading>Address Details:</FormInfoHeading>
-              <Box
+              {/* <FormInfoHeading>Address Details:</FormInfoHeading> */}
+              {/* <Box
                 display="grid"
                 gap="30px"
                 sx={{
@@ -304,8 +326,8 @@ const CreatePatient = () => {
                     md: "repeat(4, minmax(0, 1fr))",
                   },
                 }}
-              >
-                <TextField
+              > */}
+              {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -319,33 +341,37 @@ const CreatePatient = () => {
                   error={!!touched.address && !!errors.address}
                   helperText={touched.address && errors.address}
                   sx={{ gridColumn: "span 1" }}
-                />
-                <CustomSelectBox
-                  value={selectCity}
-                  onChange={handleCityChange}
-                  selectLabel={"City"}
-                  selectOptions={cityOptions}
-                />
-                <CustomSelectBox
-                  value={selectState}
-                  onChange={handleStateChange}
-                  selectLabel={"State"}
-                  selectOptions={stateOptions}
-                />
-                <CustomSelectBox
-                  value={selectCountry}
-                  onChange={handleCountryChange}
-                  selectLabel={"Country"}
-                  selectOptions={countryOption}
-                />
-                <CustomSelectBox
-                  value={residenceType}
-                  onChange={handleResidenceType}
+                /> */}
+              {/* <CustomSelectBox
+                value={values.cityName}
+                handleChange={handleChange}
+                selectLabel={"City"}
+                selectOptions={cityOptions}
+                name="cityName"
+              />
+              <CustomSelectBox
+                value={values.stateName}
+                handleChange={handleChange}
+                selectLabel={"State"}
+                selectOptions={stateOptions}
+                name="stateName"
+              />
+              <CustomSelectBox
+                value={values.countryName}
+                handleChange={handleChange}
+                selectLabel={"Country"}
+                selectOptions={countryOption}
+                name="countryName"
+              /> */}
+              {/* <CustomSelectBox
+                  value={values.residenceTypeName}
+                  handleChange={handleChange}
                   selectLabel={"Residence Type"}
                   selectOptions={residenceOptions}
-                />
+                  name="residenceTypeName"
+                /> */}
 
-                <TextField
+              {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -359,11 +385,11 @@ const CreatePatient = () => {
                   error={!!touched.zipCode && !!errors.zipCode}
                   helperText={touched.zipCode && errors.zipCode}
                   sx={{ gridColumn: "span 1" }}
-                />
-              </Box>
+                /> */}
+              {/* </Box> */}
               {/* emergency contact */}
-              <FormInfoHeading>Emergency Contact:</FormInfoHeading>
-              <Box
+              {/* <FormInfoHeading>Emergency Contact:</FormInfoHeading> */}
+              {/* <Box
                 display="grid"
                 gap="30px"
                 sx={{
@@ -419,16 +445,18 @@ const CreatePatient = () => {
                 />
 
                 <CustomSelectBox
-                  value={emergencyContactCity}
-                  onChange={handleEmergencyCity}
+                  value={values.emergencyContactCity}
+                  handleChange={handleChange}
                   selectLabel={"City"}
                   selectOptions={cityOptions}
+                  name="emergencyContactCity"
                 />
                 <CustomSelectBox
-                  value={emergencyContactState}
-                  onChange={handleEmergencyState}
+                  value={values.emergencyContactState}
+                  handleChange={handleChange}
                   selectLabel={"State"}
                   selectOptions={stateOptions}
+                  name="emergencyContactState"
                 />
 
                 <TextField
@@ -461,20 +489,20 @@ const CreatePatient = () => {
                   label="Zipcode"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.emegencyContactZipCode}
-                  id="emegencyContactZipCode"
-                  name="emegencyContactZipCode"
+                  value={values.emergencyContactZipCode}
+                  id="emergencyContactZipCode"
+                  name="emergencyContactZipCode"
                   error={
-                    !!touched.emegencyContactZipCode &&
-                    !!errors.emegencyContactZipCode
+                    !!touched.emergencyContactZipCode &&
+                    !!errors.emergencyContactZipCode
                   }
                   helperText={
-                    touched.emegencyContactZipCode &&
-                    errors.emegencyContactZipCode
+                    touched.emergencyContactZipCode &&
+                    errors.emergencyContactZipCode
                   }
                   sx={{ gridColumn: "span 1" }}
                 />
-              </Box>
+              </Box> */}
             </Box>
             <Box
               display="flex"
@@ -482,8 +510,13 @@ const CreatePatient = () => {
               mt="20px"
               paddingBottom={"20px"}
             >
-              <Button type="submit" color="secondary" variant="contained">
-                Create Patient
+              <Button
+                type="submit"
+                color="secondary"
+                variant="contained"
+                disabled={loading}
+              >
+                {loading ? "Creating..." : "Create Patient"}
               </Button>
             </Box>
           </form>
@@ -491,29 +524,6 @@ const CreatePatient = () => {
       </Formik>
     </Box>
   );
-};
-
-const phoneRegExp =
-  /^((\+[1-9]{1,4}[ -]?)|(\([0-9]{2,3}\)[ -]?)|([0-9]{2,4})[ -]?)*?[0-9]{3,4}[ -]?[0-9]{3,4}$/;
-
-const checkoutSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
-  email: yup.string().email("invalid email").required("required"),
-  contact: yup
-    .string()
-    .matches(phoneRegExp, "Phone number is not valid")
-    .required("required"),
-  address1: yup.string().required("required"),
-  address2: yup.string().required("required"),
-});
-const initialValues = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  contact: "",
-  address1: "",
-  address2: "",
 };
 
 export default CreatePatient;
