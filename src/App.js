@@ -18,6 +18,8 @@ import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
 import ManagePatient from "./scenes/patient/ManagePatient";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -49,6 +51,7 @@ function App() {
             </Routes>
           </main>
         </div>
+        <ToastContainer />
       </ThemeProvider>
     </ColorModeContext.Provider>
   );

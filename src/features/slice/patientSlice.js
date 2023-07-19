@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { newPatientAction } from "../actions/createPatientAction";
+import { toast } from "react-toastify";
 
 const initialState = {
   patientData: {},
@@ -17,10 +18,12 @@ const patientSlice = createSlice({
       state.loading = false;
       console.log(action.payload, "slice payload data of create patient");
       state.patientData = action.payload;
+      toast.success("patient has been created successfully!");
     },
     [newPatientAction.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
+      toast.error("patient creation failed");
     },
   },
 });

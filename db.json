@@ -1,0 +1,115 @@
+{
+  "patient": [
+    {
+      "firstName": "Ali",
+      "lastName": "Sheikh",
+      "email": "sheikh@gmail.com",
+      "cellPhone": 3545648564123,
+      "workPhone": 564685489564561,
+      "cityName": "Karachi",
+      "stateName": "Sindh",
+      "countryName": "Pakistan",
+      "id": 1
+    },
+    {
+      "firstName": "Nimra",
+      "lastName": "Saleem",
+      "email": "nimra.saleem@gmail.com",
+      "cellPhone": 3545648564123,
+      "workPhone": 564685489564561,
+      "cityName": "Karachi",
+      "stateName": "Sindh",
+      "countryName": "Pakistan",
+      "id": 2
+    },
+    {
+      "firstName": "Waniya",
+      "lastName": "Amjad",
+      "email": "waniya5@c.m",
+      "cellPhone": 753635978345,
+      "workPhone": 389563048963,
+      "cityName": "Hyderabad",
+      "stateName": "Sindh",
+      "countryName": "Pakistan",
+      "id": 3
+    },
+    {
+      "firstName": "Hammad",
+      "lastName": "Amjad",
+      "email": "hammad@gmail.com",
+      "cellPhone": 98739837954,
+      "workPhone": 86093457694576,
+      "cityName": "Islamabad",
+      "stateName": "Punjab",
+      "countryName": "Pakistan",
+      "id": 4
+    },
+    {
+      "firstName": "sdasdasdasd",
+      "lastName": "askdasdjh",
+      "email": "asdasd@g.m",
+      "cellPhone": 366789345,
+      "workPhone": 25346457869753640,
+      "cityName": "Karachi",
+      "stateName": "KPK",
+      "countryName": "USA",
+      "id": 5
+    },
+    {
+      "firstName": "Umair",
+      "lastName": "Shafique",
+      "email": "umair@mail.com",
+      "cellPhone": 65973563,
+      "workPhone": 36809745987,
+      "cityName": "Multan",
+      "stateName": "KPK",
+      "countryName": "Pakistan",
+      "id": 6
+    },
+    {
+      "firstName": "Riaz",
+      "lastName": "Lucid",
+      "email": "riaz.mail@a.c",
+      "cellPhone": 89753067345876,
+      "workPhone": 3089457656830476000,
+      "cityName": "Islamabad",
+      "stateName": "KPK",
+      "countryName": "USA",
+      "id": 7
+    },
+    {
+      "firstName": "Nadia",
+      "lastName": "Khan",
+      "email": "nadia@mail.com",
+      "cellPhone": 50893476,
+      "workPhone": 7689,
+      "cityName": "Hyderabad",
+      "stateName": "Sindh",
+      "countryName": "Pakistan",
+      "id": 8
+    },
+    {
+      "firstName": "Ammar",
+      "lastName": "Qureshi",
+      "email": "ammarqureshi.techmatter@gmail.com",
+      "cellPhone": 3147828957,
+      "workPhone": 3147828957,
+      "cityName": "Karachi",
+      "stateName": "Sindh",
+      "countryName": "Pakistan",
+      "id": 9
+    },
+    {
+      "firstName": "Hammad",
+      "lastName": "Ahmed",
+      "accountName": "Corporate",
+      "id": 10
+    },
+    {
+      "firstName": "Ali",
+      "lastName": "Amjad",
+      "accountName": "Insurance",
+      "id": 11
+    }
+  ]
+}

@@ -13,9 +13,9 @@ export const postData = async (url, data) => {
 export const getData = async (url) => {
   try {
     const response = await axios.get(url);
-    console.log(response.data, "get custom func data");
-    return await response.data;
+    console.log(response.data, "custom getData function");
+    return response.data;
   } catch (error) {
-    throw error;
+    console.error(error);
   }
 };

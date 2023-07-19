@@ -7,11 +7,16 @@ export const newPatientAction = createAsyncThunk(
   async (data) => {
     try {
       const response = await postData(
-        `https://192.168.1.25:7102/api/Patient`,
+        "http://192.168.3.73:86/api/test",
+        { mode: "cors" },
         data
       );
       console.log(response, "create patient action creator checking data");
-      return response;
+      if (response) {
+        return response;
+      } else {
+        throw new Error(response.error);
+      }
     } catch (error) {
       throw error;
     }
