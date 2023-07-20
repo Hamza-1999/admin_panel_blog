@@ -1,4 +1,14 @@
-import { Box, Button, TextField, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Stack,
+  Typography,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+} from "@mui/material";
 import { Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
@@ -7,20 +17,21 @@ import CustomSelectBox from "../../components/CustomSelectBox";
 import FormInfoHeading from "../../components/FormInfoHeading";
 import { useDispatch, useSelector } from "react-redux";
 import { newPatientAction } from "../../features/actions/createPatientAction";
-import { toast } from "react-toastify";
 import { getData } from "../../config/axiosFunctions";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import path from "../../config/apiUrl";
 // import { createPatientSchema } from "../../schemas";
 
 const CreatePatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
-  // const [accountTypesOption, setAccountTypesOption]
+  const [stateType, setStateType] = useState([]);
+  // const [genderOptions, setGenderOptions] = useState();
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.patient);
   // initial formik values
   const initialValues = {
-    firstName: "",
-    lastName: "",
+    // firstName: "",
+    // lastName: "",
     // email: "",
     // cellPhone: "",
     // homePhone: "",
@@ -32,18 +43,25 @@ const CreatePatient = () => {
     // emergencyContactLastName: "",
     // emergencyContactAddress: "",
     // emergencyContactZipCode: "",
+    // countryName: "",
+    // iso: "",
+    // capital: "",
+    // continent: "",
+    // currency: "",
 
     // dropdowns
     // genderIdentityName: "",
     // maritalStatusName: "",
     // raceStatusName: "",
-    accountName: "",
-    // cityName: "",
+    // accountName: "",
+    cityName: "",
     // stateName: "",
     // countryName: "",
     // residenceTypeName: "",
     // emergencyContactCity: "",
     // emergencyContactState: "",
+    // companyName: "",
+    stateName: "",
   };
   const handleFormSubmit = (values, actions) => {
     try {
@@ -57,17 +75,17 @@ const CreatePatient = () => {
 
   // gender options array
   // const genderOptions = ["Male", "Female", "Other"];
-  const cityOptions = [
-    "Hyderabad",
-    "Karachi",
-    "Islamabad",
-    "Lahore",
-    "Faislabad",
-    "Multan",
-    "Quetta",
-  ];
-  const stateOptions = ["Sindh", "Punjab", "KPK", "Balochistan"];
-  const countryOption = ["Pakistan", "USA", "Dubai", "UK"];
+  // const cityOptions = [
+  //   "Hyderabad",
+  //   "Karachi",
+  //   "Islamabad",
+  //   "Lahore",
+  //   "Faislabad",
+  //   "Multan",
+  //   "Quetta",
+  // ];
+  // const stateOptions = ["Sindh", "Punjab", "KPK", "Balochistan"];
+  // const countryOption = ["Pakistan", "USA", "Dubai", "UK"];
   // const raceOptions = [
   //   " American Indian or Eskimo or Aleut",
   //   "Asian or Native Hawaiian or Pacific Islander",
@@ -96,11 +114,9 @@ const CreatePatient = () => {
 
   const fetchAccountTypeOptions = async () => {
     try {
-      const accountTypeOptions = await getData(
-        "http://192.168.3.73:86/api/ct-accountType"
-      );
-      console.log(accountTypeOptions, "account types");
-      // Handle the accountTypeOptions data here
+      const getAccTypes = await getData(`${path}/state`);
+      console.log(getAccTypes.result, "state types");
+      setStateType(getAccTypes.result);
     } catch (error) {
       console.error(error);
     }
@@ -110,10 +126,12 @@ const CreatePatient = () => {
     fetchAccountTypeOptions();
   }, []);
 
+  // const accountTypesOptions = ["Insurance"];
+
+  // const companyNameOpt = ["Aku's Hospital"];
   return (
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
-
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -143,7 +161,6 @@ const CreatePatient = () => {
                 display="grid"
                 gap="30px"
                 sx={{
-                  // "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
@@ -156,17 +173,17 @@ const CreatePatient = () => {
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="First Name"
+                  label="City Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
-                  name="firstName"
-                  id="firstName"
-                  error={!!touched.firstName && !!errors.firstName}
-                  helperText={touched.firstName && errors.firstName}
+                  value={values.cityName}
+                  name="cityName"
+                  id="cityName"
+                  // error={!!touched.firstName && !!errors.firstName}
+                  // helperText={touched.firstName && errors.firstName}
                   sx={{ gridColumn: "span 1" }}
                 />
-                <TextField
+                {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
@@ -177,38 +194,88 @@ const CreatePatient = () => {
                   value={values.lastName}
                   name="lastName"
                   id="lastName"
-                  error={!!touched.lastName && !!errors.lastName}
-                  helperText={touched.lastName && errors.lastName}
-                  sx={{ gridColumn: "span 1" }}
-                />
+                  // error={!!touched.lastName && !!errors.lastName}
+                  // helperText={touched.lastName && errors.lastName}
+                  sx={{ gridColumn: "span 1" }} */}
+                {/* /> */}
                 {/* <TextField
                   size="small"
                   fullWidth
                   variant="filled"
                   type="text"
-                  label="Email"
+                  label="Continent"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.email}
-                  name="email"
-                  id="email"
-                  error={!!touched.email && !!errors.email}
-                  helperText={touched.email && errors.email}
+                  value={values.continent}
+                  name="continent"
+                  id="continent"
+                  // error={!!touched.email && !!errors.email}
+                  // helperText={touched.email && errors.email}
+                  sx={{ gridColumn: "span 1" }}
+                />
+                <TextField
+                  size="small"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Capital"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.capital}
+                  name="capital"
+                  id="capital"
+                  // error={!!touched.email && !!errors.email}
+                  // helperText={touched.email && errors.email}
+                  sx={{ gridColumn: "span 1" }}
+                />
+                <TextField
+                  size="small"
+                  fullWidth
+                  variant="filled"
+                  type="text"
+                  label="Currency"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.currency}
+                  name="currency"
+                  id="currency"
+                  // error={!!touched.email && !!errors.email}
+                  // helperText={touched.email && errors.email}
                   sx={{ gridColumn: "span 1" }}
                 /> */}
+                <FormControl>
+                  <InputLabel>State</InputLabel>
+                  <Select
+                    onChange={(e) => {
+                      handleChange(e);
+                      const selectedOption = stateType.find(
+                        (option) => option.stateName === e.target.value
+                      );
+                      if (selectedOption) {
+                        values.stateId = selectedOption.stateId;
+                        values.stateName = selectedOption.stateName;
+                      } else {
+                        values.accountTypeId = null;
+                        values.accountName = null;
+                      }
+                    }}
+                    onBlur={handleBlur}
+                    value={values.stateName}
+                    name="stateName"
+                  >
+                    {stateType?.map((opt) => (
+                      <MenuItem value={opt.stateName} key={opt.stateId}>
+                        {opt.stateName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
                 {/* <CustomSelectBox
-                  value={values.accountName}
-                  handleChange={handleChange}
-                  selectLabel="Account Type"
-                  selectOptions={accountTypeOptions}
-                  name="accountName"
-                /> */}
-                {/* <CustomSelectBox
-                  value={values.maritalStatusName}
+                  value={values.gender}
                   handleChange={handleChange}
                   selectLabel="Marital Status"
-                  selectOptions={maritalOptions}
-                  name="maritalStatusName"
+                  selectOptions={genderOptions}
+                  name="gender"
                 /> */}
                 {/* <CustomSelectBox
                   value={values.raceStatusName}

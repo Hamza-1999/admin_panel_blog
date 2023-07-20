@@ -1,2 +1,2 @@
-const path = "https://192.168.1.25:7102"
-export default path
+const path = "http://192.168.3.73:3000/api";
+export default path;
