@@ -7,8 +7,7 @@ export const newPatientAction = createAsyncThunk(
   "createPatient",
   async (data) => {
     try {
-      const response = await postData(`${path}/city`, data);
-      console.log(response, "create patient action creator checking data");
+      const response = await postData(`${path}/test-patient`, data);
       if (response) {
         return response;
       } else {
