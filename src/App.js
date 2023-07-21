@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Topbar from "./scenes/global/Topbar";
 import Sidebar from "./scenes/global/Sidebar";
 import Dashboard from "./scenes/dashboard";
@@ -20,21 +20,27 @@ import Calendar from "./scenes/calendar/calendar";
 import ManagePatient from "./scenes/patient/ManagePatient";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Login from "./auth/Login";
 
 function App() {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === "/";
 
   return (
     <ColorModeContext.Provider value={colorMode}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div className="app">
-          <Sidebar isSidebar={isSidebar} />
+          {!isLoginPage && <Sidebar isSidebar={isSidebar} />}
+          {/* <Sidebar isSidebar={isSidebar} /> */}
           <main className="content">
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              <Route path="/" element={<Dashboard />} />
+              <Route path="/" element={<Login />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
               <Route path="/createpatient" element={<CreatePatient />} />
               <Route path="/managepatient" element={<ManagePatient />} />

@@ -1,17 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { postData } from "../../config/axiosFunctions";
+import path from "../../config/apiUrl";
 
 // create patient action creator
 export const newPatientAction = createAsyncThunk(
   "createPatient",
   async (data) => {
     try {
-      const response = await postData(
-        "http://192.168.3.73:86/api/test",
-        { mode: "cors" },
-        data
-      );
-      console.log(response, "create patient action creator checking data");
+      const response = await postData(`${path}/test-patient`, data);
       if (response) {
         return response;
       } else {

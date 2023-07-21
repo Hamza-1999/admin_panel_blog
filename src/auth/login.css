@@ -1,0 +1,33 @@
+.loginBtn {
+    background: linear-gradient(to top left, #192135, #3e5a92);
+    /* color: #fff !important; */
+    font-size: 1rem;
+
+}
+
+.loginBtn:hover {
+    background: none;
+    border:1px solid  #192135 !important;
+    /* color: #192135; */
+    transition: linear .4s;
+}
+
+.textField {
+    border-radius: 20px !important;
+}
+
+.welcomeBox {
+    background: linear-gradient(to top left, #192135, #3e5a92);
+}
+
+.socialIcon {
+    margin: 0 10px;
+    cursor: pointer;
+    border: 1px solid green;
+    font-size: 40px !important;
+   padding: 8px;
+   border-radius: 50px;
+}
+.socialIcon:hover{
+    color: #3e5a92;
+}
