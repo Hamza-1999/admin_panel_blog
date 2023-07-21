@@ -37,7 +37,7 @@ function App() {
           {!isLoginPage && <Sidebar isSidebar={isSidebar} />}
           {/* <Sidebar isSidebar={isSidebar} /> */}
           <main className="content">
-            {!isLoginPage && <Topbar setIsSidebar={setIsSidebar} />}
+            <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />

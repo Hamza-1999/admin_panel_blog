@@ -16,7 +16,6 @@ const patientSlice = createSlice({
     },
     [newPatientAction.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log(action.payload, "slice payload data of create patient");
       state.patientData = action.payload;
       toast.success("patient has been created successfully!");
     },
