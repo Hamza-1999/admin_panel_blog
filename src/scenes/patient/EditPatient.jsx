@@ -13,17 +13,22 @@ import { ErrorMessage, Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 // import { useState } from "react";
-
 import FormInfoHeading from "../../components/FormInfoHeading";
 import { useDispatch, useSelector } from "react-redux";
-import { newPatientAction } from "../../features/actions/createPatientAction";
+import {
+  getPatientAction,
+  newPatientAction,
+  updatePatientAction,
+} from "../../features/actions/createPatientAction";
 import { getData } from "../../config/axiosFunctions";
 import { useEffect, useState } from "react";
 import path from "../../config/apiUrl";
 // import { createPatientSchema } from "../../schemas";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CreatePatient = () => {
+const EditPatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
+
   const [accountTypeOptions, setAccountTypeOptions] = useState([]);
   const [genderOptions, setGenderOptions] = useState([]);
   const [maritalOptions, setMaritalOptions] = useState([]);
@@ -40,55 +45,73 @@ const CreatePatient = () => {
   const [residenceOptions, setResidenceOptions] = useState([]);
   const [companyOptions, setCompanyOptions] = useState([]);
   const [branchOptions, setBranchOptions] = useState([]);
-  // const [genderOptions, setGenderOptions] = useState();
+
+  const { id } = useParams();
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.patient);
+  const { getAllPatients, loading } = useSelector((state) => state.patient);
+  console.log(getAllPatients.result, "getting patients for edit");
+  const navigate = useNavigate();
+
+  const findPatient = getAllPatients.result.find(
+    (el) => el.patientId === parseInt(id)
+  );
+  console.log(findPatient, "find Patient");
   // initial formik values
+
   const initialValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    drivingLicense: "",
-    cellPhone: "",
-    homePhone: "",
-    workPhone: "",
-    ext: "",
-    address: "",
-    zipCode: "",
-    emergencyContactFirstName: "",
-    emergencyContactLastName: "",
-    emergencyContactAddress: "",
-    emergencyContactZipCode: "",
-    emergencyContactState: "",
-    emergencyContactCity: "",
+    patientId: findPatient ? findPatient.patientId : "",
+    firstName: findPatient ? findPatient.firstName : "",
+    lastName: findPatient ? findPatient.lastName : "",
+    email: findPatient ? findPatient.email : "",
+    drivingLicense: findPatient ? findPatient.drivingLicense : "",
+    cellPhone: findPatient ? findPatient.cellPhone : "",
+    homePhone: findPatient ? findPatient.homePhone : "",
+    workPhone: findPatient ? findPatient.workPhone : "",
+    ext: findPatient ? findPatient.ext : "",
+    address: findPatient ? findPatient.address : "",
+    zipCode: findPatient ? findPatient.zipCode : "",
+    emergencyContactFirstName: findPatient
+      ? findPatient.emergencyContactFirstName
+      : "",
+    emergencyContactLastName: findPatient
+      ? findPatient.emergencyContactLastName
+      : "",
+    emergencyContactAddress: findPatient
+      ? findPatient.emergencyContactAddress
+      : "",
+    emergencyContactZipCode: findPatient
+      ? findPatient.emergencyContactZipCode
+      : "",
+    emergencyContactState: findPatient ? findPatient.emergencyContactState : "",
+    emergencyContactCity: findPatient ? findPatient.emergencyContactCity : "",
     // dateOfDeath: null,
     // dropdowns
-    genderName: "",
-    maritalStatusName: "",
-    raceName: "",
-    sexualOrientationName: "",
-    employmentStatusName: "",
-    referralSourceName: "",
-    relationShipToPatientName: "",
-    ethnicityName: "",
-    studentStatusName: "",
-    accountTypeName: "",
-    cityName: "",
-    countryName: "",
-    stateName: "",
-    residenceName: "",
-    companyName: "",
-    branchName: "",
+    genderName: findPatient ? findPatient.genderName : "",
+    maritalStatusName: findPatient ? findPatient.maritalStatusName : "",
+    raceName: findPatient ? findPatient.raceName : "",
+    sexualOrientationName: findPatient ? findPatient.sexualOrientationName : "",
+    employmentStatusName: findPatient ? findPatient.employmentStatusName : "",
+    referralSourceName: findPatient ? findPatient.referralSourceName : "",
+    relationShipToPatientName: findPatient
+      ? findPatient.relationShipToPatientName
+      : "",
+    ethnicityName: findPatient ? findPatient.ethnicityName : "",
+    studentStatusName: findPatient ? findPatient.studentStatusName : "",
+    accountTypeName: findPatient ? findPatient.accountTypeName : "",
+    cityName: findPatient ? findPatient.cityName : "",
+    countryName: findPatient ? findPatient.countryName : "",
+    stateName: findPatient ? findPatient.stateName : "",
+    residenceName: findPatient ? findPatient.residenceName : "",
+    companyName: findPatient ? findPatient.companyName : "",
+    branchName: findPatient ? findPatient.branchName : "",
   };
-  const handleFormSubmit = (values, actions) => {
-    try {
-      dispatch(newPatientAction(values));
-      console.log(values, "checking submit values of createPatient");
-      actions.resetForm();
-    } catch (error) {
-      console.error("Error creating patient:", error);
-    }
-  };
+
+  // useEffect(() => {
+  //   // Fetch all patients data if not already loaded
+  //   if (!getAllPatients.result.length) {
+  //     dispatch(getPatientAction());
+  //   }
+  // }, [dispatch]);
 
   const fetchGenderTypes = async () => {
     try {
@@ -246,9 +269,26 @@ const CreatePatient = () => {
   // const accountTypesOptions = ["Insurance"];
 
   // const companyNameOpt = ["Aku's Hospital"];
+
+  const handleFormSubmit = (values, actions) => {
+    try {
+      dispatch(
+        updatePatientAction({
+          patientId: findPatient.patientId,
+          ...values,
+        })
+      );
+      console.log(values, "checking submit values of createPatient");
+      actions.setSubmitting(false);
+      navigate("/managepatient");
+    } catch (error) {
+      console.error("Error updating patient:", error);
+      actions.setSubmitting(false);
+    }
+  };
   return (
     <Box m="20px">
-      <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
+      <Header title="UPDATE PATIENT" subtitle="Update a Patient Profile" />
       <Formik
         onSubmit={handleFormSubmit}
         initialValues={initialValues}
@@ -261,7 +301,6 @@ const CreatePatient = () => {
           handleBlur,
           handleChange,
           handleSubmit,
-          setFieldValue,
         }) => (
           <form
             onSubmit={handleSubmit}
@@ -350,25 +389,23 @@ const CreatePatient = () => {
                 <FormControl>
                   <InputLabel>Gender</InputLabel>
                   <Select
-                    // onChange={(e) => {
-                    //   handleChange(e);
-                    //   const selectedOption = genderOptions.find(
-                    //     (option) => option.genderIdentityName === e.target.value
-                    //   );
-                    //   if (selectedOption) {
-                    //     values.genderIdentityId =
-                    //       selectedOption.genderIdentityId;
-                    //     values.genderName = selectedOption.genderIdentityName;
-                    //   } else {
-                    //     values.genderIdentityId = null;
-                    //     values.genderName = null;
-                    //   }
-                    // }}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      handleChange(e);
+                      const selectedOption = genderOptions.find(
+                        (option) => option.genderIdentityName === e.target.value
+                      );
+                      if (selectedOption) {
+                        values.genderIdentityId =
+                          selectedOption.genderIdentityId;
+                        values.genderName = selectedOption.genderIdentityName;
+                      } else {
+                        values.genderIdentityId = null;
+                        values.genderName = null;
+                      }
+                    }}
                     onBlur={handleBlur}
                     value={values.genderName}
                     name="genderName"
-                    id="genderName"
                   >
                     {genderOptions?.map((opt) => (
                       <MenuItem
@@ -743,7 +780,7 @@ const CreatePatient = () => {
                 />
               </Box>
 
-              {/* <Stack
+              <Stack
                 width={"100%"}
                 gap={5}
                 sx={{
@@ -753,14 +790,13 @@ const CreatePatient = () => {
               >
                 <Typography variant="h4" component={"h2"}>
                   Date Details:
-                </Typography> */}
-              {/* <CustomDatePicker
+                </Typography>
+                {/* <CustomDatePicker
                   value={values.dateOfBirth}
                   handleChange={handleChange}
                   labelText="Date Of Birth"
                 /> */}
-
-              {/* </Stack> */}
+              </Stack>
 
               <FormInfoHeading>Address Details:</FormInfoHeading>
               <Box
@@ -1156,7 +1192,7 @@ const CreatePatient = () => {
                 variant="contained"
                 disabled={loading}
               >
-                {loading ? "Creating..." : "Create Patient"}
+                {loading ? "Updating..." : "Update Patient"}
               </Button>
             </Box>
           </form>
@@ -1166,4 +1202,4 @@ const CreatePatient = () => {
   );
 };
 
-export default CreatePatient;
+export default EditPatient;

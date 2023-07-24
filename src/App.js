@@ -21,6 +21,7 @@ import ManagePatient from "./scenes/patient/ManagePatient";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./auth/Login";
+import EditPatient from "./scenes/patient/EditPatient";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -43,6 +44,7 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
               <Route path="/createpatient" element={<CreatePatient />} />
+              <Route path="/editpatient/:id" element={<EditPatient />} />
               <Route path="/managepatient" element={<ManagePatient />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />

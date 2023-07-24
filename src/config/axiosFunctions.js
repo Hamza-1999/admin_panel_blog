@@ -19,3 +19,13 @@ export const getData = async (url) => {
     console.error(error);
   }
 };
+
+export const updateData = async (url, data) => {
+  try {
+    const response = await axios.put(url, data);
+    console.log(response.data, "custom update func data");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

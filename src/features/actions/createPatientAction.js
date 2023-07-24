@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { postData } from "../../config/axiosFunctions";
+import { getData, postData, updateData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 
 // create patient action creator
@@ -13,6 +13,33 @@ export const newPatientAction = createAsyncThunk(
       } else {
         throw new Error(response.error);
       }
+    } catch (error) {
+      throw error;
+    }
+  }
+);
+
+export const getPatientAction = createAsyncThunk("getPatient", async () => {
+  try {
+    const response = await getData(`${path}/test-patient`);
+    if (response) {
+      return response;
+    } else {
+      throw new Error(response.error);
+    }
+  } catch (error) {}
+});
+
+export const updatePatientAction = createAsyncThunk(
+  "updatePatient",
+  async (data) => {
+    try {
+      const response = await updateData(
+        `${path}/test-patient/${data.patientId}`,
+        data
+      );
+      console.log(response, "edit action response");
+      return response;
     } catch (error) {
       throw error;
     }
