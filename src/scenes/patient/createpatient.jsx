@@ -20,6 +20,11 @@ import { newPatientAction } from "../../features/actions/createPatientAction";
 import { getData } from "../../config/axiosFunctions";
 import { useEffect, useState } from "react";
 import path from "../../config/apiUrl";
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 // import { createPatientSchema } from "../../schemas";
 
 const CreatePatient = () => {
@@ -62,6 +67,7 @@ const CreatePatient = () => {
     emergencyContactState: "",
     emergencyContactCity: "",
     // dateOfDeath: null,
+    dateOfBirth: dayjs("2022-04-17"),
     // dropdowns
     genderName: "",
     maritalStatusName: "",
@@ -224,6 +230,14 @@ const CreatePatient = () => {
       console.error(error);
     }
   };
+
+  // const handleGetGenderNameValue = (value) => {
+  //   //get name
+  //   const selectedOption = genderOptions.find(
+  //     (option) => option.genderIdentityName === value
+  //   );
+  // };
+
   useEffect(() => {
     fetchAccountTypeOptions();
     fetchGenderTypes();
@@ -246,6 +260,27 @@ const CreatePatient = () => {
   // const accountTypesOptions = ["Insurance"];
 
   // const companyNameOpt = ["Aku's Hospital"];
+
+  const customSelectMenuStyling = (maxHeight, horizontalAlign) => {
+    return {
+      MenuProps: {
+        getContentAnchorEl: null, // Aligns the menu to the top of the select field
+        anchorOrigin: {
+          vertical: "bottom",
+          horizontal: horizontalAlign || "left",
+        },
+        transformOrigin: {
+          vertical: "top",
+          horizontal: horizontalAlign || "left",
+        },
+        PaperProps: {
+          style: {
+            maxHeight: maxHeight || "100px", // Set the maximum height of the menu
+          },
+        },
+      },
+    };
+  };
   return (
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
@@ -350,34 +385,42 @@ const CreatePatient = () => {
                 <FormControl>
                   <InputLabel>Gender</InputLabel>
                   <Select
-                    // onChange={(e) => {
-                    //   handleChange(e);
-                    //   const selectedOption = genderOptions.find(
-                    //     (option) => option.genderIdentityName === e.target.value
-                    //   );
-                    //   if (selectedOption) {
-                    //     values.genderIdentityId =
-                    //       selectedOption.genderIdentityId;
-                    //     values.genderName = selectedOption.genderIdentityName;
-                    //   } else {
-                    //     values.genderIdentityId = null;
-                    //     values.genderName = null;
-                    //   }
-                    // }}
-                    onChange={handleChange}
+                    onChange={(e) => {
+                      console.log("eeeeee", e);
+                      handleChange(e);
+                      const selectedOption = genderOptions.find(
+                        (option) => option.genderIdentityName === e.target.value
+                      );
+                      if (selectedOption) {
+                        values.genderIdentityId =
+                          selectedOption.genderIdentityId;
+                        values.genderName = selectedOption.genderIdentityName;
+                      } else {
+                        values.genderIdentityId = null;
+                        values.genderName = null;
+                      }
+                    }}
                     onBlur={handleBlur}
                     value={values.genderName}
                     name="genderName"
-                    id="genderName"
+                    // id="genderName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
-                    {genderOptions?.map((opt) => (
-                      <MenuItem
-                        value={opt.genderIdentityName}
-                        key={opt.genderIdentityId}
-                      >
-                        {opt.genderIdentityName}
-                      </MenuItem>
-                    ))}
+                    {genderOptions?.map((opt) => {
+                      console.log(opt, "dd options");
+                      return (
+                        <MenuItem
+                          value={opt.genderIdentityName}
+                          key={opt.genderIdentityId}
+                        >
+                          {opt.genderIdentityName}
+                        </MenuItem>
+                      );
+                    })}
                   </Select>
                 </FormControl>
 
@@ -401,6 +444,11 @@ const CreatePatient = () => {
                         values.sexualOrientationName = null;
                       }
                     }}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     onBlur={handleBlur}
                     value={values.sexualOrientationName}
                     name="sexualOrientationName"
@@ -435,6 +483,11 @@ const CreatePatient = () => {
                     }}
                     onBlur={handleBlur}
                     value={values.maritalStatusName}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     name="maritalStatusName"
                   >
                     {maritalOptions?.map((opt) => (
@@ -467,6 +520,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.raceName}
                     name="raceName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {raceOptions?.map((opt) => (
                       <MenuItem
@@ -498,6 +556,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.accountTypeName}
                     name="accountTypeName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {accountTypeOptions?.map((opt) => (
                       <MenuItem value={opt.accountType} key={opt.accountTypeId}>
@@ -526,6 +589,11 @@ const CreatePatient = () => {
                         values.employmentStatusName = null;
                       }
                     }}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     onBlur={handleBlur}
                     value={values.employmentStatusName}
                     name="employmentStatusName"
@@ -560,6 +628,11 @@ const CreatePatient = () => {
                       }
                     }}
                     onBlur={handleBlur}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     value={values.referralSourceName}
                     name="referralSourceName"
                   >
@@ -593,6 +666,11 @@ const CreatePatient = () => {
                         values.relationShipToPatientName = null;
                       }
                     }}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     onBlur={handleBlur}
                     value={values.relationShipToPatientName}
                     name="relationShipToPatientName"
@@ -627,6 +705,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.ethnicityName}
                     name="ethnicityName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {ethnicityOptions?.map((opt) => (
                       <MenuItem value={opt.ethnicityName} key={opt.ethnicityId}>
@@ -655,6 +738,11 @@ const CreatePatient = () => {
                     }}
                     onBlur={handleBlur}
                     value={values.studentStatusName}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     name="studentStatusName"
                   >
                     {studentStatusOpt?.map((opt) => (
@@ -743,24 +831,32 @@ const CreatePatient = () => {
                 />
               </Box>
 
-              {/* <Stack
-                width={"100%"}
-                gap={5}
+              {/* DATE PICKER */}
+              <FormInfoHeading>Birth Details:</FormInfoHeading>
+
+              <Box
+                display="grid"
+                gap="30px"
                 sx={{
-                  flexDirection: { xs: "column", sm: "row", md: "row" },
-                  alignItems: "center",
+                  gridTemplateColumns: {
+                    xs: "repeat(1, minmax(0, 1fr))",
+                    sm: "repeat(2, minmax(0, 1fr))",
+                    md: "repeat(4, minmax(0, 1fr))",
+                  },
                 }}
               >
-                <Typography variant="h4" component={"h2"}>
-                  Date Details:
-                </Typography> */}
-              {/* <CustomDatePicker
-                  value={values.dateOfBirth}
-                  handleChange={handleChange}
-                  labelText="Date Of Birth"
-                /> */}
-
-              {/* </Stack> */}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DemoItem>
+                      <DatePicker
+                        value={values.dateOfBirth}
+                        onChange={handleChange}
+                        label="DOB"
+                      />
+                    </DemoItem>
+                  </DemoContainer>
+                </LocalizationProvider>
+              </Box>
 
               <FormInfoHeading>Address Details:</FormInfoHeading>
               <Box
@@ -826,6 +922,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.countryName}
                     name="countryName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {countryOptions?.map((opt) => (
                       <MenuItem value={opt.countryName} key={opt.countryId}>
@@ -854,6 +955,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.stateName}
                     name="stateName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {stateOptions?.map((opt) => (
                       <MenuItem value={opt.stateName} key={opt.stateId}>
@@ -882,6 +988,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.cityName}
                     name="cityName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {cityOptions?.map((opt) => (
                       <MenuItem value={opt.cityName} key={opt.cityId}>
@@ -910,6 +1021,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.residenceName}
                     name="residenceName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {residenceOptions?.map((opt) => (
                       <MenuItem
@@ -956,6 +1072,11 @@ const CreatePatient = () => {
                     onBlur={handleBlur}
                     value={values.companyName}
                     name="companyName"
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                   >
                     {companyOptions?.map((opt) => (
                       <MenuItem value={opt.companyName} key={opt.companyId}>
@@ -985,6 +1106,11 @@ const CreatePatient = () => {
                       }
                     }}
                     onBlur={handleBlur}
+                    {...customSelectMenuStyling("100px", {
+                      xs: "right",
+                      sm: "left",
+                      md: "left",
+                    })}
                     value={values.branchName}
                     name="branchName"
                   >

@@ -1,33 +1,35 @@
-.loginBtn {
-    background: linear-gradient(to top left, #192135, #3e5a92);
-    /* color: #fff !important; */
-    font-size: 1rem;
-
+.mainContainer {
+  
+    height: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70% !important;
+    border-radius: 15px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.loginBtn:hover {
-    background: none;
-    border:1px solid  #192135 !important;
-    /* color: #192135; */
-    transition: linear .4s;
+.containerItem1 {
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-image:
+    linear-gradient(to bottom, #0f2922f0, #274f45),
+    url('../../public/assets/hospital-building-2.jpg');
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    
 }
 
-.textField {
-    border-radius: 20px !important;
-}
-
-.welcomeBox {
-    background: linear-gradient(to top left, #192135, #3e5a92);
-}
-
-.socialIcon {
-    margin: 0 10px;
-    cursor: pointer;
-    border: 1px solid green;
-    font-size: 40px !important;
-   padding: 8px;
-   border-radius: 50px;
-}
-.socialIcon:hover{
-    color: #3e5a92;
+.containerItem2 {
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    background-image:
+    linear-gradient(to bottom, #0e0b13f2, #18161d),
+    url('../../public/assets/stones.jpg');
+    object-fit: cover;
+    background-size: cover;
+    background-position: center;
+    
 }

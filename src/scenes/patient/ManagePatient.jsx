@@ -23,7 +23,7 @@ const ManagePatient = () => {
     id: el.patientId,
     firstName: el.firstName,
     lastName: el.lastName,
-    // dateOfBirth: new Date(el.dateOfBirth).toLocaleDateString(),
+    dateOfBirth: new Date(el.dateOfBirth).toLocaleDateString(),
     genderName: el.genderName,
     accountTypeName: el.accountTypeName,
     // email: el.email,
@@ -79,7 +79,7 @@ const ManagePatient = () => {
       width: 150,
     },
     { field: "lastName", headerName: "Last Name", width: 150 },
-    // { field: "dateOfBirth", headerName: "Date Of Birth", width: 150 },
+    { field: "dateOfBirth", headerName: "Date Of Birth", width: 150 },
     { field: "genderName", headerName: "Gender", width: 150 },
     { field: "accountTypeName", headerName: "Account Type", width: 150 },
     // { field: "drivingLicense", headerName: "Driving License", width: 150 },
@@ -160,7 +160,7 @@ const ManagePatient = () => {
   return (
     <Box m={"20px"}>
       <Header title="MANAGE PATIENT" subtitle="Show all patients" />
-      <Box height={"400px"} width={"100%"}>
+      <Box height={"400px"}>
         {loading ? (
           <CircularProgress />
         ) : (

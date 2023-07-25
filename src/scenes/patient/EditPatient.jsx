@@ -25,6 +25,11 @@ import { useEffect, useState } from "react";
 import path from "../../config/apiUrl";
 // import { createPatientSchema } from "../../schemas";
 import { useNavigate, useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 const EditPatient = () => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -52,13 +57,16 @@ const EditPatient = () => {
   console.log(getAllPatients.result, "getting patients for edit");
   const navigate = useNavigate();
 
-  const findPatient = getAllPatients.result.find(
+  const findPatient = getAllPatients.result?.find(
     (el) => el.patientId === parseInt(id)
   );
   console.log(findPatient, "find Patient");
   // initial formik values
 
   const initialValues = {
+    dateOfBirth: findPatient
+      ? dayjs(findPatient.dateOfBirth)
+      : dayjs("2022-04-17"),
     patientId: findPatient ? findPatient.patientId : "",
     firstName: findPatient ? findPatient.firstName : "",
     lastName: findPatient ? findPatient.lastName : "",
@@ -321,7 +329,7 @@ const EditPatient = () => {
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(4, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
                   },
                 }}
               >
@@ -398,9 +406,11 @@ const EditPatient = () => {
                         values.genderIdentityId =
                           selectedOption.genderIdentityId;
                         values.genderName = selectedOption.genderIdentityName;
+                        console.log(values.genderName, "if: - gender");
                       } else {
                         values.genderIdentityId = null;
                         values.genderName = null;
+                        console.log(values.genderName, "else gendername");
                       }
                     }}
                     onBlur={handleBlur}
@@ -714,7 +724,7 @@ const EditPatient = () => {
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(4, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
                   },
                 }}
               >
@@ -779,7 +789,7 @@ const EditPatient = () => {
                   sx={{ gridColumn: "span 1" }}
                 />
               </Box>
-
+              {/* 
               <Stack
                 width={"100%"}
                 gap={5}
@@ -790,13 +800,38 @@ const EditPatient = () => {
               >
                 <Typography variant="h4" component={"h2"}>
                   Date Details:
-                </Typography>
-                {/* <CustomDatePicker
+                </Typography> */}
+              {/* <CustomDatePicker
                   value={values.dateOfBirth}
                   handleChange={handleChange}
                   labelText="Date Of Birth"
                 /> */}
-              </Stack>
+              {/* </Stack> */}
+              <FormInfoHeading>Birth Details:</FormInfoHeading>
+
+              <Box
+                display="grid"
+                gap="30px"
+                sx={{
+                  gridTemplateColumns: {
+                    xs: "repeat(1, minmax(0, 1fr))",
+                    sm: "repeat(2, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
+                  },
+                }}
+              >
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DemoContainer components={["DatePicker"]}>
+                    <DemoItem>
+                      <DatePicker
+                        value={values.dateOfBirth}
+                        onChange={handleChange("dateOfBirth")}
+                        label="Date of Birth"
+                      />
+                    </DemoItem>
+                  </DemoContainer>
+                </LocalizationProvider>
+              </Box>
 
               <FormInfoHeading>Address Details:</FormInfoHeading>
               <Box
@@ -806,7 +841,7 @@ const EditPatient = () => {
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(4, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
                   },
                 }}
               >
@@ -968,7 +1003,7 @@ const EditPatient = () => {
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(4, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
                   },
                 }}
               >
@@ -1045,7 +1080,7 @@ const EditPatient = () => {
                   gridTemplateColumns: {
                     xs: "repeat(1, minmax(0, 1fr))",
                     sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(4, minmax(0, 1fr))",
+                    md: "repeat(3, minmax(0, 1fr))",
                   },
                 }}
               >
