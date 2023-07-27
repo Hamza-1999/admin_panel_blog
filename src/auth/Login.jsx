@@ -1,141 +1,159 @@
+// Internal imports
+import React from "react";
+import { useNavigate } from "react-router-dom";
+
+// Material-UI imports
 import {
   Box,
   Button,
   Checkbox,
-  Container,
   FormControl,
   FormControlLabel,
   FormGroup,
-  FormHelperText,
   Grid,
-  Input,
   InputLabel,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import FacebookIcon from "@mui/icons-material/Facebook";
+import { blue } from "@mui/material/colors";
+
+// CSS import
 import "./login.css";
-import { useNavigate } from "react-router-dom";
-const Login = () => {
+
+const TechMatterLogo = () => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "flex-end",
+        justifyContent: "space-between",
+        height: "100%",
+        padding: "50px 45px",
+      }}
+    >
+      <Typography
+        variant="h3"
+        component={"h2"}
+        fontSize={".9rem"}
+        fontWeight={"300"}
+        letterSpacing={1.2}
+      >
+        TechMatter PVT LTD
+      </Typography>
+      <Typography
+        variant="h3"
+        component={"h1"}
+        fontSize={"1.5rem"}
+        textAlign={"right"}
+        sx={{ color: "#3da58a" }}
+        fontWeight={"700"}
+      >
+        Welcome to Login
+      </Typography>
+    </Box>
+  );
+};
+
+const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    console.log("clicked");
     navigate("/dashboard");
   };
+
   return (
-    <Container fixed>
-      <Box fullWidth display="flex" marginTop={"10%"}>
-        <Box sx={{ border: "1px solid green" }} width={"50%"} padding={"25px"}>
-          <Box
-            className="header"
-            flexDirection={"row"}
-            display={"flex"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Typography
-              variant="h3"
-              component={"h1"}
-              fontSize={"2.5rem"}
-              fontWeight={"300"}
-            >
-              Sign In
-            </Typography>
-            <Stack direction={"row"}>
-              <TwitterIcon className="socialIcon" />
-              <FacebookIcon className="socialIcon" />
-            </Stack>
-          </Box>
+    <Box component={"form"} padding={"28px 60px"}>
+      <Typography variant="h1" component={"h1"} fontSize={"2rem"}>
+        Login
+      </Typography>
 
-          <Box
-            display={"flex"}
-            flexDirection={"column"}
-            // alignItems={"center"}
-            // justifyContent={"center"}
-          >
-            <FormControl fullWidth sx={{ margin: "20px 0" }}>
-              <label>Username</label>
-              <TextField
-                label="Username"
-                type="text"
-                className="textField"
-                sx={{
-                  marginTop: "10px",
-                }}
-              />
-            </FormControl>
-            <FormControl fullWidth sx={{ margin: "20px 0" }}>
-              <label>Password</label>
-              <TextField
-                label="Password"
-                type="password"
-                sx={{
-                  marginTop: "10px",
-                }}
-              />
-            </FormControl>
+      <Box marginTop={"40px"}>
+        <FormGroup sx={{ margin: "10px 0 30px" }}>
+          <InputLabel>Username:</InputLabel>
+          <TextField
+            variant="outlined"
+            inputProps={{
+              style: {
+                height: "5px",
+              },
+            }}
+            sx={{ marginTop: "10px" }}
+          />
+        </FormGroup>
+        <FormGroup>
+          <InputLabel>Password:</InputLabel>
+          <TextField
+            variant="outlined"
+            type="password"
+            inputProps={{
+              style: {
+                height: "5px",
+              },
+            }}
+            sx={{ marginTop: "10px" }}
+          />
+        </FormGroup>
 
-            <Button
-              fullWidth
-              variant="outline"
-              className="loginBtn"
+        <FormControlLabel
+          sx={{ marginTop: "12px" }}
+          control={
+            <Checkbox
+              defaultChecked
               sx={{
-                marginTop: "20px",
-                padding: "12px",
-                background: "",
-                borderRadius: "20px",
+                color: blue[500],
               }}
-              onClick={handleLogin}
-            >
-              Sign In
-            </Button>
+            />
+          }
+          label="Remember me"
+        />
 
-            <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              marginTop={"15px"}
-            >
-              <FormGroup>
-                <FormControlLabel control={<Checkbox />} label="Remember" />
-              </FormGroup>
-
-              <Typography>Forget Password</Typography>
-            </Stack>
-          </Box>
-        </Box>
-        <Box
-          sx={{ border: "1px solid red" }}
-          className="welcomeBox"
-          display={"flex"}
-          flexDirection={"column"}
-          width={"50%"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          padding={"18px"}
-        >
-          <Typography variant="h3" component={"h1"} fontSize={"2.5rem"}>
-            Welcome to Login
-          </Typography>
-          <Typography variant="h5" component={"p"} margin={"30px 0"}>
-            Don't have an account?
-          </Typography>
-          <FormGroup sx={{ width: "200px" }}>
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="small"
-              sx={{ borderRadius: "20px", padding: "10px" }}
-            >
-              Sign In
-            </Button>
-          </FormGroup>
-        </Box>
+        <Stack display={"flex"} alignItems={"flex-end"} width={"100%"}>
+          <Button
+            variant="contained"
+            style={{
+              width: "50%",
+              // background: "#274f45",
+            }}
+            className="loginBtn"
+            onClick={handleLogin}
+          >
+            Login
+          </Button>
+        </Stack>
       </Box>
-    </Container>
+    </Box>
+  );
+};
+
+const Login = () => {
+  return (
+    <Grid container className="mainContainer">
+      <Grid
+        item
+        xs={4}
+        className="containerItem1"
+        sx={{
+          display: { xs: "none", sm: "grid", md: "grid" },
+        }}
+      >
+        <TechMatterLogo />
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={8}
+        md={8}
+        sx={{
+          width: "100%",
+        }}
+        className="containerItem2"
+      >
+        <LoginForm />
+      </Grid>
+    </Grid>
   );
 };
 

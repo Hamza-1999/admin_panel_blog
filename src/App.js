@@ -36,9 +36,8 @@ function App() {
         <CssBaseline />
         <div className="app">
           {!isLoginPage && <Sidebar isSidebar={isSidebar} />}
-          {/* <Sidebar isSidebar={isSidebar} /> */}
           <main className="content">
-            <Topbar setIsSidebar={setIsSidebar} />
+            {!isLoginPage && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
