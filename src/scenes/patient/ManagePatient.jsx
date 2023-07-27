@@ -1,4 +1,4 @@
-import { Box, CircularProgress, IconButton } from "@mui/material";
+import { Box, CircularProgress, IconButton, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import Header from "../../components/Header";
 import { DataGrid } from "@mui/x-data-grid";
@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatientAction } from "../../features/actions/createPatientAction";
 import { useNavigate } from "react-router-dom";
+
 const ManagePatient = () => {
   const navigate = useNavigate();
   // const [allPatient, setAllPatient] = useState([]);
@@ -52,10 +53,6 @@ const ManagePatient = () => {
     // emergencyContactZipCode: el.emergencyContactZipCode,
   }));
 
-  useEffect(() => {
-    dispatch(getPatientAction());
-  }, [dispatch]);
-
   if (
     !getAllPatients ||
     !getAllPatients.result ||
@@ -64,7 +61,11 @@ const ManagePatient = () => {
     return (
       <Box m={"20px"}>
         <Header title="MANAGE PATIENT" subtitle="Show all patients" />
-        {loading ? <CircularProgress /> : <div>No patient data available.</div>}
+        {loading ? (
+          <Typography>Loading...</Typography>
+        ) : (
+          <div>No patient data available.</div>
+        )}
       </Box>
     );
   }
@@ -76,12 +77,39 @@ const ManagePatient = () => {
     {
       field: "firstName",
       headerName: "First Name",
-      width: 150,
+      width: 200,
+      headerAlign: "center",
+      align: "center",
     },
-    { field: "lastName", headerName: "Last Name", width: 150 },
-    { field: "dateOfBirth", headerName: "Date Of Birth", width: 150 },
-    { field: "genderName", headerName: "Gender", width: 150 },
-    { field: "accountTypeName", headerName: "Account Type", width: 150 },
+    {
+      field: "lastName",
+      headerName: "Last Name",
+      headerAlign: "center",
+      width: 200,
+      align: "center",
+    },
+    {
+      field: "dateOfBirth",
+      headerName: "Date Of Birth",
+      width: 200,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "genderName",
+      headerName: "Gender",
+      width: 200,
+      align: "center",
+      headerAlign: "center",
+    },
+    {
+      field: "accountTypeName",
+      headerName: "Account Type",
+      width: 200,
+      align: "center",
+      headerAlign: "center",
+      cursor: "pointer",
+    },
     // { field: "drivingLicense", headerName: "Driving License", width: 150 },
     // {
     //   field: "sexualOrientationName",
@@ -131,7 +159,10 @@ const ManagePatient = () => {
     {
       field: "actions",
       headerName: "Actions",
-      width: 150,
+      width: 200,
+      align: "center",
+      headerAlign: "center",
+
       renderCell: (params) => {
         const { id } = params.row;
 
@@ -160,15 +191,27 @@ const ManagePatient = () => {
   return (
     <Box m={"20px"}>
       <Header title="MANAGE PATIENT" subtitle="Show all patients" />
-      <Box height={"400px"}>
-        {loading ? (
-          <CircularProgress />
-        ) : (
-          <Box height={"400px"} width={"100%"}>
-            <DataGrid rows={rows} columns={columns} pageSize={5} />
-          </Box>
-        )}
-      </Box>
+      {loading ? (
+        // <CircularProgress />
+        <Typography>Loading...</Typography>
+      ) : (
+        <Box height={"400px"} width={"100%"}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
+              },
+            }}
+            pageSize={5}
+            disableSelectionOnClick
+            onCellClick={(params) => navigate(`/editpatient/${params.row.id}`)}
+          />
+        </Box>
+      )}
     </Box>
   );
 };

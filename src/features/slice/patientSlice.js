@@ -45,7 +45,6 @@ const patientSlice = createSlice({
     },
     [updatePatientAction.fulfilled]: (state, action) => {
       state.loading = false;
-      console.log(state.getAllPatients, "update patients in slice");
       const updatedPatientIndex = state.getAllPatients.result?.findIndex(
         (user) => user.patientId === action.payload.PatientId
       );

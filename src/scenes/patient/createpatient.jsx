@@ -8,8 +8,10 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  NativeSelect,
+  InputBase,
 } from "@mui/material";
-import { ErrorMessage, Formik } from "formik";
+import { ErrorMessage, Field, Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 // import { useState } from "react";
@@ -25,6 +27,7 @@ import { DemoContainer, DemoItem } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import styled from "@emotion/styled";
 // import { createPatientSchema } from "../../schemas";
 
 const CreatePatient = () => {
@@ -54,6 +57,7 @@ const CreatePatient = () => {
     lastName: "",
     email: "",
     drivingLicense: "",
+    dateOfBirth: "",
     cellPhone: "",
     homePhone: "",
     workPhone: "",
@@ -67,7 +71,6 @@ const CreatePatient = () => {
     emergencyContactState: "",
     emergencyContactCity: "",
     // dateOfDeath: null,
-    dateOfBirth: dayjs("2022-04-17"),
     // dropdowns
     genderName: "",
     maritalStatusName: "",
@@ -96,167 +99,56 @@ const CreatePatient = () => {
     }
   };
 
-  const fetchGenderTypes = async () => {
-    try {
-      const getGenderTypes = await getData(`${path}/ct-genderIdentity`);
-      setGenderOptions(getGenderTypes.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchMaritalStatus = async () => {
-    try {
-      const getMaritalTypes = await getData(`${path}/ct-maritalStatus`);
-      setMaritalOptions(getMaritalTypes.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchRaceStatus = async () => {
-    try {
-      const getRaceTypes = await getData(`${path}/ct-raceStatus`);
-      setRaceOptions(getRaceTypes.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchAccountTypeOptions = async () => {
-    try {
-      const getAccTypes = await getData(`${path}/ct-accountType`);
-      setAccountTypeOptions(getAccTypes);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchSexualOrientation = async () => {
-    try {
-      const getSexOrientation = await getData(
-        `${path}/ct-sexualorientatioStatus`
-      );
-      setSexOrientationOptions(getSexOrientation.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchEmployeementStatus = async () => {
-    try {
-      const getEmployeeStatus = await getData(`${path}/ct-employmentStatus`);
-      setEmployeementOptions(getEmployeeStatus);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchRefferalSource = async () => {
-    try {
-      const getRefrence = await getData(
-        `http://192.168.3.73:3000/ct-referralSource`
-      );
-      setReferenceOptions(getRefrence.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchRelationToPatient = async () => {
-    try {
-      const getRelation = await getData(`${path}/ct-relationToPatient`);
-      setPatientRelationOpt(getRelation.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchEthnicityStatus = async () => {
-    try {
-      const getEthnicity = await getData(
-        `http://192.168.3.73:3000/ct-ethnicityStatus`
-      );
-      setEthnicityOptions(getEthnicity.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchStudentStatus = async () => {
-    try {
-      const getStudentStatus = await getData(`${path}/ct-studentStatus`);
-      setStudentStatusOpt(getStudentStatus.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchCities = async () => {
-    try {
-      const getCity = await getData(`${path}/city`);
-      setCityOptions(getCity.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchCountries = async () => {
-    try {
-      const getCountry = await getData(`${path}/country`);
-      setCountryOptions(getCountry.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchState = async () => {
-    try {
-      const getState = await getData(`${path}/state`);
-      setStateOptions(getState.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchResidenceTypes = async () => {
-    try {
-      const getResidence = await getData(`${path}/ct-residenceType`);
-      setResidenceOptions(getResidence.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchCompany = async () => {
-    try {
-      const getCompany = await getData(`${path}/company`);
-      setCompanyOptions(getCompany.result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchBranch = async () => {
-    try {
-      const fetchBranch = await getData(`${path}/branch`);
-      setBranchOptions(fetchBranch.result);
-    } catch (error) {
-      console.error(error);
-    }
+  // Define data fetching URLs
+  const dataFetchUrls = {
+    accountType: `${path}/ct-accountType`,
+    genderTypes: `${path}/ct-genderIdentity`,
+    maritalStatus: `${path}/ct-maritalStatus`,
+    raceStatus: `${path}/ct-raceStatus`,
+    sexualOrientation: `${path}/ct-sexualorientatioStatus`,
+    employmentStatus: `${path}/ct-employmentStatus`,
+    referralSource: `http://192.168.3.73:3000/ct-referralSource`,
+    relationToPatient: `${path}/ct-relationToPatient`,
+    ethnicityStatus: `http://192.168.3.73:3000/ct-ethnicityStatus`,
+    studentStatus: `${path}/ct-studentStatus`,
+    cities: `${path}/city`,
+    countries: `${path}/country`,
+    states: `${path}/state`,
+    residenceTypes: `${path}/ct-residenceType`,
+    companies: `${path}/company`,
+    branches: `${path}/branch`,
   };
 
-  // const handleGetGenderNameValue = (value) => {
-  //   //get name
-  //   const selectedOption = genderOptions.find(
-  //     (option) => option.genderIdentityName === value
-  //   );
-  // };
+  // Define a reusable function to fetch data for a given URL
+  const fetchDataOptions = async (url, setter) => {
+    try {
+      const response = await getData(url);
+      setter(response.result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
-    fetchAccountTypeOptions();
-    fetchGenderTypes();
-    fetchMaritalStatus();
-    fetchRaceStatus();
-    fetchSexualOrientation();
-    fetchEmployeementStatus();
-    fetchRefferalSource();
-    fetchRelationToPatient();
-    fetchEthnicityStatus();
-    fetchStudentStatus();
-    fetchCities();
-    fetchCountries();
-    fetchState();
-    fetchResidenceTypes();
-    fetchCompany();
-    fetchBranch();
-  }, []);
-
+    fetchDataOptions(dataFetchUrls.accountType, setAccountTypeOptions);
+    fetchDataOptions(dataFetchUrls.branches, setBranchOptions);
+    fetchDataOptions(dataFetchUrls.cities, setCityOptions);
+    fetchDataOptions(dataFetchUrls.companies, setCompanyOptions);
+    fetchDataOptions(dataFetchUrls.countries, setCountryOptions);
+    fetchDataOptions(dataFetchUrls.employmentStatus, setEmployeementOptions);
+    fetchDataOptions(dataFetchUrls.ethnicityStatus, setEthnicityOptions);
+    fetchDataOptions(dataFetchUrls.genderTypes, setGenderOptions);
+    fetchDataOptions(dataFetchUrls.maritalStatus, setMaritalOptions);
+    fetchDataOptions(dataFetchUrls.raceStatus, setRaceOptions);
+    fetchDataOptions(dataFetchUrls.referralSource, setReferenceOptions);
+    fetchDataOptions(dataFetchUrls.relationToPatient, setPatientRelationOpt);
+    fetchDataOptions(dataFetchUrls.residenceTypes, setResidenceOptions);
+    fetchDataOptions(dataFetchUrls.sexualOrientation, setSexOrientationOptions);
+    fetchDataOptions(dataFetchUrls.states, setStateOptions);
+    fetchDataOptions(dataFetchUrls.studentStatus, setStudentStatusOpt);
+    // fetchAccountTypeOptions();
+    // fetchEmployeementStatus();
+  }, [dispatch]);
   // const accountTypesOptions = ["Insurance"];
 
   // const companyNameOpt = ["Aku's Hospital"];
@@ -281,6 +173,46 @@ const CreatePatient = () => {
       },
     };
   };
+
+  const BootstrapInput = styled(InputBase)(({ theme }) => ({
+    "label + &": {
+      marginTop: theme.spacing(3),
+    },
+    "& .MuiInputBase-input": {
+      borderRadius: 4,
+      position: "relative",
+      // backgroundColor: theme.palette.background.paper,
+      border: "1px solid #ced4da",
+      fontSize: 16,
+      padding: "10px 26px 10px 12px",
+      transition: theme.transitions.create(["border-color", "box-shadow"]),
+      // Use the system font instead of the default Roboto font.
+      fontFamily: [
+        "-apple-system",
+        "BlinkMacSystemFont",
+        '"Segoe UI"',
+        "Roboto",
+        '"Helvetica Neue"',
+        "Arial",
+        "sans-serif",
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+      ].join(","),
+      "&:focus": {
+        borderRadius: 4,
+        borderColor: "#80bdff",
+        boxShadow: "0 0 0 0.2rem rgba(0,123,255,.25)",
+      },
+    },
+  }));
+
+  const handleChangeDate = (fieldName, values, setValues) => {
+    setValues({
+      ...values,
+      [fieldName]: values,
+    });
+  };
   return (
     <Box m="20px">
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
@@ -297,6 +229,7 @@ const CreatePatient = () => {
           handleChange,
           handleSubmit,
           setFieldValue,
+          setValues,
         }) => (
           <form
             onSubmit={handleSubmit}
@@ -386,7 +319,6 @@ const CreatePatient = () => {
                   <InputLabel>Gender</InputLabel>
                   <Select
                     onChange={(e) => {
-                      console.log("eeeeee", e);
                       handleChange(e);
                       const selectedOption = genderOptions.find(
                         (option) => option.genderIdentityName === e.target.value
@@ -423,6 +355,30 @@ const CreatePatient = () => {
                     })}
                   </Select>
                 </FormControl>
+
+                {/* <FormControl variant="standard">
+                  <NativeSelect
+                    id="genderSelection"
+                    value={values.genderName}
+                    name="genderName"
+                    onBlur={handleBlur}
+                    // placeholder="gender"
+                    onChange={handleChange}
+                    input={<BootstrapInput />}
+                  >
+                    <option aria-label="None" value="" label="Gender" />
+                    {genderOptions.map((opt) => {
+                      return (
+                        <option
+                          value={opt.genderIdentityId}
+                          key={opt.genderIdentityId}
+                        >
+                          {opt.genderIdentityName}
+                        </option>
+                      );
+                    })}
+                  </NativeSelect>
+                </FormControl> */}
 
                 {/* sexual orientation dropdown */}
                 <FormControl>
@@ -848,11 +804,18 @@ const CreatePatient = () => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DemoContainer components={["DatePicker"]}>
                     <DemoItem>
-                      <DatePicker
-                        value={values.dateOfBirth}
-                        onChange={handleChange}
-                        label="DOB"
-                      />
+                      <Field name="dateOfBirth">
+                        {({ field }) => (
+                          <DatePicker
+                            {...field}
+                            value={dayjs(values.dateOfBirth).toDate()}
+                            onChange={(date) => {
+                              handleChangeDate("dateOfBirth", date, setValues);
+                            }}
+                            label="DOB"
+                          />
+                        )}
+                      </Field>
                     </DemoItem>
                   </DemoContainer>
                 </LocalizationProvider>
