@@ -55,9 +55,16 @@ const EditPatient = () => {
   const { getAllPatients, loading } = useSelector((state) => state.patient);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Fetch all patients data if not already loaded
+    if (!getAllPatients?.result?.length) {
+      dispatch(getPatientAction());
+    }
+  }, [dispatch]);
   const findPatient = getAllPatients.result?.find(
     (el) => el.patientId === parseInt(id)
   );
+
   // initial formik values
   const initialValues = {
     patientId: findPatient ? findPatient.patientId : "",
@@ -109,13 +116,6 @@ const EditPatient = () => {
     companyName: findPatient ? findPatient.companyName : "",
     branchName: findPatient ? findPatient.branchName : "",
   };
-
-  useEffect(() => {
-    // Fetch all patients data if not already loaded
-    if (!getAllPatients?.result?.length) {
-      dispatch(getPatientAction());
-    }
-  }, [dispatch]);
 
   // Define data fetching URLs
   const dataFetchUrls = {
