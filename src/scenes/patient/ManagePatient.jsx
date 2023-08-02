@@ -13,20 +13,31 @@ const ManagePatient = () => {
   // const [allPatient, setAllPatient] = useState([]);
   // console.log(allPatient, "all patient data");
   const dispatch = useDispatch();
-  const { getAllPatients, loading } = useSelector((state) => state.patient);
-  console.log(getAllPatients, "getPatient in Ui");
+  const { getAllPatients, loading, error } = useSelector(
+    (state) => state.patient
+  );
+  console.log(error, "error");
 
   useEffect(() => {
     dispatch(getPatientAction());
   }, [dispatch]);
+
+  if (error) {
+    return (
+      <Box m={"20px"}>
+        <Header title="MANAGE PATIENT" subtitle="Show all patients" />
+        <div>Error loading data. Please try again later.</div>
+      </Box>
+    );
+  }
 
   const rows = getAllPatients.result?.map((el) => ({
     id: el.patientId,
     firstName: el.firstName,
     lastName: el.lastName,
     dateOfBirth: new Date(el.dateOfBirth).toLocaleDateString(),
-    genderName: el.genderName,
-    accountTypeName: el.accountTypeName,
+    genderIdentityName: el.genderIdentityName,
+    accountType: el.accountType,
     // email: el.email,
     // drivingLicense: el.drivingLicense,
     // sexualOrientationName: el.sexualOrientationName,
@@ -96,14 +107,14 @@ const ManagePatient = () => {
       headerAlign: "center",
     },
     {
-      field: "genderName",
+      field: "genderIdentityName",
       headerName: "Gender",
       width: 200,
       align: "center",
       headerAlign: "center",
     },
     {
-      field: "accountTypeName",
+      field: "accountType",
       headerName: "Account Type",
       width: 200,
       align: "center",

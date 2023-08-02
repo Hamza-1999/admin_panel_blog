@@ -1,0 +1,28 @@
+/* Add this CSS to your existing styles or in a separate CSS file */
+.formContainer {
+    overflow: hidden;
+    border: 1px solid lightgrey;
+    border-radius: 25px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    opacity: 1; /* Start with full opacity */
+    transition: max-height 0.4s, opacity 0.4s; /* Add max-height and opacity to the transition */
+}
+
+.formContent {
+      max-height: 60vh;
+    overflow-y: scroll !important;
+    padding: 17px 27px;
+    transform: translateX(0); /* Start with the content in the original position */
+    transition: transform 0.4s; /* Add transform to the transition */
+  }
+  
+  .formContainer.hidden {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .formContainer.hidden .formContent {
+    transform: translateX(-100%); /* Slide in from the left when hidden */
+  }
+  

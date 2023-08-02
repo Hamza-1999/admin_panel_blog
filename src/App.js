@@ -13,7 +13,6 @@ import Pie from "./scenes/pie";
 import FAQ from "./scenes/faq";
 import Geography from "./scenes/geography";
 import Patient from "./scenes/patient";
-import CreatePatient from "./scenes/patient/createpatient";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import { ColorModeContext, useMode } from "./theme";
 import Calendar from "./scenes/calendar/calendar";
@@ -22,6 +21,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./auth/Login";
 import EditPatient from "./scenes/patient/EditPatient";
+import CreatePatient from "./scenes/patient/CreatePatient";
 
 function App() {
   const [theme, colorMode] = useMode();
