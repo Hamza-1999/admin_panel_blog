@@ -3,26 +3,33 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import { useTheme } from "@emotion/react";
+
 const CustomSelectBox = ({
-  values,
+  value,
   handleChange,
-  selectLabel,
-  selectOptions,
+  handleBlur,
+  label,
+  dropdownOptions,
   name,
 }) => {
   return (
     <FormControl fullWidth>
-      <InputLabel>{selectLabel}</InputLabel>
+      {!value && <InputLabel>{label}</InputLabel>}
       <Select
-        value={values}
+        value={value}
         name={name}
-        label={selectLabel}
+        label={label}
         onChange={handleChange}
+        onBlur={handleBlur}
+        native
+        defaultValue=""
       >
-        {selectOptions.map((el) => (
-          <MenuItem key={el} value={el}>
-            {el}
-          </MenuItem>
+        <option aria-label="None" value="" />
+        {dropdownOptions.map((opt) => (
+          <option key={opt.id} value={opt.value}>
+            {opt.value}
+          </option>
         ))}
       </Select>
     </FormControl>
