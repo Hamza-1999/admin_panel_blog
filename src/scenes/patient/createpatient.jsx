@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
 import { useFormik } from "formik";
 import { Box, Button, Tab, Tabs } from "@mui/material";
 import Header from "../../components/Header";
-import BillingInfo from "./BillingInfo";
 import InsuranceInfo from "./InsuranceInfo";
 import { useDispatch, useSelector } from "react-redux";
 import { newPatientAction } from "../../features/actions/createPatientAction";
 
 import "./createpatient.css";
 import path from "../../config/apiUrl";
+import PayerInfo from "./PayerInfo";
 const CreatePatient = () => {
   const [tabValue, setTabValue] = useState(0);
   const [isFormVisible, setIsFormVisible] = useState(true);
@@ -68,14 +68,28 @@ const CreatePatient = () => {
     insuredCountryName: "",
     insuredRelationShipToPatientName: "",
     insuredGenderIdentityName: "",
-    employeeName: "",
+    // employeeName: "",
     empAddress: "",
     empCityName: "",
     empStateName: "",
+    insuredPartyName: "",
     empZipCode: "",
     empEmploymentStatusName: "",
     accountNo: "",
     patientName: "",
+
+    // payer info data
+    payerInfoMemberId: null,
+    payerInfoGroupId: null,
+    payerInfoCopayAmount: null,
+    payerInfoCoInsurancePercent: null,
+    payerInfoDeductibleAmount: null,
+    payerInfoOutOfPocketMax: null,
+    payerInfoEffectiveDate: null,
+    payerInfoTerminationDate: null,
+    payerInfoPriorityName: "",
+    payerInfoPolicyType: "",
+    payerInfoPayerType: "",
   });
   const handleTabChange = (event, newValue) => {
     setIsFormVisible(false);
@@ -85,42 +99,126 @@ const CreatePatient = () => {
     }, 400);
   };
 
+  const handleFormSubmit = async (formValues) => {
+    try {
+      let endpoint;
+
+      switch (tabValue) {
+        case 0:
+          endpoint = `${path}/test-patient`;
+
+          break;
+        case 1:
+          endpoint = `${path}/insuredParty`;
+
+          break;
+        case 2:
+          // eslint-disable-next-line no-unused-vars
+          endpoint = `${path}/payerInfo`;
+
+          break;
+        default:
+          break;
+      }
+      if (endpoint) {
+        // Dispatch the action with the dynamic endpoint and form data
+
+        await dispatch(newPatientAction({ endpoint, data: formValues }));
+        formik.resetForm();
+        console.log(formValues, "checking submit values of createPatient");
+      } else {
+        console.error("Invalid tabValue:", tabValue);
+      }
+    } catch (error) {
+      console.error("Error creating patient:", error);
+    }
+  };
+
   const formik = useFormik({
     initialValues: formData,
-    onSubmit: async (values, action) => {
+    onSubmit: async (values) => {
       try {
-        let endpoint;
+        await handleFormSubmit(values);
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          drivingLicense: "",
+          dateOfBirth: null,
+          dateOfDeath: null,
+          cellPhone: "",
+          homePhone: "",
+          workPhone: "",
+          ext: "",
+          address: "",
+          zipCode: "",
+          emergencyContactFirstName: "",
+          emergencyContactLastName: "",
+          emergencyContactAddress: "",
+          emergencyContactZipCode: "",
+          emergencyContactState: "",
+          emergencyContactCity: "",
+          // dateOfDeath: null,
+          // dropdowns
+          genderIdentityName: "",
+          maritalStatusName: "",
+          raceStatusName: "",
+          sexualOrientationName: "",
+          employmentStatusName: "",
+          referralSourceName: "",
+          relationShipToPatientName: "",
+          ethnicityName: "",
+          studentStatusName: "",
+          accountType: "",
+          cityName: "",
+          countryName: "",
+          stateName: "",
+          residenceTypeName: "",
 
-        switch (tabValue) {
-          case 0:
-            endpoint = `${path}/test-patient`;
-            break;
-          case 1:
-            endpoint = `${path}/insuredParty`;
-            break;
-          case 2:
-            // eslint-disable-next-line no-unused-vars
-            endpoint = `${path}/billing`;
-            break;
-          default:
-            break;
-        }
-        if (endpoint) {
-          // Dispatch the action with the dynamic endpoint and form data
-          await dispatch(newPatientAction({ endpoint, data: values }));
+          // Insured Information Data
+          insuredFirstName: "",
+          insuredLastName: "",
+          insuredDateOfBirth: "",
+          insuredAddress: "",
+          insuredSSN: "",
+          insuredZipCode: "",
+          insuredHomePhone: "",
+          insuredCellPhone: "",
+          insuredWorkPhone: "",
+          insuredExt: "",
+          insuredEmail: "",
+          insuredCityName: "",
+          insuredStateName: "",
+          insuredCountryName: "",
+          insuredRelationShipToPatientName: "",
+          insuredGenderIdentityName: "",
+          // employeeName: "",
+          empAddress: "",
+          empCityName: "",
+          empStateName: "",
+          insuredPartyName: "",
+          empZipCode: "",
+          empEmploymentStatusName: "",
+          accountNo: "",
+          patientName: "",
 
-          console.log(values, "checking submit values of createPatient");
-        } else {
-          console.error("Invalid tabValue:", tabValue);
-        }
-        // dispatch(newPatientAction(values));
-        // console.log(values, "checking submit values of createPatient");
-        // action.resetForm();
+          // payer info data
+          payerInfoMemberId: "",
+          payerInfoGroupId: "",
+          payerInfoCopayAmount: "",
+          payerInfoCoInsurancePercent: "",
+          payerInfoDeductibleAmount: "",
+          payerInfoOutOfPocketMax: "",
+          payerInfoEffectiveDate: "",
+          payerInfoTerminationDate: "",
+          payerInfoPriorityName: "",
+          payerInfoPolicyType: "",
+          payerInfoPayerType: "",
+        });
+        console.log(values, "checking submit values of createPatient");
       } catch (error) {
         console.error("Error creating patient:", error);
       }
-
-      action.resetForm();
     },
   });
 
@@ -136,16 +234,10 @@ const CreatePatient = () => {
         >
           <Tab label="Patient Info" value={0} />
           <Tab label="Insurance Info" value={1} />
-          <Tab label="Billing Info" value={2} />
+          <Tab label="Payer Info" value={2} />
         </Tabs>
         <form
           onSubmit={formik.handleSubmit}
-          // style={{
-          //   height: "70vh",
-          //   overflowY: "scroll",
-          //   border: "1px solid lightgrey",
-          //   padding: "17px 27px",
-          // }}
           className={`formContainer ${!isFormVisible ? "hidden" : ""}`}
         >
           {/* <div > */}
@@ -165,7 +257,7 @@ const CreatePatient = () => {
               />
             )}
             {tabValue === 2 && (
-              <BillingInfo
+              <PayerInfo
                 formik={formik}
                 formData={formData}
                 setFormData={setFormData}
@@ -189,7 +281,13 @@ const CreatePatient = () => {
                 marginRight: "30px",
               }}
             >
-              {loading ? "Creating..." : "Create Patient"}
+              {tabValue === 0
+                ? loading
+                  ? "Creating"
+                  : "Create"
+                : loading
+                ? "Adding"
+                : "Add"}
             </Button>
           </Box>
         </form>
