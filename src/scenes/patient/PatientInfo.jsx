@@ -320,7 +320,6 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
-
         {/* contact details */}
 
         <Accordion>
@@ -413,9 +412,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
-
         {/* Birth Details */}
-
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMore />}
@@ -587,7 +584,6 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
         </Accordion>
 
         {/* emergency contact */}
-
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMore />}
