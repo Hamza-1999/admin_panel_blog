@@ -225,7 +225,6 @@ const CreatePatient = () => {
   return (
     <Box margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
-
       <Box>
         <Tabs
           value={tabValue}
