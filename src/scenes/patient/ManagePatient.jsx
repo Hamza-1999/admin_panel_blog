@@ -33,6 +33,7 @@ const ManagePatient = () => {
 
   const rows = getAllPatients.result?.map((el) => ({
     id: el.patientId,
+    accountNo: el.accountNo,
     firstName: el.firstName,
     lastName: el.lastName,
     dateOfBirth: new Date(el.dateOfBirth).toLocaleDateString(),
@@ -216,7 +217,9 @@ const ManagePatient = () => {
             }}
             pageSize={5}
             disableSelectionOnClick
-            onCellClick={(params) => navigate(`/showpatient/${params.row.id}`)}
+            onCellClick={(params) =>
+              navigate(`/showpatient/${params.row.accountNo}`)
+            }
           />
         </Box>
       )}

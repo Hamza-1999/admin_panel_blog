@@ -10,14 +10,19 @@ import { newPatientAction } from "../../features/actions/createPatientAction";
 import "./createpatient.css";
 import path from "../../config/apiUrl";
 import PayerInfo from "./PayerInfo";
+import { v4 as uuid } from "uuid";
+import { newInsuranceAction } from "../../features/actions/patientInsuranceAction";
 const CreatePatient = () => {
   const [tabValue, setTabValue] = useState(0);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.patient);
+  const uniqueId = uuid().slice(0, 7);
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
+    accountNo: uniqueId,
     email: "",
     drivingLicense: "",
     dateOfBirth: null,
@@ -75,7 +80,7 @@ const CreatePatient = () => {
     insuredPartyName: "",
     empZipCode: "",
     empEmploymentStatusName: "",
-    accountNo: "",
+
     patientName: "",
 
     // payer info data
@@ -99,7 +104,7 @@ const CreatePatient = () => {
     }, 400);
   };
 
-  const handleFormSubmit = async (formValues) => {
+  const handleFormSubmit = (formValues) => {
     try {
       let endpoint;
 
@@ -123,7 +128,8 @@ const CreatePatient = () => {
       if (endpoint) {
         // Dispatch the action with the dynamic endpoint and form data
 
-        await dispatch(newPatientAction({ endpoint, data: formValues }));
+        dispatch(newPatientAction({ endpoint, data: formValues }));
+
         formik.resetForm();
         console.log(formValues, "checking submit values of createPatient");
       } else {
@@ -136,12 +142,13 @@ const CreatePatient = () => {
 
   const formik = useFormik({
     initialValues: formData,
-    onSubmit: async (values) => {
+    onSubmit: (values) => {
       try {
-        await handleFormSubmit(values);
+        handleFormSubmit(values);
         setFormData({
           firstName: "",
           lastName: "",
+          accountNo: "",
           email: "",
           drivingLicense: "",
           dateOfBirth: null,
@@ -192,15 +199,14 @@ const CreatePatient = () => {
           insuredCountryName: "",
           insuredRelationShipToPatientName: "",
           insuredGenderIdentityName: "",
-          // employeeName: "",
+          // employe details
+          employeeName: "",
           empAddress: "",
           empCityName: "",
           empStateName: "",
           insuredPartyName: "",
           empZipCode: "",
           empEmploymentStatusName: "",
-          accountNo: "",
-          patientName: "",
 
           // payer info data
           payerInfoMemberId: "",

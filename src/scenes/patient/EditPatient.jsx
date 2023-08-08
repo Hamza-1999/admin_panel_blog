@@ -33,7 +33,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 // import { createPatientSchema } from "../../schemas";
 
-const EditPatient = () => {
+const EditPatient = ({ handleClose }) => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
   const [isLoading, setIsLoading] = useState(true);
   const [accountTypeOptions, setAccountTypeOptions] = useState([]);
@@ -51,7 +51,7 @@ const EditPatient = () => {
   const [stateOptions, setStateOptions] = useState([]);
   const [residenceOptions, setResidenceOptions] = useState([]);
 
-  const { id } = useParams();
+  const { accountNo } = useParams();
   const dispatch = useDispatch();
   const { loading, getAllPatients } = useSelector((state) => state.patient);
   const navigate = useNavigate();
@@ -66,10 +66,10 @@ const EditPatient = () => {
   }, [dispatch]);
 
   const findPatient = getAllPatients.result?.find(
-    (el) => el.patientId === parseInt(id)
+    (el) => el.accountNo === accountNo
   );
 
-  console.log(findPatient, "finding");
+  console.log(findPatient, "finding for edit 66");
 
   console.log("Date of Birth:", findPatient?.dateOfBirth);
   console.log("Date of Death:", findPatient?.dateOfDeath);
@@ -118,13 +118,14 @@ const EditPatient = () => {
     try {
       dispatch(
         updatePatientAction({
-          patientId: findPatient.patientId,
+          accountNo: findPatient?.accountNo,
           ...values,
         })
       );
       console.log(values, "checking submit values of update patient");
       actions.setSubmitting(false);
-      navigate("/managepatient");
+      handleClose();
+      // navigate("/managepatient");
     } catch (error) {
       console.error("Error updating patient:", error);
       actions.setSubmitting(false);
