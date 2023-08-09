@@ -33,6 +33,7 @@ const ManagePatient = () => {
 
   const rows = getAllPatients.result?.map((el) => ({
     id: el.patientId,
+    accountNo: el.accountNo,
     firstName: el.firstName,
     lastName: el.lastName,
     dateOfBirth: new Date(el.dateOfBirth).toLocaleDateString(),
@@ -81,9 +82,6 @@ const ManagePatient = () => {
     );
   }
 
-  const handleEdit = (id) => {
-    navigate(`/editpatient/${id}`);
-  };
   const columns = [
     {
       field: "firstName",
@@ -167,36 +165,36 @@ const ManagePatient = () => {
     //   headerName: "Emergency Contact Zip Code",
     //   width: 150,
     // },
-    {
-      field: "actions",
-      headerName: "Actions",
-      width: 200,
-      align: "center",
-      headerAlign: "center",
+    // {
+    //   field: "actions",
+    //   headerName: "Actions",
+    //   width: 200,
+    //   align: "center",
+    //   headerAlign: "center",
 
-      renderCell: (params) => {
-        const { id } = params.row;
+    //   renderCell: (params) => {
+    //     const { id } = params.row;
 
-        return (
-          <>
-            <IconButton
-              color="secondary"
-              onClick={() => handleEdit(id)}
-              title="Edit"
-            >
-              <EditIcon />
-            </IconButton>
-            <IconButton
-              color="secondary"
-              // onClick={() => handleDelete(id)}
-              title="Delete"
-            >
-              <DeleteIcon />
-            </IconButton>
-          </>
-        );
-      },
-    },
+    //     return (
+    //       <>
+    //         <IconButton
+    //           color="secondary"
+    //           onClick={() => handleEdit(id)}
+    //           title="Edit"
+    //         >
+    //           <EditIcon />
+    //         </IconButton>
+    //         <IconButton
+    //           color="secondary"
+    //           // onClick={() => handleDelete(id)}
+    //           title="Delete"
+    //         >
+    //           <DeleteIcon />
+    //         </IconButton>
+    //       </>
+    //     );
+    //   },
+    // },
   ];
 
   return (
@@ -219,7 +217,9 @@ const ManagePatient = () => {
             }}
             pageSize={5}
             disableSelectionOnClick
-            onCellClick={(params) => navigate(`/editpatient/${params.row.id}`)}
+            onCellClick={(params) =>
+              navigate(`/showpatient/${params.row.accountNo}`)
+            }
           />
         </Box>
       )}

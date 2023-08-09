@@ -37,12 +37,12 @@ export const updatePatientAction = createAsyncThunk(
   async (data) => {
     try {
       const response = await updateData(
-        `${path}/test-patient/${data.patientId}`,
+        `${path}/test-patient/${data.accountNo}`,
         data
       );
       console.log(response, "edit action response");
       console.log(data, "edit data patient 55");
-      return response;
+      return response.result;
     } catch (error) {
       throw error;
     }

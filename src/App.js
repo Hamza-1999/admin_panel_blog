@@ -22,6 +22,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Login from "./auth/Login";
 import EditPatient from "./scenes/patient/EditPatient";
 import CreatePatient from "./scenes/patient/CreatePatient";
+import ShowPatientInfo from "./scenes/patient/ShowPatientInfo";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -43,8 +44,12 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
               <Route path="/createpatient" element={<CreatePatient />} />
-              <Route path="/editpatient/:id" element={<EditPatient />} />
+              <Route path="/editpatient/:accountNo" element={<EditPatient />} />
               <Route path="/managepatient" element={<ManagePatient />} />
+              <Route
+                path="/showpatient/:accountNo"
+                element={<ShowPatientInfo />}
+              />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />

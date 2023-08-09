@@ -44,12 +44,24 @@ const patientSlice = createSlice({
       state.loading = true;
     },
     [updatePatientAction.fulfilled]: (state, action) => {
+      // state.loading = false;
+      // const updatedPatientIndex = state.getAllPatients.result?.findIndex(
+      //   (user) => user.patientId === action.payload.PatientId
+      // );
+      // if (updatedPatientIndex !== -1) {
+      //   state.getAllPatients[updatedPatientIndex] = action.payload;
+      // }
+
       state.loading = false;
       const updatedPatientIndex = state.getAllPatients.result?.findIndex(
-        (user) => user.patientId === action.payload.PatientId
+        (user) => user.accountNo === action.payload.accountNo
       );
       if (updatedPatientIndex !== -1) {
-        state.getAllPatients[updatedPatientIndex] = action.payload;
+        const updatedPatientData = {
+          ...state.getAllPatients.result[updatedPatientIndex],
+          ...action.payload,
+        };
+        state.getAllPatients.result[updatedPatientIndex] = updatedPatientData;
       }
     },
     [updatePatientAction.rejected]: (state, action) => {

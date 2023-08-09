@@ -143,22 +143,6 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           />
         </LocalizationProvider>
 
-        <TextField
-          size="small"
-          fullWidth
-          variant="filled"
-          type="text"
-          label="Patient Name"
-          onBlur={formik.handleBlur}
-          onChange={handleChange}
-          value={formData.patientName}
-          name="patientName"
-          id="patientName"
-          // error={!!touched.lastName && !!errors.lastName}
-          // helperText={touched.lastName && errors.lastName}
-          sx={{ gridColumn: "span 1" }}
-        />
-
         <CustomSelectBox
           name="insuredGenderIdentityName"
           value={formData.insuredGenderIdentityName}
@@ -315,6 +299,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           sx={{ gridColumn: "span 1" }}
         />
       </Box>
+      {/*Employee details  */}
       <div>
         <Typography variant="h5" component={"h4"} marginBottom="8px">
           Employee Details :
@@ -338,9 +323,9 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
             label="Employee Name"
             onBlur={formik.handleBlur}
             onChange={handleChange}
-            value={formData.insuredPartyName}
-            name="insuredPartyName"
-            id="insuredPartyName"
+            value={formData.employeeName}
+            name="employeeName"
+            id="employeeName"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
             sx={{ gridColumn: "span 1" }}

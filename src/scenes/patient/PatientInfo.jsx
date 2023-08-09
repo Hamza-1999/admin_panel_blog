@@ -159,6 +159,23 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 // helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: "span 1" }}
               />
+
+              {/* <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Account No#"
+                disabled
+                onBlur={formik.handleBlur}
+                onChange={handleChange}
+                value={formData.accountNo}
+                name="accountNo"
+                id="accountNo"
+                // error={!!touched.accountNo && !!errors.accountNo}
+                // helperText={touched.accountNo && errors.accountNo}
+                sx={{ gridColumn: "span 1" }}
+              /> */}
               <TextField
                 size="small"
                 fullWidth
