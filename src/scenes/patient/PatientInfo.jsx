@@ -370,7 +370,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 size="small"
                 fullWidth
                 variant="filled"
-                type="text"
+                type="number"
                 label="Phone Number"
                 onBlur={formik.handleBlur}
                 onChange={handleChange}
@@ -385,7 +385,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 size="small"
                 fullWidth
                 variant="filled"
-                type="text"
+                type="number"
                 label="Home Number"
                 onBlur={formik.handleBlur}
                 onChange={handleChange}
@@ -400,7 +400,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 size="small"
                 fullWidth
                 variant="filled"
-                type="text"
+                type="number"
                 label="Work Phone"
                 onBlur={formik.handleBlur}
                 onChange={handleChange}
@@ -415,7 +415,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 size="small"
                 fullWidth
                 variant="filled"
-                type="text"
+                type="number"
                 label="Ext"
                 onBlur={formik.handleBlur}
                 onChange={handleChange}
