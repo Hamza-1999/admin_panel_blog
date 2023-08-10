@@ -23,6 +23,8 @@ import Login from "./auth/Login";
 import EditPatient from "./scenes/patient/EditPatient";
 import CreatePatient from "./scenes/patient/CreatePatient";
 import ShowPatientInfo from "./scenes/patient/ShowPatientInfo";
+import Practice from "./scenes/custom-setup/practices/Practice";
+import EditInsuranceInfo from "./scenes/patient/EditInsuranceInfo";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -50,6 +52,7 @@ function App() {
                 path="/showpatient/:accountNo"
                 element={<ShowPatientInfo />}
               />
+              <Route path="/practices" element={<Practice />} />
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
               <Route path="/invoices" element={<Invoices />} />

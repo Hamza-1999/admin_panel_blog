@@ -186,6 +186,35 @@ const Sidebar = () => {
               />
             </Collapse>
 
+            {/* practices */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+              }}
+            >
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+                onClick={() => setIsPagesOpen(!isPagesOpen)}
+              >
+                Custom Setup
+              </Typography>
+              {isPagesOpen ? <ExpandLess /> : <ExpandMore />}
+            </Box>
+            <Collapse in={isPagesOpen}>
+              <Item
+                title="Practices"
+                to="/practices"
+                icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Collapse>
+
             <Box
               sx={{
                 display: "flex",

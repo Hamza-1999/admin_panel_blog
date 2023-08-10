@@ -85,7 +85,7 @@ const CreatePatient = () => {
     empZipCode: "",
     empEmploymentStatusName: "",
 
-    patientName: "",
+    // patientName: "",
 
     // payer info data
     payerInfoMemberId: null,
@@ -98,7 +98,7 @@ const CreatePatient = () => {
     payerInfoTerminationDate: null,
     payerInfoPriorityName: "",
     payerInfoPolicyType: "",
-    payerInfoPayerType: "",
+    payerInfoPayerName: "",
   });
   const handleTabChange = (event, newValue) => {
     setIsFormVisible(false);
@@ -111,33 +111,6 @@ const CreatePatient = () => {
   const handleFormSubmit = (formValues) => {
     try {
       dispatch(newPatientAction(formValues));
-      // switch (tabValue) {
-      //   case 0:
-      //     endpoint = `${path}/test-patient`;
-
-      //     break;
-      //   case 1:
-      //     endpoint = `${path}/insuredParty`;
-
-      //     break;
-      //   case 2:
-      //     // eslint-disable-next-line no-unused-vars
-      //     endpoint = `${path}/payerInfo`;
-
-      //     break;
-      //   default:
-      //     break;
-      // }
-      // if (endpoint) {
-      //   // Dispatch the action with the dynamic endpoint and form data
-
-      //   dispatch(newPatientAction({ endpoint, data: formValues }));
-
-      //   formik.resetForm();
-      //   console.log(formValues, "checking submit values of createPatient");
-      // } else {
-      //   console.error("Invalid tabValue:", tabValue);
-      // }
     } catch (error) {
       console.error("Error creating patient:", error);
     }
@@ -203,6 +176,7 @@ const CreatePatient = () => {
           insuredCountryName: "",
           insuredRelationShipToPatientName: "",
           insuredGenderIdentityName: "",
+          insuredPriorityType: "",
           // employe details
           employeeName: "",
           empAddress: "",
@@ -223,7 +197,7 @@ const CreatePatient = () => {
           payerInfoTerminationDate: null,
           payerInfoPriorityName: "",
           payerInfoPolicyType: "",
-          payerInfoPayerType: "",
+          payerInfoPayerName: "",
         });
         console.log(values, "checking submit values of createPatient");
       } catch (error) {

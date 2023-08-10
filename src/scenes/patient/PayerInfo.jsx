@@ -26,15 +26,35 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
   const [policyTypeOptions, setPolicyTypeOptions] = useState([]);
   const [openNewPayerModal, setOpenNewPayerModal] = useState(false);
   const [openPyerListModal, setOpenPyerListModal] = useState(false);
-  const [selectedPayerName, setSelectedPayerName] = useState("");
+  const [selectedPayerName, setSelectedPayerName] = useState(
+    formData.payerInfoPayerName
+  );
+  console.log(selectedPayerName, "payername");
 
   const handleChange = (event) => {
+    console.log(event.target.value, "value");
     formik.handleChange(event);
     setFormData({
       ...formData,
       [event.target.name]: event.target.value,
     });
   };
+
+  // const handlePayerNameChange = (event) => {
+  //   const newPayerName = event.target.value;
+  //   console.log("Selected Payer Name:", newPayerName);
+
+  //   setSelectedPayerName(newPayerName); // Set the selected payer name
+
+  //   const updatedFormData = {
+  //     ...formData,
+  //     payerInfoPayerName: newPayerName, // Update payerInfoPayerName in formData
+  //   };
+
+  //   setFormData(updatedFormData);
+
+  //   console.log("Updated Form Data:", updatedFormData);
+  // };
 
   // Define data fetching URLs
   const dataFetchUrls = {
@@ -58,6 +78,10 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
   }, [dispatch]);
 
   //  modal
+
+  useEffect(() => {
+    setSelectedPayerName(formData.payerInfoPayerName);
+  }, [formData.payerInfoPayerName]);
 
   return (
     <>
@@ -139,16 +163,33 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
             }}
           >
             <TextField
-              type="button"
+              type="text"
               size="small"
               variant="filled"
               sx={{
                 width: { xs: "100%", sm: "100%" },
                 fontSize: "1rem",
               }}
-              value={selectedPayerName || formik.payerInfoPayerType}
-              name="payerInfoPayerType"
-              onChange={handleChange}
+              value={selectedPayerName}
+              name="payerInfoPayerName"
+              onChange={(event) => {
+                const newPayerName = event.target.value;
+                console.log("Selected Payer Name:", newPayerName);
+
+                setSelectedPayerName(newPayerName); // Set the selected payer name
+
+                formik.handleChange(event);
+
+                setFormData({
+                  ...formData,
+                  payerInfoPayerName: newPayerName, // Update payerInfoPayerName in formData
+                });
+
+                console.log("Updated Form Data:", {
+                  ...formData,
+                  payerInfoPayerName: newPayerName,
+                });
+              }}
               onBlur={formik.handleBlur}
               onClick={() => setOpenPyerListModal(true)}
               label="Payer"
