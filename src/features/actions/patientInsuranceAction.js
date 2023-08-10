@@ -26,8 +26,8 @@ export const updateInsuranceAction = createAsyncThunk(
         `${path}/insuredParty/${data.accountNo}`,
         data
       );
-      console.log(response, "edit action response");
-      console.log(data, "edit data patient 55");
+      console.log(response, "edit insurance response");
+      //   console.log(data, "edit data patient 55");
       return response.result;
     } catch (error) {
       throw error;

@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
-import { useFormik } from "formik";
-import { Box, Button, Tab, Tabs } from "@mui/material";
+import { getIn, useFormik } from "formik";
+import { Box, Button, Stack, Tab, Tabs } from "@mui/material";
 import Header from "../../components/Header";
 import InsuranceInfo from "./InsuranceInfo";
 import { useDispatch, useSelector } from "react-redux";
-import { newPatientAction } from "../../features/actions/createPatientAction";
+import {
+  getPatientAction,
+  newPatientAction,
+} from "../../features/actions/createPatientAction";
 
 import "./createpatient.css";
 import path from "../../config/apiUrl";
 import PayerInfo from "./PayerInfo";
-import { v4 as uuid } from "uuid";
-import { newInsuranceAction } from "../../features/actions/patientInsuranceAction";
+// import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
+
 const CreatePatient = () => {
   const [tabValue, setTabValue] = useState(0);
+  // const insuranctAccNo = useSelector((state) => state.patient);
+  // console.log(insuranctAccNo, "insurance account number");
   const [isFormVisible, setIsFormVisible] = useState(true);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.patient);
-  const uniqueId = uuid().slice(0, 7);
 
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    accountNo: uniqueId,
+    accountNo: "",
     email: "",
     drivingLicense: "",
     dateOfBirth: null,
     dateOfDeath: null,
-    cellPhone: "",
-    homePhone: "",
-    workPhone: "",
-    ext: "",
+    cellPhone: null,
+    homePhone: null,
+    workPhone: null,
+    ext: null,
     address: "",
     zipCode: "",
     emergencyContactFirstName: "",
@@ -63,10 +67,10 @@ const CreatePatient = () => {
     insuredAddress: "",
     insuredSSN: "",
     insuredZipCode: "",
-    insuredHomePhone: "",
-    insuredCellPhone: "",
-    insuredWorkPhone: "",
-    insuredExt: "",
+    insuredHomePhone: null,
+    insuredCellPhone: null,
+    insuredWorkPhone: null,
+    insuredExt: null,
     insuredEmail: "",
     insuredCityName: "",
     insuredStateName: "",
@@ -81,7 +85,7 @@ const CreatePatient = () => {
     empZipCode: "",
     empEmploymentStatusName: "",
 
-    patientName: "",
+    // patientName: "",
 
     // payer info data
     payerInfoMemberId: null,
@@ -94,7 +98,7 @@ const CreatePatient = () => {
     payerInfoTerminationDate: null,
     payerInfoPriorityName: "",
     payerInfoPolicyType: "",
-    payerInfoPayerType: "",
+    payerInfoPayerName: "",
   });
   const handleTabChange = (event, newValue) => {
     setIsFormVisible(false);
@@ -106,35 +110,7 @@ const CreatePatient = () => {
 
   const handleFormSubmit = (formValues) => {
     try {
-      let endpoint;
-
-      switch (tabValue) {
-        case 0:
-          endpoint = `${path}/test-patient`;
-
-          break;
-        case 1:
-          endpoint = `${path}/insuredParty`;
-
-          break;
-        case 2:
-          // eslint-disable-next-line no-unused-vars
-          endpoint = `${path}/payerInfo`;
-
-          break;
-        default:
-          break;
-      }
-      if (endpoint) {
-        // Dispatch the action with the dynamic endpoint and form data
-
-        dispatch(newPatientAction({ endpoint, data: formValues }));
-
-        formik.resetForm();
-        console.log(formValues, "checking submit values of createPatient");
-      } else {
-        console.error("Invalid tabValue:", tabValue);
-      }
+      dispatch(newPatientAction(formValues));
     } catch (error) {
       console.error("Error creating patient:", error);
     }
@@ -153,10 +129,10 @@ const CreatePatient = () => {
           drivingLicense: "",
           dateOfBirth: null,
           dateOfDeath: null,
-          cellPhone: "",
-          homePhone: "",
-          workPhone: "",
-          ext: "",
+          cellPhone: null,
+          homePhone: null,
+          workPhone: null,
+          ext: null,
           address: "",
           zipCode: "",
           emergencyContactFirstName: "",
@@ -185,20 +161,22 @@ const CreatePatient = () => {
           // Insured Information Data
           insuredFirstName: "",
           insuredLastName: "",
-          insuredDateOfBirth: "",
+          insuredDateOfBirth: null,
           insuredAddress: "",
           insuredSSN: "",
           insuredZipCode: "",
-          insuredHomePhone: "",
-          insuredCellPhone: "",
-          insuredWorkPhone: "",
-          insuredExt: "",
+          insuredHomePhone: null,
+          insuredCellPhone: null,
+          patientAccountNo: null,
+          insuredWorkPhone: null,
+          insuredExt: null,
           insuredEmail: "",
           insuredCityName: "",
           insuredStateName: "",
           insuredCountryName: "",
           insuredRelationShipToPatientName: "",
           insuredGenderIdentityName: "",
+          insuredPriorityType: "",
           // employe details
           employeeName: "",
           empAddress: "",
@@ -209,17 +187,17 @@ const CreatePatient = () => {
           empEmploymentStatusName: "",
 
           // payer info data
-          payerInfoMemberId: "",
-          payerInfoGroupId: "",
-          payerInfoCopayAmount: "",
-          payerInfoCoInsurancePercent: "",
-          payerInfoDeductibleAmount: "",
-          payerInfoOutOfPocketMax: "",
-          payerInfoEffectiveDate: "",
-          payerInfoTerminationDate: "",
+          payerInfoMemberId: null,
+          payerInfoGroupId: null,
+          payerInfoCopayAmount: null,
+          payerInfoCoInsurancePercent: null,
+          payerInfoDeductibleAmount: null,
+          payerInfoOutOfPocketMax: null,
+          payerInfoEffectiveDate: null,
+          payerInfoTerminationDate: null,
           payerInfoPriorityName: "",
           payerInfoPolicyType: "",
-          payerInfoPayerType: "",
+          payerInfoPayerName: "",
         });
         console.log(values, "checking submit values of createPatient");
       } catch (error) {
@@ -228,20 +206,46 @@ const CreatePatient = () => {
     },
   });
 
+  // useEffect(() => {
+  //   dispatch(getPatientAction());
+  // }, []);
   return (
     <Box margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
       <Box>
-        <Tabs
-          value={tabValue}
-          onChange={handleTabChange}
-          sx={{ marginBottom: "10px" }}
+        <Stack
+          flexDirection="row"
+          alignItems="center"
+          justifyContent="space-between"
         >
-          <Tab label="Patient Info" value={0} />
-          <Tab label="Insurance Info" value={1} />
-          <Tab label="Payer Info" value={2} />
-        </Tabs>
+          <Tabs
+            value={tabValue}
+            onChange={handleTabChange}
+            sx={{ marginBottom: "10px" }}
+          >
+            <Tab label="Patient Info" value={0} />
+            <Tab label="Insurance Info" value={1} />
+            <Tab label="Payer Info" value={2} />
+          </Tabs>
+
+          <Box>
+            <Button
+              type="submit"
+              color="secondary"
+              variant="contained"
+              form="patientForm"
+              disabled={loading}
+              sx={{
+                marginRight: "30px",
+              }}
+              // onSubmit={formik.handleSubmit}
+            >
+              {loading ? "Saving..." : "Save"}
+            </Button>
+          </Box>
+        </Stack>
         <form
+          id="patientForm"
           onSubmit={formik.handleSubmit}
           className={`formContainer ${!isFormVisible ? "hidden" : ""}`}
         >
@@ -268,32 +272,6 @@ const CreatePatient = () => {
                 setFormData={setFormData}
               />
             )}
-          </Box>
-          {/* </div> */}
-
-          <Box
-            display="flex"
-            justifyContent="end"
-            mt="20px"
-            paddingBottom={"20px"}
-          >
-            <Button
-              type="submit"
-              color="secondary"
-              variant="contained"
-              disabled={loading}
-              sx={{
-                marginRight: "30px",
-              }}
-            >
-              {tabValue === 0
-                ? loading
-                  ? "Creating"
-                  : "Create"
-                : loading
-                ? "Adding"
-                : "Add"}
-            </Button>
           </Box>
         </form>
       </Box>

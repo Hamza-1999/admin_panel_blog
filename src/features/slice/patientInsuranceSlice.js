@@ -55,7 +55,7 @@ const patientInsuranceSlice = createSlice({
       state.loading = false;
       const updatedInsuranceIndex =
         state.getPatientInsuranceData.result?.findIndex(
-          (user) => user.patientId === action.payload.patientId
+          (user) => user.accountNo === action.payload.patientAccountNo
         );
       if (updatedInsuranceIndex !== -1) {
         const updatedInsuranceData = {

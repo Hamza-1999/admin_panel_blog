@@ -22,6 +22,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const [patienRelationOpt, setPatientRelationOpt] = useState([]);
+  const [priorityOptions, setPriorityOptions] = useState([]);
 
   console.log(employeementOptions, "employe");
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
     genderTypes: `${path}/ct-genderIdentity`,
     employmentStatus: `${path}/ct-employmentStatus`,
     relationToPatient: `${path}/ct-relationToPatient`,
+    priorityType: `${path}/ct-priorityType`,
     cities: `${path}/city`,
     countries: `${path}/country`,
     states: `${path}/state`,
@@ -60,6 +62,8 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
     fetchDataOptions(dataFetchUrls.employmentStatus, setEmployeementOptions);
     fetchDataOptions(dataFetchUrls.genderTypes, setGenderOptions);
     fetchDataOptions(dataFetchUrls.relationToPatient, setPatientRelationOpt);
+    fetchDataOptions(dataFetchUrls.priorityType, setPriorityOptions);
+
     fetchDataOptions(dataFetchUrls.states, setStateOptions);
   }, [dispatch]);
 
@@ -112,6 +116,19 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           // error={!!touched.lastName && !!errors.lastName}
           // helperText={touched.lastName && errors.lastName}
           sx={{ gridColumn: "span 1" }}
+        />
+
+        {/* priority type */}
+        <CustomSelectBox
+          value={formData.insuredPriorityType}
+          name="insuredPriorityType"
+          dropdownOptions={priorityOptions?.map((opt) => ({
+            value: opt.priorityType,
+            id: opt.priorityTypeId,
+          }))}
+          label="Priority Type"
+          handleChange={handleChange}
+          handleBlur={formik.handleBlur}
         />
         <TextField
           size="small"
@@ -172,7 +189,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           size="small"
           fullWidth
           variant="filled"
-          type="text"
+          type="number"
           label="Phone Number"
           onBlur={formik.handleBlur}
           onChange={handleChange}
@@ -187,7 +204,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           size="small"
           fullWidth
           variant="filled"
-          type="text"
+          type="number"
           label="Home Number"
           onBlur={formik.handleBlur}
           onChange={handleChange}
@@ -203,7 +220,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           size="small"
           fullWidth
           variant="filled"
-          type="text"
+          type="number"
           label="Work Phone"
           onBlur={formik.handleBlur}
           onChange={handleChange}
@@ -218,7 +235,7 @@ const InsuranceInfo = ({ formik, formData, setFormData }) => {
           size="small"
           fullWidth
           variant="filled"
-          type="text"
+          type="number"
           label="Ext"
           onBlur={formik.handleBlur}
           onChange={handleChange}

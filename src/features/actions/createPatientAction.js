@@ -5,9 +5,9 @@ import path from "../../config/apiUrl";
 // create patient action creator
 export const newPatientAction = createAsyncThunk(
   "createPatient",
-  async ({ endpoint, data }) => {
+  async (data) => {
     try {
-      const response = await postData(endpoint, data);
+      const response = await postData(`${path}/test-patient`, data);
       if (response) {
         return response;
       } else {
