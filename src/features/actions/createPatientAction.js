@@ -42,7 +42,7 @@ export const updatePatientAction = createAsyncThunk(
       );
       console.log(response, "edit action response");
       console.log(data, "edit data patient 55");
-      return response.result;
+      return response.result; // Return the updated patient data
     } catch (error) {
       throw error;
     }

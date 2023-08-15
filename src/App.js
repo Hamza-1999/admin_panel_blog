@@ -25,6 +25,7 @@ import CreatePatient from "./scenes/patient/CreatePatient";
 import ShowPatientInfo from "./scenes/patient/ShowPatientInfo";
 import Practice from "./scenes/custom-setup/practices/Practice";
 import EditInsuranceInfo from "./scenes/patient/EditInsuranceInfo";
+import EditPatientInfo from "./scenes/patient/EditPatientInfo";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -46,7 +47,11 @@ function App() {
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
               <Route path="/createpatient" element={<CreatePatient />} />
-              <Route path="/editpatient/:accountNo" element={<EditPatient />} />
+              {/* <Route path="/editpatient/:accountNo" element={<EditPatient />} /> */}
+              <Route
+                path="/editpatient/:accountNo"
+                element={<EditPatientInfo />}
+              />
               <Route path="/managepatient" element={<ManagePatient />} />
               <Route
                 path="/showpatient/:accountNo"

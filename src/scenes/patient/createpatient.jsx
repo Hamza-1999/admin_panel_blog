@@ -13,6 +13,7 @@ import {
 import "./createpatient.css";
 import path from "../../config/apiUrl";
 import PayerInfo from "./PayerInfo";
+import { tempName } from "../../utils/formikInitValues";
 // import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
 
 const CreatePatient = () => {
@@ -117,88 +118,10 @@ const CreatePatient = () => {
   };
 
   const formik = useFormik({
-    initialValues: formData,
+    initialValues: tempName,
     onSubmit: (values) => {
       try {
         handleFormSubmit(values);
-        setFormData({
-          firstName: "",
-          lastName: "",
-          accountNo: "",
-          email: "",
-          drivingLicense: "",
-          dateOfBirth: null,
-          dateOfDeath: null,
-          cellPhone: null,
-          homePhone: null,
-          workPhone: null,
-          ext: null,
-          address: "",
-          zipCode: "",
-          emergencyContactFirstName: "",
-          emergencyContactLastName: "",
-          emergencyContactAddress: "",
-          emergencyContactZipCode: "",
-          emergencyContactState: "",
-          emergencyContactCity: "",
-          // dateOfDeath: null,
-          // dropdowns
-          genderIdentityName: "",
-          maritalStatusName: "",
-          raceStatusName: "",
-          sexualOrientationName: "",
-          employmentStatusName: "",
-          referralSourceName: "",
-          relationShipToPatientName: "",
-          ethnicityName: "",
-          studentStatusName: "",
-          accountType: "",
-          cityName: "",
-          countryName: "",
-          stateName: "",
-          residenceTypeName: "",
-
-          // Insured Information Data
-          insuredFirstName: "",
-          insuredLastName: "",
-          insuredDateOfBirth: null,
-          insuredAddress: "",
-          insuredSSN: "",
-          insuredZipCode: "",
-          insuredHomePhone: null,
-          insuredCellPhone: null,
-          patientAccountNo: null,
-          insuredWorkPhone: null,
-          insuredExt: null,
-          insuredEmail: "",
-          insuredCityName: "",
-          insuredStateName: "",
-          insuredCountryName: "",
-          insuredRelationShipToPatientName: "",
-          insuredGenderIdentityName: "",
-          insuredPriorityType: "",
-          // employe details
-          employeeName: "",
-          empAddress: "",
-          empCityName: "",
-          empStateName: "",
-          insuredPartyName: "",
-          empZipCode: "",
-          empEmploymentStatusName: "",
-
-          // payer info data
-          payerInfoMemberId: null,
-          payerInfoGroupId: null,
-          payerInfoCopayAmount: null,
-          payerInfoCoInsurancePercent: null,
-          payerInfoDeductibleAmount: null,
-          payerInfoOutOfPocketMax: null,
-          payerInfoEffectiveDate: null,
-          payerInfoTerminationDate: null,
-          payerInfoPriorityName: "",
-          payerInfoPolicyType: "",
-          payerInfoPayerName: "",
-        });
         console.log(values, "checking submit values of createPatient");
       } catch (error) {
         console.error("Error creating patient:", error);
@@ -206,9 +129,6 @@ const CreatePatient = () => {
     },
   });
 
-  // useEffect(() => {
-  //   dispatch(getPatientAction());
-  // }, []);
   return (
     <Box margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
