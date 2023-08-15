@@ -6,11 +6,11 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+
 import { ErrorMessage, Field, Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 // import { useState } from "react";
-
 import FormInfoHeading from "../../components/FormInfoHeading";
 import { useDispatch, useSelector } from "react-redux";
 import { newPatientAction } from "../../features/actions/createPatientAction";
@@ -27,6 +27,7 @@ import { Expand, ExpandMore } from "@mui/icons-material";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik, formData, setFormData }) => {
+  console.log(formik, "formdata");
   // const isNonMobile = useMediaQuery("(min-width:600px)");
   const [accountTypeOptions, setAccountTypeOptions] = useState([]);
   const [genderOptions, setGenderOptions] = useState([]);
@@ -159,23 +160,6 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                 // helperText={touched.lastName && errors.lastName}
                 sx={{ gridColumn: "span 1" }}
               />
-
-              {/* <TextField
-                size="small"
-                fullWidth
-                variant="filled"
-                type="text"
-                label="Account No#"
-                disabled
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={formData.accountNo}
-                name="accountNo"
-                id="accountNo"
-                // error={!!touched.accountNo && !!errors.accountNo}
-                // helperText={touched.accountNo && errors.accountNo}
-                sx={{ gridColumn: "span 1" }}
-              /> */}
               <TextField
                 size="small"
                 fullWidth
@@ -460,14 +444,15 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
               <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
                 <DatePicker
                   label="Date of Birth"
-                  value={formData.dateOfBirth}
-                  onChange={(value) =>
-                    formik.setFieldValue("dateOfBirth", value)
-                  }
+                  value={formik.values.dateOfBirth}
+                  onChange={(value) => {
+                    console.log(value, "dateVal");
+                    formik.setFieldValue("dateOfBirth", value);
+                  }}
                   onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  clearable
+                  // clearable
                 />
               </LocalizationProvider>
 
@@ -481,7 +466,7 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
                   onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  clearable
+                  // clearable
                 />
               </LocalizationProvider>
             </Box>

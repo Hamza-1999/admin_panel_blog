@@ -43,17 +43,32 @@ const patientSlice = createSlice({
     [updatePatientAction.pending]: (state) => {
       state.loading = true;
     },
-    [updatePatientAction.fulfilled]: (state, action) => {
-      // state.loading = false;
-      // const updatedPatientIndex = state.getAllPatients.result?.findIndex(
-      //   (user) => user.patientId === action.payload.PatientId
-      // );
-      // if (updatedPatientIndex !== -1) {
-      //   state.getAllPatients[updatedPatientIndex] = action.payload;
-      // }
+    // [updatePatientAction.fulfilled]: (state, action) => {
+    //   // state.loading = false;
+    //   // const updatedPatientIndex = state.getAllPatients.result?.findIndex(
+    //   //   (user) => user.patientId === action.payload.PatientId
+    //   // );
+    //   // if (updatedPatientIndex !== -1) {
+    //   //   state.getAllPatients[updatedPatientIndex] = action.payload;
+    //   // }
 
+    //   state.loading = false;
+    //   const updatedPatientIndex = state.getAllPatients.result?.findIndex(
+    //     (user) => user.accountNo === action.payload.accountNo
+    //   );
+    //   if (updatedPatientIndex !== -1) {
+    //     const updatedPatientData = {
+    //       ...state.getAllPatients.result[updatedPatientIndex],
+    //       ...action.payload,
+    //     };
+    //     state.getAllPatients.result[updatedPatientIndex] = updatedPatientData;
+    //   }
+    // },
+
+    // Update the patient data in the list
+    [updatePatientAction.fulfilled]: (state, action) => {
       state.loading = false;
-      const updatedPatientIndex = state.getAllPatients.result?.findIndex(
+      const updatedPatientIndex = state.getAllPatients.result.findIndex(
         (user) => user.accountNo === action.payload.accountNo
       );
       if (updatedPatientIndex !== -1) {
@@ -61,9 +76,17 @@ const patientSlice = createSlice({
           ...state.getAllPatients.result[updatedPatientIndex],
           ...action.payload,
         };
-        state.getAllPatients.result[updatedPatientIndex] = updatedPatientData;
+        // Create a new array with the updated patient data
+        const updatedPatientArray = [...state.getAllPatients.result];
+        updatedPatientArray[updatedPatientIndex] = updatedPatientData;
+
+        // Update the state with the new array
+        state.getAllPatients.result = updatedPatientArray;
       }
+      // Assuming you are returning the updated data in the action payload
+      state.patientData = action.payload;
     },
+
     [updatePatientAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;

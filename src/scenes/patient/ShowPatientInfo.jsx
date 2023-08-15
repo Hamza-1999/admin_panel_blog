@@ -26,51 +26,24 @@ import { getInsuranceAction } from "../../features/actions/patientInsuranceActio
 import EditInsuranceInfo from "./EditInsuranceInfo";
 
 const ShowPatientInfo = () => {
-  const [editPatientInfoModal, setEditPatientInfoModal] = useState(false);
-  const [editInsuranceInfoModal, setEditInsuranceInfoModal] = useState(false);
-  //   console.log(showPatientData, "show");
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { accountNo } = useParams();
+  useEffect(() => {
+    dispatch(getPatientAction());
+  }, [dispatch]);
   console.log(accountNo, "acc number");
   const { getAllPatients, loading } = useSelector((state) => state.patient);
-  const { getPatientInsuranceData } = useSelector(
-    (state) => state.patientInsurance
-  );
 
-  console.log(getPatientInsuranceData, "insurance11");
-  // console.log(getAllPatients, "patient11");
   const selectedPatient = getAllPatients.result?.find(
     (el) => el.accountNo === accountNo
   );
 
-  const selectedInsuranceInfo = getPatientInsuranceData.result?.find(
-    (el) => el.accountNo === accountNo
-  );
-  console.log(selectedInsuranceInfo, "findind same");
-
-  useEffect(() => {
-    dispatch(getPatientAction());
-    dispatch(getInsuranceAction());
-  }, [dispatch]);
-
+  const handleEditPatient = (accNum) => {
+    navigate(`/editpatient/${accNum}`);
+  };
   return (
     <>
-      <CustomModal
-        open={editPatientInfoModal}
-        handleClose={() => setEditPatientInfoModal(false)}
-      >
-        <EditPatient handleClose={() => setEditPatientInfoModal(false)} />
-      </CustomModal>
-      <CustomModal
-        open={editInsuranceInfoModal}
-        handleClose={() => setEditInsuranceInfoModal(false)}
-      >
-        <EditInsuranceInfo
-          handleClose={() => setEditInsuranceInfoModal(false)}
-        />
-      </CustomModal>
       <Box width={"100%"} padding={"20px"}>
         <Header title="Patient Details" subtitle="" />
         <div style={{ background: "lightgray" }}>
@@ -162,7 +135,9 @@ const ShowPatientInfo = () => {
                 <Typography variant="h3" component={"h2"}>
                   General Info
                 </Typography>
-                <IconButton onClick={() => setEditPatientInfoModal(true)}>
+                <IconButton
+                  onClick={() => handleEditPatient(selectedPatient?.accountNo)}
+                >
                   <Edit />
                 </IconButton>
               </Stack>
@@ -395,7 +370,9 @@ const ShowPatientInfo = () => {
                 <Typography variant="h3" component={"h2"}>
                   Insurance Information
                 </Typography>
-                <IconButton onClick={() => setEditInsuranceInfoModal(true)}>
+                <IconButton
+                  onClick={() => handleEditPatient(selectedPatient?.accountNo)}
+                >
                   <Edit />
                 </IconButton>
               </Stack>
@@ -403,208 +380,221 @@ const ShowPatientInfo = () => {
 
             <AccordionDetails>
               <Grid container spacing={4}>
-                {selectedInsuranceInfo?.insuredPartyDtos?.map((el) => {
-                  return (
-                    <>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Patient Name
-                          </Typography>
-                          <Typography>
-                            {`${el.insuredFirstName} ${el.insuredLastName}` ||
-                              "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Date Of Birth
-                          </Typography>
-                          <Typography>
-                            {el.insuredDateOfBirth || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Gender
-                          </Typography>
-                          <Typography>
-                            {el.insuredGenderIdentityName || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            SSN
-                          </Typography>
-                          <Typography>{el.insuredSSN || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Priority Type
-                          </Typography>
-                          <Typography>
-                            {el.insuredPriorityType || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Phone No
-                          </Typography>
-                          <Typography>
-                            {el.insuredCellPhone || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Home Number
-                          </Typography>
-                          <Typography>
-                            {el.insuredHomePhone || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Work Number
-                          </Typography>
-                          <Typography>
-                            {el.insuredWorkPhone || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            {el.insuredExt || "None"}
-                          </Typography>
-                          <Typography>122</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Relation to Patient
-                          </Typography>
-                          <Typography>
-                            {el.insuredRelationShipToPatientName || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Email
-                          </Typography>
-                          <Typography>{el.insuredEmail || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Address
-                          </Typography>
-                          <Typography>{el.insuredAddress || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Country
-                          </Typography>
-                          <Typography>
-                            {el.insuredCountryName || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            City
-                          </Typography>
-                          <Typography>
-                            {el.insuredCityName || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            State
-                          </Typography>
-                          <Typography>{el.empStateName || "None"}</Typography>
-                        </Stack>
-                      </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Patient Name
+                    </Typography>
+                    <Typography>
+                      {`${selectedPatient?.insuredFirstName} ${selectedPatient?.insuredLastName}` ||
+                        "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Date Of Birth
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredDateOfBirth || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Gender
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredGenderIdentityName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      SSN
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredSSN || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Priority Type
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredPriorityType || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Phone No
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredCellPhone || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Home Number
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredHomePhone || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Work Number
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredWorkPhone || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      {selectedPatient?.insuredExt || "None"}
+                    </Typography>
+                    <Typography>122</Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Relation to Patient
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredRelationShipToPatientName ||
+                        "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Email
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredEmail || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Address
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredAddress || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Country
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredCountryName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      City
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.insuredCityName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      State
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empStateName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
 
-                      <Grid item xs={12}>
-                        <Typography>Employement Details</Typography>
-                      </Grid>
+                <Grid item xs={12}>
+                  <Typography>Employement Details</Typography>
+                </Grid>
 
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Name
-                          </Typography>
-                          <Typography>{el.employeeName || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Employement Status
-                          </Typography>
-                          <Typography>
-                            {el.empEmploymentStatusName || "None"}
-                          </Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Address
-                          </Typography>
-                          <Typography>{el.empAddress || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            City
-                          </Typography>
-                          <Typography>{el.empCityName || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            State
-                          </Typography>
-                          <Typography>{el.empStateName || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={4}>
-                        <Stack>
-                          <Typography variant="h4" component={"h1"}>
-                            Zipcode
-                          </Typography>
-                          <Typography>{el.empZipCode || "None"}</Typography>
-                        </Stack>
-                      </Grid>
-                    </>
-                  );
-                })}
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Name
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.employeeName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Employement Status
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empEmploymentStatusName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Address
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empAddress || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      City
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empCityName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      State
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empStateName || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Stack>
+                    <Typography variant="h4" component={"h1"}>
+                      Zipcode
+                    </Typography>
+                    <Typography>
+                      {selectedPatient?.empZipCode || "None"}
+                    </Typography>
+                  </Stack>
+                </Grid>
               </Grid>
             </AccordionDetails>
           </Accordion>
@@ -620,7 +610,9 @@ const ShowPatientInfo = () => {
                 <Typography variant="h3" component={"h2"}>
                   Payer Information
                 </Typography>
-                <IconButton>
+                <IconButton
+                  onClick={() => handleEditPatient(selectedPatient?.accountNo)}
+                >
                   <Edit />
                 </IconButton>
               </Stack>
