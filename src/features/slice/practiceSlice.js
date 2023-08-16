@@ -1,8 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { newPracticeAction } from "../actions/practiceAction";
+import {
+  getPracticeAction,
+  newPracticeAction,
+} from "../actions/practiceAction";
 
 const initialState = {
   createPracticeData: {},
+  getPractices: [],
   loading: false,
   error: null,
 };
@@ -17,11 +21,22 @@ const practiceSlice = createSlice({
     [newPracticeAction.fulfilled]: (state, action) => {
       state.loading = false;
       state.createPracticeData = action.payload;
-      console.log(action.paylaod, "practice slice payload");
     },
     [newPracticeAction.rejected]: (state, action) => {
       state.loading = false;
-      state.error = action.payload.message;
+      state.error = action.payload;
+    },
+    [getPracticeAction.pending]: (state) => {
+      state.loading = true;
+    },
+    [getPracticeAction.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.getPractices = action.payload;
+      console.log(action.paylaod, "practice slice get payload");
+    },
+    [getPracticeAction.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });

@@ -12,6 +12,9 @@ const CustomModal = ({ children, open, handleClose }) => {
     border: "2px solid #000",
     boxShadow: 24,
     p: 4,
+    height: "auto",
+    maxHeight: "600px",
+    overflowY: "scroll",
   };
 
   return (
