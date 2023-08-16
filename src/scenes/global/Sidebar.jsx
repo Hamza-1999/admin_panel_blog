@@ -136,12 +136,12 @@ const Sidebar = () => {
                 justifyContent: "space-between",
                 cursor: "pointer",
               }}
+              onClick={() => setIsPatientOpen(!isPatientOpen)}
             >
               <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
-                onClick={() => setIsPatientOpen(!isPatientOpen)}
               >
                 Patient
               </Typography>
@@ -186,7 +186,7 @@ const Sidebar = () => {
               />
             </Collapse>
 
-            {/* practices */}
+            {/* Custom Setup */}
             <Box
               sx={{
                 display: "flex",
@@ -194,12 +194,12 @@ const Sidebar = () => {
                 justifyContent: "space-between",
                 cursor: "pointer",
               }}
+              onClick={() => setIsPagesOpen(!isPagesOpen)}
             >
               <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
-                onClick={() => setIsPagesOpen(!isPagesOpen)}
               >
                 Custom Setup
               </Typography>
@@ -207,8 +207,8 @@ const Sidebar = () => {
             </Box>
             <Collapse in={isPagesOpen}>
               <Item
-                title="Practices"
-                to="/practices"
+                title="Practice"
+                to="/practice"
                 icon={<PersonOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
@@ -222,12 +222,12 @@ const Sidebar = () => {
                 justifyContent: "space-between",
                 cursor: "pointer",
               }}
+              onClick={() => setIsPagesOpen(!isPagesOpen)}
             >
               <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
-                onClick={() => setIsPagesOpen(!isPagesOpen)}
               >
                 Pages
               </Typography>
@@ -264,12 +264,12 @@ const Sidebar = () => {
                 justifyContent: "space-between",
                 cursor: "pointer",
               }}
+              onClick={() => setIsChartsOpen(!isChartsOpen)}
             >
               <Typography
                 variant="h6"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
-                onClick={() => setIsChartsOpen(!isChartsOpen)}
               >
                 Charts
               </Typography>
