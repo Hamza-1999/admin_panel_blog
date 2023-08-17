@@ -35,8 +35,6 @@ const EditPatientInfo = () => {
     (el) => el.accountNo === accountNo
   );
 
-  console.log(findEditValues, "finded");
-
   const [editFormData, setEditFormData] = useState({
     firstName: findEditValues?.firstName || "",
     lastName: findEditValues?.lastName || "",

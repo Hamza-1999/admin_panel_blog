@@ -19,54 +19,77 @@ import CustomSelectBox from "../../../components/CustomSelectBox";
 import { useFormik } from "formik";
 import path from "../../../config/apiUrl";
 import { getData } from "../../../config/axiosFunctions";
-import { useDispatch } from "react-redux";
-import { newPracticeAction } from "../../../features/actions/practiceAction";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getPracticeAction,
+  newPracticeAction,
+  updatePracticeAction,
+} from "../../../features/actions/practiceAction";
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
-import { useNavigate } from "react-router-dom";
-import SearchNpi from "./npi/SearchNpi";
+import { useNavigate, useParams } from "react-router-dom";
+import { updatePatientAction } from "../../../features/actions/createPatientAction";
 
-const NewPractice = () => {
+const UpdatePractice = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [taxonomyListModal, setTaxonomyListModal] = useState(false);
-  const [searchNpiModal, setSearchNpiModal] = useState(false);
+  const [npiModal, setNpiModal] = useState(false);
   const [organizationType, setOrganizationType] = useState([]);
+  const { id } = useParams();
+  //   console.log(id);
   const [isLoading, setIsLoading] = useState(false);
+  const { getPractices } = useSelector((state) => state.practices);
+  console.log(getPractices.result, "getting pracices in update");
+  const findPractice = getPractices.result?.find(
+    (el) => el.practiceId === Number(id)
+  );
+  console.log(findPractice, "finded practice");
 
   const initialValues = {
-    practiceName: "",
-    practiceNPINo: null,
-    taxonomySpeciality: "",
-    npiNo: null,
-    organizationTypeName: "",
-    sequenceNo: null,
-    referenceNo: null,
-    tcnPrefix: "",
-    code: "",
-    primaryAddress: "",
-    primaryCity: "",
-    primaryState: "",
-    primaryZipCode: null,
-    primaryPhone: null,
-    primaryFax: "",
-    payToAddress: "",
-    payToCity: "",
-    payToState: "",
-    payToZipCode: null,
-    sameAsPrimary: false,
+    practiceName: findPractice?.practiceName || "",
+    practiceNPINo: findPractice?.practiceNPINo || null,
+    taxonomySpeciality: findPractice?.taxonomySpeciality || "",
+    organizationTypeName: findPractice?.organizationTypeName || "",
+    sequenceNo: findPractice?.sequenceNo || null,
+    referenceNo: findPractice?.referenceNo || null,
+    tcnPrefix: findPractice?.tcnPrefix || "",
+    code: findPractice?.code || "",
+    primaryAddress: findPractice?.primaryAddress || "",
+    primaryCity: findPractice?.primaryCity || "",
+    primaryState: findPractice?.primaryState || "",
+    primaryZipCode: findPractice?.primaryZipCode || null,
+    primaryPhone: findPractice?.primaryPhone || null,
+    primaryFax: findPractice?.primaryFax || "",
+    payToAddress: findPractice?.payToAddress || "",
+    payToCity: findPractice?.payToCity || "",
+    payToState: findPractice?.payToState || "",
+    payToZipCode: findPractice?.payToZipCode || null,
+    sameAsPrimary: findPractice ? true : false,
   };
-  const { handleChange, handleBlur, handleSubmit, values, setFieldValue } =
-    useFormik({
-      initialValues: initialValues,
-      onSubmit: (values, action) => {
-        try {
-          dispatch(newPracticeAction(values));
-        } catch (error) {
-          console.error("Error creating patient:", error);
-        }
-        action.resetForm();
-      },
-    });
+  const {
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    values,
+    setFieldValue,
+    setValues,
+  } = useFormik({
+    initialValues: initialValues,
+    onSubmit: (values, action) => {
+      try {
+        dispatch(
+          updatePracticeAction({
+            practiceId: findPractice?.practiceId,
+            ...values,
+          })
+        );
+      } catch (error) {
+        console.error("Error creating patient:", error);
+      }
+      action.resetForm();
+      navigate("/practice");
+    },
+  });
 
   const handleCheckboxChange = () => {
     setFieldValue("sameAsPrimary", !values.sameAsPrimary);
@@ -101,7 +124,35 @@ const NewPractice = () => {
 
   useEffect(() => {
     fetchDataOptions(dataFetchUrls.priorityType, setOrganizationType);
-  }, []);
+  }, [dispatch]);
+
+  useEffect(() => {
+    setValues({
+      practiceName: findPractice?.practiceName || "",
+      practiceNPINo: findPractice?.practiceNPINo || null,
+      taxonomySpeciality: findPractice?.taxonomySpeciality || "",
+      organizationTypeName: findPractice?.organizationTypeName || "",
+      sequenceNo: findPractice?.sequenceNo || null,
+      referenceNo: findPractice?.referenceNo || null,
+      tcnPrefix: findPractice?.tcnPrefix || "",
+      code: findPractice?.code || "",
+      primaryAddress: findPractice?.primaryAddress || "",
+      primaryCity: findPractice?.primaryCity || "",
+      primaryState: findPractice?.primaryState || "",
+      primaryZipCode: findPractice?.primaryZipCode || null,
+      primaryPhone: findPractice?.primaryPhone || null,
+      primaryFax: findPractice?.primaryFax || "",
+      payToAddress: findPractice?.payToAddress || "",
+      payToCity: findPractice?.payToCity || "",
+      payToState: findPractice?.payToState || "",
+      payToZipCode: findPractice?.payToZipCode || null,
+      sameAsPrimary: findPractice ? true : false,
+    });
+  }, [findPractice]);
+
+  useEffect(() => {
+    dispatch(getPracticeAction());
+  }, [dispatch]);
   return (
     <>
       <CustomModal
@@ -113,19 +164,18 @@ const NewPractice = () => {
           handleClose={() => setTaxonomyListModal(false)}
         />
       </CustomModal>
-      {/* npi modal */}
-      <CustomModal
-        open={searchNpiModal}
-        handleClose={() => setSearchNpiModal(false)}
+      {/* <CustomModal
+        open={npiModal}
+        handleClose={() => setNpiModal(false)}
       >
-        <SearchNpi
+        <SearchNpi 
           setFieldValue={setFieldValue}
-          handleClose={() => setSearchNpiModal(false)}
+          handleClose={() => setNpiModal(false)}
         />
-      </CustomModal>
+      </CustomModal> */}
 
       <Box margin={"20px"} sx={{ width: { xs: "80%", sm: "70%", md: "60%" } }}>
-        <Header title="Add New Practice" subtitle="" />
+        <Header title="Update Practice" subtitle="" />
 
         <form onSubmit={handleSubmit}>
           <Box
@@ -176,15 +226,16 @@ const NewPractice = () => {
                 width: { xs: "100%", sm: "100%" },
                 fontSize: "1rem",
               }}
-              value={values.npiNo}
-              name="npiNo"
-              onChange={handleChange}
-              onBlur={handleBlur}
+              //   value={selectedPayerName}
+              //   name="payerInfoPayerName"
+              //   onChange={handleChange}
+              //   onBlur={handleBlur}
+              onClick={() => setNpiModal(true)}
               label="NPI"
               InputProps={{
                 endAdornment: (
                   <InputAdornment>
-                    <IconButton onClick={() => setSearchNpiModal(true)}>
+                    <IconButton>
                       <Search />
                     </IconButton>
                   </InputAdornment>
@@ -563,7 +614,7 @@ const NewPractice = () => {
 
           <Box margin={"20px 0"}>
             <Button variant="outlined" color="secondary" type="submit">
-              Save
+              Update
             </Button>
           </Box>
         </form>
@@ -572,4 +623,4 @@ const NewPractice = () => {
   );
 };
 
-export default NewPractice;
+export default UpdatePractice;

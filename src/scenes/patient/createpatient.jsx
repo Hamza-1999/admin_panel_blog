@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import PatientInfo from "./PatientInfo";
-import { getIn, useFormik } from "formik";
+import { useFormik } from "formik";
 import { Box, Button, Stack, Tab, Tabs } from "@mui/material";
 import Header from "../../components/Header";
 import InsuranceInfo from "./InsuranceInfo";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getPatientAction,
-  newPatientAction,
-} from "../../features/actions/createPatientAction";
+import { newPatientAction } from "../../features/actions/createPatientAction";
 
 import "./createpatient.css";
 import path from "../../config/apiUrl";

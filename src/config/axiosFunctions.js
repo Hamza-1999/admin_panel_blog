@@ -24,7 +24,7 @@ export const updateData = async (url, data) => {
   try {
     const response = await axios.put(url, data);
     console.log(response.data, "custom update func data");
-    console.log(data, "custpm func data 66");
+    console.log(data, "custom func update data ");
     return response.data;
   } catch (error) {
     throw error;
