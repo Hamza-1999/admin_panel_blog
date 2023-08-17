@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getData, postData } from "../../config/axiosFunctions";
+import { getData, postData, updateData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 
 export const newPracticeAction = createAsyncThunk(
@@ -22,7 +22,6 @@ export const getPracticeAction = createAsyncThunk("getPractice", async () => {
   try {
     const response = await getData(`${path}/practice`);
     if (response) {
-      console.log(response, "getpracticeaction response11");
       return response;
     } else {
       throw new Error(response.error);
@@ -31,3 +30,20 @@ export const getPracticeAction = createAsyncThunk("getPractice", async () => {
     throw new Error(error);
   }
 });
+
+export const updatePracticeAction = createAsyncThunk(
+  "updatePractice",
+  async (data) => {
+    console.log(data, "update data prac");
+    try {
+      const response = await updateData(
+        `${path}/practice/${data.practiceId}`,
+        data
+      );
+      console.log(response, "update prac action response");
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+);
