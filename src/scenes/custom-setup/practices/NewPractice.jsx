@@ -27,7 +27,7 @@ import SearchNpi from "./npi/SearchNpi";
 
 const NewPractice = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [taxonomyName, setTaxonomyName] = useState("");
   const [taxonomyListModal, setTaxonomyListModal] = useState(false);
   const [searchNpiModal, setSearchNpiModal] = useState(false);
   const [organizationType, setOrganizationType] = useState([]);
@@ -37,7 +37,6 @@ const NewPractice = () => {
     practiceName: "",
     practiceNPINo: null,
     taxonomySpeciality: "",
-    npiNo: null,
     organizationTypeName: "",
     sequenceNo: null,
     referenceNo: null,
@@ -64,6 +63,27 @@ const NewPractice = () => {
         } catch (error) {
           console.error("Error creating patient:", error);
         }
+
+        setFieldValue("practiceName", "");
+        setFieldValue("practiceNPINo", "");
+        setFieldValue("taxonomySpeciality", "");
+        setFieldValue("organizationTypeName", "");
+        setFieldValue("sequenceNo", "");
+        setFieldValue("referenceNo", "");
+        setFieldValue("tcnPrefix", "");
+        setFieldValue("code", "");
+        setFieldValue("primaryAddress", "");
+        setFieldValue("primaryCity", "");
+        setFieldValue("primaryState", "");
+        setFieldValue("primaryZipCode", "");
+        setFieldValue("primaryPhone", "");
+        setFieldValue("primaryFax", "");
+        setFieldValue("payToAddress", "");
+        setFieldValue("payToCity", "");
+        setFieldValue("payToState", "");
+        setFieldValue("payToZipCode", "");
+        setFieldValue("sameAsPrimary", false);
+
         action.resetForm();
       },
     });
@@ -110,6 +130,7 @@ const NewPractice = () => {
       >
         <TaxonomyCategories
           setFieldValue={setFieldValue}
+          setTaxonomyName={setTaxonomyName}
           handleClose={() => setTaxonomyListModal(false)}
         />
       </CustomModal>
@@ -121,6 +142,7 @@ const NewPractice = () => {
         <SearchNpi
           setFieldValue={setFieldValue}
           handleClose={() => setSearchNpiModal(false)}
+          setSearchNpiModal={setSearchNpiModal}
         />
       </CustomModal>
 
@@ -176,8 +198,8 @@ const NewPractice = () => {
                 width: { xs: "100%", sm: "100%" },
                 fontSize: "1rem",
               }}
-              value={values.npiNo}
-              name="npiNo"
+              value={values.practiceNPINo}
+              name="practiceNPINo"
               onChange={handleChange}
               onBlur={handleBlur}
               label="NPI"
@@ -209,6 +231,7 @@ const NewPractice = () => {
             display="grid"
             margin={"20px 0"}
             gap="30px"
+            alignItems={"center"}
             sx={{
               gridTemplateColumns: {
                 xs: "repeat(1, minmax(0, 1fr))",
@@ -240,6 +263,11 @@ const NewPractice = () => {
                 ),
               }}
             />
+            {taxonomyName && (
+              <Typography variant="h4" component="h4">
+                {taxonomyName}
+              </Typography>
+            )}
           </Box>
           <Box marginTop={"30px"}>
             <Typography variant="h5" component="h5">

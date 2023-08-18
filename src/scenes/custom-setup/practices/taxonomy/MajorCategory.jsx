@@ -11,6 +11,7 @@ const MajorCategory = ({
   setSelectedCategory,
   setSelectedCode,
   selectedCode,
+  setTaxonomyName,
 }) => {
   console.log(majorOption, "majorOptions");
   const [isOpen, setIsOpen] = useState(false);
@@ -20,16 +21,23 @@ const MajorCategory = ({
   };
   return (
     <Box margin={"20px 0"}>
-      <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
-        {isOpen ? (
-          <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
-        ) : (
-          <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
-        )}
-        <Typography variant="h3" component={"h3"}>
+      <Box display={"flex"} alignItems={"center"}>
+        <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
+          {isOpen ? (
+            <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
+          ) : (
+            <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
+          )}
+        </Stack>
+        <Typography
+          letterSpacing={"1.24px"}
+          sx={{ cursor: "default" }}
+          variant="h4"
+          component={"h4"}
+        >
           {majorOption.taxonomyMajorCategoryName}
         </Typography>
-      </Stack>
+      </Box>
 
       {isOpen &&
         majorOption.taxonomyIntermediateCategoryDtos?.map(
@@ -41,6 +49,7 @@ const MajorCategory = ({
               setSelectedCategory={setSelectedCategory}
               setSelectedCode={setSelectedCode}
               selectedCode={selectedCode}
+              setTaxonomyName={setTaxonomyName}
             />
           )
         )}

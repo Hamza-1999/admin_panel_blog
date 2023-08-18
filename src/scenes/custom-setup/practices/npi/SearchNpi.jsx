@@ -1,4 +1,11 @@
-import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import axios from "axios";
 import { useFormik } from "formik";
 import React from "react";
@@ -8,8 +15,9 @@ import CustomModal from "../../../../components/CustomModal";
 import { unstable_resetCleanupTracking } from "@mui/x-data-grid";
 import SearchedNpiData from "./SearchedNpiData";
 
-const SearchNpi = () => {
+const SearchNpi = ({ setFieldValue, setSearchNpiModal }) => {
   const [searchedData, setSearchedData] = useState([]);
+  const [emptyField, setEmptyField] = useState(false);
   const [openSearchDataModal, setOpenSearchDataModal] = useState(false);
   console.log(searchedData, "getting search response");
   const initialValues = {
@@ -22,6 +30,16 @@ const SearchNpi = () => {
     initialValues: initialValues,
     onSubmit: async (values) => {
       const { FirstName, LastName, OrganizationName } = values;
+      if (!FirstName && !LastName && !OrganizationName) {
+        // // Show an alert here indicating that at least one field should be filled.
+        // alert("Please fill at least one search field");
+        // return;
+        setEmptyField(true);
+      }
+
+      setTimeout(() => {
+        setEmptyField(false);
+      }, 1000);
       const queryParams = new URLSearchParams();
 
       if (FirstName) queryParams.append("firstName", FirstName.trim());
@@ -45,16 +63,23 @@ const SearchNpi = () => {
   });
   return (
     <>
+      {emptyField && (
+        <Box>
+          <Alert severity="error">Please Fill Any One Field</Alert>
+        </Box>
+      )}
       <CustomModal
         open={openSearchDataModal}
         handleClose={() => setOpenSearchDataModal(false)}
       >
         <SearchedNpiData
           searchedData={searchedData}
+          setFieldValue={setFieldValue}
           handleClose={() => setOpenSearchDataModal(false)}
+          setSearchNpiModal={setSearchNpiModal}
         />
       </CustomModal>
-      <Box>
+      <Box padding={"15px 20px"}>
         <Stack>
           <Typography variant="h3" component={"h3"}>
             NPI Registry

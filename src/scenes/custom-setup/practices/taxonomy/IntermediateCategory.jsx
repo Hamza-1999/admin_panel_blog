@@ -10,9 +10,9 @@ const IntermediateCategory = ({
   selectedCategory,
   setSelectedCategory,
   selectedCode,
+  setTaxonomyName,
   setSelectedCode,
 }) => {
-  console.log(intermediateOptions, "interoptions22");
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
@@ -25,42 +25,32 @@ const IntermediateCategory = ({
     }
     setSelectedCategory(intermediateOptions.taxonomyIntermediateCategoryName);
     setSelectedCode(intermediateOptions.taxonomyIntermediateCode);
+    setTaxonomyName(intermediateOptions.taxonomyIntermediateCategoryName);
   };
 
   return (
     <Box marginLeft={"40px"}>
-      <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
-        {intermediateOptions.taxonomySubCategoryDtos?.length > 0 ? (
-          isOpen ? (
-            <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
-          ) : (
-            <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
-          )
-        ) : null}
-
+      <Box display="flex" alignItems="center">
+        <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
+          {intermediateOptions.taxonomySubCategoryDtos?.length > 0 ? (
+            isOpen ? (
+              <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
+            ) : (
+              <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
+            )
+          ) : null}
+        </Stack>
         <Typography
-          variant="h3"
-          component={"h3"}
+          variant="h4"
+          component={"h4"}
+          sx={{ cursor: "default" }}
+          letterSpacing="1.24px"
+          lineHeight={"30px"}
           onClick={handleIntermediateSelect}
         >
           {intermediateOptions.taxonomyIntermediateCategoryName}
         </Typography>
-      </Stack>
-
-      {/* {isOpen && (
-        <ul>
-          {intermediateOptions.taxonomySubCategoryDtos?.map((subCat, index) => {
-            return (
-              <SubCategory
-                key={index}
-                subOptions={subCat}
-                selectedCategory={selectedCategory}
-                setSelectedCategory={setSelectedCategory}
-              />
-            );
-          })}
-        </ul>
-      )} */}
+      </Box>
 
       {isOpen &&
         intermediateOptions.taxonomySubCategoryDtos?.map((subCat, index) => {
@@ -72,6 +62,7 @@ const IntermediateCategory = ({
               setSelectedCategory={setSelectedCategory}
               selectedCode={selectedCode}
               setSelectedCode={setSelectedCode}
+              setTaxonomyName={setTaxonomyName}
             />
           );
         })}
