@@ -9,8 +9,8 @@ const SubCategory = ({
   subOptions,
   selectedCategory,
   setSelectedCategory,
-  selectedCode,
   setSelectedCode,
+  setTaxonomyName,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,22 +24,31 @@ const SubCategory = ({
     }
     setSelectedCategory(subOptions.taxonomySubCategoryName);
     setSelectedCode(subOptions.taxonomySubCode);
+    setTaxonomyName(subOptions.taxonomySubCategoryName);
   };
   return (
     <Box marginLeft={"70px"}>
-      <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
-        {subOptions.taxonomyMinorCategoryDtos?.length > 0 ? (
-          isOpen ? (
-            <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
-          ) : (
-            <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
-          )
-        ) : null}
-
-        <Typography variant="h3" component={"h3"} onClick={handleSubSelect}>
+      <Box display="flex" alignItems="center">
+        <Stack onClick={toggleOpen} alignItems={"center"} flexDirection={"row"}>
+          {subOptions.taxonomyMinorCategoryDtos?.length > 0 ? (
+            isOpen ? (
+              <ArrowDropDownIcon sx={{ fontSize: "2.2rem" }} />
+            ) : (
+              <ArrowRightIcon sx={{ fontSize: "2.2rem" }} />
+            )
+          ) : null}
+        </Stack>
+        <Typography
+          variant="h4"
+          component={"h4"}
+          letterSpacing={"1.24px"}
+          sx={{ cursor: "default" }}
+          lineHeight="30px"
+          onClick={handleSubSelect}
+        >
           {subOptions.taxonomySubCategoryName}
         </Typography>
-      </Stack>
+      </Box>
 
       {isOpen && (
         <ul
@@ -55,6 +64,7 @@ const SubCategory = ({
                 selectedCategory={selectedCategory}
                 setSelectedCategory={setSelectedCategory}
                 setSelectedCode={setSelectedCode}
+                setTaxonomyName={setTaxonomyName}
               />
             );
           })}

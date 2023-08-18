@@ -7,10 +7,14 @@ import { useState } from "react";
 import MajorCategory from "./MajorCategory";
 import IntermediateCategory from "./IntermediateCategory";
 import SubCategory from "./SubCategory";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import SelectedCategory from "./SelectedCategory";
 
-const TaxonomyCategories = ({ handleClose, setFieldValue }) => {
+const TaxonomyCategories = ({
+  handleClose,
+  setFieldValue,
+  setTaxonomyName,
+}) => {
   const dispatch = useDispatch();
   const { getTaxonomyData } = useSelector((state) => state.taxonomy);
   const [selectedCategory, setSelectedCategory] = useState("select category");
@@ -31,13 +35,39 @@ const TaxonomyCategories = ({ handleClose, setFieldValue }) => {
   };
   return (
     <div>
-      <Typography variant="h2" component={"h2"}>
-        Taxonomy List
-      </Typography>
-      <SelectedCategory
-        selectedCategory={selectedCategory}
-        selectedCode={selectedCode}
-      />
+      <Box
+        sx={{
+          position: "sticky",
+          top: "0",
+          zIndex: "111",
+          background: "#fff",
+          padding: "21px",
+          borderBottom: "1px solid lightgrey",
+        }}
+      >
+        <Stack
+          flexDirection={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
+        >
+          <Typography variant="h2" component={"h2"}>
+            Taxonomy List
+          </Typography>
+          <Box textAlign={"right"}>
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={() => handleCloseModal(selectedCode)}
+            >
+              Select
+            </Button>
+          </Box>
+        </Stack>
+        <SelectedCategory
+          selectedCategory={selectedCategory}
+          selectedCode={selectedCode}
+        />
+      </Box>
 
       {/* major component */}
       {getTaxonomyData.result?.map((majorCat, index) => {
@@ -50,19 +80,10 @@ const TaxonomyCategories = ({ handleClose, setFieldValue }) => {
             selectedCategory={selectedCategory}
             selectedCode={selectedCode}
             setSelectedCode={setSelectedCode}
+            setTaxonomyName={setTaxonomyName}
           />
         );
       })}
-
-      <Box textAlign={"right"} marginTop={"50px"}>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={() => handleCloseModal(selectedCode)}
-        >
-          Select
-        </Button>
-      </Box>
     </div>
   );
 };

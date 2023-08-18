@@ -28,22 +28,21 @@ import {
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePatientAction } from "../../../features/actions/createPatientAction";
+import SearchNpi from "./npi/SearchNpi";
 
 const UpdatePractice = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [taxonomyListModal, setTaxonomyListModal] = useState(false);
-  const [npiModal, setNpiModal] = useState(false);
+  const [searchNpiModal, setSearchNpiModal] = useState(false);
   const [organizationType, setOrganizationType] = useState([]);
   const { id } = useParams();
   //   console.log(id);
-  const [isLoading, setIsLoading] = useState(false);
   const { getPractices } = useSelector((state) => state.practices);
   console.log(getPractices.result, "getting pracices in update");
   const findPractice = getPractices.result?.find(
     (el) => el.practiceId === Number(id)
   );
-  console.log(findPractice, "finded practice");
 
   const initialValues = {
     practiceName: findPractice?.practiceName || "",
@@ -164,15 +163,16 @@ const UpdatePractice = () => {
           handleClose={() => setTaxonomyListModal(false)}
         />
       </CustomModal>
-      {/* <CustomModal
-        open={npiModal}
-        handleClose={() => setNpiModal(false)}
+      <CustomModal
+        open={searchNpiModal}
+        handleClose={() => setSearchNpiModal(false)}
       >
-        <SearchNpi 
+        <SearchNpi
           setFieldValue={setFieldValue}
-          handleClose={() => setNpiModal(false)}
+          handleClose={() => setSearchNpiModal(false)}
+          setSearchNpiModal={setSearchNpiModal}
         />
-      </CustomModal> */}
+      </CustomModal>
 
       <Box margin={"20px"} sx={{ width: { xs: "80%", sm: "70%", md: "60%" } }}>
         <Header title="Update Practice" subtitle="" />
@@ -226,16 +226,15 @@ const UpdatePractice = () => {
                 width: { xs: "100%", sm: "100%" },
                 fontSize: "1rem",
               }}
-              //   value={selectedPayerName}
-              //   name="payerInfoPayerName"
-              //   onChange={handleChange}
-              //   onBlur={handleBlur}
-              onClick={() => setNpiModal(true)}
+              value={values.practiceNPINo}
+              name="practiceNPINo"
+              onChange={handleChange}
+              onBlur={handleBlur}
               label="NPI"
               InputProps={{
                 endAdornment: (
                   <InputAdornment>
-                    <IconButton>
+                    <IconButton onClick={() => setSearchNpiModal(true)}>
                       <Search />
                     </IconButton>
                   </InputAdornment>
@@ -613,7 +612,7 @@ const UpdatePractice = () => {
           )}
 
           <Box margin={"20px 0"}>
-            <Button variant="outlined" color="secondary" type="submit">
+            <Button variant="contained" color="secondary" type="submit">
               Update
             </Button>
           </Box>
