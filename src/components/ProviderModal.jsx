@@ -73,9 +73,7 @@ const ProviderModal = ({ handleClose, setFieldValue, fieldToSet }) => {
       fieldToSet === "billingProviderName"
         ? `${val.row.billingProviderName}`
         : `${val.row.eligibilityProviderName}`;
-    console.log(fieldToSet, "fieldToSet");
-    console.log(fieldValue, "fieldValue");
-    setFieldValue(fieldToSet, `${fieldValue} (${val.row.providerSequenceNo})`);
+    setFieldValue(fieldToSet, fieldValue);
     handleClose();
   };
   return (
