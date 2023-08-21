@@ -15,7 +15,7 @@ import CustomModal from "../../../../components/CustomModal";
 import { unstable_resetCleanupTracking } from "@mui/x-data-grid";
 import SearchedNpiData from "./SearchedNpiData";
 
-const SearchNpi = ({ setFieldValue, setSearchNpiModal }) => {
+const SearchNpi = ({ setSearchNpiModal, handleSelectNpi }) => {
   const [searchedData, setSearchedData] = useState([]);
   const [emptyField, setEmptyField] = useState(false);
   const [openSearchDataModal, setOpenSearchDataModal] = useState(false);
@@ -74,7 +74,7 @@ const SearchNpi = ({ setFieldValue, setSearchNpiModal }) => {
       >
         <SearchedNpiData
           searchedData={searchedData}
-          setFieldValue={setFieldValue}
+          handleSelectNpi={handleSelectNpi}
           handleClose={() => setOpenSearchDataModal(false)}
           setSearchNpiModal={setSearchNpiModal}
         />

@@ -122,6 +122,14 @@ const NewPractice = () => {
   useEffect(() => {
     fetchDataOptions(dataFetchUrls.priorityType, setOrganizationType);
   }, []);
+
+  const handleSelectTaxonomy = (taxonomyCode) => {
+    setFieldValue("taxonomySpeciality", taxonomyCode);
+  };
+
+  const handleSelectNpi = (npiNum) => {
+    setFieldValue("practiceNPINo", npiNum);
+  };
   return (
     <>
       <CustomModal
@@ -129,7 +137,7 @@ const NewPractice = () => {
         handleClose={() => setTaxonomyListModal(false)}
       >
         <TaxonomyCategories
-          setFieldValue={setFieldValue}
+          handleSelectTaxonomy={handleSelectTaxonomy}
           setTaxonomyName={setTaxonomyName}
           handleClose={() => setTaxonomyListModal(false)}
         />
@@ -140,7 +148,7 @@ const NewPractice = () => {
         handleClose={() => setSearchNpiModal(false)}
       >
         <SearchNpi
-          setFieldValue={setFieldValue}
+          handleSelectNpi={handleSelectNpi}
           handleClose={() => setSearchNpiModal(false)}
           setSearchNpiModal={setSearchNpiModal}
         />

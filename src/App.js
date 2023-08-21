@@ -28,6 +28,8 @@ import EditPatientInfo from "./scenes/patient/EditPatientInfo";
 import NewPractice from "./scenes/custom-setup/practices/NewPractice";
 import Practice from "./scenes/custom-setup/practices/Practice";
 import UpdatePractice from "./scenes/custom-setup/practices/UpdatePractice";
+import NewProvider from "./scenes/custom-setup/provider/NewProvider";
+import Provider from "./scenes/custom-setup/provider/Provider";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -59,9 +61,13 @@ function App() {
                 path="/showpatient/:accountNo"
                 element={<ShowPatientInfo />}
               />
+              {/* practices */}
               <Route path="/practice/new" element={<NewPractice />} />
               <Route path="/practice" element={<Practice />} />
               <Route path="/practice/update/:id" element={<UpdatePractice />} />
+              {/* provider */}
+              <Route path="/provider/new" element={<NewProvider />} />
+              <Route path="/provider" element={<Provider />} />
 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />

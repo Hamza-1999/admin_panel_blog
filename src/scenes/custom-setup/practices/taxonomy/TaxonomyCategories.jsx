@@ -12,8 +12,9 @@ import SelectedCategory from "./SelectedCategory";
 
 const TaxonomyCategories = ({
   handleClose,
-  setFieldValue,
+  setTaxonomyCode,
   setTaxonomyName,
+  handleSelectTaxonomy,
 }) => {
   const dispatch = useDispatch();
   const { getTaxonomyData } = useSelector((state) => state.taxonomy);
@@ -30,7 +31,8 @@ const TaxonomyCategories = ({
 
   const handleCloseModal = (itemCode) => {
     console.log(itemCode, "itemCode");
-    setFieldValue("taxonomySpeciality", itemCode);
+    // setTaxonomyCode(itemCode);
+    handleSelectTaxonomy(itemCode);
     handleClose();
   };
   return (

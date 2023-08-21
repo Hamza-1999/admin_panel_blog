@@ -25,11 +25,19 @@ const CustomSelectBox = ({
         native
         defaultValue=""
       >
-        <option aria-label="None" value="" />
+        <option
+          key="select"
+          value="Select"
+          style={{ color: "lightgray !important" }}
+        >
+          Select
+        </option>
         {dropdownOptions.map((opt) => (
-          <option key={opt.id} value={opt.value}>
-            {opt.value}
-          </option>
+          <>
+            <option key={opt.id} value={opt.value}>
+              {opt.value}
+            </option>
+          </>
         ))}
       </Select>
     </FormControl>

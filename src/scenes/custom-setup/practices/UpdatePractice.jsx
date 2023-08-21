@@ -152,6 +152,10 @@ const UpdatePractice = () => {
   useEffect(() => {
     dispatch(getPracticeAction());
   }, [dispatch]);
+
+  const handleSelectTaxonomy = (taxonomyCode) => {
+    setFieldValue("taxonomySpeciality", taxonomyCode);
+  };
   return (
     <>
       <CustomModal
@@ -159,7 +163,7 @@ const UpdatePractice = () => {
         handleClose={() => setTaxonomyListModal(false)}
       >
         <TaxonomyCategories
-          setFieldValue={setFieldValue}
+          handleSelectTaxonomy={handleSelectTaxonomy}
           handleClose={() => setTaxonomyListModal(false)}
         />
       </CustomModal>
