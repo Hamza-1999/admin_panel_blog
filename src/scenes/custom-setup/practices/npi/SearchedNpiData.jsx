@@ -4,7 +4,7 @@ import React from "react";
 
 const SearchedNpiData = ({
   searchedData,
-  setFieldValue,
+  handleSelectNpi,
   setSearchNpiModal,
   handleClose,
 }) => {
@@ -46,8 +46,7 @@ const SearchedNpiData = ({
   ];
 
   const handleNpiField = (val) => {
-    console.log(val, "val npi");
-    setFieldValue("practiceNPINo", Number(val));
+    handleSelectNpi(Number(val));
     handleClose();
     setSearchNpiModal(false);
   };
