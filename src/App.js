@@ -30,6 +30,7 @@ import Practice from "./scenes/custom-setup/practices/Practice";
 import UpdatePractice from "./scenes/custom-setup/practices/UpdatePractice";
 import NewProvider from "./scenes/custom-setup/provider/NewProvider";
 import Provider from "./scenes/custom-setup/provider/Provider";
+import UpdateProvider from "./scenes/custom-setup/provider/UpdateProvider";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -68,6 +69,7 @@ function App() {
               {/* provider */}
               <Route path="/provider/new" element={<NewProvider />} />
               <Route path="/provider" element={<Provider />} />
+              <Route path="/provider/update/:id" element={<UpdateProvider />} />
 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />

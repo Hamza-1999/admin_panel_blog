@@ -29,7 +29,38 @@ const Practice = () => {
         {loading ? (
           <Typography>Loading...</Typography>
         ) : (
+          <>
           <div>No patient data available.</div>
+          <Box
+              margin={"20px 0"}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                flexDirection: { xs: "column", sm: "row" },
+                gap: "15px",
+              }}
+            >
+              {/* <TextField
+              fullWidth
+              value={searchPractice}
+              onChange={(e) => setSearchPractice(e.target.value)}
+              variant="outlined"
+              size="small"
+              label="Search"
+            /> */}
+              <Box width={{ xs: "100%", sm: "65%", md: "65%" }}>
+                <Button
+                  //   fullWidth
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => navigate("/provider/new")}
+                >
+                  <Add /> New Provider
+                </Button>
+              </Box>
+              </Box>
+          </>
         )}
       </Box>
     );
