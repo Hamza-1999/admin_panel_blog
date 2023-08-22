@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getProviderAction,
   newProviderAction,
+  updateProviderAction,
 } from "../actions/providerAction";
+import { toast } from "react-toastify";
 
 const initialState = {
   createProviderData: {},
@@ -35,6 +37,27 @@ const providerSlice = createSlice({
     [getProviderAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    [updateProviderAction.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateProviderAction.fulfilled]: (state, action) => {
+      state.loading = false;
+      const updatedProviderIndex = state.getProviders.result.findIndex(
+        (user) => user.providerId === action.payload.providerId
+      );
+      if (updatedProviderIndex !== -1) {
+        state.getProviders.result[updatedProviderIndex] = {
+          ...state.getProviders.result[updatedProviderIndex],
+          ...action.payload,
+        };
+      }
+      toast.success("Provider Updated Successfully!");
+    },
+    [updateProviderAction.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      toast.error("Provider Updation Failed");
     },
   },
 });

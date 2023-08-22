@@ -167,7 +167,7 @@ const Provider = () => {
           pageSize={5}
           disableSelectionOnClick
           onCellClick={(params) =>
-            navigate(`/practice/update/${params.row.id}`)
+            navigate(`/provider/update/${params.row.id}`)
           }
         />
       </Box>

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getData, postData } from "../../config/axiosFunctions";
+import { getData, postData, updateData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 
 export const newProviderAction = createAsyncThunk(
@@ -30,3 +30,20 @@ export const getProviderAction = createAsyncThunk("getProvider", async () => {
     throw new Error(error);
   }
 });
+
+export const updateProviderAction = createAsyncThunk(
+  "updateProvider",
+  async (data) => {
+    console.log(data, "update data provider action response");
+    try {
+      const response = await updateData(
+        `${path}/provider/${data.providerId}`,
+        data
+      );
+      console.log(response, "update prac action response");
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+);

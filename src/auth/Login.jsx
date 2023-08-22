@@ -39,6 +39,7 @@ const TechMatterLogo = () => {
         fontSize={".9rem"}
         fontWeight={"300"}
         letterSpacing={1.2}
+        color={"#fff"}
       >
         TechMatter PVT LTD
       </Typography>
