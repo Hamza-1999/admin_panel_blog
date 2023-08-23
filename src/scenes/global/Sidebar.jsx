@@ -17,6 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import Claim from "../claim-dir/claim/NewClaim";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -44,6 +45,8 @@ const Sidebar = () => {
   const [isPatientOpen, setIsPatientOpen] = useState(false);
   const [isPagesOpen, setIsPagesOpen] = useState(false);
   const [isChartsOpen, setIsChartsOpen] = useState(false);
+  const [isCustomSetupOpen, setIsCustomSetupOpen] = useState(false);
+  const [isClaimOpen, setIsClaimOpen] = useState(false);
 
   return (
     <Box
@@ -194,7 +197,7 @@ const Sidebar = () => {
                 justifyContent: "space-between",
                 cursor: "pointer",
               }}
-              onClick={() => setIsPagesOpen(!isPagesOpen)}
+              onClick={() => setIsCustomSetupOpen(!isCustomSetupOpen)}
             >
               <Typography
                 variant="h6"
@@ -203,9 +206,9 @@ const Sidebar = () => {
               >
                 Custom Setup
               </Typography>
-              {isPagesOpen ? <ExpandLess /> : <ExpandMore />}
+              {isCustomSetupOpen ? <ExpandLess /> : <ExpandMore />}
             </Box>
-            <Collapse in={isPagesOpen}>
+            <Collapse in={isCustomSetupOpen}>
               <Item
                 title="Practice"
                 to="/practice"
@@ -221,6 +224,42 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             </Collapse>
+
+            {/* claims */}
+            {/* <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+              }}
+              onClick={() => setIsClaimOpen(!isClaimOpen)}
+            >
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Claim
+              </Typography>
+              {isClaimOpen ? <ExpandLess /> : <ExpandMore />}
+            </Box>
+            <Collapse in={isClaimOpen}>
+              <Item
+                title="Claim"
+                to="/claims"
+                icon={<Claim />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              <Item
+                title="Provider"
+                to="/provider"
+                icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+            </Collapse> */}
 
             <Box
               sx={{

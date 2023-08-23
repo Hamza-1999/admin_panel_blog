@@ -9,7 +9,6 @@ import {
   Button,
   IconButton,
   InputAdornment,
-  InputLabel,
   TextField,
   TextareaAutosize,
   Typography,
@@ -22,7 +21,6 @@ import { getData } from "../../../config/axiosFunctions";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getPracticeAction,
-  newPracticeAction,
   updatePracticeAction,
 } from "../../../features/actions/practiceAction";
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
@@ -156,6 +154,10 @@ const UpdatePractice = () => {
   const handleSelectTaxonomy = (taxonomyCode) => {
     setFieldValue("taxonomySpeciality", taxonomyCode);
   };
+
+  const handleSelectNpi = (npiNum) => {
+    setFieldValue("practiceNPINo", npiNum);
+  };
   return (
     <>
       <CustomModal
@@ -175,6 +177,7 @@ const UpdatePractice = () => {
           setFieldValue={setFieldValue}
           handleClose={() => setSearchNpiModal(false)}
           setSearchNpiModal={setSearchNpiModal}
+          handleSelectNpi={handleSelectNpi}
         />
       </CustomModal>
 

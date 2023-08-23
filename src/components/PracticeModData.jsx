@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getPracticeAction } from "../features/actions/practiceAction";
 
-const PracticeModData = ({ handleClose, setFieldValue }) => {
+const PracticeModData = ({ handleClose, setFieldValue, setSelectPractice }) => {
   const dispatch = useDispatch();
   //   const navigate = useNavigate();
   const { getPractices, loading } = useSelector((state) => state.practices);
@@ -72,11 +72,13 @@ const PracticeModData = ({ handleClose, setFieldValue }) => {
   ];
 
   const handleCellClick = (val) => {
-    console.log(val, "practiceNameinProv");
-    setFieldValue(
-      "practiceName",
-      `${val.row.practiceName} (${val.row.sequenceNo})`
-    );
+    setFieldValue("practiceName", val.row.practiceName);
+    setFieldValue("practiceId", Number(val.row.id));
+
+    setSelectPractice({
+      pracName: val.row.practiceName,
+      seqNo: val.row.sequenceNo,
+    });
 
     handleClose();
   };

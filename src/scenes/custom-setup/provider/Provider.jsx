@@ -31,7 +31,7 @@ const Provider = () => {
           <Typography>Loading...</Typography>
         ) : (
           <>
-            <div>No patient data available.</div>
+            <div>No provider data available.</div>
             <Box
               margin={"20px 0"}
               sx={{
@@ -73,6 +73,7 @@ const Provider = () => {
     providerLastName: el.providerLastName,
     providerSequenceNo: el.providerSequenceNo,
     providerNPINo: el.providerNPINo,
+    providerOrganization: el.providerOrganization,
     isActive: el.isActive,
   }));
 
@@ -88,8 +89,14 @@ const Provider = () => {
       headerAlign: "center",
       filterable: true,
       align: "center",
-      valueGetter: (params) =>
-        `${params.row.providerFirstName} ${params.row.providerLastName}`,
+      valueGetter: (params) => {
+        const { providerOrganization, providerFirstName, providerLastName } =
+          params.row;
+        if (providerOrganization) {
+          return providerOrganization;
+        }
+        return `${providerFirstName} ${providerLastName}`;
+      },
     },
     {
       field: "providerNPINo",

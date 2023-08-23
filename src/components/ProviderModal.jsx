@@ -5,8 +5,15 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getProviderAction } from "../features/actions/providerAction";
+import { Formik } from "formik";
 
-const ProviderModal = ({ handleClose, setFieldValue, fieldToSet }) => {
+const ProviderModal = ({
+  handleClose,
+  setFieldValue,
+  fieldToSet,
+  setSelectBil,
+  setSelectElibility,
+}) => {
   const dispatch = useDispatch();
   //   const navigate = useNavigate();
   const { getProviders, loading } = useSelector((state) => state.provider);
@@ -74,6 +81,22 @@ const ProviderModal = ({ handleClose, setFieldValue, fieldToSet }) => {
         ? `${val.row.billingProviderName}`
         : `${val.row.eligibilityProviderName}`;
     setFieldValue(fieldToSet, fieldValue);
+    // setFieldValue(fieldToSet, fieldValue);
+
+    if (fieldToSet === "billingProviderName") {
+      setSelectBil({
+        billProv: val.row.billingProviderName,
+        seqNo: val.row.providerSequenceNo,
+      });
+    }
+
+    if (fieldToSet === "eligibilityProviderName") {
+      setSelectElibility({
+        seqNo: val.row.providerSequenceNo,
+        eligProv: val.row.eligibilityProviderName,
+      });
+    }
+
     handleClose();
   };
   return (
