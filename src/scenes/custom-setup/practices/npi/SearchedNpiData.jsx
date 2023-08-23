@@ -47,8 +47,8 @@ const SearchedNpiData = ({
 
   const handleNpiField = (val) => {
     handleSelectNpi(Number(val));
-    handleClose();
     setSearchNpiModal(false);
+    handleClose();
   };
   return (
     <Box sx={{ height: "400px", width: "100%" }} padding={"15px 20px"}>

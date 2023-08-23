@@ -12,7 +12,6 @@ import React from "react";
 import path from "../../../../config/apiUrl";
 import { useState } from "react";
 import CustomModal from "../../../../components/CustomModal";
-import { unstable_resetCleanupTracking } from "@mui/x-data-grid";
 import SearchedNpiData from "./SearchedNpiData";
 
 const SearchNpi = ({ setSearchNpiModal, handleSelectNpi }) => {
@@ -31,9 +30,6 @@ const SearchNpi = ({ setSearchNpiModal, handleSelectNpi }) => {
     onSubmit: async (values) => {
       const { FirstName, LastName, OrganizationName } = values;
       if (!FirstName && !LastName && !OrganizationName) {
-        // // Show an alert here indicating that at least one field should be filled.
-        // alert("Please fill at least one search field");
-        // return;
         setEmptyField(true);
       }
 

@@ -18,7 +18,7 @@ const TaxonomyCategories = ({
 }) => {
   const dispatch = useDispatch();
   const { getTaxonomyData } = useSelector((state) => state.taxonomy);
-  const [selectedCategory, setSelectedCategory] = useState("select category");
+  const [selectedCategory, setSelectedCategory] = useState("Select Category");
   const [selectedCode, setSelectedCode] = useState("");
 
   useEffect(() => {

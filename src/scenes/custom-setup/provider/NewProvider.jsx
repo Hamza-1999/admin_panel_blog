@@ -4,8 +4,12 @@ import {
   AccordionSummary,
   Box,
   Button,
+  FormControlLabel,
   IconButton,
   InputAdornment,
+  Radio,
+  RadioGroup,
+  Stack,
   TextField,
   Typography,
 } from "@mui/material";
@@ -31,6 +35,19 @@ const NewProvider = () => {
   const [practiceModal, setPracticeModal] = useState(false);
   const [billingProviderModal, setBillingProviderModal] = useState(false);
   const [elibilityProviderModal, setEligibilityProviderModal] = useState(false);
+  const [selectBil, setSelectBil] = useState({
+    billProv: "",
+    seqNo: null,
+  });
+  const [selectEligibility, setSelectElibility] = useState({
+    eligProv: "",
+    seqNo: null,
+  });
+  const [selectPractice, setSelectPractice] = useState({
+    pracName: "",
+    seqNo: null,
+  });
+  const [idNo, setIdNo] = useState("ssn");
 
   const initialValues = {
     providerFirstName: "",
@@ -48,6 +65,8 @@ const NewProvider = () => {
     ein: "",
     billingProviderName: "",
     eligibilityProviderName: "",
+    practiceId: null,
+    selection: "individual",
   };
   const { handleBlur, handleChange, handleSubmit, values, setFieldValue } =
     useFormik({
@@ -59,7 +78,18 @@ const NewProvider = () => {
         } catch (error) {
           throw new Error(error);
         }
-
+        setSelectBil({
+          billProv: "",
+          seqNo: null,
+        });
+        setSelectElibility({
+          eligProv: "",
+          seqNo: null,
+        });
+        setSelectPractice({
+          pracName: "",
+          seqNo: null,
+        });
         action.resetForm();
       },
     });
@@ -105,6 +135,7 @@ const NewProvider = () => {
         <PracticeModData
           handleClose={() => setPracticeModal(false)}
           setFieldValue={setFieldValue}
+          setSelectPractice={setSelectPractice}
         />
       </CustomModal>
 
@@ -116,6 +147,7 @@ const NewProvider = () => {
           fieldToSet="billingProviderName"
           handleClose={() => setBillingProviderModal(false)}
           setFieldValue={setFieldValue}
+          setSelectBil={setSelectBil}
         />
       </CustomModal>
       <CustomModal
@@ -126,6 +158,7 @@ const NewProvider = () => {
           fieldToSet="eligibilityProviderName"
           handleClose={() => setEligibilityProviderModal(false)}
           setFieldValue={setFieldValue}
+          setSelectElibility={setSelectElibility}
         />
       </CustomModal>
 
@@ -133,109 +166,140 @@ const NewProvider = () => {
         <Header title="Add New Provider" subtitle="" />
 
         <form onSubmit={handleSubmit}>
-          <Box
-            display="grid"
-            gap="30px"
-            margin={"20px 0"}
-            sx={{
-              gridTemplateColumns: {
-                xs: "repeat(1, minmax(0, 1fr))",
-                sm: "repeat(1, minmax(0, 1fr))",
-                md: "repeat(4, minmax(0, 1fr))",
-              },
-            }}
-          >
-            <TextField
-              size="small"
-              fullWidth
-              variant="filled"
-              type="text"
-              label="First Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.providerFirstName}
-              name="providerFirstName"
-              id="providerFirstName"
-              // error={!!touched.firstName && !!errors.firstName}
-              // helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              size="small"
-              fullWidth
-              variant="filled"
-              type="text"
-              label="Last Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.providerLastName}
-              name="providerLastName"
-              id="providerLastName"
-              // error={!!touched.firstName && !!errors.firstName}
-              // helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              size="small"
-              fullWidth
-              variant="filled"
-              type="text"
-              label="MI"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.providerMI}
-              name="providerMI"
-              id="providerMI"
-              // error={!!touched.firstName && !!errors.firstName}
-              // helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
-            />
-            <TextField
-              size="small"
-              fullWidth
-              variant="filled"
-              type="text"
-              label="Credentials"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.providerCredential}
-              name="providerCredential"
-              id="providerCredential"
-              // error={!!touched.firstName && !!errors.firstName}
-              // helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
-            />
-          </Box>
+          {values.selection === "individual" ? (
+            <Box
+              display="grid"
+              gap="30px"
+              margin={"20px 0"}
+              sx={{
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(1, minmax(0, 1fr))",
+                  md: "repeat(4, minmax(0, 1fr))",
+                },
+              }}
+            >
+              <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="First Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.providerFirstName}
+                name="providerFirstName"
+                id="providerFirstName"
+                // error={!!touched.firstName && !!errors.firstName}
+                // helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Last Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.providerLastName}
+                name="providerLastName"
+                id="providerLastName"
+                // error={!!touched.firstName && !!errors.firstName}
+                // helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="MI"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.providerMI}
+                name="providerMI"
+                id="providerMI"
+                // error={!!touched.firstName && !!errors.firstName}
+                // helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+              <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Credentials"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.providerCredential}
+                name="providerCredential"
+                id="providerCredential"
+                // error={!!touched.firstName && !!errors.firstName}
+                // helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+            </Box>
+          ) : (
+            <Box
+              display="grid"
+              gap="30px"
+              margin={"20px 0"}
+              sx={{
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(1, minmax(0, 1fr))",
+                  md: "repeat(1, minmax(0, 1fr))",
+                },
+              }}
+            >
+              <TextField
+                size="small"
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Origanization Name"
+                onBlur={handleBlur}
+                onChange={handleChange}
+                value={values.providerOrganization}
+                name="providerOrganization"
+                id="providerOrganization"
+                // error={!!touched.firstName && !!errors.firstName}
+                // helperText={touched.firstName && errors.firstName}
+                sx={{ gridColumn: "span 1" }}
+              />
+            </Box>
+          )}
 
-          {/* organization name */}
-          <Box
-            display="grid"
-            gap="30px"
-            margin={"20px 0"}
-            sx={{
-              gridTemplateColumns: {
-                xs: "repeat(1, minmax(0, 1fr))",
-                sm: "repeat(1, minmax(0, 1fr))",
-                md: "repeat(1, minmax(0, 1fr))",
-              },
-            }}
-          >
-            <TextField
-              size="small"
-              fullWidth
-              variant="filled"
-              type="text"
-              label="Origanization Name"
-              onBlur={handleBlur}
-              onChange={handleChange}
-              value={values.providerOrganization}
-              name="providerOrganization"
-              id="providerOrganization"
-              // error={!!touched.firstName && !!errors.firstName}
-              // helperText={touched.firstName && errors.firstName}
-              sx={{ gridColumn: "span 1" }}
+          <Stack flexDirection={"row"} alignItems={"center"}>
+            <FormControlLabel
+              label="Individual"
+              control={
+                <Radio
+                  value="individual"
+                  variant="soft"
+                  label="Individual"
+                  name="radio-buttons"
+                  checked={values.selection === "individual"}
+                  onChange={() => setFieldValue("selection", "individual")}
+                />
+              }
             />
-          </Box>
+
+            <FormControlLabel
+              label="Organization"
+              control={
+                <Radio
+                  value="organization"
+                  variant="soft"
+                  label="Organization"
+                  name="radio-buttons"
+                  checked={values.selection === "organization"}
+                  onChange={() => setFieldValue("selection", "organization")}
+                />
+              }
+            />
+          </Stack>
 
           {/* modals npi - taxonomy */}
           <Box
@@ -392,9 +456,37 @@ const NewProvider = () => {
                   sx={{
                     width: { xs: "100%", sm: "100%" },
                     fontSize: "1rem",
+                    display: "none",
                   }}
                   value={values.practiceName}
                   name="practiceName"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  label="Practice for this provider"
+                />
+
+                <TextField
+                  type="number"
+                  value={values.practiceId}
+                  name="practiceId"
+                  sx={{ display: "none" }}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  disabled
+                />
+                <TextField
+                  type="text"
+                  size="small"
+                  variant="filled"
+                  sx={{
+                    width: { xs: "100%", sm: "100%" },
+                    fontSize: "1rem",
+                  }}
+                  value={
+                    selectPractice.pracName &&
+                    `${selectPractice.pracName} (${selectPractice.seqNo})`
+                  }
+                  name="pracName"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   label="Practice for this provider"
@@ -422,6 +514,21 @@ const NewProvider = () => {
                 }}
               >
                 <TextField
+                  size="small"
+                  fullWidth
+                  variant="outlined"
+                  type="text"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.billingProviderName}
+                  name="billingProviderName"
+                  id="billingProviderName"
+                  // error={!!touched.firstName && !!errors.firstName}
+                  // helperText={touched.firstName && errors.firstName}
+                  sx={{ gridColumn: "span 1", display: "none" }}
+                />
+
+                <TextField
                   type="text"
                   size="small"
                   variant="filled"
@@ -429,8 +536,11 @@ const NewProvider = () => {
                     width: { xs: "100%", sm: "100%" },
                     fontSize: "1rem",
                   }}
-                  value={values.billingProviderName}
-                  name="billingProviderName"
+                  value={
+                    selectBil.billProv &&
+                    `${selectBil.billProv} (${selectBil.seqNo})`
+                  }
+                  name="billProv"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   label="Bills Claims Under"
@@ -460,6 +570,20 @@ const NewProvider = () => {
                 }}
               >
                 <TextField
+                  size="small"
+                  fullWidth
+                  variant="outlined"
+                  type="text"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.eligibilityProviderName}
+                  name="eligibilityProviderName"
+                  id="eligibilityProviderName"
+                  // error={!!touched.firstName && !!errors.firstName}
+                  // helperText={touched.firstName && errors.firstName}
+                  sx={{ gridColumn: "span 1", display: "none" }}
+                />
+                <TextField
                   type="text"
                   size="small"
                   variant="filled"
@@ -467,8 +591,11 @@ const NewProvider = () => {
                     width: { xs: "100%", sm: "100%" },
                     fontSize: "1rem",
                   }}
-                  value={values.eligibilityProviderName}
-                  name="eligibilityProviderName"
+                  value={
+                    selectEligibility.eligProv &&
+                    `${selectEligibility.eligProv} (${selectEligibility.seqNo})`
+                  }
+                  name="eligProv"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   label="Check Eligibility Under"
@@ -485,11 +612,79 @@ const NewProvider = () => {
                   }}
                 />
               </Box>
+
+              <Box
+                display="grid"
+                gap="30px"
+                margin={"20px 0"}
+                sx={{
+                  gridTemplateColumns: {
+                    xs: "repeat(1, minmax(0, 1fr))",
+                    sm: "repeat(1, minmax(0, 1fr))",
+                    md: "repeat(1, minmax(0, 1fr))",
+                  },
+                }}
+              >
+                {idNo === "ssn" ? (
+                  <TextField
+                    type="text"
+                    size="small"
+                    variant="filled"
+                    value={values.ssn}
+                    name="ssn"
+                    label="Use which id ?"
+                    placeholder="SSN"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                ) : (
+                  <TextField
+                    type="text"
+                    size="small"
+                    variant="filled"
+                    value={values.ein}
+                    name="ein"
+                    label="Use which id ?"
+                    placeholder="EIN"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                )}
+
+                <Stack flexDirection={"row"} alignItems={"center"}>
+                  <FormControlLabel
+                    label="Social Security# (SSN)"
+                    control={
+                      <Radio
+                        value="ssn"
+                        variant="soft"
+                        name="radio-buttons"
+                        checked={idNo === "ssn"}
+                        onChange={() => setIdNo("ssn")}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    label="Employer Identification# (EIN)"
+                    control={
+                      <Radio
+                        value="ein"
+                        variant="soft"
+                        name="radio-buttons"
+                        checked={idNo === "ein"}
+                        onChange={() => setIdNo("ein")}
+                      />
+                    }
+                  />
+                </Stack>
+              </Box>
             </AccordionDetails>
           </Accordion>
 
-          <Box>
-            <Button type="submit">Submit</Button>
+          <Box margin={"20px 0"}>
+            <Button variant="contained" color="secondary" type="submit">
+              Save
+            </Button>
           </Box>
         </form>
       </Box>

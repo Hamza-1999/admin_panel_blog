@@ -22,10 +22,12 @@ const providerSlice = createSlice({
     [newProviderAction.fulfilled]: (state, action) => {
       state.loading = false;
       state.createProviderData = action.payload;
+      toast.success("Provider has been created Successfully!");
     },
     [newProviderAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      toast.success("Provider creation failed");
     },
     [getProviderAction.pending]: (state) => {
       state.loading = true;
