@@ -52,55 +52,35 @@ const NewPractice = () => {
     payToCity: "",
     payToState: "",
     payToZipCode: null,
-    sameAsPrimary: false,
+    isPayToAddressSame: false,
   };
   const { handleChange, handleBlur, handleSubmit, values, setFieldValue } =
     useFormik({
       initialValues: initialValues,
       onSubmit: (values, action) => {
+        console.log(values, "practice data");
         try {
           dispatch(newPracticeAction(values));
         } catch (error) {
           console.error("Error creating patient:", error);
         }
-
-        setFieldValue("practiceName", "");
-        setFieldValue("practiceNPINo", "");
-        setFieldValue("taxonomySpeciality", "");
-        setFieldValue("organizationTypeName", "");
-        setFieldValue("sequenceNo", "");
-        setFieldValue("referenceNo", "");
-        setFieldValue("tcnPrefix", "");
-        setFieldValue("code", "");
-        setFieldValue("primaryAddress", "");
-        setFieldValue("primaryCity", "");
-        setFieldValue("primaryState", "");
-        setFieldValue("primaryZipCode", "");
-        setFieldValue("primaryPhone", "");
-        setFieldValue("primaryFax", "");
-        setFieldValue("payToAddress", "");
-        setFieldValue("payToCity", "");
-        setFieldValue("payToState", "");
-        setFieldValue("payToZipCode", "");
-        setFieldValue("sameAsPrimary", false);
-
         action.resetForm();
       },
     });
 
   const handleCheckboxChange = () => {
-    setFieldValue("sameAsPrimary", !values.sameAsPrimary);
+    setFieldValue("isPayToAddressSame", !values.isPayToAddressSame);
 
-    if (!values.sameAsPrimary) {
-      setFieldValue("payToAddress", values.primaryAddress);
-      setFieldValue("payToCity", values.primaryCity);
-      setFieldValue("payToState", values.primaryState);
-      setFieldValue("payToZipCode", values.primaryZipCode);
-    } else {
+    if (values.isPayToAddressSame) {
       setFieldValue("payToAddress", "");
       setFieldValue("payToCity", "");
       setFieldValue("payToState", "");
       setFieldValue("payToZipCode", "");
+    } else {
+      setFieldValue("payToAddress", values.primaryAddress);
+      setFieldValue("payToCity", values.primaryCity);
+      setFieldValue("payToState", values.primaryState);
+      setFieldValue("payToZipCode", values.primaryZipCode);
     }
   };
 
@@ -496,14 +476,14 @@ const NewPractice = () => {
             <label>
               <input
                 type="checkbox"
-                name="sameAsPrimary"
-                checked={values.sameAsPrimary}
+                name="isPayToAddressSame"
+                checked={values.isPayToAddressSame}
                 onChange={handleCheckboxChange}
               />{" "}
               Pay-To address is the same as the primary office address
             </label>
           </Box>
-          {!values.sameAsPrimary && (
+          {!values.isPayToAddressSame && (
             <Accordion sx={{ marginTop: "10px" }}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography variant="h5" component={"h4"}>
