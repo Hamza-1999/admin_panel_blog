@@ -11,7 +11,7 @@ const ProviderModal = ({
   handleClose,
   setFieldValue,
   fieldToSet,
-  setSelectBil,
+  setSelectBill,
   setSelectElibility,
 }) => {
   const dispatch = useDispatch();
@@ -40,9 +40,10 @@ const ProviderModal = ({
 
   const rows = getProviders.result?.map((el) => ({
     id: el.providerId,
-    billingProviderName: el.billingProviderName,
-    eligibilityProviderName: el.eligibilityProviderName,
     providerSequenceNo: el.providerSequenceNo,
+    providerFirstName: el.providerFirstName,
+    providerLastName: el.providerLastName,
+    providerOrganization: el.providerOrganization,
   }));
 
   // const filteredRow = rows?.filter((ro) =>
@@ -51,19 +52,20 @@ const ProviderModal = ({
 
   const columns = [
     {
-      field: "billingProviderName",
-      headerName: "Billing Name",
+      field: "name",
+      headerName: "Name",
       minWidth: 160,
       headerAlign: "center",
       filterable: true,
       align: "center",
-    },
-    {
-      field: "eligibilityProviderName",
-      headerName: "Eligibility Name",
-      minWidth: 160,
-      headerAlign: "center",
-      align: "center",
+      valueGetter: (params) => {
+        const { providerOrganization, providerFirstName, providerLastName } =
+          params.row;
+        if (providerOrganization) {
+          return providerOrganization;
+        }
+        return `${providerFirstName} ${providerLastName}`;
+      },
     },
     {
       field: "providerSequenceNo",
@@ -75,25 +77,23 @@ const ProviderModal = ({
   ];
 
   const handleCellClick = (val) => {
-    console.log(val.row.billingProviderName, "val of providr");
+    console.log(val.formattedValue, "val11");
     const fieldValue =
       fieldToSet === "billingProviderName"
-        ? `${val.row.billingProviderName}`
-        : `${val.row.eligibilityProviderName}`;
+        ? val.formattedValue
+        : val.formattedValue;
     setFieldValue(fieldToSet, fieldValue);
-    // setFieldValue(fieldToSet, fieldValue);
 
     if (fieldToSet === "billingProviderName") {
-      setSelectBil({
-        billProv: val.row.billingProviderName,
+      setSelectBill({
+        billProv: val.formattedValue,
         seqNo: val.row.providerSequenceNo,
       });
     }
-
     if (fieldToSet === "eligibilityProviderName") {
       setSelectElibility({
+        eligProv: val.formattedValue,
         seqNo: val.row.providerSequenceNo,
-        eligProv: val.row.eligibilityProviderName,
       });
     }
 

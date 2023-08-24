@@ -30,8 +30,8 @@ const Practice = () => {
           <Typography>Loading...</Typography>
         ) : (
           <>
-          <div>No patient data available.</div>
-          <Box
+            <div>No practice data available.</div>
+            <Box
               margin={"20px 0"}
               sx={{
                 display: "flex",
@@ -56,10 +56,10 @@ const Practice = () => {
                   color="secondary"
                   onClick={() => navigate("/provider/new")}
                 >
-                  <Add /> New Provider
+                  <Add /> Add Practice
                 </Button>
               </Box>
-              </Box>
+            </Box>
           </>
         )}
       </Box>

@@ -25,7 +25,7 @@ const PracticeModData = ({ handleClose, setFieldValue, setSelectPractice }) => {
         {loading ? (
           <Typography>Loading...</Typography>
         ) : (
-          <div>No patient data available.</div>
+          <div>No practice data available.</div>
         )}
       </Box>
     );
