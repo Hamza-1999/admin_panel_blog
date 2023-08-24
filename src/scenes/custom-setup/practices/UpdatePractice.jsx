@@ -60,7 +60,7 @@ const UpdatePractice = () => {
     payToCity: findPractice?.payToCity || "",
     payToState: findPractice?.payToState || "",
     payToZipCode: findPractice?.payToZipCode || null,
-    sameAsPrimary: findPractice ? true : false,
+    isPayToAddressSame: findPractice?.isPayToAddressSame || false,
   };
   const {
     handleChange,
@@ -88,9 +88,9 @@ const UpdatePractice = () => {
   });
 
   const handleCheckboxChange = () => {
-    setFieldValue("sameAsPrimary", !values.sameAsPrimary);
+    setFieldValue("isPayToAddressSame", !values.isPayToAddressSame);
 
-    if (!values.sameAsPrimary) {
+    if (!values.isPayToAddressSame) {
       setFieldValue("payToAddress", values.primaryAddress);
       setFieldValue("payToCity", values.primaryCity);
       setFieldValue("payToState", values.primaryState);
@@ -142,7 +142,7 @@ const UpdatePractice = () => {
       payToCity: findPractice?.payToCity || "",
       payToState: findPractice?.payToState || "",
       payToZipCode: findPractice?.payToZipCode || null,
-      sameAsPrimary: findPractice ? true : false,
+      isPayToAddressSame: findPractice?.isPayToAddressSame || false,
     });
   }, [findPractice]);
 
@@ -516,8 +516,8 @@ const UpdatePractice = () => {
             <label>
               <input
                 type="checkbox"
-                name="sameAsPrimary"
-                checked={values.sameAsPrimary}
+                name="isPayToAddressSame"
+                checked={values.isPayToAddressSame}
                 onChange={handleCheckboxChange}
               />{" "}
               Pay-To address is the same as the primary office address
