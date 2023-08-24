@@ -1,4 +1,5 @@
-import { Box, Modal } from "@mui/material";
+import { Cancel } from "@mui/icons-material";
+import { Box, Button, Modal } from "@mui/material";
 import React from "react";
 
 const CustomModal = ({ children, open, handleClose }) => {
@@ -14,11 +15,25 @@ const CustomModal = ({ children, open, handleClose }) => {
     height: "auto",
     maxHeight: "600px",
     overflowY: "scroll",
+    // padding: "16px", // Adding some padding to the modal content
+  };
+
+  const cancelBtnStyle = {
+    position: "absolute",
+    top: "16px", // Adjust the top position as needed
+    right: "16px", // Adjust the right position as needed
+    zIndex: 111,
+    paddingRight: "20px",
   };
 
   return (
     <Modal onClose={handleClose} open={open}>
-      <Box sx={modalStyle}>{children}</Box>
+      <Box sx={modalStyle}>
+        <Button sx={cancelBtnStyle} onClick={handleClose}>
+          <Cancel />
+        </Button>
+        {children}
+      </Box>
     </Modal>
   );
 };

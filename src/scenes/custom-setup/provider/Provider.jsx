@@ -118,7 +118,7 @@ const Provider = () => {
       headerName: "Inactive",
       headerAlign: "center",
       align: "center",
-      valueGetter: (params) => (params.value ? "Active" : "Inactive"),
+      valueGetter: (params) => (!params.value ? "Active" : "Inactive"),
     },
   ];
 

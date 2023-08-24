@@ -35,7 +35,7 @@ const NewProvider = () => {
   const [practiceModal, setPracticeModal] = useState(false);
   const [billingProviderModal, setBillingProviderModal] = useState(false);
   const [elibilityProviderModal, setEligibilityProviderModal] = useState(false);
-  const [selectBil, setSelectBil] = useState({
+  const [selectBill, setSelectBill] = useState({
     billProv: "",
     seqNo: null,
   });
@@ -47,7 +47,6 @@ const NewProvider = () => {
     pracName: "",
     seqNo: null,
   });
-  const [idNo, setIdNo] = useState("ssn");
 
   const initialValues = {
     providerFirstName: "",
@@ -66,7 +65,8 @@ const NewProvider = () => {
     billingProviderName: "",
     eligibilityProviderName: "",
     practiceId: null,
-    selection: "individual",
+    isIndividual: true,
+    isIdNo: true,
   };
   const { handleBlur, handleChange, handleSubmit, values, setFieldValue } =
     useFormik({
@@ -78,7 +78,7 @@ const NewProvider = () => {
         } catch (error) {
           throw new Error(error);
         }
-        setSelectBil({
+        setSelectBill({
           billProv: "",
           seqNo: null,
         });
@@ -147,7 +147,7 @@ const NewProvider = () => {
           fieldToSet="billingProviderName"
           handleClose={() => setBillingProviderModal(false)}
           setFieldValue={setFieldValue}
-          setSelectBil={setSelectBil}
+          setSelectBill={setSelectBill}
         />
       </CustomModal>
       <CustomModal
@@ -166,7 +166,7 @@ const NewProvider = () => {
         <Header title="Add New Provider" subtitle="" />
 
         <form onSubmit={handleSubmit}>
-          {values.selection === "individual" ? (
+          {values.isIndividual ? (
             <Box
               display="grid"
               gap="30px"
@@ -280,8 +280,8 @@ const NewProvider = () => {
                   variant="soft"
                   label="Individual"
                   name="radio-buttons"
-                  checked={values.selection === "individual"}
-                  onChange={() => setFieldValue("selection", "individual")}
+                  checked={values.isIndividual}
+                  onChange={() => setFieldValue("isIndividual", true)}
                 />
               }
             />
@@ -294,8 +294,8 @@ const NewProvider = () => {
                   variant="soft"
                   label="Organization"
                   name="radio-buttons"
-                  checked={values.selection === "organization"}
-                  onChange={() => setFieldValue("selection", "organization")}
+                  checked={!values.isIndividual}
+                  onChange={() => setFieldValue("isIndividual", false)}
                 />
               }
             />
@@ -537,8 +537,8 @@ const NewProvider = () => {
                     fontSize: "1rem",
                   }}
                   value={
-                    selectBil.billProv &&
-                    `${selectBil.billProv} (${selectBil.seqNo})`
+                    selectBill.billProv &&
+                    `${selectBill.billProv} (${selectBill.seqNo})`
                   }
                   name="billProv"
                   onChange={handleChange}
@@ -625,7 +625,7 @@ const NewProvider = () => {
                   },
                 }}
               >
-                {idNo === "ssn" ? (
+                {values.isIdNo ? (
                   <TextField
                     type="text"
                     size="small"
@@ -659,8 +659,8 @@ const NewProvider = () => {
                         value="ssn"
                         variant="soft"
                         name="radio-buttons"
-                        checked={idNo === "ssn"}
-                        onChange={() => setIdNo("ssn")}
+                        checked={values.isIdNo}
+                        onChange={() => setFieldValue("isIdNo", true)}
                       />
                     }
                   />
@@ -671,8 +671,8 @@ const NewProvider = () => {
                         value="ein"
                         variant="soft"
                         name="radio-buttons"
-                        checked={idNo === "ein"}
-                        onChange={() => setIdNo("ein")}
+                        checked={!values.isIdNo}
+                        onChange={() => setFieldValue("isIdNo", false)}
                       />
                     }
                   />

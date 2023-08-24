@@ -25,7 +25,6 @@ import {
 } from "../../../features/actions/practiceAction";
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
 import { useNavigate, useParams } from "react-router-dom";
-import { updatePatientAction } from "../../../features/actions/createPatientAction";
 import SearchNpi from "./npi/SearchNpi";
 
 const UpdatePractice = () => {
