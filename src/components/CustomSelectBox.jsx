@@ -15,7 +15,11 @@ const CustomSelectBox = ({
 }) => {
   return (
     <FormControl fullWidth>
-      {!value && <InputLabel>{label}</InputLabel>}
+      {value ? (
+        <InputLabel>{label}</InputLabel>
+      ) : (
+        <InputLabel>Select</InputLabel>
+      )}
       <Select
         value={value}
         name={name}

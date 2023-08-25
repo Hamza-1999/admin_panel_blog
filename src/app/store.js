@@ -5,6 +5,7 @@ import patientInsuranceSlice from "../features/slice/patientInsuranceSlice";
 import practiceSlice from "../features/slice/practiceSlice";
 import taxonomySlice from "../features/slice/taxonomySlice";
 import providerSlice from "../features/slice/providerSlice";
+import claimSlice from "../features/slice/claimSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     practices: practiceSlice,
     taxonomy: taxonomySlice,
     provider: providerSlice,
+    claim: claimSlice,
   },
 });
 export default store;
