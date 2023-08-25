@@ -8,8 +8,6 @@ const SearchedNpiData = ({
   setSearchNpiModal,
   handleClose,
 }) => {
-  console.log(searchedData, "searchedData66");
-
   // data grid rows
   const rows = searchedData?.map((el) => ({
     id: el.npiId,

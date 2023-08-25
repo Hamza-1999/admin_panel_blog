@@ -75,3 +75,21 @@ export const tempName = {
   payerInfoPolicyType: "",
   payerInfoPayerName: "",
 };
+
+export const claimInitVal = {
+  patientName: "",
+  patientAccountNo: "",
+  renderingProviderName: "",
+  billingProviderName: "",
+  supervisingProviderName: "",
+  practiceAddress: "",
+  practiceSequenceNo: null,
+  primaryPayerInsuranceName: "",
+  primaryPayerMemberId: null,
+  primaryPayerGroupId: null,
+  primaryPayerPolicyType: "",
+  primaryPayerCopayDue: null,
+  payerSequenceNo: null,
+  claimFrequency: "",
+  referenceNumber: null,
+};

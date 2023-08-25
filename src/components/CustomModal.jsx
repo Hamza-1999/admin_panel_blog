@@ -8,11 +8,12 @@ const CustomModal = ({ children, open, handleClose }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", sm: "70%", md: "60%" },
+    width: { xs: "80%", sm: "60%", md: "70%" },
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
-    height: "auto",
+    minHeight: "100px",
+
     maxHeight: "600px",
     overflowY: "scroll",
     // padding: "16px", // Adding some padding to the modal content
@@ -20,7 +21,7 @@ const CustomModal = ({ children, open, handleClose }) => {
 
   const cancelBtnStyle = {
     position: "absolute",
-    top: "16px", // Adjust the top position as needed
+    top: "0", // Adjust the top position as needed
     right: "16px", // Adjust the right position as needed
     zIndex: 111,
     paddingRight: "20px",
@@ -28,12 +29,10 @@ const CustomModal = ({ children, open, handleClose }) => {
 
   return (
     <Modal onClose={handleClose} open={open}>
-      <Box sx={modalStyle}>
-        <Button sx={cancelBtnStyle} onClick={handleClose}>
-          <Cancel />
-        </Button>
-        {children}
-      </Box>
+      <Box sx={modalStyle}>{children}</Box>
+      {/* <Button sx={cancelBtnStyle} onClick={handleClose}>
+        Cancel
+      </Button> */}
     </Modal>
   );
 };
