@@ -1,6 +1,7 @@
 import { Box, Paper } from "@mui/material";
 import React from "react";
 import CustomSearchField from "../../../components/CustomSearchField";
+import CustomField from "../../../components/CustomField";
 
 const ClaimCharges = () => {
   return (
@@ -22,10 +23,7 @@ const ClaimCharges = () => {
           },
         }}
       >
-        <CustomSearchField type="text" label="ICD A" />
-        <CustomSearchField type="text" label="ICD B" />
-        <CustomSearchField type="text" label="ICD C" />
-        <CustomSearchField type="text" label="ICD D" />
+        <CustomField type="text" label="ICD A" isNumeric={false} />
       </Box>
       <Box
         display="grid"

@@ -4,28 +4,27 @@ import React from "react";
 const CustomField = ({
   type,
   label,
-  isNumeric,
   value,
   handleChange,
   handleBlur,
   name,
 }) => {
   return (
-    <FormControl>
+    <div>
       <TextField
         size="small"
         fullWidth
         type={type}
         variant="filled"
-        value={value}
+        value={value || ""}
         onChange={handleChange}
         onBlur={handleBlur}
         name={name}
         label={label}
-        inputMode={isNumeric && "numeric"}
         spellCheck={false}
+        InputLabelProps={{ shrink: true }}
       />
-    </FormControl>
+    </div>
   );
 };
 

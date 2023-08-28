@@ -11,6 +11,7 @@ import {
   Stack,
   TextField,
   Typography,
+  fabClasses,
 } from "@mui/material";
 import React from "react";
 import CustomSelectBox from "../../../components/CustomSelectBox";
@@ -23,15 +24,16 @@ import path from "../../../config/apiUrl";
 import { getData } from "../../../config/axiosFunctions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
+import Facility from "../../custom-setup/facility/Facility";
 
-const ClaimInfo = ({ formik, setClaimIds }) => {
-  console.log(formik.values, "vall90");
+const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [openPatientModal, setOpenPatientModal] = useState(false);
+  const [openFacilityModal, setOpenFacilityModal] = useState(false);
   const [frequencyOpt, setFrequencyOpt] = useState([]);
+  const [policyTypeOpt, setPolicyTypeOpt] = useState([]);
   const dispatch = useDispatch();
 
-  // formik.setValues(updatedValues);
   const handleAccordionChange = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
@@ -39,6 +41,7 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
   // Define data fetching URLs
   const dataFetchUrls = {
     frequencyType: `${path}/ct-claimFrequency`,
+    policyType: `${path}/ct-policyType`,
   };
 
   // Define a reusable function to fetch data for a given URL
@@ -53,9 +56,11 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
 
   useEffect(() => {
     fetchDataOptions(dataFetchUrls.frequencyType, setFrequencyOpt);
+    fetchDataOptions(dataFetchUrls.policyType, setPolicyTypeOpt);
   }, [dispatch]);
   return (
     <>
+      {/* patient modal */}
       <CustomModal
         open={openPatientModal}
         handleClose={() => setOpenPatientModal(false)}
@@ -63,6 +68,20 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
         <ClaimModData
           setClaimIds={setClaimIds}
           handleClose={() => setOpenPatientModal(false)}
+          setValues={formik.setValues}
+          setFieldValue={formik.setFieldValue}
+          formik={formik}
+        />
+      </CustomModal>
+      {/* facility modal */}
+      <CustomModal
+        open={openFacilityModal}
+        handleClose={() => setOpenFacilityModal(false)}
+      >
+        <Facility
+          handleClose={() => setOpenFacilityModal(false)}
+          setFacilityId={setFacilityId}
+          setFieldValue={formik.setFieldValue}
         />
       </CustomModal>
       <Box display="flex" flexDirection="column" gap={"20px"}>
@@ -92,11 +111,10 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
 
           <CustomField
             type="number"
-            value={formik.values.referenceNumber}
+            value={formik.values.referenceNumber || ""}
             handleChange={formik.handleChange}
             name="referenceNumber"
             handleBlur={formik.handleBlur}
-            isNumeric={true}
             label="Reference #"
           />
 
@@ -128,6 +146,10 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             label="Patient"
             type="text"
             handlePatientOpen={() => setOpenPatientModal(true)}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.patientName}
+            name="patientName"
           />
         </Box>
         <Box
@@ -141,7 +163,14 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             },
           }}
         >
-          <CustomSearchField label="Biling Provider" type="text" />
+          <CustomSearchField
+            label="Biling Provider"
+            type="text"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.billingProviderName}
+            name="billingProviderName"
+          />
         </Box>
         <Box
           display="grid"
@@ -154,7 +183,14 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             },
           }}
         >
-          <CustomSearchField label="Rendering Provider" type="text" />
+          <CustomSearchField
+            label="Rendering Provider"
+            type="text"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.renderingProviderName}
+            name="renderingProviderName"
+          />
         </Box>
         <Box
           display="grid"
@@ -167,7 +203,15 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             },
           }}
         >
-          <CustomSearchField label="Facility" type="text" />
+          <CustomSearchField
+            label="Facility"
+            type="text"
+            handlePatientOpen={() => setOpenFacilityModal(true)}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.facilityName}
+            name="facilityName"
+          />
         </Box>
         <Box
           display="grid"
@@ -180,20 +224,14 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             },
           }}
         >
-          <CustomSearchField label="Facility" type="text" />
-        </Box>
-        <Box
-          display="grid"
-          gap="30px"
-          sx={{
-            gridTemplateColumns: {
-              xs: "repeat(1, minmax(0, 1fr))",
-              sm: "repeat(1, minmax(0, 1fr))",
-              md: "repeat(1, minmax(0, 1fr))",
-            },
-          }}
-        >
-          <CustomField label="Office Location" type="text" isNumeric={false} />
+          <CustomField
+            label="Office Location"
+            type="text"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            value={formik.values.practiceAddress}
+            name="practiceAddress"
+          />
         </Box>
 
         <Box
@@ -207,7 +245,14 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
             },
           }}
         >
-          <CustomSearchField label="Primary Insurance" type="text" />
+          <CustomSearchField
+            label="Primary Insurance"
+            type="text"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.primaryPayerInsuranceName}
+            name="primaryPayerInsuranceName"
+          />
         </Box>
 
         <Accordion defaultExpanded={false} onChange={handleAccordionChange}>
@@ -230,9 +275,34 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
                 },
               }}
             >
-              <CustomField type="text" label="Member ID" isNumeric={false} />
-              <CustomField type="text" label="Policy Type" isNumeric={false} />
-              <CustomField type="number" label="Copay Due" isNumeric={true} />
+              <CustomField
+                type="number"
+                label="Member ID"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                value={formik.values.primaryPayerMemberId}
+                name="primaryPayerMemberId"
+              />
+
+              <CustomSelectBox
+                value={formik.values.primaryPayerPolicyType}
+                name="primaryPayerPolicyType"
+                dropdownOptions={policyTypeOpt?.map((opt) => ({
+                  value: opt.policyType,
+                  id: opt.policyTypeId,
+                }))}
+                label="Policy Type"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="number"
+                label="Copay Due"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                value={formik.values.primaryPayerCopayDue}
+                name="primaryPayerCopayDue"
+              />
             </Box>
             <Box
               display="grid"
@@ -246,7 +316,14 @@ const ClaimInfo = ({ formik, setClaimIds }) => {
                 },
               }}
             >
-              <CustomField type="text" label="Group Number" isNumeric={false} />
+              <CustomField
+                type="number"
+                label="Group Number"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                value={formik.values.primaryPayerGroupId}
+                name="primaryPayerGroupId"
+              />
             </Box>
           </AccordionDetails>
         </Accordion>

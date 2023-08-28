@@ -21,8 +21,7 @@ const NewClaim = () => {
     supervisingProviderId: null,
     providerId: null,
   });
-
-  console.log(claimIds, "claimsids444");
+  const [facilityId, setFacilityId] = useState(null);
   const dispatch = useDispatch();
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -30,20 +29,8 @@ const NewClaim = () => {
 
   const formik = useFormik({
     initialValues: claimInitVal,
-    onSubmit: (values) => {
-      console.log(
-        {
-          ...values,
-          patientId: claimIds.patientId,
-          practiceId: claimIds.practiceId,
-          billingProviderId: claimIds.billingProviderId,
-          insuredPartyId: claimIds.insuredPartyId,
-          payerInfoId: claimIds.payerInfoId,
-          renderingProviderId: claimIds.renderingProviderId,
-          supervisingProviderId: claimIds.supervisingProviderId,
-        },
-        "claim values"
-      );
+    onSubmit: (values, action) => {
+      console.log(values.referenceNumber, "refgg");
       const postValues = {
         ...values,
         patientId: claimIds.patientId,
@@ -54,12 +41,16 @@ const NewClaim = () => {
         renderingProviderId: claimIds.renderingProviderId,
         supervisingProviderId: claimIds.supervisingProviderId,
         providerId: claimIds.providerId,
+        facilityId: facilityId,
       };
+      console.log(postValues, "postVals");
+
       try {
         dispatch(newClaimAction(postValues));
       } catch (error) {
         throw error;
       }
+      action.resetForm();
     },
   });
 
@@ -124,7 +115,11 @@ const NewClaim = () => {
           }}
         >
           {tabValue === 0 && (
-            <ClaimInfo formik={formik} setClaimIds={setClaimIds} />
+            <ClaimInfo
+              formik={formik}
+              setClaimIds={setClaimIds}
+              setFacilityId={setFacilityId}
+            />
           )}
           {tabValue === 1 && <ClaimCharges />}
         </Paper>

@@ -92,4 +92,5 @@ export const claimInitVal = {
   payerSequenceNo: null,
   claimFrequency: "",
   referenceNumber: null,
+  facilityName: "",
 };

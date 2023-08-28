@@ -7,15 +7,27 @@ import {
 } from "@mui/material";
 import React from "react";
 
-const CustomSearchField = ({ type, label, handlePatientOpen }) => {
+const CustomSearchField = ({
+  type,
+  label,
+  handlePatientOpen,
+  fieldVal,
+  handleChange,
+  name,
+  handleBlur,
+}) => {
   return (
-    <FormControl fullWidth>
+    <div>
       <TextField
         size="small"
         fullWidth
         variant="filled"
         type={type}
         label={label}
+        value={fieldVal || ""}
+        name={name}
+        onChange={handleChange}
+        onBlur={handleBlur}
         sx={{
           cursor: "default",
         }}
@@ -28,8 +40,9 @@ const CustomSearchField = ({ type, label, handlePatientOpen }) => {
             </InputAdornment>
           ),
         }}
+        InputLabelProps={{ shrink: true }}
       />
-    </FormControl>
+    </div>
   );
 };
 

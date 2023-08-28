@@ -6,6 +6,7 @@ import practiceSlice from "../features/slice/practiceSlice";
 import taxonomySlice from "../features/slice/taxonomySlice";
 import providerSlice from "../features/slice/providerSlice";
 import claimSlice from "../features/slice/claimSlice";
+import facilitySlice from "../features/slice/facilitySlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     taxonomy: taxonomySlice,
     provider: providerSlice,
     claim: claimSlice,
+    facility: facilitySlice,
   },
 });
 export default store;
