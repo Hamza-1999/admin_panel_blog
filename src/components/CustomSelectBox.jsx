@@ -1,9 +1,7 @@
 import React from "react";
 import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { useTheme } from "@emotion/react";
 
 const CustomSelectBox = ({
   value,
@@ -15,25 +13,20 @@ const CustomSelectBox = ({
 }) => {
   return (
     <FormControl fullWidth>
-      {value ? (
-        <InputLabel>{label}</InputLabel>
-      ) : (
-        <InputLabel>Select</InputLabel>
-      )}
+      <InputLabel shrink={true}> {label}</InputLabel>
       <Select
         value={value}
         name={name}
+        type="text"
         label={label}
         onChange={handleChange}
         onBlur={handleBlur}
+        variant="outlined"
         native
+        id="dropdowns"
         defaultValue=""
       >
-        <option
-          key="select"
-          value="Select"
-          style={{ color: "lightgray !important" }}
-        >
+        <option value="0" style={{ color: "lightgray !important" }}>
           Select
         </option>
         {dropdownOptions.map((opt) => (

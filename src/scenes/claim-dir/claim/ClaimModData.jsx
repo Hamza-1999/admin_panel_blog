@@ -6,9 +6,14 @@ import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const ClaimModData = ({ setClaimIds }) => {
+const ClaimModData = ({
+  setClaimIds,
+  setValues,
+  setFieldValue,
+  formik,
+  handleClose,
+}) => {
   const [PatientClaimData, setPatientClaimData] = useState([]);
-  console.log(PatientClaimData, "patCLaim");
   const getClaimDetails = async () => {
     try {
       const response = await axios.get(`${path}/patientClaimDetail`);
@@ -114,9 +119,29 @@ const ClaimModData = ({ setClaimIds }) => {
       supervisingProviderId: val.supervisingProviderId,
       providerId: val.providerId,
     });
+
+    setValues({
+      ...formik.values,
+      patientName: `${val.firstName} ${val.lastName} (${val.patientAccountNo})`,
+      renderingProviderName: `${val.renderingProviderFirstName} ${val.renderingProviderLastName} (${val.renderingProviderSequenceNo})`,
+      billingProviderName: `${val.billingProviderFirstName} ${val.billingProviderLastName} (${val.billingProviderSequenceNo})`,
+      practiceAddress: val.practiceAddress,
+      primaryPayerInsuranceName: `${val.primaryPayerInfoName} (${val.primaryPayerInfoSequenceNo})`,
+      primaryPayerMemberId: val.primaryPayerInfoMemberId,
+      primaryPayerGroupId: val.primaryPayerInfoGroupId,
+      primaryPayerPolicyType: val.primaryPayerPolicyType,
+      primaryPayerCopayDue: val.primaryPayerInfoCopayDue,
+    });
+
+    // setFieldValue(
+    //   "patientName",
+    //   `${val.firstName} ${val.lastName} (${val.patientAccountNo})`
+    // );
+
+    handleClose();
   };
   return (
-    <Box sx={{ height: "450px", width: "700px" }} padding={"20px"}>
+    <Box sx={{ height: "450px", width: "100%" }} padding={"20px"}>
       <Typography variant="h4" component="h4" margin="10px 0">
         Patient Claim Data
       </Typography>
