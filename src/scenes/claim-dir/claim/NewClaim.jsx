@@ -12,7 +12,7 @@ import { newClaimAction } from "../../../features/actions/claimAction";
 const NewClaim = () => {
   const [tabValue, setTabValue] = useState(0);
   const [claimIds, setClaimIds] = useState({
-    patientId: null,
+    patientAccountNo: null,
     practiceId: null,
     billingProviderId: null,
     insuredPartyId: null,
@@ -30,10 +30,9 @@ const NewClaim = () => {
   const formik = useFormik({
     initialValues: claimInitVal,
     onSubmit: (values, action) => {
-      console.log(values.referenceNumber, "refgg");
       const postValues = {
         ...values,
-        patientId: claimIds.patientId,
+        patientAccountNo: claimIds.patientAccountNo,
         practiceId: claimIds.practiceId,
         billingProviderId: claimIds.billingProviderId,
         insuredPartyId: claimIds.insuredPartyId,
@@ -43,8 +42,7 @@ const NewClaim = () => {
         providerId: claimIds.providerId,
         facilityId: facilityId,
       };
-      console.log(postValues, "postVals");
-
+      // console.log(postValues, "calim postValues");
       try {
         dispatch(newClaimAction(postValues));
       } catch (error) {
@@ -54,11 +52,9 @@ const NewClaim = () => {
     },
   });
 
-  console.log(formik.values, "vals");
   return (
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
-
       <Stack
         flexDirection={{ xs: "column", sm: "column", md: "row" }}
         alignItems={{ xs: "flex-start", sm: "flex-start", md: "center" }}
@@ -108,9 +104,8 @@ const NewClaim = () => {
       </Stack>
 
       <form id="claimForm" onSubmit={formik.handleSubmit}>
-        <Paper
+        <Box
           sx={{
-            width: { xs: "95%", sm: "75%", md: "50%" },
             padding: "15px",
           }}
         >
@@ -121,8 +116,8 @@ const NewClaim = () => {
               setFacilityId={setFacilityId}
             />
           )}
-          {tabValue === 1 && <ClaimCharges />}
-        </Paper>
+          {tabValue === 1 && <ClaimCharges formik={formik} />}
+        </Box>
       </form>
     </Box>
   );

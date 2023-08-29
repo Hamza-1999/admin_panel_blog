@@ -78,7 +78,7 @@ export const tempName = {
 
 export const claimInitVal = {
   patientName: "",
-  patientAccountNo: "",
+  patientAccountNo: null,
   renderingProviderName: "",
   billingProviderName: "",
   supervisingProviderName: "",
@@ -93,4 +93,31 @@ export const claimInitVal = {
   claimFrequency: "",
   referenceNumber: null,
   facilityName: "",
+
+  // claim charges
+  icD_A: null,
+  icD_B: null,
+  icD_C: null,
+  icD_D: null,
+  icD_E: null,
+  icD_F: null,
+  icD_G: null,
+  icD_H: null,
+  icD_I: null,
+  icD_J: null,
+  icD_K: null,
+  icD_L: null,
+  // description
+  icd_A_Description: "",
+  icd_B_Description: "",
+  icd_C_Description: "",
+  icd_D_Description: "",
+  icd_E_Description: "",
+  icd_F_Description: "",
+  icd_G_Description: "",
+  icd_H_Description: "",
+  icd_I_Description: "",
+  icd_J_Description: "",
+  icd_K_Description: "",
+  icd_L_Description: "",
 };
