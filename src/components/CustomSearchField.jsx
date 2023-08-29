@@ -10,7 +10,7 @@ import React from "react";
 const CustomSearchField = ({
   type,
   label,
-  handlePatientOpen,
+  handleModalOpen,
   fieldVal,
   handleChange,
   name,
@@ -34,7 +34,7 @@ const CustomSearchField = ({
         InputProps={{
           endAdornment: (
             <InputAdornment>
-              <IconButton onClick={handlePatientOpen}>
+              <IconButton onClick={handleModalOpen}>
                 <Search />
               </IconButton>
             </InputAdornment>

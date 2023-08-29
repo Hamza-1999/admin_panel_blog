@@ -2,6 +2,7 @@ import React from "react";
 import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import CustomModal from "./CustomModal";
 
 const CustomSelectBox = ({
   value,

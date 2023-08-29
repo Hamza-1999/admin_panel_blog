@@ -8,6 +8,7 @@ const CustomField = ({
   handleChange,
   handleBlur,
   name,
+  isOutlined,
 }) => {
   return (
     <div>
@@ -15,7 +16,7 @@ const CustomField = ({
         size="small"
         fullWidth
         type={type}
-        variant="filled"
+        variant={isOutlined ? "outlined" : "filled"}
         value={value || ""}
         onChange={handleChange}
         onBlur={handleBlur}

@@ -84,7 +84,12 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
           setFieldValue={formik.setFieldValue}
         />
       </CustomModal>
-      <Box display="flex" flexDirection="column" gap={"20px"}>
+      <Box
+        display="flex"
+        sx={{ width: { xs: "95%", sm: "75%", md: "50%" } }}
+        flexDirection="column"
+        gap={"20px"}
+      >
         <Box
           display="grid"
           gap="30px"
@@ -145,7 +150,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
           <CustomSearchField
             label="Patient"
             type="text"
-            handlePatientOpen={() => setOpenPatientModal(true)}
+            handleModalOpen={() => setOpenPatientModal(true)}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             fieldVal={formik.values.patientName}
@@ -206,7 +211,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
           <CustomSearchField
             label="Facility"
             type="text"
-            handlePatientOpen={() => setOpenFacilityModal(true)}
+            handleModalOpen={() => setOpenFacilityModal(true)}
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             fieldVal={formik.values.facilityName}

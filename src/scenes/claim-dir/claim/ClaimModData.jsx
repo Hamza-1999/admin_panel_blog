@@ -111,6 +111,7 @@ const ClaimModData = ({
     console.log(val, "allcVals");
     setClaimIds({
       patientId: val.id,
+      patientAccountNo: val.patientAccountNo,
       practiceId: val.practiceId,
       billingProviderId: val.billingProviderId,
       insuredPartyId: val.insuredPartyId,
