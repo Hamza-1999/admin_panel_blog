@@ -107,6 +107,7 @@ export const claimInitVal = {
   icD_J: null,
   icD_K: null,
   icD_L: null,
+
   // description
   icd_A_Description: "",
   icd_B_Description: "",
@@ -120,4 +121,24 @@ export const claimInitVal = {
   icd_J_Description: "",
   icd_K_Description: "",
   icd_L_Description: "",
+
+  // charges dtos for multiple procedure
+  claimChargesDto: [
+    {
+      fromDate: null,
+      toDate: null,
+      procedureCode: "",
+      posCode: "",
+      tosCode: "",
+      modCode_1: "",
+      modCode_2: "",
+      modCode_3: "",
+      modCode_4: "",
+      icD_pointers: "",
+      unitPrice: null,
+      units: null,
+      amount: null,
+      claimStatus: "",
+    },
+  ],
 };
