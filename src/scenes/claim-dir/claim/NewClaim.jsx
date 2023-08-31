@@ -43,12 +43,12 @@ const NewClaim = () => {
         facilityId: facilityId,
       };
       // console.log(postValues, "calim postValues");
-      try {
-        dispatch(newClaimAction(postValues));
-      } catch (error) {
-        throw error;
-      }
-      action.resetForm();
+      // try {
+      //   dispatch(newClaimAction(postValues));
+      // } catch (error) {
+      //   throw error;
+      // }
+      // action.resetForm();
     },
   });
 
@@ -90,13 +90,13 @@ const NewClaim = () => {
           </Button>
           <Button
             type="submit"
-            color="secondary"
             variant="contained"
             form="claimForm"
             // sx={{
             //   marginRight: "15px",
             // }}
             // onSubmit={formik.handleSubmit}
+            sx={{ bgcolor: "#6870fa", color: "#fff" }}
           >
             Save
           </Button>
