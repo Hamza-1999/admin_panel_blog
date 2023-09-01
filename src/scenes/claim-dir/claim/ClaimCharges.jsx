@@ -15,7 +15,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ProcedureClaim from "./ProcedureClaim";
 import ProcedureTable from "./ProcedureTable";
 
-const ClaimCharges = ({ formik }) => {
+const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
   const [openProcedureModal, setOpenProcedureModal] = useState(false);
   const [icdIdentifier, setIcdIdentifier] = useState("");
@@ -47,15 +47,11 @@ const ClaimCharges = ({ formik }) => {
         open={openProcedureModal}
         handleClose={() => setOpenProcedureModal(false)}
       >
-        {formik.values.claimChargesDto.map((charge, index) => (
-          <ProcedureClaim
-            formik={formik}
-            charge={charge}
-            key={index}
-            index={index}
-            handleClose={() => setOpenProcedureModal(false)}
-          />
-        ))}
+        <ProcedureClaim
+          formik={formik}
+          setClaimChargesDto={setClaimChargesDto}
+          handleClose={() => setOpenProcedureModal(false)}
+        />
       </CustomModal>
 
       <>
@@ -521,7 +517,7 @@ const ClaimCharges = ({ formik }) => {
               Add Procedures
             </Button>
 
-            <ProcedureTable gridData={gridData} />
+            <ProcedureTable claimChargesDto={claimChargesDto} />
           </Box>
         </div>
       </>

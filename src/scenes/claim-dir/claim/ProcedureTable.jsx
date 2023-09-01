@@ -2,7 +2,20 @@ import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 
-const ProcedureTable = ({ gridData }) => {
+const ProcedureTable = ({ claimChargesDto }) => {
+  console.log(claimChargesDto, "claim dtos");
+  const rows = claimChargesDto.map((el, index) => ({
+    id: index,
+    procedureCode: el.procedureCode,
+    toDate: el.toDate,
+    fromDate: el.fromDate,
+    tosCode: el.tosCode,
+    posCode: el.posCode,
+    modCode_1: el.modCode_1,
+    modCode_2: el.modCode_2,
+    modCode_3: el.modCode_3,
+    modCode_4: el.modCode_4,
+  }));
   const columns = [
     {
       field: "fromDate",
@@ -47,7 +60,7 @@ const ProcedureTable = ({ gridData }) => {
       headerClassName: "header-bg",
     },
     {
-      field: "mod1",
+      field: "modCode_1",
       headerName: "Mod 1",
       width: 150,
       headerAlign: "center",
@@ -55,7 +68,7 @@ const ProcedureTable = ({ gridData }) => {
       headerClassName: "header-bg",
     },
     {
-      field: "mod2",
+      field: "modCode_2",
       headerName: "Mod 2",
       width: 150,
       headerAlign: "center",
@@ -63,7 +76,7 @@ const ProcedureTable = ({ gridData }) => {
       headerClassName: "header-bg",
     },
     {
-      field: "mod3",
+      field: "modCode_3",
       headerName: "Mod 3",
       width: 150,
       headerAlign: "center",
@@ -71,42 +84,42 @@ const ProcedureTable = ({ gridData }) => {
       headerClassName: "header-bg",
     },
     {
-      field: "mod4",
+      field: "modCode_4",
       headerName: "Mod 4",
       width: 150,
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
     },
-    {
-      field: "unitPrice",
-      headerName: "Unit Price",
-      width: 150,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "header-bg",
-    },
-    {
-      field: "units",
-      headerName: "Units",
-      width: 150,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "header-bg",
-    },
-    {
-      field: "amount",
-      headerName: "Amount",
-      width: 150,
-      headerAlign: "center",
-      align: "center",
-      headerClassName: "header-bg",
-    },
+    // {
+    //   field: "unitPrice",
+    //   headerName: "Unit Price",
+    //   width: 150,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "header-bg",
+    // },
+    // {
+    //   field: "units",
+    //   headerName: "Units",
+    //   width: 150,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "header-bg",
+    // },
+    // {
+    //   field: "amount",
+    //   headerName: "Amount",
+    //   width: 150,
+    //   headerAlign: "center",
+    //   align: "center",
+    //   headerClassName: "header-bg",
+    // },
   ];
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-        rows={gridData}
+        rows={rows}
         columns={columns}
         sx={{
           "& .header-bg": {
@@ -119,7 +132,7 @@ const ProcedureTable = ({ gridData }) => {
             <div
               style={{ width: "100%", textAlign: "center", padding: "16px" }}
             >
-              {gridData.length === 0 && "No Data Is Added"}
+              {claimChargesDto.length === 0 && "No Data Is Added"}
             </div>
           ),
         }}

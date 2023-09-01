@@ -8,11 +8,12 @@ import {
 } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React from "react";
+import React, { useState } from "react";
 import CustomSearchField from "../../../components/CustomSearchField";
 
-const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
+const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
   console.log(formik.values, "667");
+
   const procedureBoxStyle = {
     display: "flex",
     alignItems: "center",
@@ -25,16 +26,34 @@ const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
     backgroundColor: "#fff",
   };
 
+  const [procedureValues, setProcedureValues] = useState({
+    procedureCode: "",
+    toDate: null,
+    fromDate: null,
+    posCode: "",
+    tosCode: "",
+    modCode_1: "",
+    modCode_2: "",
+    modCode_3: "",
+    modCode_4: "",
+    icd_Pointers: "",
+    unitPrice: null,
+    units: null,
+    amount: null,
+    claimStatus: "",
+  });
   const handleProcedureAdd = () => {
-    formik.setValues({
-      ...formik.values,
-      claimChargesDto: [
-        // ...charge,
-        {
-          procedureCode: charge.procedureCode,
-        },
-      ],
-    });
+    setClaimChargesDto((prevVals) => [...prevVals, procedureValues]);
+    handleClose();
+  };
+
+  const handleProcedureChange = (event) => {
+    const { name, value } = event.target;
+
+    setProcedureValues((prevCharge) => ({
+      ...prevCharge,
+      [name]: value,
+    }));
   };
   return (
     <>
@@ -72,34 +91,29 @@ const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
         >
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
-              label="To"
-              value={charge.toDate}
-              onChange={(value) => {
-                console.log(value, "dateVal");
-                formik.setFieldValue("toDate", value);
-              }}
-              onBlur={() => formik.setFieldTouched("toDate", true)}
-              renderInput={(params) => <TextField {...params} />}
+              label="From"
+              value={procedureValues.fromDate}
+              onChange={handleProcedureChange}
+              // onBlur={() => formik.setFieldTouched("toDate", true)}
+              renderInput={(params) => <TextField {...params} name="toDate" />}
               inputFormat="MM/DD/YYYY"
               // clearable
             />
           </LocalizationProvider>
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
-              label="From"
-              value={charge.fromDate}
-              onChange={(value) => {
-                console.log(value, "dateVal");
-                formik.setFieldValue("fromDate", value);
-              }}
-              onBlur={() => formik.setFieldTouched("fromDate", true)}
-              renderInput={(params) => <TextField {...params} />}
+              label="To"
+              value={procedureValues.fromDate}
+              onChange={handleProcedureChange}
+              // onBlur={() => formik.setFieldTouched("fromDate", true)}
+              renderInput={(params) => (
+                <TextField {...params} name="fromDate" />
+              )}
               inputFormat="MM/DD/YYYY"
               // clearable
             />
           </LocalizationProvider>
         </Box>
-
         <Box>
           <Box
             sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}
@@ -111,19 +125,25 @@ const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
               <CustomSearchField
                 type="text"
                 label="Procedure"
-                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
-                fieldVal={charge.procedureCode}
-                name={`claimChargesDto[${index}].procedureCode`}
+                handleChange={handleProcedureChange}
+                fieldVal={procedureValues.procedureCode}
+                name="procedureCode"
               />
             </FormControl>
           </Box>
-          {/* <Box
+          <Box
             sx={{ display: "flex", alignItems: "center", marginTop: "20px" }}
           >
             <label style={{ marginRight: "20px", width: "20%" }}>POS:</label>
             <FormControl fullWidth>
-              <CustomSearchField type="text" label="Post" />
+              <CustomSearchField
+                type="text"
+                label="Pos"
+                handleChange={handleProcedureChange}
+                fieldVal={procedureValues.posCode}
+                name="posCode"
+              />
             </FormControl>
           </Box>
           <Box
@@ -131,13 +151,19 @@ const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
           >
             <label style={{ marginRight: "20px", width: "20%" }}>TOS:</label>
             <FormControl fullWidth>
-              <CustomSearchField type="text" label="Tos" />
+              <CustomSearchField
+                type="text"
+                label="Tos"
+                handleChange={handleProcedureChange}
+                fieldVal={procedureValues.tosCode}
+                name="tosCode"
+              />
             </FormControl>
-          </Box> */}
+          </Box>
         </Box>
 
         {/* mod */}
-        {/* <Box
+        <Box
           display="grid"
           gap="30px"
           sx={{
@@ -149,11 +175,31 @@ const ProcedureClaim = ({ formik, handleClose, charge, index }) => {
             marginTop: "20px",
           }}
         >
-          <CustomSearchField label="Mod 1" />
-          <CustomSearchField label="Mod 2" />
-          <CustomSearchField label="Mod 3" />
-          <CustomSearchField label="Mod 4" />
-        </Box> */}
+          <CustomSearchField
+            label="Mod 1"
+            fieldVal={procedureValues.modCode_1}
+            handleChange={handleProcedureChange}
+            name="modCode_1"
+          />
+          <CustomSearchField
+            label="Mod 2"
+            fieldVal={procedureValues.modCode_2}
+            handleChange={handleProcedureChange}
+            name="modCode_2"
+          />
+          <CustomSearchField
+            label="Mod 3"
+            fieldVal={procedureValues.modCode_3}
+            handleChange={handleProcedureChange}
+            name="modCode_3"
+          />
+          <CustomSearchField
+            label="Mod 4"
+            fieldVal={procedureValues.modCode_4}
+            handleChange={handleProcedureChange}
+            name="modCode_4"
+          />
+        </Box>
       </Stack>
     </>
   );
