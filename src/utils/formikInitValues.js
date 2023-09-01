@@ -123,22 +123,22 @@ export const claimInitVal = {
   icd_L_Description: "",
 
   // charges dtos for multiple procedure
-  claimChargesDto: [
-    {
-      fromDate: null,
-      toDate: null,
-      procedureCode: "",
-      posCode: "",
-      tosCode: "",
-      modCode_1: "",
-      modCode_2: "",
-      modCode_3: "",
-      modCode_4: "",
-      icD_pointers: "",
-      unitPrice: null,
-      units: null,
-      amount: null,
-      claimStatus: "",
-    },
-  ],
+  // claimChargesDto: [
+  //   {
+  //     fromDate: null,
+  //     toDate: null,
+  //     procedureCode: "",
+  //     posCode: "",
+  //     tosCode: "",
+  //     modCode_1: "",
+  //     modCode_2: "",
+  //     modCode_3: "",
+  //     modCode_4: "",
+  //     icD_pointers: "",
+  //     unitPrice: null,
+  //     units: null,
+  //     amount: null,
+  //     claimStatus: "",
+  //   },
+  // ],
 };

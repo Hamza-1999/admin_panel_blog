@@ -22,6 +22,8 @@ const NewClaim = () => {
     providerId: null,
   });
   const [facilityId, setFacilityId] = useState(null);
+  const [claimChargesDto, setClaimChargesDto] = useState([]);
+  console.log(claimChargesDto, "claimDto");
   const dispatch = useDispatch();
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -30,8 +32,10 @@ const NewClaim = () => {
   const formik = useFormik({
     initialValues: claimInitVal,
     onSubmit: (values, action) => {
+      console.log(values, "claimvals999");
       const postValues = {
         ...values,
+        claimChargesDto: claimChargesDto,
         patientAccountNo: claimIds.patientAccountNo,
         practiceId: claimIds.practiceId,
         billingProviderId: claimIds.billingProviderId,
@@ -42,13 +46,13 @@ const NewClaim = () => {
         providerId: claimIds.providerId,
         facilityId: facilityId,
       };
-      // console.log(postValues, "calim postValues");
-      // try {
-      //   dispatch(newClaimAction(postValues));
-      // } catch (error) {
-      //   throw error;
-      // }
-      // action.resetForm();
+      console.log(postValues, "calim postValues");
+      try {
+        dispatch(newClaimAction(postValues));
+      } catch (error) {
+        throw error;
+      }
+      action.resetForm();
     },
   });
 
@@ -116,7 +120,13 @@ const NewClaim = () => {
               setFacilityId={setFacilityId}
             />
           )}
-          {tabValue === 1 && <ClaimCharges formik={formik} />}
+          {tabValue === 1 && (
+            <ClaimCharges
+              formik={formik}
+              setClaimChargesDto={setClaimChargesDto}
+              claimChargesDto={claimChargesDto}
+            />
+          )}
         </Box>
       </form>
     </Box>
