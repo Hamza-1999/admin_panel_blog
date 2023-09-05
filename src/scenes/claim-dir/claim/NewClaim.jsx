@@ -13,6 +13,7 @@ const NewClaim = () => {
   const [tabValue, setTabValue] = useState(0);
   const [claimIds, setClaimIds] = useState({
     patientAccountNo: null,
+    patientId: null,
     practiceId: null,
     billingProviderId: null,
     insuredPartyId: null,
@@ -37,6 +38,7 @@ const NewClaim = () => {
         ...values,
         claimChargesDto: claimChargesDto,
         patientAccountNo: claimIds.patientAccountNo,
+        patientId: claimIds.patientId,
         practiceId: claimIds.practiceId,
         billingProviderId: claimIds.billingProviderId,
         insuredPartyId: claimIds.insuredPartyId,

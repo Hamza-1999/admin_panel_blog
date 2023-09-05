@@ -6,13 +6,7 @@ import { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const ClaimModData = ({
-  setClaimIds,
-  setValues,
-  setFieldValue,
-  formik,
-  handleClose,
-}) => {
+const ClaimModData = ({ setClaimIds, setValues, formik, handleClose }) => {
   const [PatientClaimData, setPatientClaimData] = useState([]);
   const getClaimDetails = async () => {
     try {
@@ -127,17 +121,15 @@ const ClaimModData = ({
       renderingProviderName: `${val.renderingProviderFirstName} ${val.renderingProviderLastName} (${val.renderingProviderSequenceNo})`,
       billingProviderName: `${val.billingProviderFirstName} ${val.billingProviderLastName} (${val.billingProviderSequenceNo})`,
       practiceAddress: val.practiceAddress,
-      primaryPayerInsuranceName: `${val.primaryPayerInfoName} (${val.primaryPayerInfoSequenceNo})`,
+      primaryPayerInsuranceName:
+        val.primaryPayerInfoName === null
+          ? ""
+          : `${val.primaryPayerInfoName} (${val.primaryPayerInfoSequenceNo})`,
       primaryPayerMemberId: val.primaryPayerInfoMemberId,
       primaryPayerGroupId: val.primaryPayerInfoGroupId,
       primaryPayerPolicyType: val.primaryPayerPolicyType,
       primaryPayerCopayDue: val.primaryPayerInfoCopayDue,
     });
-
-    // setFieldValue(
-    //   "patientName",
-    //   `${val.firstName} ${val.lastName} (${val.patientAccountNo})`
-    // );
 
     handleClose();
   };

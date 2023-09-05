@@ -17,7 +17,7 @@ import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { ExpandLess, ExpandMore } from "@mui/icons-material";
-import Claim from "../claim-dir/claim/NewClaim";
+import Claim from "../claim-dir/claim/Claim";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -189,6 +189,42 @@ const Sidebar = () => {
               />
             </Collapse>
 
+            {/* claims */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+              }}
+              onClick={() => setIsClaimOpen(!isClaimOpen)}
+            >
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Claim
+              </Typography>
+              {isClaimOpen ? <ExpandLess /> : <ExpandMore />}
+            </Box>
+            <Collapse in={isClaimOpen}>
+              <Item
+                title="Claim"
+                to="/claims"
+                icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              {/* <Item
+                title="Provider"
+                to="/provider"
+                icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              /> */}
+            </Collapse>
+
             {/* Custom Setup */}
             <Box
               sx={{
@@ -224,42 +260,6 @@ const Sidebar = () => {
                 setSelected={setSelected}
               />
             </Collapse>
-
-            {/* claims */}
-            {/* <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                cursor: "pointer",
-              }}
-              onClick={() => setIsClaimOpen(!isClaimOpen)}
-            >
-              <Typography
-                variant="h6"
-                color={colors.grey[300]}
-                sx={{ m: "15px 0 5px 20px" }}
-              >
-                Claim
-              </Typography>
-              {isClaimOpen ? <ExpandLess /> : <ExpandMore />}
-            </Box>
-            <Collapse in={isClaimOpen}>
-              <Item
-                title="Claim"
-                to="/claims"
-                icon={<Claim />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Provider"
-                to="/provider"
-                icon={<PersonOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-            </Collapse> */}
 
             <Box
               sx={{

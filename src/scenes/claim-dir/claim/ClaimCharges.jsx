@@ -19,7 +19,6 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
   const [openProcedureModal, setOpenProcedureModal] = useState(false);
   const [icdIdentifier, setIcdIdentifier] = useState("");
-  const [gridData, setGridData] = useState([]);
 
   const handleOpenDiagnosisModal = (identifier) => {
     setOpenDiagnosisModal(true);
