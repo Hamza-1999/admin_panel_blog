@@ -8,12 +8,12 @@ const CustomModal = ({ children, open, handleClose }) => {
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    width: { xs: "80%", sm: "60%", md: "70%" },
+    width: { xs: "80%", sm: "auto", md: "auto" },
+    minWidth: { xs: "80%", sm: "450px", md: "600px" },
     bgcolor: "background.paper",
     border: "2px solid #000",
     boxShadow: 24,
     minHeight: "100px",
-
     maxHeight: "600px",
     overflowY: "scroll",
     // padding: "16px", // Adding some padding to the modal content

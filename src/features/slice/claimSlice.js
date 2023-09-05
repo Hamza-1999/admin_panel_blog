@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { newClaimAction } from "../actions/claimAction";
+import { getClaimAction, newClaimAction } from "../actions/claimAction";
 
 const initialState = {
   createClaimData: {},
-  //   getClaims: [],
-  leading: false,
+  getClaims: [],
+  loading: false,
   error: null,
 };
 const claimSlice = createSlice({
@@ -24,6 +24,18 @@ const claimSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
       toast.error("Claim creation failed");
+    },
+    [getClaimAction.pending]: (state) => {
+      state.loading = true;
+    },
+    [getClaimAction.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.getClaims = action.payload;
+      console.log(action.paylaod, "claim slice get payload");
+    },
+    [getClaimAction.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
 });

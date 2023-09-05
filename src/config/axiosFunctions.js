@@ -3,8 +3,11 @@ import axios from "axios";
 export const postData = async (url, data) => {
   try {
     const response = await axios.post(url, data);
-    console.log(response.data, "custom func data");
-    return await response.data;
+    if (response.status === 200) {
+      return await response.data;
+    } else {
+      throw new Error("Request failed with status: " + response.status);
+    }
   } catch (error) {
     throw error;
   }
@@ -14,7 +17,11 @@ export const getData = async (url) => {
   try {
     const response = await axios.get(url);
     console.log(response.data, "custom getData function");
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error("Request failed with status: " + response.status);
+    }
   } catch (error) {
     console.error(error);
   }
@@ -23,9 +30,11 @@ export const getData = async (url) => {
 export const updateData = async (url, data) => {
   try {
     const response = await axios.put(url, data);
-    console.log(response.data, "custom update func data");
-    console.log(data, "custom func update data ");
-    return response.data;
+    if (response.status === 200) {
+      return response.data;
+    } else {
+      throw new Error("Request failed with status: " + response.status);
+    }
   } catch (error) {
     throw error;
   }

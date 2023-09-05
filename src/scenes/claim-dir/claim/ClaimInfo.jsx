@@ -25,11 +25,18 @@ import { getData } from "../../../config/axiosFunctions";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import Facility from "../../custom-setup/facility/Facility";
+import BillingProvider from "../../custom-setup/billing-provider/BillingProvider";
+import RenderingProvider from "../../custom-setup/rendering-provider/RenderingProvider";
+import InsuredParty from "../../custom-setup/insured-party/InsuredParty";
 
 const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
   const [openPatientModal, setOpenPatientModal] = useState(false);
   const [openFacilityModal, setOpenFacilityModal] = useState(false);
+  const [openInsuredParty, setOpenInsuredParty] = useState(false);
+  const [openBillingProviderMod, setOpenBillingProviderMod] = useState(false);
+  const [openRenderingProviderMod, setOpenRenderingProviderMod] =
+    useState(false);
   const [frequencyOpt, setFrequencyOpt] = useState([]);
   const [policyTypeOpt, setPolicyTypeOpt] = useState([]);
   const dispatch = useDispatch();
@@ -82,6 +89,39 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
           handleClose={() => setOpenFacilityModal(false)}
           setFacilityId={setFacilityId}
           setFieldValue={formik.setFieldValue}
+        />
+      </CustomModal>
+      {/* billing provider */}
+      <CustomModal
+        open={openBillingProviderMod}
+        handleClose={() => setOpenBillingProviderMod(false)}
+      >
+        <BillingProvider
+          setClaimIds={setClaimIds}
+          handleClose={() => setOpenBillingProviderMod(false)}
+          setValues={formik.setValues}
+        />
+      </CustomModal>
+      {/* rendering provider */}
+      <CustomModal
+        open={openRenderingProviderMod}
+        handleClose={() => setOpenRenderingProviderMod(false)}
+      >
+        <RenderingProvider
+          setClaimIds={setClaimIds}
+          handleClose={() => setOpenRenderingProviderMod(false)}
+          setValues={formik.setValues}
+        />
+      </CustomModal>
+      {/* Insurance modal */}
+      <CustomModal
+        open={openInsuredParty}
+        handleClose={() => setOpenInsuredParty(false)}
+      >
+        <InsuredParty
+          setClaimIds={setClaimIds}
+          handleClose={() => setOpenInsuredParty(false)}
+          setValues={formik.setValues}
         />
       </CustomModal>
       <Box
@@ -175,6 +215,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
             handleBlur={formik.handleBlur}
             fieldVal={formik.values.billingProviderName}
             name="billingProviderName"
+            handleModalOpen={() => setOpenBillingProviderMod(true)}
           />
         </Box>
         <Box
@@ -195,6 +236,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
             handleBlur={formik.handleBlur}
             fieldVal={formik.values.renderingProviderName}
             name="renderingProviderName"
+            handleModalOpen={() => setOpenRenderingProviderMod(true)}
           />
         </Box>
         <Box
@@ -257,6 +299,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
             handleBlur={formik.handleBlur}
             fieldVal={formik.values.primaryPayerInsuranceName}
             name="primaryPayerInsuranceName"
+            handleModalOpen={() => setOpenInsuredParty(true)}
           />
         </Box>
 

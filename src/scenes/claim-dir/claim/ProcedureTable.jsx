@@ -15,6 +15,9 @@ const ProcedureTable = ({ claimChargesDto }) => {
     modCode_2: el.modCode_2,
     modCode_3: el.modCode_3,
     modCode_4: el.modCode_4,
+    unitPrice: el.unitPrice,
+    units: el.units,
+    amount: el.amount,
   }));
   const columns = [
     {
@@ -91,30 +94,30 @@ const ProcedureTable = ({ claimChargesDto }) => {
       align: "center",
       headerClassName: "header-bg",
     },
-    // {
-    //   field: "unitPrice",
-    //   headerName: "Unit Price",
-    //   width: 150,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   headerClassName: "header-bg",
-    // },
-    // {
-    //   field: "units",
-    //   headerName: "Units",
-    //   width: 150,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   headerClassName: "header-bg",
-    // },
-    // {
-    //   field: "amount",
-    //   headerName: "Amount",
-    //   width: 150,
-    //   headerAlign: "center",
-    //   align: "center",
-    //   headerClassName: "header-bg",
-    // },
+    {
+      field: "unitPrice",
+      headerName: "Unit Price",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "header-bg",
+    },
+    {
+      field: "units",
+      headerName: "Units",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "header-bg",
+    },
+    {
+      field: "amount",
+      headerName: "Amount",
+      width: 150,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "header-bg",
+    },
   ];
   return (
     <Box sx={{ width: "100%" }}>
