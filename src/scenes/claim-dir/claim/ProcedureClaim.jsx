@@ -41,6 +41,7 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
   };
   // const [procedureAmount, setProcedureAmount] = useState(null);
   const [procedureValues, setProcedureValues] = useState({
+    procedureCodeId: null,
     procedureCode: "",
     toDate: null,
     fromDate: null,

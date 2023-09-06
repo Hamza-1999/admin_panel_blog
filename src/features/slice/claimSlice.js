@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
-import { getClaimAction, newClaimAction } from "../actions/claimAction";
+import {
+  getClaimAction,
+  newClaimAction,
+  updateClaimAction,
+} from "../actions/claimAction";
 
 const initialState = {
   createClaimData: {},
@@ -31,11 +35,32 @@ const claimSlice = createSlice({
     [getClaimAction.fulfilled]: (state, action) => {
       state.loading = false;
       state.getClaims = action.payload;
-      console.log(action.paylaod, "claim slice get payload");
+      console.log(action.payload, "claim slice get payload");
     },
     [getClaimAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+    },
+    [updateClaimAction.pending]: (state) => {
+      state.loading = true;
+    },
+    [updateClaimAction.fulfilled]: (state, action) => {
+      state.loading = false;
+      const updatedClaimIndex = state.getClaims.result.findIndex(
+        (el) => el.claimNumber === action.payload.claimNumber
+      );
+      if (updatedClaimIndex !== -1) {
+        state.getClaims.result[updatedClaimIndex] = {
+          ...state.getClaims.result[updatedClaimIndex],
+          ...action.payload,
+        };
+      }
+      toast.success("Claim Updated Successfully!");
+    },
+    [updateClaimAction.rejected]: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+      toast.error("Claim Updation Failed");
     },
   },
 });

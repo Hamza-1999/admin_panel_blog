@@ -18,34 +18,17 @@ const Claim = () => {
   const navigate = useNavigate();
   const { getClaims, loading } = useSelector((state) => state.claim);
 
-  useEffect(() => {
-    dispatch(getClaimAction());
-  }, [dispatch]);
-  console.log(getClaims, "getting claims");
-
-  if (!getClaims || !getClaims.result || getClaims.result?.length === 0) {
-    return (
-      <Box m={"20px"}>
-        <Header title="Practices" subtitle="Show all practices" />
-        {loading ? (
-          <Typography>Loading...</Typography>
-        ) : (
-          <>
-            <div>No practice data available.</div>
-          </>
-        )}{" "}
-      </Box>
-    );
-  }
-
-  const rows = getClaims.result?.map((el) => ({
-    id: el.claimId,
-    claimNumber: el.claimNumber,
-    patientFirstName: el.patientFirstName,
-    patientLastName: el.patientLastName,
-    fromDate: el.claimChargesDto[0]?.fromDate || "N/A",
-    claimStatus: el.claimChargesDto[0]?.claimStatus || "N/A",
-  }));
+  const rows =
+    getClaims && getClaims.result
+      ? getClaims.result.map((el) => ({
+          id: el.claimId,
+          claimNumber: el.claimNumber,
+          patientFirstName: el.patientFirstName,
+          patientLastName: el.patientLastName,
+          fromDate: el.claimChargesDto[0]?.fromDate || "N/A",
+          claimStatus: el.claimChargesDto[0]?.claimStatus || "N/A",
+        }))
+      : [];
 
   console.log(rows, "all rows in claims");
 
@@ -67,6 +50,8 @@ const Claim = () => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      editable: true,
+      editField: "name", // Add this line
       valueGetter: (params) =>
         `${params.row.patientFirstName} ${params.row.patientLastName}`,
     },
@@ -90,7 +75,16 @@ const Claim = () => {
     },
   ];
 
+  useEffect(() => {
+    try {
+      dispatch(getClaimAction());
+    } catch (err) {
+      throw err;
+    }
+  }, []);
   console.log(columns, "all columns in claim");
+
+  // handle change for cell edit
 
   return (
     <Box margin="20px">
@@ -110,38 +104,51 @@ const Claim = () => {
           Add Claim
         </Button>
       </Stack>
-      <Box>
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: {
-                pageSize: 5,
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Box>
+          <DataGrid
+            rows={rows}
+            editMode="row"
+            columns={columns}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5,
+                },
               },
-            },
-          }}
-          autoHeight
-          components={{
-            NoRowsOverlay: () => (
-              <div
-                style={{
-                  width: "100%",
-                  textAlign: "center",
-                  padding: "16px",
-                }}
-              >
-                {getClaims?.length === 0 && "No Data Is Added"}
-              </div>
-            ),
-          }}
-          pageSize={5}
-          disableSelectionOnClick
-          //   onCellClick={(params) =>
-          //     navigate(`/practice/update/${params.row.id}`)
-          //   }
-        />
-      </Box>
+            }}
+            autoHeight
+            components={{
+              NoRowsOverlay: () => (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "16px",
+                  }}
+                >
+                  {getClaims.result?.length === 0 && "No Data Is Added"}
+                </div>
+              ),
+            }}
+            pageSize={5}
+            disableSelectionOnClick
+            onCellClick={(params) =>
+              navigate(`/claims/update/${params.row.claimNumber}`)
+            }
+          />
+        </Box>
+      )}
     </Box>
   );
 };
