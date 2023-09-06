@@ -1,11 +1,11 @@
+import { Delete } from "@mui/icons-material";
 import { Box, Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const ProcedureTable = ({ claimChargesDto }) => {
-  console.log(claimChargesDto, "claim dtos");
-  const rows = claimChargesDto.map((el, index) => ({
-    id: index,
+const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
+  const rows = claimChargesDto.map((el) => ({
+    id: el.procedureCodeId,
     procedureCode: el.procedureCode,
     toDate: el.toDate,
     fromDate: el.fromDate,
@@ -19,6 +19,14 @@ const ProcedureTable = ({ claimChargesDto }) => {
     units: el.units,
     amount: el.amount,
   }));
+
+  const handleDeleteRow = (val) => {
+    const deletedRow = claimChargesDto.filter(
+      (el) => el.procedureCodeId !== val.id
+    );
+    setClaimChargesDto(deletedRow);
+  };
+
   const columns = [
     {
       field: "fromDate",
@@ -118,7 +126,25 @@ const ProcedureTable = ({ claimChargesDto }) => {
       align: "center",
       headerClassName: "header-bg",
     },
+    {
+      field: "action",
+      headerName: "Action",
+      width: 100,
+      headerAlign: "center",
+      align: "center",
+      headerClassName: "header-bg",
+      renderCell: (params) => (
+        <Button
+          variant="outlined"
+          color="error"
+          onClick={() => handleDeleteRow(params.row)}
+        >
+          <Delete />
+        </Button>
+      ),
+    },
   ];
+
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
@@ -135,7 +161,7 @@ const ProcedureTable = ({ claimChargesDto }) => {
             <div
               style={{ width: "100%", textAlign: "center", padding: "16px" }}
             >
-              {claimChargesDto.length === 0 && "No Data Is Added"}
+              {rows.length === 0 && "No Data Is Added"}
             </div>
           ),
         }}

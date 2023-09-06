@@ -16,6 +16,7 @@ import ProcedureClaim from "./ProcedureClaim";
 import ProcedureTable from "./ProcedureTable";
 
 const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
+  console.log(claimChargesDto, "get claim charges5");
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
   const [openProcedureModal, setOpenProcedureModal] = useState(false);
   const [icdIdentifier, setIcdIdentifier] = useState("");
@@ -516,7 +517,10 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               Add Procedures
             </Button>
 
-            <ProcedureTable claimChargesDto={claimChargesDto} />
+            <ProcedureTable
+              claimChargesDto={claimChargesDto}
+              setClaimChargesDto={setClaimChargesDto}
+            />
           </Box>
         </div>
       </>

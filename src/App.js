@@ -33,6 +33,7 @@ import Provider from "./scenes/custom-setup/provider/Provider";
 import UpdateProvider from "./scenes/custom-setup/provider/UpdateProvider";
 import NewClaim from "./scenes/claim-dir/claim/NewClaim";
 import Claim from "./scenes/claim-dir/claim/Claim";
+import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -75,6 +76,10 @@ function App() {
               {/*claim  */}
               <Route path="/claims/new" element={<NewClaim />} />
               <Route path="/claims" element={<Claim />} />
+              <Route
+                path="/claims/update/:claimNumber"
+                element={<UpdateClaim />}
+              />
 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
