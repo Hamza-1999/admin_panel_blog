@@ -32,7 +32,7 @@ const EditPatientInfo = () => {
   }, [dispatch]);
 
   const findEditValues = getAllPatients.result?.find(
-    (el) => el.accountNo === accountNo
+    (el) => el.accountNo === Number(accountNo)
   );
 
   const [editFormData, setEditFormData] = useState({
