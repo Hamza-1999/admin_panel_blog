@@ -4,8 +4,9 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
 const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
-  const rows = claimChargesDto.map((el) => ({
-    id: el.procedureCodeId,
+  console.log(claimChargesDto, "checking claim charges dto")
+  const rows = claimChargesDto.map((el, index) => ({
+    id: index,
     procedureCode: el.procedureCode,
     toDate: el.toDate,
     fromDate: el.fromDate,

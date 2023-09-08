@@ -29,19 +29,23 @@ const ShowPatientInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { accountNo } = useParams();
-  useEffect(() => {
-    dispatch(getPatientAction());
-  }, [dispatch]);
+ 
   console.log(accountNo, "acc number");
   const { getAllPatients, loading } = useSelector((state) => state.patient);
-
+  console.log(getAllPatients, "all patients")
   const selectedPatient = getAllPatients.result?.find(
-    (el) => el.accountNo === accountNo
+    (el) => el.accountNo === Number(accountNo)
   );
+
+  console.log(selectedPatient, "check selected67")
 
   const handleEditPatient = (accNum) => {
     navigate(`/editpatient/${accNum}`);
   };
+
+  useEffect(() => {
+    dispatch(getPatientAction());
+  }, [dispatch]);
   return (
     <>
       <Box width={"100%"} padding={"20px"}>
