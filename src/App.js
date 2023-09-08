@@ -34,6 +34,7 @@ import UpdateProvider from "./scenes/custom-setup/provider/UpdateProvider";
 import NewClaim from "./scenes/claim-dir/claim/NewClaim";
 import Claim from "./scenes/claim-dir/claim/Claim";
 import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
+import NewPayment from "./scenes/payment/NewPayment";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -80,6 +81,9 @@ function App() {
                 path="/claims/update/:claimNumber"
                 element={<UpdateClaim />}
               />
+
+              {/* payment */}
+              <Route path="/payment" element={<NewPayment />} />
 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
