@@ -90,7 +90,7 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
         handleClose={() => setOpenPyerListModal(false)}
       >
         <PayerList
-          onCellClick={(payerName) => setSelectedPayerName(payerName)}
+          onCellClick={(val) => setSelectedPayerName(val.payerName)}
           handleClose={() => setOpenPyerListModal(false)}
         />
       </CustomModal>

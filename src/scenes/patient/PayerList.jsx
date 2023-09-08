@@ -18,6 +18,7 @@ const PayerList = ({ onCellClick, handleClose }) => {
     payerName: el.payerName,
     planName: el.planName,
     payerAddress: el.payerAddress,
+    payerSequenceNo: el.payerSequenceNo,
   }));
 
   useEffect(() => {
@@ -66,11 +67,9 @@ const PayerList = ({ onCellClick, handleClose }) => {
             columns={columns}
             scrollbarSize={5}
             disableSelectionOnClick
-            // onCellClick={(params) => navigate(`/editpatient/${params.row.id}`)}
-            // onRowClick={(params) => onRowClick(params.row.payerName)}
             onCellClick={(param) => {
-              onCellClick(param.row.payerName);
-              handleClose();
+              onCellClick(param.row);
+              // handleClose();
             }}
           />
         ) : (

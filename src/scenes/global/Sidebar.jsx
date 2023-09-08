@@ -16,7 +16,7 @@ import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutl
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import { ExpandLess, ExpandMore } from "@mui/icons-material";
+import { ExpandLess, ExpandMore, Wallet } from "@mui/icons-material";
 import Claim from "../claim-dir/claim/Claim";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -47,6 +47,7 @@ const Sidebar = () => {
   const [isChartsOpen, setIsChartsOpen] = useState(false);
   const [isCustomSetupOpen, setIsCustomSetupOpen] = useState(false);
   const [isClaimOpen, setIsClaimOpen] = useState(false);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
 
   return (
     <Box
@@ -213,6 +214,42 @@ const Sidebar = () => {
                 title="Claim"
                 to="/claims"
                 icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              />
+              {/* <Item
+                title="Provider"
+                to="/provider"
+                icon={<PersonOutlinedIcon />}
+                selected={selected}
+                setSelected={setSelected}
+              /> */}
+            </Collapse>
+
+            {/* payment */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                cursor: "pointer",
+              }}
+              onClick={() => setIsPaymentOpen(!isPaymentOpen)}
+            >
+              <Typography
+                variant="h6"
+                color={colors.grey[300]}
+                sx={{ m: "15px 0 5px 20px" }}
+              >
+                Payment
+              </Typography>
+              {isPaymentOpen ? <ExpandLess /> : <ExpandMore />}
+            </Box>
+            <Collapse in={isPaymentOpen}>
+              <Item
+                title="Payment"
+                to="/payment"
+                icon={<Wallet />}
                 selected={selected}
                 setSelected={setSelected}
               />
