@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   FormControlLabel,
   Radio,
   Stack,
@@ -22,11 +23,15 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import ClaimTable from "../claim-dir/claim/ClaimTable";
 import CustomButton from "../../components/CustomButton";
+import { useNavigate } from "react-router-dom";
+import PostPayment from "./PostPayment";
 
 const NewPayment = () => {
+  const navigate = useNavigate();
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
   const [postPaymentData, setPostPaymentData] = useState({});
+  const [applyEob, setApplyEob] = useState(null);
   console.log(postPaymentData, "allpostPayData");
   const formik = useFormik({
     initialValues: paymentInitValue,
@@ -73,6 +78,11 @@ const NewPayment = () => {
           paymentFrom: val.primaryPayerInsuranceName,
           payerId: val.payerId,
           patientId: val.patientId,
+          patientFirstName: val.patientFirstName,
+          patientLastName: val.patientLastName,
+          patientAccountNo: val.patientAccountNo,
+          claimNumber: val.claimNumber,
+          dateOfService: val.dateOfService,
           claimInfoId: val.id,
           payerSequenceNo: val.payerSequenceNo,
           billed: val.totalCharges,
@@ -159,6 +169,27 @@ const NewPayment = () => {
     }
   };
 
+  // apply eob handle
+  const handleApplyEOB = () => {
+    if (
+      formik.values.paymentBy === "" ||
+      formik.values.paymentBy.length === 0 ||
+      formik.values.paymentBy === null
+    ) {
+      alert("Fill up the required fields");
+    } else {
+      setPostPaymentData({
+        ...formik.values,
+      });
+      const loadingBtn = setTimeout(() => {
+        navigate("/payment/post", {
+          state: { postPaymentData: formik.values },
+        });
+      }, 1500);
+
+      setApplyEob(loadingBtn);
+    }
+  };
   return (
     <>
       <CustomModal
@@ -186,11 +217,9 @@ const NewPayment = () => {
           <CustomButton
             variant="contained"
             margin="0 0 15px"
-            handleClick={() => {
-              setPostPaymentData({ ...formik.values });
-            }}
+            handleClick={handleApplyEOB}
           >
-            Apply as EOB
+            {applyEob ? <CircularProgress /> : "Apply as EOB"}
           </CustomButton>
         </Box>
         <Stack

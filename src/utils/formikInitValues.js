@@ -144,7 +144,7 @@ export const claimInitVal = {
 };
 
 export const paymentInitValue = {
-  isClaim: false,
+  isClaim: true,
   isPatientPayment: false,
   paymentBy: "",
   payerSequenceNo: null,
@@ -166,7 +166,7 @@ export const paymentInitValue = {
   patientLastName: "",
   tcn: "",
   dateOfService: null,
-  billed: null,
+  billed: 0,
   allowed: 0,
   paid: 0,
   unpaid: 0,
@@ -175,11 +175,12 @@ export const paymentInitValue = {
   balance: null,
   isRemove: false,
   procedureCodes: "",
-  amount: null,
-  startBalance: null,
+  amount: 0,
+  startBalance: 0,
   deductible: null,
   claimStatus: "",
   otherCredits: null,
-  endBalanace: null,
+  endBalanace: 0,
   claimChargesDto: [],
+  applied: 0,
 };
