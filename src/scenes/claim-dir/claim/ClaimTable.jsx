@@ -23,7 +23,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
           providerId: el.providerId,
           patientId: el.patientId,
           payerId: el.payerInfoId,
-          totalCharges: el.totalCharges,
+          totalBilled: el.totalBilled,
           fromDate: el.claimChargesDto[0]?.fromDate || "N/A",
           claimStatus: el.claimChargesDto[0]?.claimStatus || "N/A",
           claimChargesDto: el.claimChargesDto,

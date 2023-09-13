@@ -1,8 +1,28 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const PostPayGrid = ({ payDataForGrid }) => {
+const PostPayGrid = ({ formik, setShowDetail, setDetailInfo }) => {
+  const payDataForGrid = [
+    {
+      claimId: formik.values.claimInfoId,
+      patientFirstName: formik.values.patientFirstName,
+      patientLastName: formik.values.patientLastName,
+      claimNumber: formik.values.claimNumber,
+      patientAccountNo: formik.values.patientAccountNo,
+      billed: formik.values.billed,
+      allowed: formik.values.allowed,
+      paid: formik.values.paid,
+      adjusted: formik.values.adjusted,
+      unpaid: formik.values.unpaid,
+      additionalActions: formik.values.additionalActions,
+      balance: formik.values.balance,
+      dateOfService: formik.values.dateOfService,
+      tcn: formik.values.tcn,
+      claimChargesDto: formik.values.claimChargesDto,
+    },
+  ];
   console.log(payDataForGrid, "allgrids");
 
   const rows = payDataForGrid.map((el) => ({
@@ -18,8 +38,29 @@ const PostPayGrid = ({ payDataForGrid }) => {
     unpaid: el.unpaid,
     additionalActions: el.additionalActions,
     balance: el.balance,
+    claimChargesDto: el.claimChargesDto,
   }));
 
+  const totalBilled = rows.reduce((sum, row) => sum + row.billed, 0);
+  const totalAllowed = rows.reduce((sum, row) => sum + row.allowed, 0);
+  const totalPaid = rows.reduce((sum, row) => sum + row.paid, 0);
+  const totalAdjusted = rows.reduce((sum, row) => sum + row.adjusted, 0);
+  const totalUnpaid = rows.reduce((sum, row) => sum + row.unpaid, 0);
+  const totalBalance = rows.reduce((sum, row) => sum + row.balance, 0);
+
+  const totalRows = {
+    id: "total",
+    patientFirstName: "Total",
+    patientLastName: "",
+    billed: totalBilled,
+    allowed: totalAllowed,
+    adjusted: totalAdjusted,
+    balance: totalBalance,
+    paid: totalPaid,
+    unpaid: totalUnpaid,
+  };
+
+  const rowsWithTotal = [...rows, totalRows];
   const columns = [
     {
       field: "name",
@@ -116,7 +157,7 @@ const PostPayGrid = ({ payDataForGrid }) => {
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-        rows={rows}
+        rows={rowsWithTotal}
         columns={columns}
         sx={{
           "& .header-bg": {
@@ -124,14 +165,21 @@ const PostPayGrid = ({ payDataForGrid }) => {
           },
         }}
         autoHeight
+        disableSelectionOnClick
         components={{
           NoRowsOverlay: () => (
             <div
               style={{ width: "100%", textAlign: "center", padding: "16px" }}
             >
-              {rows.length === 0 && "No Data Is Added"}
+              {rowsWithTotal.length === 0 && "No Data Is Added"}
             </div>
           ),
+        }}
+        onCellClick={(params) => {
+          if (params.row.id !== "total") {
+            setDetailInfo(params.row.claimChargesDto);
+            setShowDetail(true);
+          }
         }}
       />
     </Box>

@@ -36,6 +36,7 @@ import Claim from "./scenes/claim-dir/claim/Claim";
 import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
 import NewPayment from "./scenes/payment/NewPayment";
 import PostPayment from "./scenes/payment/PostPayment";
+import PostPayDetail from "./scenes/payment/PostPayDetail";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -85,7 +86,11 @@ function App() {
 
               {/* payment */}
               <Route path="/payment" element={<NewPayment />} />
-              <Route path="/payment/post" element={<PostPayment />} />
+              {/* <Route path="/payment/post" element={<PostPayment />} /> */}
+              <Route
+                path="/payment/post/postpay-detail"
+                element={<PostPayDetail />}
+              />
 
               <Route path="/team" element={<Team />} />
               <Route path="/contacts" element={<Contacts />} />
