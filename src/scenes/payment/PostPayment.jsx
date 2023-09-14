@@ -17,28 +17,6 @@ const PostPayment = ({
   const [showDetail, setShowDetail] = useState(false);
   const [detailInfo, setDetailInfo] = useState([]);
 
-  // const payDataForGrid = [
-  //   {
-  //     claimId: formik.values.claimInfoId,
-  //     patientFirstName: formik.values.patientFirstName,
-  //     patientLastName: formik.values.patientLastName,
-  //     claimNumber: formik.values.claimNumber,
-  //     patientAccountNo: formik.values.patientAccountNo,
-  //     billed: formik.values.billed,
-  //     allowed: formik.values.allowed,
-  //     paid: formik.values.paid,
-  //     adjusted: formik.values.adjusted,
-  //     unpaid: formik.values.unpaid,
-  //     additionalActions: formik.values.additionalActions,
-  //     balance: formik.values.balance,
-  //     dateOfService: formik.values.dateOfService,
-  //     tcn: formik.values.tcn,
-  //     claimChargesDto: formik.values.claimChargesDto,
-  //   },
-  // ];
-
-  // console.log(payDataForGrid, "datagridvalues");
-
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
     if (conform) {
@@ -53,7 +31,11 @@ const PostPayment = ({
 
       {showDetail ? (
         <Box sx={{ width: "100%" }}>
-          <PostPayDetail formik={formik} detailInfo={detailInfo} />
+          <PostPayDetail
+            formik={formik}
+            detailInfo={detailInfo}
+            setShowDetail={setShowDetail}
+          />
         </Box>
       ) : (
         <div>
@@ -62,7 +44,7 @@ const PostPayment = ({
               margin="0 20px 0"
               variant="contained"
               width="200px"
-              handleClick={() => console.log("save button clicked..")}
+              handleClick={formik.handleSubmit}
             >
               Save Payment
             </CustomButton>

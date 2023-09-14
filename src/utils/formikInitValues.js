@@ -172,7 +172,7 @@ export const paymentInitValue = {
   unpaid: 0,
   adjusted: 0,
   additionalActions: 0,
-  balance: null,
+  balance: 0,
   isRemove: false,
   procedureCodes: "",
   amount: 0,
