@@ -35,9 +35,9 @@ const NewPayment = () => {
   // console.log(postPaymentData, "allpostPayData");
   const formik = useFormik({
     initialValues: paymentInitValue,
-    // onSubmit: (values) => {
-    //   console.log(values, "payment Values");
-    // },
+    onSubmit: (values) => {
+      console.log(values, "payment Values");
+    },
   });
 
   const creditCardOpt = [

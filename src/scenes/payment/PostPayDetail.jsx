@@ -1,27 +1,45 @@
-import { Box, TextField } from "@mui/material";
+import { Edit } from "@mui/icons-material";
+import { Box, Button, Stack, TextField } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React, { useState } from "react";
-
-const PostPayDetail = ({ detailInfo, formik }) => {
-  console.log(detailInfo, "alldetailOfData");
-
+import CustomModal from "../../components/CustomModal";
+import EditPayDetail from "./EditPayDetail";
+const PostPayDetail = ({ detailInfo, formik, setShowDetail }) => {
   console.log(formik.values, "formikVals");
-
+  const [openEditModal, setOpenEditModal] = useState(false);
+  console.log(openEditModal, "editedModal code");
+  const [editedRow, setEditedRow] = useState(null);
+  console.log(editedRow, "checkEditedRow5");
   const formattedData = detailInfo.map((item) => ({
     id: item.claimChargesId,
     procedureCode: item.procedureCode,
     amount: item.amountBilled,
     claimStatus: item.claimStatus,
-    fromDate: item.fromDate || "",
+    fromDate: item.fromDate,
     startBalance: item.amountBilled,
     allowed: 0,
     paid: 0,
     unpaid: 0,
     adjusted: 0,
   }));
-  console.log(formattedData, "formattedData");
+
+  const [rowData, setRowData] = useState(formattedData);
+  const [editedData, setEditedData] = useState([]);
 
   const columns = [
+    {
+      field: "action",
+      headerName: "Edit",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+      renderCell: (params) => (
+        <Button variant="outlined" onClick={() => handleEditClick(params.row)}>
+          <Edit />
+        </Button>
+      ),
+    },
     {
       field: "fromDate",
       headerName: "DOS",
@@ -62,13 +80,6 @@ const PostPayDetail = ({ detailInfo, formik }) => {
       minWidth: 150,
       headerAlign: "center",
       align: "center",
-      editable: true,
-      renderCell: (params) => (
-        <TextField
-          value={params.value}
-          onChange={(e) => handleEditCellChange(params, e)}
-        />
-      ),
     },
     {
       field: "paid",
@@ -85,17 +96,6 @@ const PostPayDetail = ({ detailInfo, formik }) => {
       minWidth: 150,
       headerAlign: "center",
       align: "center",
-      renderCell: (params) => (
-        <TextField
-          value={params.value}
-          onChange={(e) =>
-            handleEditCellChange({
-              ...params,
-              props: { value: e.target.value },
-            })
-          }
-        />
-      ),
     },
     {
       field: "unpaid",
@@ -115,101 +115,108 @@ const PostPayDetail = ({ detailInfo, formik }) => {
     },
   ];
 
-  const totalAllowed = formattedData.reduce((sum, row) => sum + row.allowed, 0);
-  console.log(totalAllowed, "total Allowed");
-  const totalPaid = formattedData.reduce((sum, row) => sum + row.paid, 0);
-  const totalUnpaid = formattedData.reduce((sum, row) => sum + row.unpaid, 0);
-  // const totalBalance = formattedData.reduce((sum, row) => sum + row.balance);
-  const totalAdjusted = formattedData.reduce(
-    (sum, row) => sum + row.adjusted,
-    0
-  );
-  const totalAmount = formattedData.reduce((sum, row) => sum + row.amount, 0);
-  const totalStartBalance = formattedData.reduce(
-    (sum, row) => sum + row.startBalance,
-    0
-  );
-
-  const totalRows = {
-    id: "total",
-    fromDate: "Total",
-    amount: totalAmount,
-    procedureCode: "",
-    startBalance: totalStartBalance,
-    allowed: totalAllowed,
-    adjusted: totalAdjusted,
-    // balance: totalBalance,
-    paid: totalPaid,
-    unpaid: totalUnpaid,
-    claimStatus: "",
+  const handleEditClick = (row) => {
+    console.log(row);
+    setEditedRow(row);
+    // Check if the row is already in the editedData state
+    const isRowInEditedData = editedData.some((item) => item.id === row.id);
+    if (!isRowInEditedData) {
+      // Add the row to the editedData state if it's not already there
+      setEditedData((prevData) => [...prevData, row]);
+    }
+    setOpenEditModal(true);
   };
 
-  const allRows = [...formattedData, totalRows];
-  console.log(allRows, "all rows");
-
-  const [editedData, setEditedData] = useState(allRows);
-
-  const handleEditCellChange = (params, event) => {
-    // Find the index of the edited row
-    const editedRowIndex = editedData.findIndex((row) => row.id === params.id);
-
-    // Get the new "Allowed" value from the event
-    const allowed = parseFloat(event.target.value) || 0;
-
-    // Calculate the updated Paid and Adjusted values
-    const amount = parseFloat(editedData[editedRowIndex].amount) || 0;
-    const paid = allowed;
-    const adjusted = amount - allowed;
-
-    // Create a new copy of the editedData with the updated cell values
-    const updatedRow = {
-      ...editedData[editedRowIndex],
-      allowed: allowed,
-      paid: paid,
-      adjusted: adjusted,
-    };
-    const updatedData = [...editedData];
-    updatedData[editedRowIndex] = updatedRow;
-
-    // Update the state with the edited data
-    setEditedData(updatedData);
-
-    // Update formik values
-    const updatedFormikValues = { ...formik.values };
-    updatedFormikValues.allowed = allowed;
-    // Update other formik values here if needed
-
-    // Set the new formik values
-    formik.setValues(updatedFormikValues);
+  const handleSave = (editedData) => {
+    const updatedData = rowData.map((row) =>
+      row.id === editedData.id ? editedData : row
+    );
+    // Update the rowData state with the edited row
+    setRowData(updatedData);
+    setEditedData((prevData) =>
+      prevData.map((row) => (row.id === editedData.id ? editedData : row))
+    );
+    setEditedData((prevData) =>
+      prevData.map((row) => (row.id === editedData.id ? editedData : row))
+    );
+    setOpenEditModal(false);
   };
+
+  // done button handling
+  const handleDone = () => {
+    const totalAllowedFV = editedData.reduce(
+      (sum, row) => sum + row.allowed,
+      0
+    );
+    const totalPaidFV = editedData.reduce((sum, row) => sum + row.paid, 0);
+    const totalAdjustedFV = editedData.reduce(
+      (sum, row) => sum + row.adjusted,
+      0
+    );
+    const totalUnpaidFV = editedData.reduce((sum, row) => sum + row.unpaid, 0);
+    const minusAllowed = formik.values.billed - totalAllowedFV;
+    const minusedAdj = minusAllowed - totalAdjustedFV;
+    const result = minusedAdj;
+    const totalBalanceFV = result;
+    const appliedFV = formik.values.billed - formik.values.allowed;
+    formik.setValues((prevVals) => ({
+      ...prevVals,
+      allowed: totalAllowedFV,
+      adjusted: totalAdjustedFV,
+      paid: totalPaidFV,
+      unpaid: totalUnpaidFV,
+      balance: totalBalanceFV,
+      applied: appliedFV,
+    }));
+    setShowDetail(false);
+  };
+
+  console.log(rowData, "checkRowData");
 
   return (
-    <div style={{ width: "100%" }}>
-      {allRows.length > 0 ? (
-        <DataGrid
-          rows={editedData}
-          columns={columns}
-          sx={{
-            "& .header-bg": {
-              backgroundColor: "lightgrey",
-            },
-          }}
-          autoHeight
-          disableSelectionOnClick
-          components={{
-            NoRowsOverlay: () => (
-              <div
-                style={{ width: "100%", textAlign: "center", padding: "16px" }}
-              >
-                No Data Is Added
-              </div>
-            ),
-          }}
-        />
-      ) : (
-        <div>No Data Is Added</div>
-      )}
-    </div>
+    <>
+      <CustomModal
+        open={openEditModal}
+        handleClose={() => setOpenEditModal(false)}
+      >
+        <EditPayDetail data={editedRow} onSave={handleSave} />
+      </CustomModal>
+      <div style={{ width: "100%" }}>
+        <Box>
+          <Button variant="outlined" onClick={handleDone}>
+            Done
+          </Button>
+        </Box>
+        {rowData.length > 0 ? (
+          <DataGrid
+            rows={rowData}
+            columns={columns}
+            sx={{
+              "& .header-bg": {
+                backgroundColor: "lightgrey",
+              },
+            }}
+            autoHeight
+            disableSelectionOnClick
+            components={{
+              NoRowsOverlay: () => (
+                <div
+                  style={{
+                    width: "100%",
+                    textAlign: "center",
+                    padding: "16px",
+                  }}
+                >
+                  No Data Is Added
+                </div>
+              ),
+            }}
+          />
+        ) : (
+          <div>No Data Is Added</div>
+        )}
+      </div>
+    </>
   );
 };
 
