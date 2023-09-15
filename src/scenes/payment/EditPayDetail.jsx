@@ -86,6 +86,18 @@ const EditPayDetail = ({ data, onSave }) => {
           variant="outlined"
         />
 
+        <TextField
+          type="number"
+          size="small"
+          label="Adjusted"
+          fullWidth
+          value={editData.billed}
+          InputLabelProps={{ shrink: true }}
+          onChange={handleInputChange}
+          name="startBalance"
+          variant="outlined"
+        />
+
         <div>
           <CustomButton variant="contained" handleClick={handleSaveClick}>
             Save

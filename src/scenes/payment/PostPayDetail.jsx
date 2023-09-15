@@ -21,6 +21,7 @@ const PostPayDetail = ({ detailInfo, formik, setShowDetail }) => {
     paid: 0,
     unpaid: 0,
     adjusted: 0,
+    endBalance: item.amountBilled,
   }));
 
   const [rowData, setRowData] = useState(formattedData);

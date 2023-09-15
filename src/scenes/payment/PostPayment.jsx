@@ -2,8 +2,6 @@ import { Box, Button, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Header from "../../components/Header";
 import CustomButton from "../../components/CustomButton";
-import { useLocation, useNavigate } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import PostPayGrid from "./PostPayGrid";
 import PostPayDetail from "./PostPayDetail";
 

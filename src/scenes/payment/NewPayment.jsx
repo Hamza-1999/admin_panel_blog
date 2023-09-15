@@ -25,10 +25,13 @@ import ClaimTable from "../claim-dir/claim/ClaimTable";
 import CustomButton from "../../components/CustomButton";
 import { useNavigate } from "react-router-dom";
 import PostPayment from "./PostPayment";
+import { useDispatch } from "react-redux";
+import { createPaymentAction } from "../../features/actions/PaymentAction";
 
 const NewPayment = () => {
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
+  const dispatch = useDispatch();
   // const [postPaymentData, setPostPaymentData] = useState({});
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
@@ -37,6 +40,7 @@ const NewPayment = () => {
     initialValues: paymentInitValue,
     onSubmit: (values) => {
       console.log(values, "payment Values");
+      dispatch(createPaymentAction(values));
     },
   });
 
@@ -75,8 +79,10 @@ const NewPayment = () => {
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: `${val.primaryPayerInsuranceName} (${val.payerSequenceNo})`,
-          paymentFrom: val.primaryPayerInsuranceName,
+          paymentFrom: val.payerId,
+          paymentFromName: val.primaryPayerInsuranceName,
           payerId: val.payerId,
+          providerId: val.providerId,
           patientId: val.patientId,
           patientFirstName: val.patientFirstName,
           patientLastName: val.patientLastName,
@@ -93,18 +99,14 @@ const NewPayment = () => {
       }
     } else {
       setOpenPayerModal(true);
-      if (val.payerName && val.payerSequenceNo) {
+      if (val.payerName || val.payerSequenceNo) {
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: `${val.payerName} (${val.payerSequenceNo})`,
-          paymentFrom: val.payerName,
+          paymentFrom: val.payerId,
+          paymentFromName: val.payerName,
           payerId: val.payerId,
-          patientId: val.patientId,
-          claimInfoId: val.id,
           payerSequenceNo: val.payerSequenceNo,
-          billed: val.totalCharges,
-          balance: val.totalCharges,
-          claimChargesDto: val.claimChargesDto,
         }));
         setOpenPayerModal(false);
       }
@@ -320,8 +322,8 @@ const NewPayment = () => {
                 <CustomField
                   type="text"
                   label="Payment From"
-                  value={formik.values.paymentFrom}
-                  name="paymentFrom"
+                  value={formik.values.paymentFromName}
+                  name="paymentFromName"
                   handleBlur={formik.handleBlur}
                   handleChange={formik.handleChange}
                 />
