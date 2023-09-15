@@ -26,7 +26,7 @@ const PostPayGrid = ({ formik, setShowDetail, setDetailInfo }) => {
   console.log(payDataForGrid, "allgrids");
 
   const rows = payDataForGrid.map((el) => ({
-    id: el.claimId,
+    id: el.claimId || el,
     patientFirstName: el.patientFirstName,
     patientLastName: el.patientLastName,
     patientAccountNo: el.patientAccountNo,
