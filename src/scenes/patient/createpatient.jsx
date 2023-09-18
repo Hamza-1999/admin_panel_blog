@@ -10,7 +10,7 @@ import { newPatientAction } from "../../features/actions/createPatientAction";
 import "./createpatient.css";
 import path from "../../config/apiUrl";
 import PayerInfo from "./PayerInfo";
-import { tempName } from "../../utils/formikInitValues";
+import { patientInitValues } from "../../utils/formikInitValues";
 // import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
 
 const CreatePatient = () => {
@@ -24,7 +24,7 @@ const CreatePatient = () => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
-    accountNo: "",
+    accountNo: null,
     email: "",
     drivingLicense: "",
     dateOfBirth: null,
@@ -115,14 +115,15 @@ const CreatePatient = () => {
   };
 
   const formik = useFormik({
-    initialValues: tempName,
-    onSubmit: (values) => {
+    initialValues: patientInitValues,
+    onSubmit: (values, action) => {
       try {
         handleFormSubmit(values);
         console.log(values, "checking submit values of createPatient");
       } catch (error) {
         console.error("Error creating patient:", error);
       }
+      action.resetForm();
     },
   });
 
