@@ -1,7 +1,7 @@
-export const tempName = {
+export const patientInitValues = {
   firstName: "",
   lastName: "",
-  accountNo: "",
+  patientAccountNo: null,
   email: "",
   drivingLicense: "",
   dateOfBirth: null,

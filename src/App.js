@@ -20,10 +20,7 @@ import ManagePatient from "./scenes/patient/ManagePatient";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Login from "./auth/Login";
-import EditPatient from "./scenes/patient/EditPatient";
-import CreatePatient from "./scenes/patient/CreatePatient";
 import ShowPatientInfo from "./scenes/patient/ShowPatientInfo";
-import EditInsuranceInfo from "./scenes/patient/EditInsuranceInfo";
 import EditPatientInfo from "./scenes/patient/EditPatientInfo";
 import NewPractice from "./scenes/custom-setup/practices/NewPractice";
 import Practice from "./scenes/custom-setup/practices/Practice";
@@ -35,8 +32,8 @@ import NewClaim from "./scenes/claim-dir/claim/NewClaim";
 import Claim from "./scenes/claim-dir/claim/Claim";
 import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
 import NewPayment from "./scenes/payment/NewPayment";
-import PostPayment from "./scenes/payment/PostPayment";
 import PostPayDetail from "./scenes/payment/PostPayDetail";
+import CreatePatient from "./scenes/patient/CreatePatient";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -57,8 +54,10 @@ function App() {
               <Route path="/" element={<Login />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
-              <Route path="/createpatient" element={<CreatePatient />} />
+
               {/* <Route path="/editpatient/:accountNo" element={<EditPatient />} /> */}
+              <Route path="/createpatient" element={<CreatePatient />} />
+
               <Route
                 path="/editpatient/:accountNo"
                 element={<EditPatientInfo />}
@@ -86,7 +85,6 @@ function App() {
 
               {/* payment */}
               <Route path="/payment" element={<NewPayment />} />
-              {/* <Route path="/payment/post" element={<PostPayment />} /> */}
               <Route
                 path="/payment/post/postpay-detail"
                 element={<PostPayDetail />}
