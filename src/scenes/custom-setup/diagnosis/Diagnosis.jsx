@@ -66,7 +66,7 @@ const Diagnosis = ({ formik, handleClose, icdIdentifier }) => {
     const descriptionFieldName = `icd_${icdIdentifier}_Description`;
     formik.setValues({
       ...formik.values,
-      [fieldName]: val.diagnosisCode,
+      [fieldName]: val.id,
       [descriptionFieldName]: val.diagnosisDescription,
     });
 

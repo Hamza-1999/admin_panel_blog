@@ -85,7 +85,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD A"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -121,7 +121,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD B"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -157,7 +157,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD C"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -193,7 +193,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD D"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -229,7 +229,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD E"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -265,7 +265,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD F"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -301,7 +301,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD G"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -337,7 +337,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD H"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -373,7 +373,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD I"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -409,7 +409,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD J"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -445,7 +445,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD K"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
@@ -481,7 +481,7 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="text"
+                type="number"
                 label="ICD L"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}

@@ -75,8 +75,8 @@ const ProcedureCodes = ({ setProcedureValues, handleClose }) => {
       procedureCodeId: val.id,
       procedureCode: val.procedureCode,
       unitPrice: val.price,
-      units: val.units,
-      amount: val.price * val.units,
+      units: Number(val.units),
+      amountBilled: val.price * val.units,
     }));
     handleClose();
   };

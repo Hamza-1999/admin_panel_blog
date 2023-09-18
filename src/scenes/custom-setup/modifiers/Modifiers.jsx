@@ -60,7 +60,7 @@ const Modifiers = ({ setProcedureValues, identifier, handleClose }) => {
     const fieldName = field;
     setProcedureValues((prevVals) => ({
       ...prevVals,
-      [fieldName]: val.modifierCode,
+      [fieldName]: val.id,
     }));
     handleClose();
   };

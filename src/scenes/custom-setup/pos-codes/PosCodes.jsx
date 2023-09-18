@@ -61,6 +61,7 @@ const PosCodes = ({ setProcedureValues, handleClose }) => {
   const handlePoscode = (val) => {
     setProcedureValues((prevVals) => ({
       ...prevVals,
+      posCodeId: val.id,
       posCode: val.posCode,
     }));
     handleClose();
