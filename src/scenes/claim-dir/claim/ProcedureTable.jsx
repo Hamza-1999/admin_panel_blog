@@ -4,7 +4,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useEffect, useState } from "react";
 
 const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
-  console.log(claimChargesDto, "checking claim charges dto")
+  console.log(claimChargesDto, "checking claim charges dto");
   const rows = claimChargesDto.map((el, index) => ({
     id: index,
     procedureCode: el.procedureCode,
@@ -18,7 +18,6 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
     modCode_4: el.modCode_4,
     unitPrice: el.unitPrice,
     units: el.units,
-    amount: el.amount,
   }));
 
   const handleDeleteRow = (val) => {
@@ -120,7 +119,7 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
       headerClassName: "header-bg",
     },
     {
-      field: "amount",
+      field: "amountBilled",
       headerName: "Amount",
       width: 150,
       headerAlign: "center",

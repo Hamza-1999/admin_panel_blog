@@ -42,23 +42,25 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
   // const [procedureAmount, setProcedureAmount] = useState(null);
   const [procedureValues, setProcedureValues] = useState({
     procedureCodeId: null,
+    tosCodeId: null,
+    posCodeId: null,
     procedureCode: "",
     toDate: null,
     fromDate: null,
     posCode: "",
     tosCode: "",
-    modCode_1: "",
-    modCode_2: "",
-    modCode_3: "",
-    modCode_4: "",
-    icd_Pointers: "",
-    unitPrice: null,
-    units: null,
+    modCode_1: null,
+    modCode_2: null,
+    modCode_3: null,
+    modCode_4: null,
+    unitPrice: 0,
+    units: 0,
     claimStatus: "",
-    amount: null,
+    amountBilled: 0,
+    isDeleted: false,
   });
 
-  console.log(procedureValues.amount, "check amount prs");
+  // console.log(procedureValues.amount, "check amount prs");
 
   const handleOpenModifierModal = (identifier) => {
     setOpenModifierModal(true);
@@ -72,20 +74,20 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
 
   const handleProcedureChange = (event) => {
     const { name, value } = event.target;
+
     setProcedureValues((prevCharge) => ({
       ...prevCharge,
       [name]: value,
     }));
     if (name === "units" || name === "unitPrice") {
-      const newUnits =
-        name === "units" ? parseInt(value) : procedureValues.units;
+      const newUnits = name === "units" ? Number(value) : procedureValues.units;
       const newPrice =
-        name === "unitPrice" ? parseFloat(value) : procedureValues.unitPrice;
+        name === "unitPrice" ? Number(value) : procedureValues.unitPrice;
       const newAmount = newUnits * newPrice;
       // Update the procedureValues state with the new amount
       setProcedureValues((prevCharge) => ({
         ...prevCharge,
-        amount: newAmount,
+        amountBilled: newAmount,
       }));
     }
   };
@@ -284,6 +286,7 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
           }}
         >
           <CustomField
+            type="number"
             label="Units"
             name="units"
             value={procedureValues.units}
@@ -291,6 +294,7 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
             handleBlur={formik.handleBlur}
           />
           <CustomField
+            type="number"
             label="Price"
             name="unitPrice"
             value={procedureValues.unitPrice}
@@ -298,9 +302,10 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
             handleBlur={formik.handleBlur}
           />
           <CustomField
+            type="number"
             label="Amount"
-            name="amount"
-            value={procedureValues.amount}
+            name="amountBilled"
+            value={procedureValues.amountBilled}
             handleChange={handleProcedureChange}
             handleBlur={formik.handleBlur}
           />

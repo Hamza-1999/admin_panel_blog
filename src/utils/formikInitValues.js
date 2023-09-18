@@ -89,7 +89,7 @@ export const claimInitVal = {
   primaryPayerGroupId: null,
   primaryPayerPolicyType: "",
   primaryPayerCopayDue: null,
-  payerSequenceNo: null,
+  // payerSequenceNo: null,
   claimFrequency: "",
   referenceNumber: null,
   facilityName: "",

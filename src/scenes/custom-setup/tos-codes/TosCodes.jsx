@@ -61,6 +61,7 @@ const TosCodes = ({ handleClose, setProcedureValues }) => {
   const handleTosDetails = (val) => {
     setProcedureValues((prevValues) => ({
       ...prevValues,
+      tosCodeId: val.id,
       tosCode: val.tosCode,
     }));
 

@@ -36,7 +36,6 @@ const NewClaim = () => {
       console.log(values, "claimvals999");
       const postValues = {
         ...values,
-        claimChargesDto: claimChargesDto,
         patientAccountNo: claimIds.patientAccountNo,
         patientId: claimIds.patientId,
         practiceId: claimIds.practiceId,
@@ -47,6 +46,7 @@ const NewClaim = () => {
         supervisingProviderId: claimIds.supervisingProviderId,
         providerId: claimIds.providerId,
         facilityId: facilityId,
+        claimChargeDto: claimChargesDto,
       };
       console.log(postValues, "calim postValues");
       try {
@@ -58,6 +58,7 @@ const NewClaim = () => {
     },
   });
 
+  console.log(formik.values, "form values claims");
   return (
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
