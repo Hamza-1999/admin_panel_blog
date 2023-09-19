@@ -107,6 +107,14 @@ const CreatePatient = () => {
   };
 
   const handleFormSubmit = (formValues) => {
+    const requiredFields = ["firstName", "lastName"];
+    const emptyFields = requiredFields.filter(
+      (fieldName) => !formValues[fieldName]
+    );
+    if (emptyFields.length > 0) {
+      alert("Please fill the required fields first");
+      return;
+    }
     try {
       dispatch(newPatientAction(formValues));
     } catch (error) {
@@ -169,13 +177,7 @@ const CreatePatient = () => {
         >
           {/* <div > */}
           <Box className="formContent">
-            {tabValue === 0 && (
-              <PatientInfo
-                formik={formik}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            )}
+            {tabValue === 0 && <PatientInfo formik={formik} />}
             {tabValue === 1 && (
               <InsuranceInfo
                 formik={formik}

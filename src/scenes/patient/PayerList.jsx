@@ -8,7 +8,7 @@ import { getPayerAction } from "../../features/actions/payerAction";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 
-const PayerList = ({ onCellClick, handleClose }) => {
+const PayerList = ({ handleSelectPayer }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { getAllPayer, loading } = useSelector((state) => state.payer);
@@ -68,8 +68,7 @@ const PayerList = ({ onCellClick, handleClose }) => {
             scrollbarSize={5}
             disableSelectionOnClick
             onCellClick={(param) => {
-              onCellClick(param.row);
-              // handleClose();
+              handleSelectPayer(param.row);
             }}
           />
         ) : (

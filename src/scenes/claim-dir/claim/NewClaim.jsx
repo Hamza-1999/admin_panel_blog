@@ -46,7 +46,7 @@ const NewClaim = () => {
         supervisingProviderId: claimIds.supervisingProviderId,
         providerId: claimIds.providerId,
         facilityId: facilityId,
-        claimChargeDto: claimChargesDto,
+        claimChargesUpdatedDto: claimChargesDto,
       };
       console.log(postValues, "calim postValues");
       try {

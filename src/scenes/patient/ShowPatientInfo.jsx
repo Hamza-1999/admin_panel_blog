@@ -23,21 +23,20 @@ import { Edit } from "@mui/icons-material";
 import CustomModal from "../../components/CustomModal";
 import EditPatient from "./EditPatient";
 import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
-import EditInsuranceInfo from "./EditInsuranceInfo";
 
 const ShowPatientInfo = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { accountNo } = useParams();
- 
+
   console.log(accountNo, "acc number");
   const { getAllPatients, loading } = useSelector((state) => state.patient);
-  console.log(getAllPatients, "all patients")
+  console.log(getAllPatients, "all patients");
   const selectedPatient = getAllPatients.result?.find(
     (el) => el.accountNo === Number(accountNo)
   );
 
-  console.log(selectedPatient, "check selected67")
+  console.log(selectedPatient, "check selected67");
 
   const handleEditPatient = (accNum) => {
     navigate(`/editpatient/${accNum}`);
@@ -363,6 +362,7 @@ const ShowPatientInfo = () => {
             </AccordionDetails>
           </Accordion>
 
+          {/* Insurance Information Detail */}
           <Accordion>
             <AccordionSummary>
               <Stack
@@ -603,6 +603,7 @@ const ShowPatientInfo = () => {
             </AccordionDetails>
           </Accordion>
 
+          {/* payerInfo Detail */}
           <Accordion>
             <AccordionSummary>
               <Stack
@@ -629,15 +630,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Priority
                     </Typography>
-                    <Typography>Primary</Typography>
-                  </Stack>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4}>
-                  <Stack>
-                    <Typography variant="h4" component={"h1"}>
-                      Payer Type
+                    <Typography>
+                      {selectedPatient?.payerInfoPriorityName}
                     </Typography>
-                    <Typography>Self-Pay</Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -645,7 +640,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Policy Type
                     </Typography>
-                    <Typography>Group Policy</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoPolicyType}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -653,7 +650,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Memder Id
                     </Typography>
-                    <Typography>1</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoMemberId}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -661,7 +660,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Group Id
                     </Typography>
-                    <Typography>1</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoMemberId}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -669,7 +670,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Copay
                     </Typography>
-                    <Typography>89700</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoCopayAmount}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -677,7 +680,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Co-Insurance %
                     </Typography>
-                    <Typography>7860</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoCoInsurancePercent}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -685,7 +690,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Deductible
                     </Typography>
-                    <Typography>7658</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoDeductibleAmount}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -693,7 +700,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Out of Pocket Max
                     </Typography>
-                    <Typography>99700</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoOutOfPocketMax}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -701,7 +710,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Effective Date
                     </Typography>
-                    <Typography>7/8/2002</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoEffectiveDate}
+                    </Typography>
                   </Stack>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4}>
@@ -709,7 +720,9 @@ const ShowPatientInfo = () => {
                     <Typography variant="h4" component={"h1"}>
                       Termination Date
                     </Typography>
-                    <Typography>7/9/2023</Typography>
+                    <Typography>
+                      {selectedPatient?.payerInfoTerminationDate}
+                    </Typography>
                   </Stack>
                 </Grid>
               </Grid>

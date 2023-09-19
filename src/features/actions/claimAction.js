@@ -4,7 +4,7 @@ import { getData, postData, updateData } from "../../config/axiosFunctions";
 
 export const newClaimAction = createAsyncThunk("createClaim", async (data) => {
   try {
-    const response = await postData(`${path}/claim`, data);
+    const response = await postData(`${path}/claim/AddUpdatedClaim`, data);
     if (response) {
       return response;
     } else {
