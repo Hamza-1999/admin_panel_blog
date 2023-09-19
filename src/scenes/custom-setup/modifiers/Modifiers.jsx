@@ -97,7 +97,7 @@ const Modifiers = ({ setProcedureValues, identifier, handleClose }) => {
             ),
           }}
           onCellClick={(params) =>
-            handleModifier(params.row, `modCode_${identifier}`)
+            handleModifier(params.row, `mod_${identifier}`)
           }
         />
       )}

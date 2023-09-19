@@ -19,6 +19,8 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CustomModal from "../../components/CustomModal";
 import NewPayer from "./NewPayer";
 import PayerList from "./PayerList";
+import CustomSearchField from "../../components/CustomSearchField";
+import CustomField from "../../components/CustomField";
 
 const PayerInfo = ({ formik, formData, setFormData }) => {
   const dispatch = useDispatch();
@@ -29,7 +31,6 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
   const [selectedPayerName, setSelectedPayerName] = useState(
     formData.payerInfoPayerName
   );
-  console.log(selectedPayerName, "payername");
 
   const handleChange = (event) => {
     console.log(event.target.value, "value");
@@ -40,23 +41,6 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
     });
   };
 
-  // const handlePayerNameChange = (event) => {
-  //   const newPayerName = event.target.value;
-  //   console.log("Selected Payer Name:", newPayerName);
-
-  //   setSelectedPayerName(newPayerName); // Set the selected payer name
-
-  //   const updatedFormData = {
-  //     ...formData,
-  //     payerInfoPayerName: newPayerName, // Update payerInfoPayerName in formData
-  //   };
-
-  //   setFormData(updatedFormData);
-
-  //   console.log("Updated Form Data:", updatedFormData);
-  // };
-
-  // Define data fetching URLs
   const dataFetchUrls = {
     priorityType: `${path}/ct-priorityType`,
     policyTypes: `${path}/ct-policyType`,
@@ -83,6 +67,11 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
     setSelectedPayerName(formData.payerInfoPayerName);
   }, [formData.payerInfoPayerName]);
 
+  const handleSelectPayer = (val) => {
+    console.log(val, "selectpayervalue");
+    formik.setFieldValue("payerInfoPayerName", val.payerName);
+    setOpenPyerListModal(false);
+  };
   return (
     <>
       <CustomModal
@@ -90,8 +79,9 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
         handleClose={() => setOpenPyerListModal(false)}
       >
         <PayerList
-          onCellClick={(val) => setSelectedPayerName(val.payerName)}
+          // onCellClick={(val) => setSelectedPayerName(val.payerName)}
           handleClose={() => setOpenPyerListModal(false)}
+          handleSelectPayer={handleSelectPayer}
         />
       </CustomModal>
 
@@ -119,27 +109,27 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
         >
           {/* priority type */}
           <CustomSelectBox
-            value={formData.payerInfoPriorityName}
+            value={formik.values.payerInfoPriorityName}
             name="payerInfoPriorityName"
             dropdownOptions={priorityOptions?.map((opt) => ({
               value: opt.priorityType,
               id: opt.priorityTypeId,
             }))}
             label="Priority Type"
-            handleChange={handleChange}
+            handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
 
           {/* policy type */}
           <CustomSelectBox
-            value={formData.payerInfoPolicyType}
+            value={formik.values.payerInfoPolicyType}
             name="payerInfoPolicyType"
             dropdownOptions={policyTypeOptions?.map((opt) => ({
               value: opt.policyType,
               id: opt.policyTypeId,
             }))}
             label="Policy Type"
-            handleChange={handleChange}
+            handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
         </Box>
@@ -162,7 +152,7 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
               gridColumn: { xs: "1 / span 1", sm: "1 / span 2", md: "auto" },
             }}
           >
-            <TextField
+            {/* <TextField
               type="text"
               size="small"
               variant="filled"
@@ -202,7 +192,22 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
                   </InputAdornment>
                 ),
               }}
-            />
+            /> */}
+            <FormControl
+              sx={{
+                width: { xs: "100%", sm: "100%" },
+                fontSize: "1rem",
+              }}
+            >
+              <CustomSearchField
+                type="text"
+                fieldVal={formik.values.payerInfoPayerName}
+                name="payerInfoPayerName"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                handleModalOpen={() => setOpenPyerListModal(true)}
+              />
+            </FormControl>
             <Button
               sx={{ width: "10%" }}
               variant="outlined"
@@ -211,37 +216,23 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
               <Add />
             </Button>
           </Box>
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
-            type="number"
+          {/* payer info member id */}
+          <CustomField
             label="Member Id"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoMemberId}
-            name="payerInfoMemberId"
-            id="payerInfoMemberId"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
-          />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
             type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoMemberId}
+            name="payerInfoMemberId"
+            handleBlur={formik.handleBlur}
+          />
+          {/* group id */}
+          <CustomField
             label="Group Id"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoGroupId}
+            type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoGroupId}
             name="payerInfoGroupId"
-            id="payerInfoGroupId"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            handleBlur={formik.handleBlur}
           />
         </Box>
 
@@ -256,68 +247,37 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
             },
           }}
         >
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Copay"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoCopayAmount}
+            value={formik.values.payerInfoCopayAmount}
             name="payerInfoCopayAmount"
-            id="payerInfoCopayAmount"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Co-Insurance %"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoCoInsurancePercent}
+            value={formik.values.payerInfoCoInsurancePercent}
             name="payerInfoCoInsurancePercent"
-            id="payerInfoCoInsurancePercent"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Deductible"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoDeductibleAmount}
+            value={formik.values.payerInfoDeductibleAmount}
             name="payerInfoDeductibleAmount"
-            id="payerInfoDeductibleAmount"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Out of Pocket Max"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={formData.payerInfoOutOfPocketMax}
+            value={formik.values.payerInfoOutOfPocketMax}
             name="payerInfoOutOfPocketMax"
-            id="payerInfoOutOfPocketMax"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
         </Box>
 
@@ -335,7 +295,7 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Effective Date"
-              value={formData.payerInfoEffectiveDate}
+              value={formik.values.payerInfoEffectiveDate}
               onChange={(value) =>
                 formik.setFieldValue("payerInfoEffectiveDate", value)
               }
@@ -344,14 +304,14 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
               }
               renderInput={(params) => <TextField {...params} />}
               inputFormat="MM/DD/YYYY"
-              clearable
+              // clearable
             />
           </LocalizationProvider>
 
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Termination Date"
-              value={formData.payerInfoTerminationDate}
+              value={formik.values.payerInfoTerminationDate}
               onChange={(value) =>
                 formik.setFieldValue("payerInfoTerminationDate", value)
               }

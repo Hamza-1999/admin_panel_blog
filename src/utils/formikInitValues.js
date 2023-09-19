@@ -1,7 +1,8 @@
 export const patientInitValues = {
   firstName: "",
   lastName: "",
-  patientAccountNo: null,
+  // patientAccountNo: null,
+  accountNo: null,
   email: "",
   drivingLicense: "",
   dateOfBirth: null,
@@ -52,6 +53,7 @@ export const patientInitValues = {
   insuredCountryName: "",
   insuredRelationShipToPatientName: "",
   insuredGenderIdentityName: "",
+  insuredPriorityType: "",
   // employeeName: "",
   empAddress: "",
   empCityName: "",
@@ -93,6 +95,10 @@ export const claimInitVal = {
   claimFrequency: "",
   referenceNumber: null,
   facilityName: "",
+  claimType: "Professional",
+  tcn: "abc",
+  totalCharges: 200,
+  totalBilled: 200,
 
   // claim charges
   icD_A: null,
@@ -121,26 +127,6 @@ export const claimInitVal = {
   icd_J_Description: "",
   icd_K_Description: "",
   icd_L_Description: "",
-
-  // charges dtos for multiple procedure
-  // claimChargesDto: [
-  //   {
-  //     fromDate: null,
-  //     toDate: null,
-  //     procedureCode: "",
-  //     posCode: "",
-  //     tosCode: "",
-  //     modCode_1: "",
-  //     modCode_2: "",
-  //     modCode_3: "",
-  //     modCode_4: "",
-  //     icD_pointers: "",
-  //     unitPrice: null,
-  //     units: null,
-  //     amount: null,
-  //     claimStatus: "",
-  //   },
-  // ],
 };
 
 export const paymentInitValue = {

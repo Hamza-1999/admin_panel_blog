@@ -20,14 +20,12 @@ import path from "../../config/apiUrl";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from "dayjs";
-import styled from "@emotion/styled";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import { Expand, ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
 // import { createPatientSchema } from "../../schemas";
 
-const PatientInfo = ({ formik, formData, setFormData }) => {
+const PatientInfo = ({ formik }) => {
   console.log(formik.values, "formdata");
   // const isNonMobile = useMediaQuery("(min-width:600px)");
   const [accountTypeOptions, setAccountTypeOptions] = useState([]);
@@ -46,14 +44,6 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
   const [residenceOptions, setResidenceOptions] = useState([]);
 
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    formik.handleChange(event);
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   // Define data fetching URLs
   const dataFetchUrls = {
@@ -170,13 +160,13 @@ const PatientInfo = ({ formik, formData, setFormData }) => {
 
               <CustomSelectBox
                 name="genderIdentityName"
-                value={formData.genderIdentityName}
+                value={formik.values.genderIdentityName}
                 dropdownOptions={genderOptions?.map((opt) => ({
                   value: opt.genderIdentityName,
                   id: opt.genderIdentityId,
                 }))}
                 label="Gender"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 

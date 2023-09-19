@@ -33,6 +33,7 @@ import CustomSelectBox from "../../components/CustomSelectBox";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { ExpandMore } from "@mui/icons-material";
+import CustomField from "../../components/CustomField";
 
 const EditPatient = ({ formik, editFormData, setEditFormData }) => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -175,27 +176,6 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
     fetchDataOptions(dataFetchUrls.studentStatus, setStudentStatusOpt);
   }, [dispatch]);
 
-  // const customSelectMenuStyling = (maxHeight, horizontalAlign) => {
-  //   return {
-  //     MenuProps: {
-  //       getContentAnchorEl: null, // Aligns the menu to the top of the select field
-  //       anchorOrigin: {
-  //         vertical: "bottom",
-  //         horizontal: horizontalAlign || "left",
-  //       },
-  //       transformOrigin: {
-  //         vertical: "top",
-  //         horizontal: horizontalAlign || "left",
-  //       },
-  //       PaperProps: {
-  //         style: {
-  //           maxHeight: maxHeight || "100px", // Set the maximum height of the menu
-  //         },
-  //       },
-  //     },
-  //   };
-  // };
-
   return (
     <>
       <Box display="flex" flexDirection="column">
@@ -227,199 +207,175 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
                 },
               }}
             >
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="text"
-                label="First Name"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.firstName}
                 name="firstName"
-                id="firstName"
-                // error={!!touched.firstName && !!errors.firstName}
-                // helperText={touched.firstName && errors.firstName}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.firstName}
+                label="First Name"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="text"
-                label="Last Name"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.lastName}
                 name="lastName"
-                id="lastName"
-                // error={!!touched.lastName && !!errors.lastName}
-                // helperText={touched.lastName && errors.lastName}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.lastName}
+                label="Last Name"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="text"
-                label="Email"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.email}
                 name="email"
-                id="email"
-                // error={!!touched.email && !!errors.email}
-                // helperText={touched.email && errors.email}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.email}
+                label="Email"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="text"
-                label="Driving License"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.drivingLicense}
                 name="drivingLicense"
-                id="drivingLicense"
-                // error={!!touched.drivingLicense && !!errors.drivingLicense}
-                // helperText={touched.drivingLicense && errors.drivingLicense}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.drivingLicense}
+                label="Driving License"
               />
 
               <CustomSelectBox
                 name="genderIdentityName"
-                value={editFormData.genderIdentityName}
+                value={formik.values.genderIdentityName}
                 dropdownOptions={genderOptions?.map((opt) => ({
                   value: opt.genderIdentityName,
                   id: opt.genderIdentityId,
                 }))}
                 label="Gender"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* sexual orientation dropdown */}
               <CustomSelectBox
                 name="sexualOrientationName"
-                value={editFormData.sexualOrientationName}
+                value={formik.values.sexualOrientationName}
                 dropdownOptions={sexOrientationOptions?.map((opt) => ({
                   value: opt.sexualOrientationName,
                   id: opt.sexualOrientationId,
                 }))}
                 label="Sex Orientation"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* marital status */}
               <CustomSelectBox
                 name="maritalStatusName"
-                value={editFormData.maritalStatusName}
+                value={formik.values.maritalStatusName}
                 dropdownOptions={maritalOptions?.map((opt) => ({
                   value: opt.maritalStatusName,
                   id: opt.maritalStatusId,
                 }))}
                 label="Marital Status"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* Race Status */}
               <CustomSelectBox
-                value={editFormData.raceStatusName}
+                value={formik.values.raceStatusName}
                 name="raceStatusName"
                 dropdownOptions={raceOptions?.map((opt) => ({
                   value: opt.raceStatusName,
                   id: opt.raceStatusId,
                 }))}
                 label="Race Status"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* account types */}
               <CustomSelectBox
-                value={editFormData.accountType}
+                value={formik.values.accountType}
                 name="accountType"
                 dropdownOptions={accountTypeOptions?.map((opt) => ({
                   value: opt.accountType,
                   id: opt.accountTypeId,
                 }))}
                 label="Account Type"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* employeement status */}
               <CustomSelectBox
-                value={editFormData.employmentStatusName}
+                value={formik.values.employmentStatusName}
                 name="employmentStatusName"
                 dropdownOptions={employeementOptions?.map((opt) => ({
                   value: opt.employmentStatusName,
                   id: opt.employmentStatusId,
                 }))}
                 label="Employement Status"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* referrel source*/}
               <CustomSelectBox
-                value={editFormData.referralSourceName}
+                value={formik.values.referralSourceName}
                 name="referralSourceName"
                 dropdownOptions={referenceOptions?.map((opt) => ({
                   value: opt.referralSourceName,
                   id: opt.referralSourceId,
                 }))}
                 label="Referral Source"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* relation to patient */}
               <CustomSelectBox
-                value={editFormData.relationShipToPatientName}
+                value={formik.values.relationShipToPatientName}
                 name="relationShipToPatientName"
                 dropdownOptions={patienRelationOpt?.map((opt) => ({
                   value: opt.relationShipToPatientName,
                   id: opt.relationShipToPatientId,
                 }))}
                 label="Relation to Patient"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
 
               {/* Ethnicity Status*/}
               <CustomSelectBox
-                value={editFormData.ethnicityName}
+                value={formik.values.ethnicityName}
                 name="ethnicityName"
                 dropdownOptions={ethnicityOptions?.map((opt) => ({
                   value: opt.ethnicityName,
                   id: opt.ethnicityId,
                 }))}
                 label="Ethnicity Status"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
               {/* student Status*/}
               <CustomSelectBox
-                value={editFormData.studentStatusName}
+                value={formik.values.studentStatusName}
                 name="studentStatusName"
                 dropdownOptions={studentStatusOpt?.map((opt) => ({
                   value: opt.studentStatusName,
                   id: opt.studentStatusId,
                 }))}
                 label="Student Status"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
             </Box>
           </AccordionDetails>
         </Accordion>
-        {/* contact details */}
 
+        {/* contact details */}
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMore />}
@@ -447,69 +403,48 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
                 },
               }}
             >
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* cell number */}
+              <CustomField
                 type="number"
-                label="Phone Number"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.cellPhone}
-                id="cellPhone"
                 name="cellPhone"
-                // error={!!touched.cellPhone && !!errors.cellPhone}
-                // helperText={touched.cellPhone && errors.cellPhone}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.cellPhone}
+                label="Phone Number"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* home phone number */}
+              <CustomField
                 type="number"
-                label="Home Number"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.homePhone}
                 name="homePhone"
-                id="homePhone"
-                // error={!!touched.homePhone && !!errors.homePhone}
-                // helperText={touched.homePhone && errors.homePhone}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.homePhone}
+                label="Home Number"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="number"
-                label="Work Phone"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.workPhone}
                 name="workPhone"
-                id="workPhone"
-                // error={!!touched.workPhone && !!errors.workPhone}
-                // helperText={touched.workPhone && errors.workPhone}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.workPhone}
+                label="Work Number"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              <CustomField
                 type="number"
-                label="Ext"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.ext}
                 name="ext"
-                id="ext"
-                // error={!!touched.ext && !!errors.ext}
-                // helperText={touched.ext && errors.ext}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                value={formik.values.ext}
+                label="Ext"
               />
             </Box>
           </AccordionDetails>
         </Accordion>
+
         {/* Birth Details */}
         <Accordion>
           <AccordionSummary
@@ -541,28 +476,28 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
               <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
                 <DatePicker
                   label="Date of Birth"
-                  value={editFormData.dateOfBirth}
-                  onChange={(value) =>
-                    formik.setFieldValue("dateOfBirth", value)
-                  }
+                  value={formik.values.dateOfBirth}
+                  onChange={(value) => {
+                    formik.setFieldValue("dateOfBirth", value);
+                  }}
                   onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  clearable
+                  // clearable
                 />
               </LocalizationProvider>
 
               <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
                 <DatePicker
                   label="Date of Death"
-                  value={editFormData.dateOfDeath}
+                  value={formik.values.dateOfDeath}
                   onChange={(value) =>
                     formik.setFieldValue("dateOfDeath", value)
                   }
                   onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  clearable
+                  // clearable
                 />
               </LocalizationProvider>
             </Box>
@@ -597,84 +532,72 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
                 },
               }}
             >
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* street line address */}
+              <CustomField
                 type="text"
-                label="Street Line Address"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.address}
-                id="address"
+                value={formik.values.address}
                 name="address"
-                // error={!!touched.address && !!errors.address}
-                // helperText={touched.address && errors.address}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="Street Line Address"
               />
-
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* zip code */}
+              <CustomField
                 type="text"
-                label="Zipcode"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.zipCode}
-                id="zipCode"
+                value={formik.values.zipCode}
                 name="zipCode"
-                // error={!!touched.zipCode && !!errors.zipCode}
-                // helperText={touched.zipCode && errors.zipCode}
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="Zipcode"
               />
-
               {/* country types */}
               <CustomSelectBox
-                value={editFormData.countryName}
+                value={formik.values.countryName}
                 name="countryName"
                 dropdownOptions={countryOptions?.map((opt) => ({
                   value: opt.countryName,
                   id: opt.countryId,
                 }))}
                 label="Country"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
               {/* state options */}
               <CustomSelectBox
-                value={editFormData.stateName}
+                value={formik.values.stateName}
                 name="stateName"
                 dropdownOptions={stateOptions?.map((opt) => ({
                   value: opt.stateName,
                   id: opt.stateId,
                 }))}
                 label="State"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
               {/* city types */}
               <CustomSelectBox
-                value={editFormData.cityName}
+                value={formik.values.cityName}
                 name="cityName"
                 dropdownOptions={cityOptions?.map((opt) => ({
                   value: opt.cityName,
                   id: opt.cityId,
                 }))}
                 label="City"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
               {/*  residence Type*/}
               <CustomSelectBox
-                value={editFormData.residenceTypeName}
+                value={formik.values.residenceTypeName}
                 name="residenceTypeName"
                 dropdownOptions={residenceOptions?.map((opt) => ({
                   value: opt.residenceTypeName,
                   id: opt.residenceTypeId,
                 }))}
                 label="Residence Type"
-                handleChange={handleChange}
+                handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
             </Box>
@@ -708,134 +631,65 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
                 },
               }}
             >
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* first name */}
+              <CustomField
                 type="text"
-                label="First Name"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactFirstName}
-                id="emergencyContactFirstName"
+                value={formik.values.emergencyContactFirstName}
                 name="emergencyContactFirstName"
-                // error={
-                //   !!touched.emergencyContactFirstName &&
-                //   !!errors.emergencyContactFirstName
-                // }
-                // helperText={
-                //   touched.emergencyContactFirstName &&
-                //   errors.emergencyContactFirstName
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="First Name"
               />
-
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* last name */}
+              <CustomField
                 type="text"
-                label="Last Name"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactLastName}
-                id="emergencyContactLastName"
+                value={formik.values.emergencyContactLastName}
                 name="emergencyContactLastName"
-                // error={
-                //   !!touched.emergencyContactLastName &&
-                //   !!errors.emergencyContactLastName
-                // }
-                // helperText={
-                //   touched.emergencyContactLastName &&
-                //   errors.emergencyContactLastName
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="Last Name"
               />
-
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* address */}
+              <CustomField
                 type="text"
-                label="Address"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactAddress}
-                id="emergencyContactAddress"
+                value={formik.values.emergencyContactAddress}
                 name="emergencyContactAddress"
-                // error={
-                //   !!touched.emergencyContactAddress &&
-                //   !!errors.emergencyContactAddress
-                // }
-                // helperText={
-                //   touched.emergencyContactAddress &&
-                //   errors.emergencyContactAddress
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="Address"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* city */}
+              <CustomField
                 type="text"
-                label="City"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactCity}
-                id="emergencyContactCity"
+                value={formik.values.emergencyContactCity}
                 name="emergencyContactCity"
-                // error={
-                //   !!touched.emergencyContactCity &&
-                //   !!errors.emergencyContactCity
-                // }
-                // helperText={
-                //   touched.emergencyContactCity &&
-                //   errors.emergencyContactCity
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="City"
               />
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* state */}
+              <CustomField
                 type="text"
-                label="State"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactState}
-                id="emergencyContactState"
+                value={formik.values.emergencyContactState}
                 name="emergencyContactState"
-                // error={
-                //   !!touched.emergencyContactState &&
-                //   !!errors.emergencyContactState
-                // }
-                // helperText={
-                //   touched.emergencyContactState &&
-                //   errors.emergencyContactState
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="State"
               />
-
-              <TextField
-                size="small"
-                fullWidth
-                variant="filled"
+              {/* zipcode */}
+              <CustomField
                 type="text"
-                label="Zipcode"
-                onBlur={formik.handleBlur}
-                onChange={handleChange}
-                value={editFormData.emergencyContactZipCode}
-                id="emergencyContactZipCode"
+                value={formik.values.emergencyContactZipCode}
                 name="emergencyContactZipCode"
-                // error={
-                //   !!touched.emergencyContactZipCode &&
-                //   !!errors.emergencyContactZipCode
-                // }
-                // helperText={
-                //   touched.emergencyContactZipCode &&
-                //   errors.emergencyContactZipCode
-                // }
-                sx={{ gridColumn: "span 1" }}
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                isOutlined={false}
+                label="Zip Code"
               />
             </Box>
           </AccordionDetails>

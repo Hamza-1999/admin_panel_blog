@@ -35,6 +35,91 @@ const EditPatientInfo = () => {
     (el) => el.accountNo === Number(accountNo)
   );
 
+  const editPatientInitVal = {
+    firstName: findEditValues?.firstName || "",
+    lastName: findEditValues?.lastName || "",
+    email: findEditValues?.email || "",
+    drivingLicense: findEditValues?.drivingLicense || "",
+    dateOfBirth: findEditValues?.dateOfBirth
+      ? dayjs(findEditValues.dateOfBirth)
+      : null,
+    dateOfDeath: findEditValues?.dateOfDeath
+      ? dayjs(findEditValues.dateOfDeath)
+      : null,
+    cellPhone: findEditValues?.cellPhone || null,
+    homePhone: findEditValues?.homePhone || null,
+    workPhone: findEditValues?.workPhone || null,
+    ext: findEditValues?.ext || null,
+    address: findEditValues?.address || "",
+    zipCode: findEditValues?.zipCode || "",
+    emergencyContactFirstName: findEditValues?.emergencyContactFirstName || "",
+    emergencyContactLastName: findEditValues?.emergencyContactLastName || "",
+    emergencyContactAddress: findEditValues?.emergencyContactAddress || "",
+    emergencyContactZipCode: findEditValues?.emergencyContactZipCode || "",
+    emergencyContactState: findEditValues?.emergencyContactState || "",
+    emergencyContactCity: findEditValues?.emergencyContactCity || "",
+    // dateOfDeath: null,
+    // dropdowns
+    genderIdentityName: findEditValues?.genderIdentityName || "",
+    maritalStatusName: findEditValues?.maritalStatusName || "",
+    raceStatusName: findEditValues?.raceStatusName || "",
+    sexualOrientationName: findEditValues?.sexualOrientationName || "",
+    employmentStatusName: findEditValues?.employmentStatusName || "",
+    referralSourceName: findEditValues?.referralSourceName || "",
+    relationShipToPatientName: findEditValues?.relationShipToPatientName || "",
+    ethnicityName: findEditValues?.ethnicityName || "",
+    studentStatusName: findEditValues?.studentStatusName || "",
+    accountType: findEditValues?.accountType || "",
+    cityName: findEditValues?.cityName || "",
+    countryName: findEditValues?.countryName || "",
+    stateName: findEditValues?.stateName || "",
+    residenceTypeName: findEditValues?.residenceTypeName || "",
+
+    // Insured Information Data
+    insuredFirstName: findEditValues?.insuredFirstName || "",
+    insuredLastName: findEditValues?.insuredLastName || "",
+    insuredDateOfBirth: null,
+    insuredAddress: findEditValues?.insuredAddress || "",
+    insuredSSN: findEditValues?.insuredSSN || "",
+    insuredZipCode: findEditValues?.insuredZipCode || "",
+    insuredHomePhone: findEditValues?.insuredHomePhone || null,
+    insuredCellPhone: findEditValues?.insuredCellPhone || null,
+    insuredWorkPhone: findEditValues?.insuredWorkPhone || null,
+    insuredExt: findEditValues?.insuredExt || null,
+    insuredEmail: findEditValues?.insuredEmail || "",
+    insuredCityName: findEditValues?.insuredCityName || "",
+    insuredStateName: findEditValues?.insuredStateName || "",
+    insuredCountryName: findEditValues?.insuredCountryName || "",
+    insuredPriorityType: findEditValues?.insuredPriorityType || "",
+    insuredRelationShipToPatientName:
+      findEditValues?.insuredRelationShipToPatientName || "",
+    insuredGenderIdentityName: findEditValues?.insuredGenderIdentityName || "",
+    // employeeName: findEditValues?.firstName || "",
+    empAddress: findEditValues?.empAddress || "",
+    empCityName: findEditValues?.empCityName || "",
+    empStateName: findEditValues?.empStateName || "",
+    insuredPartyName: findEditValues?.insuredPartyName || "",
+    empZipCode: findEditValues?.empZipCode || "",
+    empEmploymentStatusName: findEditValues?.empEmploymentStatusName || "",
+
+    // patientName: findEditValues?.firstName || "",
+
+    // payer info data
+    payerInfoMemberId: findEditValues?.payerInfoMemberId || null,
+    payerInfoGroupId: findEditValues?.payerInfoGroupId || null,
+    payerInfoCopayAmount: findEditValues?.payerInfoCopayAmount || null,
+    payerInfoCoInsurancePercent:
+      findEditValues?.payerInfoCoInsurancePercent || null,
+    payerInfoDeductibleAmount:
+      findEditValues?.payerInfoDeductibleAmount || null,
+    payerInfoOutOfPocketMax: findEditValues?.payerInfoOutOfPocketMax || null,
+    payerInfoEffectiveDate: null,
+    payerInfoTerminationDate: null,
+    payerInfoPriorityName: findEditValues?.payerInfoPriorityName || "",
+    payerInfoPolicyType: findEditValues?.payerInfoPolicyType || "",
+    payerInfoPayerName: findEditValues?.payerInfoPayerName || "",
+  };
+
   const [editFormData, setEditFormData] = useState({
     firstName: findEditValues?.firstName || "",
     lastName: findEditValues?.lastName || "",
@@ -129,17 +214,18 @@ const EditPatientInfo = () => {
   };
 
   const formik = useFormik({
-    initialValues: editFormData,
-    onSubmit: async (values) => {
+    initialValues: editPatientInitVal,
+    enableReinitialize: true,
+    onSubmit: (values) => {
       console.log(values, "editedvalues567");
       try {
-        await dispatch(
+        dispatch(
           updatePatientAction({
             accountNo: findEditValues?.accountNo,
             ...values,
           })
         );
-        setEditFormData({ ...editFormData, ...values });
+        // setEditFormData({ ...editFormData, ...values });
 
         // Reset the form values after successful submission
         formik.resetForm();
@@ -151,94 +237,6 @@ const EditPatientInfo = () => {
     },
   });
 
-  //   useEffect(() => {
-  //     setEditFormData({
-  //       firstName: findEditValues?.firstName || "",
-  //       lastName: findEditValues?.lastName || "",
-  //       email: findEditValues?.email || "",
-  //       drivingLicense: findEditValues?.drivingLicense || "",
-  //       dateOfBirth: findEditValues?.dateOfBirth
-  //         ? dayjs(findEditValues.dateOfBirth)
-  //         : null,
-  //       dateOfDeath: findEditValues?.dateOfDeath
-  //         ? dayjs(findEditValues.dateOfDeath)
-  //         : null,
-  //       cellPhone: findEditValues?.cellPhone || null,
-  //       homePhone: findEditValues?.homePhone || null,
-  //       workPhone: findEditValues?.workPhone || null,
-  //       ext: findEditValues?.ext || null,
-  //       address: findEditValues?.address || "",
-  //       zipCode: findEditValues?.zipCode || "",
-  //       emergencyContactFirstName:
-  //         findEditValues?.emergencyContactFirstName || "",
-  //       emergencyContactLastName: findEditValues?.emergencyContactLastName || "",
-  //       emergencyContactAddress: findEditValues?.emergencyContactAddress || "",
-  //       emergencyContactZipCode: findEditValues?.emergencyContactZipCode || "",
-  //       emergencyContactState: findEditValues?.emergencyContactState || "",
-  //       emergencyContactCity: findEditValues?.emergencyContactCity || "",
-  //       // dateOfDeath: null,
-  //       // dropdowns
-  //       genderIdentityName: findEditValues?.genderIdentityName || "",
-  //       maritalStatusName: findEditValues?.maritalStatusName || "",
-  //       raceStatusName: findEditValues?.raceStatusName || "",
-  //       sexualOrientationName: findEditValues?.sexualOrientationName || "",
-  //       employmentStatusName: findEditValues?.employmentStatusName || "",
-  //       referralSourceName: findEditValues?.referralSourceName || "",
-  //       relationShipToPatientName:
-  //         findEditValues?.relationShipToPatientName || "",
-  //       ethnicityName: findEditValues?.ethnicityName || "",
-  //       studentStatusName: findEditValues?.studentStatusName || "",
-  //       accountType: findEditValues?.accountType || "",
-  //       cityName: findEditValues?.cityName || "",
-  //       countryName: findEditValues?.countryName || "",
-  //       stateName: findEditValues?.stateName || "",
-  //       residenceTypeName: findEditValues?.residenceTypeName || "",
-
-  //       // Insured Information Data
-  //       insuredFirstName: findEditValues?.insuredFirstName || "",
-  //       insuredLastName: findEditValues?.insuredLastName || "",
-  //       insuredDateOfBirth: null,
-  //       insuredAddress: findEditValues?.insuredAddress || "",
-  //       insuredSSN: findEditValues?.insuredSSN || "",
-  //       insuredZipCode: findEditValues?.insuredZipCode || "",
-  //       insuredHomePhone: findEditValues?.insuredHomePhone || null,
-  //       insuredCellPhone: findEditValues?.insuredCellPhone || null,
-  //       insuredWorkPhone: findEditValues?.insuredWorkPhone || null,
-  //       insuredExt: findEditValues?.insuredExt || null,
-  //       insuredEmail: findEditValues?.insuredEmail || "",
-  //       insuredCityName: findEditValues?.insuredCityName || "",
-  //       insuredStateName: findEditValues?.insuredStateName || "",
-  //       insuredCountryName: findEditValues?.insuredCountryName || "",
-  //       insuredRelationShipToPatientName:
-  //         findEditValues?.insuredRelationShipToPatientName || "",
-  //       insuredGenderIdentityName:
-  //         findEditValues?.insuredGenderIdentityName || "",
-  //       // employeeName: findEditValues?.firstName || "",
-  //       empAddress: findEditValues?.empAddress || "",
-  //       empCityName: findEditValues?.empCityName || "",
-  //       empStateName: findEditValues?.empStateName || "",
-  //       insuredPartyName: findEditValues?.insuredPartyName || "",
-  //       empZipCode: findEditValues?.empZipCode || "",
-  //       empEmploymentStatusName: findEditValues?.empEmploymentStatusName || "",
-
-  //       // patientName: findEditValues?.firstName || "",
-
-  //       // payer info data
-  //       payerInfoMemberId: findEditValues?.payerInfoMemberId || null,
-  //       payerInfoGroupId: findEditValues?.payerInfoGroupId || null,
-  //       payerInfoCopayAmount: findEditValues?.payerInfoCopayAmount || null,
-  //       payerInfoCoInsurancePercent:
-  //         findEditValues?.payerInfoCoInsurancePercent || null,
-  //       payerInfoDeductibleAmount:
-  //         findEditValues?.payerInfoDeductibleAmount || null,
-  //       payerInfoOutOfPocketMax: findEditValues?.payerInfoOutOfPocketMax || null,
-  //       payerInfoEffectiveDate: null,
-  //       payerInfoTerminationDate: null,
-  //       payerInfoPriorityName: findEditValues?.payerInfoPriorityName || "",
-  //       payerInfoPolicyType: findEditValues?.payerInfoPolicyType || "",
-  //       payerInfoPayerName: findEditValues?.payerInfoPayerName || "",
-  //     });
-  //   }, [findEditValues]);
   return (
     <>
       <Box margin="20px" paddingBottom={"25px"}>
