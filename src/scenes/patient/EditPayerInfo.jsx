@@ -5,6 +5,7 @@ import NewPayer from "./NewPayer";
 import {
   Box,
   Button,
+  FormControl,
   IconButton,
   InputAdornment,
   TextField,
@@ -17,26 +18,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { getData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 import { useDispatch } from "react-redux";
+import CustomSearchField from "../../components/CustomSearchField";
+import CustomField from "../../components/CustomField";
 
-const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
+const EditPayerInfo = ({ formik }) => {
   const [priorityOptions, setPriorityOptions] = useState([]);
   const [policyTypeOptions, setPolicyTypeOptions] = useState([]);
   const [openNewPayerModal, setOpenNewPayerModal] = useState(false);
   const [openPyerListModal, setOpenPyerListModal] = useState(false);
-  const [selectedPayerName, setSelectedPayerName] = useState(
-    editFormData.payerInfoPayerName
-  );
 
   // initializing dispatch
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    formik.handleChange(event);
-    setEditFormData({
-      ...editFormData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   // Define data fetching URLs
   const dataFetchUrls = {
@@ -59,6 +51,14 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
     fetchDataOptions(dataFetchUrls.policyTypes, setPolicyTypeOptions);
   }, [dispatch]);
 
+  const handleSelectPayer = (val) => {
+    console.log(val, "selectpayervalue");
+    formik.setFieldValue("payerInfoPayerName", val.payerName);
+    formik.setFieldValue("payerId", val.id);
+    formik.setFieldValue("payerInfoSequenceNumber", val.payerSequenceNo);
+    setOpenPyerListModal(false);
+  };
+
   return (
     <>
       <CustomModal
@@ -66,7 +66,8 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
         handleClose={() => setOpenPyerListModal(false)}
       >
         <PayerList
-          onCellClick={(payerName) => setSelectedPayerName(payerName)}
+          // onCellClick={(payerName) => setSelectedPayerName(payerName)}
+          handleSelectPayer={handleSelectPayer}
           handleClose={() => setOpenPyerListModal(false)}
         />
       </CustomModal>
@@ -95,27 +96,27 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
         >
           {/* priority type */}
           <CustomSelectBox
-            value={editFormData.payerInfoPriorityName}
+            value={formik.values.payerInfoPriorityName}
             name="payerInfoPriorityName"
             dropdownOptions={priorityOptions?.map((opt) => ({
               value: opt.priorityType,
               id: opt.priorityTypeId,
             }))}
             label="Priority Type"
-            handleChange={handleChange}
+            handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
 
           {/* policy type */}
           <CustomSelectBox
-            value={editFormData.payerInfoPolicyType}
+            value={formik.values.payerInfoPolicyType}
             name="payerInfoPolicyType"
             dropdownOptions={policyTypeOptions?.map((opt) => ({
               value: opt.policyType,
               id: opt.policyTypeId,
             }))}
             label="Policy Type"
-            handleChange={handleChange}
+            handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
         </Box>
@@ -138,47 +139,22 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
               gridColumn: { xs: "1 / span 1", sm: "1 / span 2", md: "auto" },
             }}
           >
-            <TextField
-              type="text"
-              size="small"
-              variant="filled"
+            <FormControl
               sx={{
                 width: { xs: "100%", sm: "100%" },
                 fontSize: "1rem",
               }}
-              value={selectedPayerName}
-              name="payerInfoPayerName"
-              onChange={(event) => {
-                const newPayerName = event.target.value;
-                console.log("Selected Payer Name:", newPayerName);
-
-                setSelectedPayerName(newPayerName); // Set the selected payer name
-
-                formik.handleChange(event);
-
-                setEditFormData({
-                  ...editFormData,
-                  payerInfoPayerName: newPayerName, // Update payerInfoPayerName in formData
-                });
-
-                console.log("Updated Form Data:", {
-                  ...editFormData,
-                  payerInfoPayerName: newPayerName,
-                });
-              }}
-              onBlur={formik.handleBlur}
-              onClick={() => setOpenPyerListModal(true)}
-              label="Payer"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment>
-                    <IconButton>
-                      <Search />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+            >
+              <CustomSearchField
+                type="text"
+                label="Payer Name"
+                fieldVal={formik.values.payerInfoPayerName}
+                name="payerInfoPayerName"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+                handleModalOpen={() => setOpenPyerListModal(true)}
+              />
+            </FormControl>
             <Button
               sx={{ width: "10%" }}
               variant="outlined"
@@ -187,37 +163,23 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
               <Add />
             </Button>
           </Box>
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
-            type="number"
+          {/* payer info member id */}
+          <CustomField
             label="Member Id"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoMemberId}
-            name="payerInfoMemberId"
-            id="payerInfoMemberId"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
-          />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
             type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoMemberId}
+            name="payerInfoMemberId"
+            handleBlur={formik.handleBlur}
+          />
+          {/* group id */}
+          <CustomField
             label="Group Id"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoGroupId}
+            type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoGroupId}
             name="payerInfoGroupId"
-            id="payerInfoGroupId"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            handleBlur={formik.handleBlur}
           />
         </Box>
 
@@ -232,68 +194,37 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
             },
           }}
         >
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Copay"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoCopayAmount}
+            value={formik.values.payerInfoCopayAmount}
             name="payerInfoCopayAmount"
-            id="payerInfoCopayAmount"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Co-Insurance %"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoCoInsurancePercent}
+            value={formik.values.payerInfoCoInsurancePercent}
             name="payerInfoCoInsurancePercent"
-            id="payerInfoCoInsurancePercent"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Deductible"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoDeductibleAmount}
+            value={formik.values.payerInfoDeductibleAmount}
             name="payerInfoDeductibleAmount"
-            id="payerInfoDeductibleAmount"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
-
-          <TextField
-            size="small"
-            fullWidth
-            variant="filled"
+          <CustomField
             type="number"
             label="Out of Pocket Max"
-            onBlur={formik.handleBlur}
-            onChange={handleChange}
-            value={editFormData.payerInfoOutOfPocketMax}
+            value={formik.values.payerInfoOutOfPocketMax}
             name="payerInfoOutOfPocketMax"
-            id="payerInfoOutOfPocketMax"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: "span 1" }}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
           />
         </Box>
 
@@ -311,7 +242,7 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Effective Date"
-              value={editFormData.payerInfoEffectiveDate}
+              value={formik.values.payerInfoEffectiveDate}
               onChange={(value) =>
                 formik.setFieldValue("payerInfoEffectiveDate", value)
               }
@@ -320,14 +251,14 @@ const EditPayerInfo = ({ formik, editFormData, setEditFormData }) => {
               }
               renderInput={(params) => <TextField {...params} />}
               inputFormat="MM/DD/YYYY"
-              clearable
+              // clearable
             />
           </LocalizationProvider>
 
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Termination Date"
-              value={editFormData.payerInfoTerminationDate}
+              value={formik.values.payerInfoTerminationDate}
               onChange={(value) =>
                 formik.setFieldValue("payerInfoTerminationDate", value)
               }

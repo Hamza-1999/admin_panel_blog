@@ -15,89 +15,11 @@ import { patientInitValues } from "../../utils/formikInitValues";
 
 const CreatePatient = () => {
   const [tabValue, setTabValue] = useState(0);
-  // const insuranctAccNo = useSelector((state) => state.patient);
-  // console.log(insuranctAccNo, "insurance account number");
+
   const [isFormVisible, setIsFormVisible] = useState(true);
   const dispatch = useDispatch();
   const { loading } = useSelector((state) => state.patient);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    accountNo: null,
-    email: "",
-    drivingLicense: "",
-    dateOfBirth: null,
-    dateOfDeath: null,
-    cellPhone: null,
-    homePhone: null,
-    workPhone: null,
-    ext: null,
-    address: "",
-    zipCode: "",
-    emergencyContactFirstName: "",
-    emergencyContactLastName: "",
-    emergencyContactAddress: "",
-    emergencyContactZipCode: "",
-    emergencyContactState: "",
-    emergencyContactCity: "",
-    // dateOfDeath: null,
-    // dropdowns
-    genderIdentityName: "",
-    maritalStatusName: "",
-    raceStatusName: "",
-    sexualOrientationName: "",
-    employmentStatusName: "",
-    referralSourceName: "",
-    relationShipToPatientName: "",
-    ethnicityName: "",
-    studentStatusName: "",
-    accountType: "",
-    cityName: "",
-    countryName: "",
-    stateName: "",
-    residenceTypeName: "",
-
-    // Insured Information Data
-    insuredFirstName: "",
-    insuredLastName: "",
-    insuredDateOfBirth: null,
-    insuredAddress: "",
-    insuredSSN: "",
-    insuredZipCode: "",
-    insuredHomePhone: null,
-    insuredCellPhone: null,
-    insuredWorkPhone: null,
-    insuredExt: null,
-    insuredEmail: "",
-    insuredCityName: "",
-    insuredStateName: "",
-    insuredCountryName: "",
-    insuredRelationShipToPatientName: "",
-    insuredGenderIdentityName: "",
-    // employeeName: "",
-    empAddress: "",
-    empCityName: "",
-    empStateName: "",
-    insuredPartyName: "",
-    empZipCode: "",
-    empEmploymentStatusName: "",
-
-    // patientName: "",
-
-    // payer info data
-    payerInfoMemberId: null,
-    payerInfoGroupId: null,
-    payerInfoCopayAmount: null,
-    payerInfoCoInsurancePercent: null,
-    payerInfoDeductibleAmount: null,
-    payerInfoOutOfPocketMax: null,
-    payerInfoEffectiveDate: null,
-    payerInfoTerminationDate: null,
-    payerInfoPriorityName: "",
-    payerInfoPolicyType: "",
-    payerInfoPayerName: "",
-  });
   const handleTabChange = (event, newValue) => {
     setIsFormVisible(false);
     setTimeout(() => {
@@ -111,10 +33,12 @@ const CreatePatient = () => {
     const emptyFields = requiredFields.filter(
       (fieldName) => !formValues[fieldName]
     );
+
     if (emptyFields.length > 0) {
       alert("Please fill the required fields first");
       return;
     }
+
     try {
       dispatch(newPatientAction(formValues));
     } catch (error) {
@@ -178,20 +102,8 @@ const CreatePatient = () => {
           {/* <div > */}
           <Box className="formContent">
             {tabValue === 0 && <PatientInfo formik={formik} />}
-            {tabValue === 1 && (
-              <InsuranceInfo
-                formik={formik}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            )}
-            {tabValue === 2 && (
-              <PayerInfo
-                formik={formik}
-                formData={formData}
-                setFormData={setFormData}
-              />
-            )}
+            {tabValue === 1 && <InsuranceInfo formik={formik} />}
+            {tabValue === 2 && <PayerInfo formik={formik} />}
           </Box>
         </form>
       </Box>

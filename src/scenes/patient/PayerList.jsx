@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import { getData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 import { useEffect } from "react";
-import { Box, CircularProgress, ListItem, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getPayerAction } from "../../features/actions/payerAction";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 
-const PayerList = ({ handleSelectPayer }) => {
+const PayerList = ({ handleSelectPayer, handlePaymentPayer, modalFor }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { getAllPayer, loading } = useSelector((state) => state.payer);
 
   const rows = getAllPayer.result?.map((el) => ({
@@ -67,9 +66,11 @@ const PayerList = ({ handleSelectPayer }) => {
             columns={columns}
             scrollbarSize={5}
             disableSelectionOnClick
-            onCellClick={(param) => {
-              handleSelectPayer(param.row);
-            }}
+            onCellClick={(param) =>
+              modalFor === "payment"
+                ? handlePaymentPayer(param.row)
+                : handleSelectPayer(param.row)
+            }
           />
         ) : (
           <Typography variant="body1">No data available.</Typography>
