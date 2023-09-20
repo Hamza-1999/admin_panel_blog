@@ -61,9 +61,6 @@ export const patientInitValues = {
   insuredPartyName: "",
   empZipCode: "",
   empEmploymentStatusName: "",
-
-  // patientName: "",
-
   // payer info data
   payerInfoMemberId: null,
   payerInfoGroupId: null,
@@ -76,6 +73,7 @@ export const patientInitValues = {
   payerInfoPriorityName: "",
   payerInfoPolicyType: "",
   payerInfoPayerName: "",
+  payerInfoSequenceNumber: null,
 };
 
 export const claimInitVal = {

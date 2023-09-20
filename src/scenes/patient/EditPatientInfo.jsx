@@ -35,6 +35,7 @@ const EditPatientInfo = () => {
     (el) => el.accountNo === Number(accountNo)
   );
 
+  console.log(findEditValues?.payerInfoEffectiveDate, "effectiveDate");
   const editPatientInitVal = {
     firstName: findEditValues?.firstName || "",
     lastName: findEditValues?.lastName || "",
@@ -78,7 +79,9 @@ const EditPatientInfo = () => {
     // Insured Information Data
     insuredFirstName: findEditValues?.insuredFirstName || "",
     insuredLastName: findEditValues?.insuredLastName || "",
-    insuredDateOfBirth: null,
+    insuredDateOfBirth: findEditValues?.insuredDateOfBirth
+      ? dayjs(findEditValues.insuredDateOfBirth)
+      : null,
     insuredAddress: findEditValues?.insuredAddress || "",
     insuredSSN: findEditValues?.insuredSSN || "",
     insuredZipCode: findEditValues?.insuredZipCode || "",
@@ -94,7 +97,7 @@ const EditPatientInfo = () => {
     insuredRelationShipToPatientName:
       findEditValues?.insuredRelationShipToPatientName || "",
     insuredGenderIdentityName: findEditValues?.insuredGenderIdentityName || "",
-    // employeeName: findEditValues?.firstName || "",
+    employeeName: findEditValues?.employeeName || "",
     empAddress: findEditValues?.empAddress || "",
     empCityName: findEditValues?.empCityName || "",
     empStateName: findEditValues?.empStateName || "",
@@ -113,8 +116,12 @@ const EditPatientInfo = () => {
     payerInfoDeductibleAmount:
       findEditValues?.payerInfoDeductibleAmount || null,
     payerInfoOutOfPocketMax: findEditValues?.payerInfoOutOfPocketMax || null,
-    payerInfoEffectiveDate: null,
-    payerInfoTerminationDate: null,
+    payerInfoEffectiveDate: findEditValues?.payerInfoEffectiveDate
+      ? dayjs(findEditValues.payerInfoEffectiveDate)
+      : null,
+    payerInfoTerminationDate: findEditValues?.payerInfoTerminationDate
+      ? dayjs(findEditValues.payerInfoTerminationDate)
+      : null,
     payerInfoPriorityName: findEditValues?.payerInfoPriorityName || "",
     payerInfoPolicyType: findEditValues?.payerInfoPolicyType || "",
     payerInfoPayerName: findEditValues?.payerInfoPayerName || "",

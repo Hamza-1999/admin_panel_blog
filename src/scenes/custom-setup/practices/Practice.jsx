@@ -14,6 +14,7 @@ const Practice = () => {
   const { getPractices, loading } = useSelector((state) => state.practices);
   const [searchPractice, setSearchPractice] = useState("");
   console.log(getPractices.result, "gettingPractice Data11");
+
   useEffect(() => {
     dispatch(getPracticeAction());
   }, [dispatch]);
@@ -41,20 +42,12 @@ const Practice = () => {
                 gap: "15px",
               }}
             >
-              {/* <TextField
-              fullWidth
-              value={searchPractice}
-              onChange={(e) => setSearchPractice(e.target.value)}
-              variant="outlined"
-              size="small"
-              label="Search"
-            /> */}
               <Box width={{ xs: "100%", sm: "65%", md: "65%" }}>
                 <Button
                   //   fullWidth
                   variant="contained"
                   color="secondary"
-                  onClick={() => navigate("/provider/new")}
+                  onClick={() => navigate("/practice/new")}
                 >
                   <Add /> Add Practice
                 </Button>

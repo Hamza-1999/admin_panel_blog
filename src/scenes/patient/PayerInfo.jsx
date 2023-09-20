@@ -1,19 +1,10 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormGroup,
-  IconButton,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, FormControl, TextField, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import path from "../../config/apiUrl";
 import { getData } from "../../config/axiosFunctions";
 import { useDispatch } from "react-redux";
-import { Add, Search } from "@mui/icons-material";
+import { Add } from "@mui/icons-material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CustomModal from "../../components/CustomModal";
@@ -22,24 +13,13 @@ import PayerList from "./PayerList";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomField from "../../components/CustomField";
 
-const PayerInfo = ({ formik, formData, setFormData }) => {
+const PayerInfo = ({ formik }) => {
   const dispatch = useDispatch();
+
   const [priorityOptions, setPriorityOptions] = useState([]);
   const [policyTypeOptions, setPolicyTypeOptions] = useState([]);
   const [openNewPayerModal, setOpenNewPayerModal] = useState(false);
   const [openPyerListModal, setOpenPyerListModal] = useState(false);
-  const [selectedPayerName, setSelectedPayerName] = useState(
-    formData.payerInfoPayerName
-  );
-
-  const handleChange = (event) => {
-    console.log(event.target.value, "value");
-    formik.handleChange(event);
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
   const dataFetchUrls = {
     priorityType: `${path}/ct-priorityType`,
@@ -61,15 +41,11 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
     fetchDataOptions(dataFetchUrls.policyTypes, setPolicyTypeOptions);
   }, [dispatch]);
 
-  //  modal
-
-  useEffect(() => {
-    setSelectedPayerName(formData.payerInfoPayerName);
-  }, [formData.payerInfoPayerName]);
-
   const handleSelectPayer = (val) => {
     console.log(val, "selectpayervalue");
     formik.setFieldValue("payerInfoPayerName", val.payerName);
+    formik.setFieldValue("payerId", val.id);
+    formik.setFieldValue("payerInfoSequenceNumber", val.payerSequenceNo);
     setOpenPyerListModal(false);
   };
   return (
@@ -79,7 +55,6 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
         handleClose={() => setOpenPyerListModal(false)}
       >
         <PayerList
-          // onCellClick={(val) => setSelectedPayerName(val.payerName)}
           handleClose={() => setOpenPyerListModal(false)}
           handleSelectPayer={handleSelectPayer}
         />
@@ -152,47 +127,6 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
               gridColumn: { xs: "1 / span 1", sm: "1 / span 2", md: "auto" },
             }}
           >
-            {/* <TextField
-              type="text"
-              size="small"
-              variant="filled"
-              sx={{
-                width: { xs: "100%", sm: "100%" },
-                fontSize: "1rem",
-              }}
-              value={selectedPayerName}
-              name="payerInfoPayerName"
-              onChange={(event) => {
-                const newPayerName = event.target.value;
-                console.log("Selected Payer Name:", newPayerName);
-
-                setSelectedPayerName(newPayerName); // Set the selected payer name
-
-                formik.handleChange(event);
-
-                setFormData({
-                  ...formData,
-                  payerInfoPayerName: newPayerName, // Update payerInfoPayerName in formData
-                });
-
-                console.log("Updated Form Data:", {
-                  ...formData,
-                  payerInfoPayerName: newPayerName,
-                });
-              }}
-              onBlur={formik.handleBlur}
-              onClick={() => setOpenPyerListModal(true)}
-              label="Payer"
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment>
-                    <IconButton>
-                      <Search />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            /> */}
             <FormControl
               sx={{
                 width: { xs: "100%", sm: "100%" },
@@ -200,6 +134,7 @@ const PayerInfo = ({ formik, formData, setFormData }) => {
               }}
             >
               <CustomSearchField
+                label="Payer Name"
                 type="text"
                 fieldVal={formik.values.payerInfoPayerName}
                 name="payerInfoPayerName"

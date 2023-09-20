@@ -209,6 +209,14 @@ const NewPayment = () => {
     };
   }, []);
 
+  const handlePaymentPayer = (val) => {
+    console.log(val, "selectedPayerForPayment");
+    formik.setFieldValue("paymentBy", val.payerName);
+    formik.setFieldValue("paymentFromName", val.payerName);
+    formik.setFieldValue("paymentFrom", val.id);
+    formik.setFieldValue("payerSequenceNo", val.payerSequenceNo);
+    setOpenPayerModal(false);
+  };
   return (
     <>
       <CustomModal
@@ -228,6 +236,8 @@ const NewPayment = () => {
         <PayerList
           handleClose={() => setOpenPayerModal(false)}
           onCellClick={(val) => handlePaymentBy(val)}
+          modalFor="payment"
+          handlePaymentPayer={handlePaymentPayer}
         />
       </CustomModal>
 
