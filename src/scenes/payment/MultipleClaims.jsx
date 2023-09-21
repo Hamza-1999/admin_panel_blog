@@ -4,11 +4,14 @@ import React from "react";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
 
-const MultipleClaims = ({ multipleClaimData }) => {
+const MultipleClaims = ({
+  setSelectedRowData,
+  multipleClaimData,
+  handleClose,
+}) => {
   const [selectedRows, setSelectedRows] = useState([]);
   console.log(selectedRows, "all selected rows");
-  const [selectedData, setSelectedData] = useState([]);
-  console.log(multipleClaimData, "allClaims");
+  // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
     id: index,
     claimNo: el.claimNo || "N/A",
@@ -113,13 +116,13 @@ const MultipleClaims = ({ multipleClaimData }) => {
     },
   ];
 
-  //   data grid change
-  const handleSelectionChange = (selection) => {
-    setSelectedRows(selection.rows);
-  };
   // select button logic
   const handleSelectClick = () => {
-    setSelectedData(selectedRows);
+    const selectedModelRow = selectedRows.map((rowId) =>
+      rows.find((el) => el.id === rowId)
+    );
+    setSelectedRowData(selectedModelRow);
+    handleClose();
   };
   return (
     <Box sx={{ minHeight: "200px", padding: "15px" }}>
@@ -135,7 +138,7 @@ const MultipleClaims = ({ multipleClaimData }) => {
         rows={rows}
         columns={columns}
         checkboxSelection
-        onSelectionModelChange={(newRow) => selectedRows(newRow)}
+        onSelectionModelChange={(newRow) => setSelectedRows(newRow)}
         sx={{
           "& .header-bg": {
             backgroundColor: "lightgrey",
@@ -167,7 +170,7 @@ const MultipleClaims = ({ multipleClaimData }) => {
           margin="0 20px 0"
           variant="contained"
           width="150px"
-          handleClick={() => console.log("clicked")}
+          handleClick={handleSelectClick}
         >
           Select
         </CustomButton>

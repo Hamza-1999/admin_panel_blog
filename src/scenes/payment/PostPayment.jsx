@@ -20,7 +20,9 @@ const PostPayment = ({
   const [multipleClaimData, setMultipleClaimData] = useState([]);
   const [openMultiClaimMod, setOpenMultiClaimMod] = useState(false);
   // const [isLoading, setIsLoading] = useState();
-
+  const [selectedRowData, setSelectedRowData] = useState([]);
+  console.log(selectedRowData, "All Selected Row DAta");
+  console.log(formik.values.isClaim, "check is claim");
   console.log(multipleClaimData, "multipleClaims");
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
@@ -61,7 +63,11 @@ const PostPayment = ({
         open={openMultiClaimMod}
         handleClose={() => setOpenMultiClaimMod(false)}
       >
-        <MultipleClaims multipleClaimData={multipleClaimData} />
+        <MultipleClaims
+          setSelectedRowData={setSelectedRowData}
+          multipleClaimData={multipleClaimData}
+          handleClose={() => setOpenMultiClaimMod(false)}
+        />
       </CustomModal>
 
       {showDetail ? (
@@ -124,14 +130,16 @@ const PostPayment = ({
             </Stack>
 
             {/* get payer  */}
-            <Stack>
-              <Button
+            <Stack flexDirection="row" alignItems="center">
+              <Typography marginRight="15px">Add Payment For:</Typography>
+              <CustomButton
+                margin="15px 0 "
                 variant="contained"
-                color="secondary"
-                onClick={handleGetMultiClaims}
+                width="150px"
+                handleClick={handleGetMultiClaims}
               >
                 Add Claims
-              </Button>
+              </CustomButton>
             </Stack>
           </Box>
 
@@ -140,6 +148,7 @@ const PostPayment = ({
             formik={formik}
             setShowDetail={setShowDetail}
             setDetailInfo={setDetailInfo}
+            selectedRowData={selectedRowData}
           />
         </div>
       )}
