@@ -16,7 +16,7 @@ import ProcedureClaim from "./ProcedureClaim";
 import ProcedureTable from "./ProcedureTable";
 
 const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
-  console.log(claimChargesDto, "get claim charges5");
+  console.log(formik.values.icD_B, "icd ids");
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
   const [openProcedureModal, setOpenProcedureModal] = useState(false);
   const [icdIdentifier, setIcdIdentifier] = useState("");
@@ -89,8 +89,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD A"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_A_Code}
-                name="icD_A_Code"
+                value={formik.values.icD_Code_A}
+                name="icD_Code_A"
                 isOutlined={true}
               />
 
@@ -104,8 +104,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("A")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_A_Description}
-                  name="icd_A_Description"
+                  fieldVal={formik.values.icd_Description_A}
+                  name="icd_Description_A"
                 />
               </Box>
             </Box>
@@ -125,8 +125,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD B"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_B_Code}
-                name="icD_B_Code"
+                value={formik.values.icD_Code_B}
+                name="icD_Code_B"
                 isOutlined={true}
               />
 
@@ -140,8 +140,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("B")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_B_Description}
-                  name="icd_B_Description"
+                  fieldVal={formik.values.icd_Description_B}
+                  name="icd_Description_B"
                 />
               </Box>
             </Box>
@@ -161,8 +161,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD C"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_C_Code}
-                name="icD_C_Code"
+                value={formik.values.icD_Code_C}
+                name="icD_Code_C"
                 isOutlined={true}
               />
 
@@ -176,8 +176,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("C")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_C_Description}
-                  name="icd_C_Description"
+                  fieldVal={formik.values.icd_Description_C}
+                  name="icd_Description_C"
                 />
               </Box>
             </Box>
@@ -197,8 +197,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD D"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_D_Code}
-                name="icD_D_Code"
+                value={formik.values.icD_Code_D}
+                name="icD_Code_D"
                 isOutlined={true}
               />
 
@@ -212,8 +212,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("D")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_D_Description}
-                  name="icd_D_Description"
+                  fieldVal={formik.values.icd_Description_D}
+                  name="icd_Description_D"
                 />
               </Box>
             </Box>
@@ -233,8 +233,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD E"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_E_Code}
-                name="icD_E_Code"
+                value={formik.values.icD_Code_E}
+                name="icD_Code_E"
                 isOutlined={true}
               />
 
@@ -248,8 +248,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("E")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_E_Description}
-                  name="icd_E_Description"
+                  fieldVal={formik.values.icd_Description_E}
+                  name="icd_Description_E"
                 />
               </Box>
             </Box>
@@ -269,8 +269,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD F"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_F_Code}
-                name="icD_F_Code"
+                value={formik.values.icD_Code_F}
+                name="icD_Code_F"
                 isOutlined={true}
               />
 
@@ -284,8 +284,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("F")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_F_Description}
-                  name="icd_F_Description"
+                  fieldVal={formik.values.icd_Description_F}
+                  name="icd_Description_F"
                 />
               </Box>
             </Box>
@@ -305,8 +305,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD G"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_G_Code}
-                name="icD_G_Code"
+                value={formik.values.icD_Code_G}
+                name="icD_Code_G"
                 isOutlined={true}
               />
 
@@ -320,8 +320,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("G")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_G_Description}
-                  name="icd_G_Description"
+                  fieldVal={formik.values.icd_Description_G}
+                  name="icd_Description_G"
                 />
               </Box>
             </Box>
@@ -341,8 +341,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD H"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_H_Code}
-                name="icD_H_Code"
+                value={formik.values.icD_Code_H}
+                name="icD_Code_H"
                 isOutlined={true}
               />
 
@@ -356,8 +356,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("H")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_H_Description}
-                  name="icd_H_Description"
+                  fieldVal={formik.values.icd_Description_H}
+                  name="icd_Description_H"
                 />
               </Box>
             </Box>
@@ -377,8 +377,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD I"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_I_Code}
-                name="icD_I_Code"
+                value={formik.values.icD_Code_I}
+                name="icD_Code_I"
                 isOutlined={true}
               />
 
@@ -392,8 +392,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("I")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_I_Description}
-                  name="icd_I_Description"
+                  fieldVal={formik.values.icd_Description_I}
+                  name="icd_Description_I"
                 />
               </Box>
             </Box>
@@ -413,8 +413,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD J"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_J_Code}
-                name="icD_J_Code"
+                value={formik.values.icD_Code_J}
+                name="icD_Code_J"
                 isOutlined={true}
               />
 
@@ -428,8 +428,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("J")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_J_Description}
-                  name="icd_J_Description"
+                  fieldVal={formik.values.icd_Description_J}
+                  name="icd_Description_J"
                 />
               </Box>
             </Box>
@@ -449,8 +449,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD K"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_K_Code}
-                name="icD_K_Code"
+                value={formik.values.icD_Code_K}
+                name="icD_Code_K"
                 isOutlined={true}
               />
 
@@ -464,8 +464,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("K")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_K_Description}
-                  name="icd_K_Description"
+                  fieldVal={formik.values.icd_Description_K}
+                  name="icd_Description_K"
                 />
               </Box>
             </Box>
@@ -485,8 +485,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                 label="ICD L"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_L_Code}
-                name="icD_L_Code"
+                value={formik.values.icD_Code_L}
+                name="icD_Code_L"
                 isOutlined={true}
               />
 
@@ -500,8 +500,8 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
                   handleModalOpen={() => handleOpenDiagnosisModal("L")}
                   handleChange={formik.handleChange}
                   handleBlur={formik.handleBlur}
-                  fieldVal={formik.values.icd_L_Description}
-                  name="icd_L_Description"
+                  fieldVal={formik.values.icd_Description_L}
+                  name="icd_Description_L"
                 />
               </Box>
             </Box>
