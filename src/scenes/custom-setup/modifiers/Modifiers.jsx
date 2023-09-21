@@ -56,11 +56,13 @@ const Modifiers = ({ setProcedureValues, identifier, handleClose }) => {
     fetchModifier();
   }, []);
 
-  const handleModifier = (val, field) => {
-    const fieldName = field;
+  const handleModifier = (val, identifier) => {
+    const fieldId = `mod_${identifier}`;
+    const fieldCode = `mode_Code_${identifier}`;
     setProcedureValues((prevVals) => ({
       ...prevVals,
-      [fieldName]: val.id,
+      [fieldId]: val.id,
+      [fieldCode]: val.modifierCode,
     }));
     handleClose();
   };
@@ -96,9 +98,7 @@ const Modifiers = ({ setProcedureValues, identifier, handleClose }) => {
               </div>
             ),
           }}
-          onCellClick={(params) =>
-            handleModifier(params.row, `mod_${identifier}`)
-          }
+          onCellClick={(params) => handleModifier(params.row, identifier)}
         />
       )}
     </Box>

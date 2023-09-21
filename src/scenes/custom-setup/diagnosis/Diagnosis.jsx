@@ -62,12 +62,14 @@ const Diagnosis = ({ formik, handleClose, icdIdentifier }) => {
 
   const handleDiagnosis = (val, field) => {
     console.log(val, "diagnosis values");
-    const fieldName = field;
+    const fieldId = field;
     const descriptionFieldName = `icd_${icdIdentifier}_Description`;
+    const icdCode = `icD_${icdIdentifier}_Code`;
     formik.setValues({
       ...formik.values,
-      [fieldName]: val.id,
+      [fieldId]: val.id,
       [descriptionFieldName]: val.diagnosisDescription,
+      [icdCode]: val.diagnosisCode,
     });
 
     handleClose();

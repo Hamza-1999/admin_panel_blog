@@ -85,12 +85,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD A"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_A}
-                name="icD_A"
+                value={formik.values.icD_A_Code}
+                name="icD_A_Code"
                 isOutlined={true}
               />
 
@@ -121,12 +121,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD B"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_B}
-                name="icD_B"
+                value={formik.values.icD_B_Code}
+                name="icD_B_Code"
                 isOutlined={true}
               />
 
@@ -157,12 +157,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD C"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_C}
-                name="icD_C"
+                value={formik.values.icD_C_Code}
+                name="icD_C_Code"
                 isOutlined={true}
               />
 
@@ -193,12 +193,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD D"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_D}
-                name="icD_D"
+                value={formik.values.icD_D_Code}
+                name="icD_D_Code"
                 isOutlined={true}
               />
 
@@ -229,12 +229,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD E"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_E}
-                name="icD_E"
+                value={formik.values.icD_E_Code}
+                name="icD_E_Code"
                 isOutlined={true}
               />
 
@@ -265,12 +265,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD F"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_F}
-                name="icD_F"
+                value={formik.values.icD_F_Code}
+                name="icD_F_Code"
                 isOutlined={true}
               />
 
@@ -301,12 +301,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD G"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_G}
-                name="icD_G"
+                value={formik.values.icD_G_Code}
+                name="icD_G_Code"
                 isOutlined={true}
               />
 
@@ -337,12 +337,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD H"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_H}
-                name="icD_H"
+                value={formik.values.icD_H_Code}
+                name="icD_H_Code"
                 isOutlined={true}
               />
 
@@ -373,12 +373,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD I"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_I}
-                name="icD_I"
+                value={formik.values.icD_I_Code}
+                name="icD_I_Code"
                 isOutlined={true}
               />
 
@@ -409,12 +409,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD J"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_J}
-                name="icD_J"
+                value={formik.values.icD_J_Code}
+                name="icD_J_Code"
                 isOutlined={true}
               />
 
@@ -445,12 +445,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD K"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_K}
-                name="icD_K"
+                value={formik.values.icD_K_Code}
+                name="icD_K_Code"
                 isOutlined={true}
               />
 
@@ -481,12 +481,12 @@ const ClaimCharges = ({ formik, claimChargesDto, setClaimChargesDto }) => {
               }}
             >
               <CustomField
-                type="number"
+                type="text"
                 label="ICD L"
                 handleBlur={formik.handleBlur}
                 handleChange={formik.handleChange}
-                value={formik.values.icD_L}
-                name="icD_L"
+                value={formik.values.icD_L_Code}
+                name="icD_L_Code"
                 isOutlined={true}
               />
 

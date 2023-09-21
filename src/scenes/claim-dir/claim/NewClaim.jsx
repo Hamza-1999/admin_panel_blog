@@ -48,7 +48,7 @@ const NewClaim = () => {
         facilityId: facilityId,
         claimChargesUpdatedDto: claimChargesDto,
       };
-      console.log(postValues, "calim postValues");
+      console.log(postValues, "claim postValues");
       try {
         dispatch(newClaimAction(postValues));
       } catch (error) {
