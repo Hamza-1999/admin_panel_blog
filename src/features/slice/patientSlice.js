@@ -22,12 +22,12 @@ const patientSlice = createSlice({
     [newPatientAction.fulfilled]: (state, action) => {
       state.loading = false;
       state.patientData = action.payload;
-      toast.success("patient has been created successfully!");
+      toast.success("Patient Has Been Created Successfully!");
     },
     [newPatientAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      toast.error("patient creation failed");
+      toast.error("Patient Not Successfully Created");
     },
     [getPatientAction.pending]: (state) => {
       state.loading = true;
@@ -43,28 +43,6 @@ const patientSlice = createSlice({
     [updatePatientAction.pending]: (state) => {
       state.loading = true;
     },
-    // [updatePatientAction.fulfilled]: (state, action) => {
-    //   // state.loading = false;
-    //   // const updatedPatientIndex = state.getAllPatients.result?.findIndex(
-    //   //   (user) => user.patientId === action.payload.PatientId
-    //   // );
-    //   // if (updatedPatientIndex !== -1) {
-    //   //   state.getAllPatients[updatedPatientIndex] = action.payload;
-    //   // }
-
-    //   state.loading = false;
-    //   const updatedPatientIndex = state.getAllPatients.result?.findIndex(
-    //     (user) => user.accountNo === action.payload.accountNo
-    //   );
-    //   if (updatedPatientIndex !== -1) {
-    //     const updatedPatientData = {
-    //       ...state.getAllPatients.result[updatedPatientIndex],
-    //       ...action.payload,
-    //     };
-    //     state.getAllPatients.result[updatedPatientIndex] = updatedPatientData;
-    //   }
-    // },
-
     // Update the patient data in the list
     [updatePatientAction.fulfilled]: (state, action) => {
       state.loading = false;
@@ -85,11 +63,13 @@ const patientSlice = createSlice({
       }
       // Assuming you are returning the updated data in the action payload
       state.patientData = action.payload;
+      toast.success("Patient Has Been Updated Successfully!");
     },
 
     [updatePatientAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
+      toast.error("Patient Not Successfully Updated");
     },
   },
 });

@@ -1,9 +1,13 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
-const PostPayGrid = ({ formik, setShowDetail, setDetailInfo }) => {
+const PostPayGrid = ({
+  selectedRowData,
+  formik,
+  setShowDetail,
+  setDetailInfo,
+}) => {
   const payDataForGrid = [
     {
       claimId: formik.values.claimInfoId,
@@ -39,6 +43,17 @@ const PostPayGrid = ({ formik, setShowDetail, setDetailInfo }) => {
     additionalActions: el.additionalActions,
     balance: el.balance,
     claimChargesDto: el.claimChargesDto,
+  }));
+
+  const payerRows = selectedRowData.map((el, index) => ({
+    id: el.id || index,
+    accountNo: el.accountNo,
+    claimNo: el.claimNo,
+    patientFirstName: el.patientFirstName,
+    patientLastName: el.patientLastName,
+    balance: el.balance,
+    payments: el.payments,
+    totalCharges: el.totalCharges,
   }));
 
   const totalBilled = rows.reduce((sum, row) => sum + row.billed, 0);
@@ -154,11 +169,66 @@ const PostPayGrid = ({ formik, setShowDetail, setDetailInfo }) => {
       align: "center",
     },
   ];
+
+  // payer columns
+  const payerColumns = [
+    {
+      field: "name",
+      headerName: "Name",
+      flex: 3,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+      valueGetter: (params) =>
+        `${params.row.patientFirstName} ${params.row.patientLastName}`,
+    },
+    {
+      field: "accountNo",
+      headerName: "Account No",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+
+    {
+      field: "claimNo",
+      headerName: "Claim",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "balance",
+      headerName: "Balance",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "payments",
+      headerName: "Payments",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
+      field: "totalCharges",
+      headerName: "Total Charges",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+  ];
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-        rows={rowsWithTotal}
-        columns={columns}
+        rows={formik.values.isClaim === true ? rowsWithTotal : payerRows}
+        columns={formik.values.isClaim === true ? columns : payerColumns}
         sx={{
           "& .header-bg": {
             backgroundColor: "lightgrey",
