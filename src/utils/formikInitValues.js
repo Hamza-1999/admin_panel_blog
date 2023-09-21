@@ -112,6 +112,18 @@ export const claimInitVal = {
   icD_K: null,
   icD_L: null,
 
+  icD_A_Code: "",
+  icD_B_Code: "",
+  icD_C_Code: "",
+  icD_D_Code: "",
+  icD_E_Code: "",
+  icD_F_Code: "",
+  icD_G_Code: "",
+  icD_H_Code: "",
+  icD_I_Code: "",
+  icD_J_Code: "",
+  icD_K_Code: "",
+  icD_L_Code: "",
   // description
   icd_A_Description: "",
   icd_B_Description: "",

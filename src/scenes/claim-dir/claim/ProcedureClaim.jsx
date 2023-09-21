@@ -53,6 +53,10 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
     mod_2: null,
     mod_3: null,
     mod_4: null,
+    mode_Code_1: "",
+    mode_Code_2: "",
+    mode_Code_3: "",
+    mode_Code_4: "",
     unitPrice: 0,
     units: 0,
     claimStatus: "",
@@ -327,33 +331,33 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
         >
           <CustomSearchField
             label="Mod 1"
-            fieldVal={procedureValues.modCode_1}
+            fieldVal={procedureValues.mode_Code_1}
             handleChange={handleProcedureChange}
-            name="modCode_1"
+            name="mode_Code_1"
             handleModalOpen={() => handleOpenModifierModal(1)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 2"
-            fieldVal={procedureValues.modCode_2}
+            fieldVal={procedureValues.mode_Code_2}
             handleChange={handleProcedureChange}
-            name="modCode_2"
+            name="mode_Code_2"
             handleModalOpen={() => handleOpenModifierModal(2)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 3"
-            fieldVal={procedureValues.modCode_3}
+            fieldVal={procedureValues.mode_Code_3}
             handleChange={handleProcedureChange}
-            name="modCode_3"
+            name="mode_Code_3"
             handleModalOpen={() => handleOpenModifierModal(3)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 4"
-            fieldVal={procedureValues.modCode_4}
+            fieldVal={procedureValues.mode_Code_4}
             handleChange={handleProcedureChange}
-            name="modCode_4"
+            name="mode_Code_4"
             handleModalOpen={() => handleOpenModifierModal(4)}
             handleBlur={formik.handleBlur}
           />
