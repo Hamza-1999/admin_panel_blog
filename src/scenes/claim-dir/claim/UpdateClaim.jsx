@@ -15,6 +15,11 @@ import {
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import path from "../../../config/apiUrl";
+import {
+  icdInitialCodes,
+  icdInitialId,
+  icdInitDescription,
+} from "./claimInitFunc";
 
 const UpdateClaim = () => {
   const { claimNumber } = useParams();
@@ -24,7 +29,7 @@ const UpdateClaim = () => {
   const findClaim = getClaims.result?.find(
     (el) => el.claimNumber === Number(claimNumber)
   );
-  console.log(findClaim, "findedClaimUpdate");
+
   const [tabValue, setTabValue] = useState(0);
   const [claimIds, setClaimIds] = useState({
     patientAccountNo: findClaim?.patientAccountNo || null,
@@ -59,9 +64,6 @@ const UpdateClaim = () => {
     }
   };
 
-  //   const codeType = diagnosisData.map((el) => el);
-  //   console.log(codeType, "codeTypes");
-
   const dispatch = useDispatch();
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -90,54 +92,16 @@ const UpdateClaim = () => {
     claimFrequency: findClaim?.claimFrequency || "",
     referenceNumber: findClaim?.referenceNumber,
     facilityName: findClaim?.facilityName || "",
-
-    // claim charges
-    icD_A: findClaim?.icD_A || null,
-    icD_B: findClaim?.icD_B || null,
-    icD_C: findClaim?.icD_C || null,
-    icD_D: findClaim?.icD_D || null,
-    icD_E: findClaim?.icD_E || null,
-    icD_F: findClaim?.icD_F || null,
-    icD_G: findClaim?.icD_G || null,
-    icD_H: findClaim?.icD_H || null,
-    icD_I: findClaim?.icD_I || null,
-    icD_J: findClaim?.icD_J || null,
-    icD_K: findClaim?.icD_K || null,
-    icD_L: findClaim?.icD_L || null,
-
-    // description
-    icd_A_Description: "",
-    icd_B_Description: "",
-    icd_C_Description: "",
-    icd_D_Description: "",
-    icd_E_Description: "",
-    icd_F_Description: "",
-    icd_G_Description: "",
-    icd_H_Description: "",
-    icd_I_Description: "",
-    icd_J_Description: "",
-    icd_K_Description: "",
-    icd_L_Description: "",
-
-    // charges dtos for multiple procedure
-    // claimChargesDto: [
-    //   {
-    //     fromDate: null,
-    //     toDate: null,
-    //     procedureCode: "",
-    //     posCode: "",
-    //     tosCode: "",
-    //     modCode_1: "",
-    //     modCode_2: "",
-    //     modCode_3: "",
-    //     modCode_4: "",
-    //     icD_pointers: "",
-    //     unitPrice: null,
-    //     units: null,
-    //     amount: null,
-    //     claimStatus: "",
-    //   },
-    // ],
+    // calling icd initial ids function here
+    ...icdInitialId("icD_", findClaim?.icD_DiagnosisDetailDto),
+    // calling icd initial code function here
+    ...icdInitialCodes("icD_Code_", findClaim?.icD_DiagnosisDetailDto),
+    // calling icd initial description function here
+    ...icdInitDescription(
+      "icd_Description_",
+      findClaim?.icD_DiagnosisDetailDto
+    ),
+    claimType: "Professional",
   };
 
   const formik = useFormik({
@@ -147,7 +111,6 @@ const UpdateClaim = () => {
       console.log(values, "claimvals999");
       const updateValues = {
         ...values,
-        claimChargesDto: claimChargesDto,
         patientAccountNo: claimIds.patientAccountNo,
         patientId: claimIds.patientId,
         practiceId: claimIds.practiceId,
@@ -158,6 +121,7 @@ const UpdateClaim = () => {
         supervisingProviderId: claimIds.supervisingProviderId,
         providerId: claimIds.providerId,
         facilityId: facilityId,
+        claimChargesUpdatedDto: claimChargesDto,
       };
       console.log(updateValues, "claim update");
       try {
