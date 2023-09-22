@@ -39,7 +39,7 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
     zIndex: "111",
     backgroundColor: "#fff",
   };
-  // const [procedureAmount, setProcedureAmount] = useState(null);
+
   const [procedureValues, setProcedureValues] = useState({
     procedureCodeId: null,
     tosCodeId: null,
@@ -49,14 +49,6 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
     fromDate: null,
     posCode: "",
     tosCode: "",
-    mod_1: null,
-    mod_2: null,
-    mod_3: null,
-    mod_4: null,
-    mode_Code_1: "",
-    mode_Code_2: "",
-    mode_Code_3: "",
-    mode_Code_4: "",
     unitPrice: 0,
     units: 0,
     claimStatus: "",
@@ -64,8 +56,6 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
     amountPaid: 0,
     isDeleted: false,
   });
-
-  // console.log(procedureValues.amount, "check amount prs");
 
   const handleOpenModifierModal = (identifier) => {
     setOpenModifierModal(true);

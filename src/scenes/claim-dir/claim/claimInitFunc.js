@@ -84,3 +84,17 @@ export const icdInitDescription = (prefix, diagnosisDetailDto) => {
 
   return initialValues;
 };
+
+// claim init function for modifier codes
+export const modInitCodes = (prefix, modifierDetailDtos) => {
+  const initialValues = {};
+  const modifiersNames = [1, 2, 3, 4];
+  modifiersNames.forEach((fieldName, index) => {
+    const allModCodes =
+      modifierDetailDtos && modifierDetailDtos[index]
+        ? modifierDetailDtos[index].modifierCode
+        : null;
+    initialValues[prefix + fieldName] = allModCodes || null;
+  });
+  return initialValues;
+};
