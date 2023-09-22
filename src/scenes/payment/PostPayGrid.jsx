@@ -8,6 +8,7 @@ const PostPayGrid = ({
   setShowDetail,
   setDetailInfo,
 }) => {
+  console.log(selectedRowData, "allrowsDataPay");
   const payDataForGrid = [
     {
       claimId: formik.values.claimInfoId,
@@ -47,21 +48,28 @@ const PostPayGrid = ({
 
   const payerRows = selectedRowData.map((el, index) => ({
     id: el.id || index,
-    accountNo: el.accountNo,
-    claimNo: el.claimNo,
+    claimNumber: el.claimNumber,
+    patientAccountNo: el.patientAccountNo,
     patientFirstName: el.patientFirstName,
     patientLastName: el.patientLastName,
-    balance: el.balance,
-    payments: el.payments,
+    billed: el.totalBilled || formik.values.billed,
+    balance: el.balance || formik.values.balance,
+    allowed: formik.values.allowed,
+    adjusted: formik.values.adjusted,
+    unpaid: formik.values.unpaid,
     totalCharges: el.totalCharges,
+    paid: formik.values.paid,
+    additionalActions: formik.values.additionalActions,
+    claimChargesDto: el.claimChargesDto,
   }));
 
-  const totalBilled = rows.reduce((sum, row) => sum + row.billed, 0);
-  const totalAllowed = rows.reduce((sum, row) => sum + row.allowed, 0);
-  const totalPaid = rows.reduce((sum, row) => sum + row.paid, 0);
-  const totalAdjusted = rows.reduce((sum, row) => sum + row.adjusted, 0);
-  const totalUnpaid = rows.reduce((sum, row) => sum + row.unpaid, 0);
-  const totalBalance = rows.reduce((sum, row) => sum + row.balance, 0);
+  const totalR = formik.values.isClaim === true ? rows : payerRows;
+  const totalBilled = totalR.reduce((sum, row) => sum + row.billed, 0);
+  const totalAllowed = totalR.reduce((sum, row) => sum + row.allowed, 0);
+  const totalPaid = totalR.reduce((sum, row) => sum + row.paid, 0);
+  const totalAdjusted = totalR.reduce((sum, row) => sum + row.adjusted, 0);
+  const totalUnpaid = totalR.reduce((sum, row) => sum + row.unpaid, 0);
+  const totalBalance = totalR.reduce((sum, row) => sum + row.balance, 0);
 
   const totalRows = {
     id: "total",
@@ -170,65 +178,66 @@ const PostPayGrid = ({
     },
   ];
 
-  // payer columns
-  const payerColumns = [
-    {
-      field: "name",
-      headerName: "Name",
-      flex: 3,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-      valueGetter: (params) =>
-        `${params.row.patientFirstName} ${params.row.patientLastName}`,
-    },
-    {
-      field: "accountNo",
-      headerName: "Account No",
-      flex: 1,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-    },
+  // // payer columns
+  // const payerColumns = [
+  //   {
+  //     field: "name",
+  //     headerName: "Name",
+  //     flex: 3,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //     valueGetter: (params) =>
+  //       `${params.row.patientFirstName} ${params.row.patientLastName}`,
+  //   },
+  //   {
+  //     field: "accountNo",
+  //     headerName: "Account No",
+  //     flex: 1,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //   },
 
-    {
-      field: "claimNo",
-      headerName: "Claim",
-      flex: 1,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "balance",
-      headerName: "Balance",
-      flex: 1,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "payments",
-      headerName: "Payments",
-      flex: 1,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-    },
-    {
-      field: "totalCharges",
-      headerName: "Total Charges",
-      flex: 1,
-      minWidth: 150,
-      headerAlign: "center",
-      align: "center",
-    },
-  ];
+  //   {
+  //     field: "claimNo",
+  //     headerName: "Claim",
+  //     flex: 1,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //   },
+  //   {
+  //     field: "balance",
+  //     headerName: "Balance",
+  //     flex: 1,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //   },
+  //   {
+  //     field: "payments",
+  //     headerName: "Payments",
+  //     flex: 1,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //   },
+  //   {
+  //     field: "totalCharges",
+  //     headerName: "Total Charges",
+  //     flex: 1,
+  //     minWidth: 150,
+  //     headerAlign: "center",
+  //     align: "center",
+  //   },
+  // ];
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
         rows={formik.values.isClaim === true ? rowsWithTotal : payerRows}
-        columns={formik.values.isClaim === true ? columns : payerColumns}
+        // columns={formik.values.isClaim === true ? columns : payerColumns}
+        columns={columns}
         sx={{
           "& .header-bg": {
             backgroundColor: "lightgrey",

@@ -9,25 +9,27 @@ const MultipleClaims = ({
   multipleClaimData,
   handleClose,
 }) => {
+  console.log(multipleClaimData, "allMultiClaims");
   const [selectedRows, setSelectedRows] = useState([]);
-  console.log(selectedRows, "all selected rows");
+  // console.log(selectedRows, "all selected rows");
   // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
     id: index,
-    claimNo: el.claimNo || "N/A",
-    accountNo: el.accountNo || "N/A",
+    claimNumber: el.claimNumber || "N/A",
+    patientAccountNo: el.patientAccountNo || "N/A",
     patientFirstName: el.patientFirstName || "N/A",
     patientLastName: el.patientLastName || "N/A",
-    totalCharges: el.totalCharges || "N/A",
-    adjustments: el.adjustments || "N/A",
-    balance: el.balance || "N/A",
-    payments: el.payments || "N/A",
-    // fromDate: el.payerClaimChargeDto[0].fromDate,
-    // toDate: el.payerClaimChargeDto[0].toDate,
+    totalBilled: el.totalBilled || "N/A",
+    adjustments: 0,
+    balance: el.totalBilled || "N/A",
+    payments: 0,
+    fromDate: el.claimChargesDto[0].fromDate || "N/a",
+    toDate: el.claimChargesDto[0].toDate || "N/A",
+    claimChargesDto: el.claimChargesDto,
   }));
   const columns = [
     {
-      field: "claimNo",
+      field: "claimNumber",
       headerName: "Claim #",
       flex: 1,
       minWidth: 100,
@@ -36,7 +38,7 @@ const MultipleClaims = ({
       headerClassName: "header-bg",
     },
     {
-      field: "accountNo",
+      field: "patientAccountNo",
       headerName: "Account #",
       flex: 1,
       minWidth: 100,
@@ -79,7 +81,7 @@ const MultipleClaims = ({
     //   align: "center",
     // },
     {
-      field: "totalCharges",
+      field: "totalBilled",
       headerName: "Charges",
       flex: 1,
       minWidth: 100,

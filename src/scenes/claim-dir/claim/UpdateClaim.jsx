@@ -19,6 +19,7 @@ import {
   icdInitialCodes,
   icdInitialId,
   icdInitDescription,
+  modInitCodes,
 } from "./claimInitFunc";
 
 const UpdateClaim = () => {
@@ -28,6 +29,11 @@ const UpdateClaim = () => {
   const { getClaims, loading } = useSelector((state) => state.claim);
   const findClaim = getClaims.result?.find(
     (el) => el.claimNumber === Number(claimNumber)
+  );
+
+  console.log(
+    findClaim?.claimChargesDto[0].modifierDetailDtos,
+    "get modifier array"
   );
 
   const [tabValue, setTabValue] = useState(0);
@@ -41,6 +47,7 @@ const UpdateClaim = () => {
     renderingProviderId: findClaim?.renderingProviderId || null,
     supervisingProviderId: findClaim?.supervisingProviderId || null,
     providerId: findClaim?.providerId || null,
+    facilityId: findClaim?.facilityId || null,
   });
   const [facilityId, setFacilityId] = useState(null);
   const [claimChargesDto, setClaimChargesDto] = useState(
@@ -75,15 +82,17 @@ const UpdateClaim = () => {
       "",
     patientAccountNo: findClaim?.patientAccountNo || null,
     renderingProviderName:
-      `${findClaim?.renderingProviderFirstName} ${findClaim?.renderingProviderLastName} ` ||
+      `${findClaim?.renderingProviderFirstName} ${findClaim?.renderingProviderLastName} (${findClaim?.renderingProviderSequence})` ||
       "",
     billingProviderName:
-      `${findClaim?.billingProviderFirstName} ${findClaim?.billingProviderLastName} ` ||
+      `${findClaim?.billingProviderFirstName} ${findClaim?.billingProviderLastName} (${findClaim?.billingProviderSequence})` ||
       "",
     supervisingProviderName: "",
     practiceAddress: findClaim?.practiceAddress || "",
     practiceSequenceNo: findClaim?.practiceSequenceNo || null,
-    primaryPayerInsuranceName: findClaim?.primaryPayerInsuranceName || "",
+    primaryPayerInsuranceName:
+      `${findClaim?.primaryPayerInsuranceName} (${findClaim?.payerSequenceNo})` ||
+      "",
     primaryPayerMemberId: findClaim?.primaryPayerMemberId || null,
     primaryPayerGroupId: findClaim?.primaryPayerGroupId || null,
     primaryPayerPolicyType: findClaim?.primaryPayerPolicyType || "",
@@ -91,7 +100,8 @@ const UpdateClaim = () => {
     payerSequenceNo: findClaim?.payerSequenceNo || null,
     claimFrequency: findClaim?.claimFrequency || "",
     referenceNumber: findClaim?.referenceNumber,
-    facilityName: findClaim?.facilityName || "",
+    facilityName:
+      `${findClaim?.facilityName} (${findClaim?.facilitySequence})` || "",
     // calling icd initial ids function here
     ...icdInitialId("icD_", findClaim?.icD_DiagnosisDetailDto),
     // calling icd initial code function here
@@ -102,6 +112,7 @@ const UpdateClaim = () => {
       findClaim?.icD_DiagnosisDetailDto
     ),
     claimType: "Professional",
+    // calling mod code function here
   };
 
   const formik = useFormik({
@@ -223,6 +234,7 @@ const UpdateClaim = () => {
               formik={formik}
               setClaimChargesDto={setClaimChargesDto}
               claimChargesDto={claimChargesDto}
+              findClaim={findClaim}
             />
           )}
         </Box>
