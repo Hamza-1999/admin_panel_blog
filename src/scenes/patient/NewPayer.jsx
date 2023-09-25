@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { createNewPayerAction } from "../../features/actions/payerAction";
 
-const NewPayer = () => {
+const NewPayer = ({ handleClose }) => {
   const dispatch = useDispatch();
   const [payerTypeOpt, setPayerTypeOpt] = useState([]);
   const { loading } = useSelector((state) => state.payer);
@@ -40,7 +40,13 @@ const NewPayer = () => {
     initialValues: initialValues,
     onSubmit: (values, action) => {
       console.log(values, "new payer values");
-      dispatch(createNewPayerAction(values));
+      if (initialValues.payerName.length === 0) {
+        alert("Add Required Fields");
+      } else {
+        dispatch(createNewPayerAction(values));
+      }
+      action.resetForm();
+      handleClose();
     },
   });
 

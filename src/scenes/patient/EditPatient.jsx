@@ -35,7 +35,7 @@ import dayjs from "dayjs";
 import { ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
 
-const EditPatient = ({ formik, editFormData, setEditFormData }) => {
+const EditPatient = ({ formik }) => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
   const [isLoading, setIsLoading] = useState(true);
   const [accountTypeOptions, setAccountTypeOptions] = useState([]);
@@ -54,82 +54,6 @@ const EditPatient = ({ formik, editFormData, setEditFormData }) => {
   const [residenceOptions, setResidenceOptions] = useState([]);
 
   const dispatch = useDispatch();
-
-  const handleChange = (event) => {
-    formik.handleChange(event);
-    setEditFormData({
-      ...editFormData,
-      [event.target.name]: event.target.value,
-    });
-  };
-  // const { loading, getAllPatients } = useSelector((state) => state.patient);
-  const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!getAllPatients?.result?.length) {
-  //     dispatch(getPatientAction()).then(() => setIsLoading(false));
-  //   } else {
-  //     setIsLoading(false);
-  //   }
-  // }, [dispatch]);
-
-  // initial formik values
-  // const initialValues = {
-  //   firstName: findPatient?.firstName || "",
-  //   lastName: findPatient?.lastName || "",
-  //   email: findPatient?.email || "",
-  //   drivingLicense: findPatient?.drivingLicense || "",
-  //   dateOfBirth: findPatient?.dateOfBirth
-  //     ? dayjs(findPatient.dateOfBirth)
-  //     : null,
-  //   dateOfDeath: findPatient?.dateOfDeath
-  //     ? dayjs(findPatient.dateOfDeath)
-  //     : null,
-  //   cellPhone: findPatient?.cellPhone || "",
-  //   homePhone: findPatient?.homePhone || "",
-  //   workPhone: findPatient?.workPhone || "",
-  //   ext: findPatient?.ext || "",
-  //   address: findPatient?.address || "",
-  //   zipCode: findPatient?.zipCode || "",
-  //   emergencyContactFirstName: findPatient?.emergencyContactFirstName || "",
-  //   emergencyContactLastName: findPatient?.emergencyContactLastName || "",
-  //   emergencyContactAddress: findPatient?.emergencyContactAddress || "",
-  //   emergencyContactZipCode: findPatient?.emergencyContactZipCode || "",
-  //   emergencyContactState: findPatient?.emergencyContactState || "",
-  //   emergencyContactCity: findPatient?.emergencyContactCity || "",
-  //   // dateOfDeath: null,
-  //   // dropdowns
-  //   genderIdentityName: findPatient?.genderIdentityName || "",
-  //   maritalStatusName: findPatient?.maritalStatusName || "",
-  //   raceStatusName: findPatient?.raceStatusName || "",
-  //   sexualOrientationName: findPatient?.sexualOrientationName || "",
-  //   employmentStatusName: findPatient?.employmentStatusName || "",
-  //   referralSourceName: findPatient?.referralSourceName || "",
-  //   relationShipToPatientName: findPatient?.relationShipToPatientName || "",
-  //   ethnicityName: findPatient?.ethnicityName || "",
-  //   studentStatusName: findPatient?.studentStatusName || "",
-  //   accountType: findPatient?.accountType || "",
-  //   cityName: findPatient?.cityName || "",
-  //   countryName: findPatient?.countryName || "",
-  //   stateName: findPatient?.stateName || "",
-  //   residenceTypeName: findPatient?.residenceTypeName || "",
-  // };
-  // const handleFormSubmit = (values, actions) => {
-  //   try {
-  //     dispatch(
-  //       updatePatientAction({
-  //         accountNo: findPatient?.accountNo,
-  //         ...values,
-  //       })
-  //     );
-  //     console.log(values, "checking submit values of update patient");
-  //     actions.setSubmitting(false);
-  //     handleClose();
-  //     // navigate("/managepatient");
-  //   } catch (error) {
-  //     console.error("Error updating patient:", error);
-  //     actions.setSubmitting(false);
-  //   }
-  // };
 
   // Define data fetching URLs
   const dataFetchUrls = {

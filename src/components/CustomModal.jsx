@@ -16,6 +16,7 @@ const CustomModal = ({ children, open, handleClose }) => {
     minHeight: "100px",
     maxHeight: "600px",
     overflowY: "scroll",
+    padding: "15px",
     // padding: "16px", // Adding some padding to the modal content
   };
 

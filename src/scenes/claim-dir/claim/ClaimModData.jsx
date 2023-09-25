@@ -59,14 +59,16 @@ const ClaimModData = ({ setClaimIds, setValues, formik, handleClose }) => {
     {
       field: "patientAccountNo",
       headerName: "Account #",
-      width: 150,
+      flex: 1,
+      minWidth: 100,
       headerAlign: "center",
       align: "center",
     },
     {
       field: "name",
       headerName: "Name",
-      width: 150,
+      minWidth: 100,
+      flex: 2,
       headerAlign: "center",
       align: "center",
       valueGetter: (params) => `${params.row.firstName} ${params.row.lastName}`,
@@ -75,25 +77,18 @@ const ClaimModData = ({ setClaimIds, setValues, formik, handleClose }) => {
     {
       field: "dateOfBirth",
       headerName: "Date Of Birth",
-      width: 150,
+      flex: 1,
+      minWidth: 100,
       headerAlign: "center",
       align: "center",
-    },
-    {
-      field: "insured",
-      headerName: "Insured",
-      width: 150,
-      headerAlign: "center",
-      align: "center",
-      valueGetter: (params) =>
-        `${params.row.insuredFirstName} ${params.row.insuredLastName}`,
     },
     {
       field: "accountType",
       headerName: "Account Type",
-      width: 150,
+      minWidth: 100,
       headerAlign: "center",
       align: "center",
+      flex: 1,
     },
   ];
 

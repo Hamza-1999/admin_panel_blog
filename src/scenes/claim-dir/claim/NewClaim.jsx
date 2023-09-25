@@ -8,8 +8,10 @@ import { useFormik } from "formik";
 import { claimInitVal } from "../../../utils/formikInitValues";
 import { useDispatch } from "react-redux";
 import { newClaimAction } from "../../../features/actions/claimAction";
+import { useNavigate } from "react-router-dom";
 
 const NewClaim = () => {
+  const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
   const [claimIds, setClaimIds] = useState({
     patientAccountNo: null,
@@ -58,6 +60,15 @@ const NewClaim = () => {
     },
   });
 
+  // handle cancel
+  const handleCancel = () => {
+    const conform = window.confirm("Are you sure you want to cancel?");
+    if (conform) {
+      formik.resetForm();
+      navigate("/claims");
+    }
+  };
+
   console.log(formik.values, "form values claims");
   return (
     <Box margin="20px">
@@ -91,7 +102,7 @@ const NewClaim = () => {
             sx={{
               marginRight: "15px",
             }}
-            // onSubmit={formik.handleSubmit}
+            onClick={handleCancel}
           >
             Cancel
           </Button>

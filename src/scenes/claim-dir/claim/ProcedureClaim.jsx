@@ -55,6 +55,14 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
     amountBilled: 0,
     amountPaid: 0,
     isDeleted: false,
+    mod_Code1: "",
+    mod_Code2: "",
+    mod_Code3: "",
+    mod_Code4: "",
+    mod_1: null,
+    mod_2: null,
+    mod_3: null,
+    mod_4: null,
   });
 
   const handleOpenModifierModal = (identifier) => {
@@ -321,33 +329,33 @@ const ProcedureClaim = ({ formik, handleClose, setClaimChargesDto }) => {
         >
           <CustomSearchField
             label="Mod 1"
-            fieldVal={procedureValues.mode_Code_1}
+            fieldVal={procedureValues.mod_Code1}
             handleChange={handleProcedureChange}
-            name="mode_Code_1"
+            name="mod_Code1"
             handleModalOpen={() => handleOpenModifierModal(1)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 2"
-            fieldVal={procedureValues.mode_Code_2}
+            fieldVal={procedureValues.mod_Code2}
             handleChange={handleProcedureChange}
-            name="mode_Code_2"
+            name="mod_Code2"
             handleModalOpen={() => handleOpenModifierModal(2)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 3"
-            fieldVal={procedureValues.mode_Code_3}
+            fieldVal={procedureValues.mod_Code3}
             handleChange={handleProcedureChange}
-            name="mode_Code_3"
+            name="mod_Code3"
             handleModalOpen={() => handleOpenModifierModal(3)}
             handleBlur={formik.handleBlur}
           />
           <CustomSearchField
             label="Mod 4"
-            fieldVal={procedureValues.mode_Code_4}
+            fieldVal={procedureValues.mod_Code4}
             handleChange={handleProcedureChange}
-            name="mode_Code_4"
+            name="mod_Code4"
             handleModalOpen={() => handleOpenModifierModal(4)}
             handleBlur={formik.handleBlur}
           />
