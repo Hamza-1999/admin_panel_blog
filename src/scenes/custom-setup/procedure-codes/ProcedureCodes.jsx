@@ -46,8 +46,8 @@ const ProcedureCodes = ({ setProcedureValues, handleClose }) => {
     {
       field: "procedureDescription",
       headerName: "Description",
-      minWidth: 200,
-      flex: 1,
+      minWidth: 100,
+      flex: 3,
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
@@ -81,7 +81,7 @@ const ProcedureCodes = ({ setProcedureValues, handleClose }) => {
     handleClose();
   };
   return (
-    <Box sx={{ width: "400px" }}>
+    <Box sx={{ width: "100%" }}>
       {isLoading ? (
         <Box
           sx={{
