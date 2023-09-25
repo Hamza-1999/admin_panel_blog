@@ -38,7 +38,7 @@ const TosCodes = ({ handleClose, setProcedureValues }) => {
       field: "tosCode",
       headerName: "Codes",
       minWidth: 100,
-      flex: 1,
+      flex: 2,
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
@@ -46,8 +46,8 @@ const TosCodes = ({ handleClose, setProcedureValues }) => {
     {
       field: "tosDescription",
       headerName: "Description",
-      minWidth: 290,
-      flex: 1,
+      minWidth: 100,
+      flex: 3,
       headerAlign: "left",
       align: "left",
       headerClassName: "header-bg",
@@ -68,7 +68,7 @@ const TosCodes = ({ handleClose, setProcedureValues }) => {
     handleClose();
   };
   return (
-    <Box sx={{ width: "400px" }}>
+    <Box sx={{ width: "100%" }}>
       {isLoading ? (
         <Box
           sx={{

@@ -130,17 +130,19 @@ const PostPayment = ({
             </Stack>
 
             {/* get payer  */}
-            <Stack flexDirection="row" alignItems="center">
-              <Typography marginRight="15px">Add Payment For:</Typography>
-              <CustomButton
-                margin="15px 0 "
-                variant="contained"
-                width="150px"
-                handleClick={handleGetMultiClaims}
-              >
-                Add Claims
-              </CustomButton>
-            </Stack>
+            {!formik.values.isClaim ? (
+              <Stack flexDirection="row" alignItems="center">
+                <Typography marginRight="15px">Add Payment For:</Typography>
+                <CustomButton
+                  margin="15px 0 "
+                  variant="contained"
+                  width="150px"
+                  handleClick={handleGetMultiClaims}
+                >
+                  Add Claims
+                </CustomButton>
+              </Stack>
+            ) : null}
           </Box>
 
           {/* Grid here */}
