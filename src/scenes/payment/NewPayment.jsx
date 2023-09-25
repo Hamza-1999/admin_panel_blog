@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import PostPayment from "./PostPayment";
 import { useDispatch } from "react-redux";
 import { createPaymentAction } from "../../features/actions/PaymentAction";
+import { toast } from "react-toastify";
 
 const NewPayment = () => {
   const [openClaimModal, setOpenClaimModal] = useState(false);
@@ -38,9 +39,13 @@ const NewPayment = () => {
   // console.log(postPaymentData, "allpostPayData");
   const formik = useFormik({
     initialValues: paymentInitValue,
-    onSubmit: (values) => {
+    onSubmit: (values, action) => {
       console.log(values, "payment Values");
       dispatch(createPaymentAction(values));
+      toast.success("Payment Created Successfully!");
+      action.resetForm();
+      setShowPostPay(false);
+      setApplyEob(false);
     },
   });
 

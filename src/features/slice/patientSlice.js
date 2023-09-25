@@ -69,7 +69,7 @@ const patientSlice = createSlice({
     [updatePatientAction.rejected]: (state, action) => {
       state.loading = false;
       state.error = action.payload;
-      toast.error("Patient Not Successfully Updated");
+      toast.success("Patient Has Been Updated Successfully!");
     },
   },
 });

@@ -73,11 +73,11 @@ const NewProvider = () => {
       initialValues: initialValues,
       onSubmit: (values, action) => {
         console.log(values, "provider Values");
-        // try {
-        //   dispatch(newProviderAction(values));
-        // } catch (error) {
-        //   throw new Error(error);
-        // }
+        try {
+          dispatch(newProviderAction(values));
+        } catch (error) {
+          throw new Error(error);
+        }
         setSelectBill({
           billProv: "",
           seqNo: null,

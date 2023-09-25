@@ -12,7 +12,7 @@ import {
   newClaimAction,
   updateClaimAction,
 } from "../../../features/actions/claimAction";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import path from "../../../config/apiUrl";
 import {
@@ -24,6 +24,7 @@ import {
 
 const UpdateClaim = () => {
   const { claimNumber } = useParams();
+  const navigate = useNavigate();
   const [diagnosisData, setDiagnosisData] = useState([]);
   //   get claims
   const { getClaims, loading } = useSelector((state) => state.claim);
@@ -145,7 +146,7 @@ const UpdateClaim = () => {
       } catch (error) {
         throw new Error(error);
       }
-      //   action.resetForm();
+      action.resetForm();
     },
   });
 
@@ -160,6 +161,15 @@ const UpdateClaim = () => {
   useEffect(() => {
     fetchAllDiagnosis();
   }, []);
+
+  // handle cancel
+  const handleCancel = () => {
+    const conform = window.confirm("Are you sure you want to cancel?");
+    if (conform) {
+      formik.resetForm();
+      navigate("/claims");
+    }
+  };
   return (
     <Box margin="20px">
       <Header title="Update Claim" />
@@ -193,6 +203,7 @@ const UpdateClaim = () => {
               marginRight: "15px",
             }}
             // onSubmit={formik.handleSubmit}
+            onClick={handleCancel}
           >
             Cancel
           </Button>

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createNewPayerAction, getPayerAction } from "../actions/payerAction";
+import { toast } from "react-toastify";
 
 const initialState = {
   payerData: {},
@@ -18,6 +19,7 @@ const payerSlice = createSlice({
     [createNewPayerAction.fulfilled]: (state, action) => {
       state.loading = false;
       state.payerData = action.payload;
+      toast.success("Payment Created Successfully!");
     },
     [createNewPayerAction.rejected]: (state, action) => {
       state.loading = false;

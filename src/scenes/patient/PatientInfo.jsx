@@ -23,6 +23,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import { Expand, ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
+import CustomSearchField from "../../components/CustomSearchField";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -157,6 +158,9 @@ const PatientInfo = ({ formik }) => {
                 value={formik.values.drivingLicense}
                 label="Driving License"
               />
+
+              {/* payer and provider */}
+              <CustomSearchField />
 
               <CustomSelectBox
                 name="genderIdentityName"

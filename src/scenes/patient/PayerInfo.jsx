@@ -64,7 +64,7 @@ const PayerInfo = ({ formik }) => {
         open={openNewPayerModal}
         handleClose={() => setOpenNewPayerModal(false)}
       >
-        <NewPayer />
+        <NewPayer handleClose={() => setOpenNewPayerModal(false)} />
       </CustomModal>
 
       <Box display="flex" flexDirection="column" gap={5}>

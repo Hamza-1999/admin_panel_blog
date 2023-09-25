@@ -6,18 +6,19 @@ import React, { useEffect, useState } from "react";
 const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
   console.log(claimChargesDto, "checking claim charges dto");
   const rows = claimChargesDto.map((el, index) => ({
-    id: index,
+    id: el.procedureCodeId,
     procedureCode: el.procedureCode,
     toDate: el.toDate,
     fromDate: el.fromDate,
     tosCode: el.tosCode,
     posCode: el.posCode,
-    modCode_1: el.modCode_1,
-    modCode_2: el.modCode_2,
-    modCode_3: el.modCode_3,
-    modCode_4: el.modCode_4,
+    modCode_1: el.mod_Code1,
+    modCode_2: el.mod_Code2,
+    modCode_3: el.mod_Code3,
+    modCode_4: el.mod_Code4,
     unitPrice: el.unitPrice,
     units: el.units,
+    amountBilled: el.amountBilled,
   }));
 
   const handleDeleteRow = (val) => {

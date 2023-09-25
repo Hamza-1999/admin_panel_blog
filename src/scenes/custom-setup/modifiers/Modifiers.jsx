@@ -58,7 +58,7 @@ const Modifiers = ({ setProcedureValues, identifier, handleClose }) => {
 
   const handleModifier = (val, identifier) => {
     const fieldId = `mod_${identifier}`;
-    const fieldCode = `mode_Code_${identifier}`;
+    const fieldCode = `mod_Code${identifier}`;
     setProcedureValues((prevVals) => ({
       ...prevVals,
       [fieldId]: val.id,

@@ -11,9 +11,12 @@ import "./createpatient.css";
 import path from "../../config/apiUrl";
 import PayerInfo from "./PayerInfo";
 import { patientInitValues } from "../../utils/formikInitValues";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 // import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
 
 const CreatePatient = () => {
+  const navigate = useNavigate();
   const [tabValue, setTabValue] = useState(0);
 
   const [isFormVisible, setIsFormVisible] = useState(true);
@@ -29,20 +32,37 @@ const CreatePatient = () => {
   };
 
   const handleFormSubmit = (formValues) => {
-    const requiredFields = ["firstName", "lastName"];
-    const emptyFields = requiredFields.filter(
-      (fieldName) => !formValues[fieldName]
-    );
+    // const requiredFields = ["firstName", "lastName"];
+    // const emptyFields = requiredFields.filter(
+    //   (fieldName) => !formValues[fieldName]
+    // );
 
-    if (emptyFields.length > 0) {
-      alert("Please fill the required fields first");
-      return;
-    }
-
-    try {
-      dispatch(newPatientAction(formValues));
-    } catch (error) {
-      console.error("Error creating patient:", error);
+    // if (emptyFields.length > 0) {
+    //   alert("Please fill the required fields first");
+    //   return;
+    // }
+    if (
+      formik.values.firstName.length === 0 &&
+      formik.values.lastName.length === 0
+    ) {
+      toast.error("Patient First & Last Name is required");
+    } else if (
+      formik.values.genderIdentityName.length === 0 ||
+      formik.values.genderIdentityName === null ||
+      !formik.values.genderIdentityName
+    ) {
+      toast.error("Gender field is required");
+    } else if (
+      formik.values.dateOfBirth.length === 0 ||
+      formik.values.dateOfBirth === null
+    ) {
+      toast.error("Date of birth field is required");
+    } else {
+      try {
+        dispatch(newPatientAction(formValues));
+      } catch (error) {
+        console.error("Error creating patient:", error);
+      }
     }
   };
 
@@ -59,26 +79,51 @@ const CreatePatient = () => {
     },
   });
 
+  // handle cancel
+  const handleCancel = () => {
+    const conform = window.confirm("Are you sure you want to cancel?");
+    if (conform) {
+      formik.resetForm();
+      navigate("/managepatient");
+    }
+  };
+
   return (
     <Box margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
       <Box>
         <Stack
-          flexDirection="row"
-          alignItems="center"
+          sx={{ flexDirection: { xs: "column", sm: "column", md: "row" } }}
+          // alignItems="center"
           justifyContent="space-between"
         >
           <Tabs
             value={tabValue}
             onChange={handleTabChange}
-            sx={{ marginBottom: "10px" }}
+            // sx={{ marginBottom: "10px" }}
+            sx={{
+              order: { xs: 2, sm: 2, md: 1 },
+              marginBottom: "10px",
+            }}
           >
             <Tab label="Patient Info" value={0} />
             <Tab label="Insurance Info" value={1} />
             <Tab label="Payer Info" value={2} />
           </Tabs>
 
-          <Box>
+          <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
+            <Button
+              type="reset"
+              color="error"
+              variant="outlined"
+              form="claimForm"
+              sx={{
+                marginRight: "15px",
+              }}
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
             <Button
               type="submit"
               color="secondary"
