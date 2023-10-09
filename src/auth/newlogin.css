@@ -1,0 +1,15 @@
+*{
+    margin: 0%;
+    padding: 0%;
+}
+.login{
+    background-image: url("/public/assets/Rectangle\ 1.png");
+    height: 107%;
+    margin-top: 9%;
+}
+#inner{
+    border: 2px solid green;
+    background-color: white;
+    margin-top: 12px;
+ 
+}
