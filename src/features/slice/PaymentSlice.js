@@ -5,11 +5,19 @@ const initialState = {
   paymentData: {},
   loading: false,
   error: null,
+  selectedClaim: [],
 };
 
 const paymentSlice = createSlice({
   name: "payment",
   initialState: initialState,
+  reducers: {
+    addSelectedClaim: (state, action) => {
+      console.log(action.payload, "payment data");
+      // state.selectedClaim.push(action.payload);
+      state.selectedClaim = action.payload;
+    },
+  },
   extraReducers: {
     [createPaymentAction.pending]: (state) => {
       state.loading = true;
@@ -25,4 +33,5 @@ const paymentSlice = createSlice({
   },
 });
 
+export const { addSelectedClaim } = paymentSlice.actions;
 export default paymentSlice.reducer;

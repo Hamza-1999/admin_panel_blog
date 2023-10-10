@@ -3,6 +3,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addSelectedClaim } from "../../features/slice/PaymentSlice";
 
 const MultipleClaims = ({
   setSelectedRowData,
@@ -11,6 +13,9 @@ const MultipleClaims = ({
 }) => {
   console.log(multipleClaimData, "allMultiClaims");
   const [selectedRows, setSelectedRows] = useState([]);
+  // dispatching
+  const dispatch = useDispatch();
+  console.log(selectedRows, "allselectedrows56");
   // console.log(selectedRows, "all selected rows");
   // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
@@ -64,22 +69,6 @@ const MultipleClaims = ({
       align: "center",
       headerClassName: "header-bg",
     },
-    // {
-    //   field: "fromDate",
-    //   headerName: "From",
-    //   flex: 1,
-    //   minWidth: 100,
-    //   headerAlign: "center",
-    //   align: "center",
-    // },
-    // {
-    //   field: "toDate",
-    //   headerName: "To",
-    //   flex: 1,
-    //   minWidth: 100,
-    //   headerAlign: "center",
-    //   align: "center",
-    // },
     {
       field: "totalBilled",
       headerName: "Charges",
@@ -123,8 +112,9 @@ const MultipleClaims = ({
     const selectedModelRow = selectedRows.map((rowId) =>
       rows.find((el) => el.id === rowId)
     );
-    setSelectedRowData(selectedModelRow);
-    handleClose();
+    dispatch(addSelectedClaim([...selectedModelRow]));
+    // setSelectedRowData(selectedModelRow);
+    // handleClose();
   };
   return (
     <Box sx={{ minHeight: "200px", padding: "15px" }}>

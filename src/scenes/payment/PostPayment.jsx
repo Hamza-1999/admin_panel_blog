@@ -15,15 +15,13 @@ const PostPayment = ({
   setApplyEob,
   formik,
 }) => {
-  const [showDetail, setShowDetail] = useState(false);
-  const [detailInfo, setDetailInfo] = useState([]);
+  // const [showDetail, setShowDetail] = useState(false);
+  // const [detailInfo, setDetailInfo] = useState([]);
   const [multipleClaimData, setMultipleClaimData] = useState([]);
   const [openMultiClaimMod, setOpenMultiClaimMod] = useState(false);
   // const [isLoading, setIsLoading] = useState();
-  const [selectedRowData, setSelectedRowData] = useState([]);
-  console.log(selectedRowData, "All Selected Row DAta");
-  console.log(formik.values.isClaim, "check is claim");
-  console.log(multipleClaimData, "multipleClaims");
+  // const [selectedRowData, setSelectedRowData] = useState([]);
+
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
     if (conform) {
@@ -64,13 +62,13 @@ const PostPayment = ({
         handleClose={() => setOpenMultiClaimMod(false)}
       >
         <MultipleClaims
-          setSelectedRowData={setSelectedRowData}
+          // setSelectedRowData={setSelectedRowData}
           multipleClaimData={multipleClaimData}
           handleClose={() => setOpenMultiClaimMod(false)}
         />
       </CustomModal>
 
-      {showDetail ? (
+      {/* {showDetail ? (
         <Box sx={{ width: "100%" }}>
           <PostPayDetail
             formik={formik}
@@ -78,82 +76,81 @@ const PostPayment = ({
             setShowDetail={setShowDetail}
           />
         </Box>
-      ) : (
-        <div>
-          <Stack flexDirection={"row"} alignItems="center">
-            <CustomButton
-              margin="0 20px 0"
-              variant="contained"
-              width="200px"
-              handleClick={formik.handleSubmit}
-            >
-              Save Payment
-            </CustomButton>
-            <Button variant="outlined" color="error" onClick={handleCancel}>
-              Cancel
-            </Button>
+      ) : ( */}
+      <div>
+        <Stack flexDirection={"row"} alignItems="center">
+          <CustomButton
+            margin="0 20px 0"
+            variant="contained"
+            width="200px"
+            // handleClick={formik.handleSubmit}
+          >
+            Save Payment
+          </CustomButton>
+          <Button variant="outlined" color="error" onClick={handleCancel}>
+            Cancel
+          </Button>
+        </Stack>
+
+        <Box
+          sx={{
+            background: "lightgrey",
+            padding: "18px",
+            margin: "28px 0 20px",
+          }}
+        >
+          <Typography variant="h4" component="p">
+            Payment -{" "}
+            {formik.values.paymentMethod === "creditCard"
+              ? formik.values.creditCardType
+              : formik.values.paymentMethod === "check"
+              ? "Check"
+              : "EFT"}{" "}
+            from <span>{formik.values.paymentBy}</span>
+          </Typography>
+
+          <Stack margin="20px 0 10px">
+            {formik.values.paymentMethod === "check" && (
+              <Typography variant="h5" component="span">
+                <strong>Check:</strong> {formik.values.checkNumber}
+              </Typography>
+            )}
+            <Typography variant="h5" component="span">
+              <strong>Amount:</strong> $ {formik.values.paymentAmount}
+            </Typography>
+            <Typography variant="h5" component="span">
+              <strong>Applied:</strong> $ {formik.values.applied}
+            </Typography>
+            <Typography variant="h5" component="span">
+              <strong>Unapplied:</strong> ${" "}
+              {formik.values.paymentAmount - formik.values.applied}
+            </Typography>
           </Stack>
 
-          <Box
-            sx={{
-              background: "lightgrey",
-              padding: "18px",
-              margin: "28px 0 20px",
-            }}
-          >
-            <Typography variant="h4" component="p">
-              Payment -{" "}
-              {formik.values.paymentMethod === "creditCard"
-                ? formik.values.creditCardType
-                : formik.values.paymentMethod === "check"
-                ? "Check"
-                : "EFT"}{" "}
-              from <span>{formik.values.paymentBy}</span>
-            </Typography>
+          {/* get payer  */}
 
-            <Stack margin="20px 0 10px">
-              {formik.values.paymentMethod === "check" && (
-                <Typography variant="h5" component="span">
-                  <strong>Check:</strong> {formik.values.checkNumber}
-                </Typography>
-              )}
-              <Typography variant="h5" component="span">
-                <strong>Amount:</strong> $ {formik.values.paymentAmount}
-              </Typography>
-              <Typography variant="h5" component="span">
-                <strong>Applied:</strong> $ {formik.values.applied}
-              </Typography>
-              <Typography variant="h5" component="span">
-                <strong>Unapplied:</strong> ${" "}
-                {formik.values.paymentAmount - formik.values.applied}
-              </Typography>
-            </Stack>
+          <Stack flexDirection="row" alignItems="center">
+            <Typography marginRight="15px">Add Payment For:</Typography>
+            <CustomButton
+              margin="15px 0 "
+              variant="contained"
+              width="150px"
+              handleClick={handleGetMultiClaims}
+            >
+              Add Claims
+            </CustomButton>
+          </Stack>
+        </Box>
 
-            {/* get payer  */}
-            {!formik.values.isClaim ? (
-              <Stack flexDirection="row" alignItems="center">
-                <Typography marginRight="15px">Add Payment For:</Typography>
-                <CustomButton
-                  margin="15px 0 "
-                  variant="contained"
-                  width="150px"
-                  handleClick={handleGetMultiClaims}
-                >
-                  Add Claims
-                </CustomButton>
-              </Stack>
-            ) : null}
-          </Box>
-
-          {/* Grid here */}
-          <PostPayGrid
-            formik={formik}
-            setShowDetail={setShowDetail}
-            setDetailInfo={setDetailInfo}
-            selectedRowData={selectedRowData}
-          />
-        </div>
-      )}
+        {/* Grid here */}
+        <PostPayGrid
+        // formik={formik}
+        // setShowDetail={setShowDetail}
+        // setDetailInfo={setDetailInfo}
+        // selectedRowData={selectedRowData}
+        />
+      </div>
+      {/* )} */}
     </Box>
   );
 };

@@ -1,89 +1,26 @@
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
+import { useSelector } from "react-redux";
 
-const PostPayGrid = ({
-  selectedRowData,
-  formik,
-  setShowDetail,
-  setDetailInfo,
-}) => {
-  console.log(selectedRowData, "allrowsDataPay");
-  const payDataForGrid = [
-    {
-      claimId: formik.values.claimInfoId,
-      patientFirstName: formik.values.patientFirstName,
-      patientLastName: formik.values.patientLastName,
-      claimNumber: formik.values.claimNumber,
-      patientAccountNo: formik.values.patientAccountNo,
-      billed: formik.values.billed,
-      allowed: formik.values.allowed,
-      paid: formik.values.paid,
-      adjusted: formik.values.adjusted,
-      unpaid: formik.values.unpaid,
-      additionalActions: formik.values.additionalActions,
-      balance: formik.values.balance,
-      dateOfService: formik.values.dateOfService,
-      tcn: formik.values.tcn,
-      claimChargesDto: formik.values.claimChargesDto,
-    },
-  ];
-  console.log(payDataForGrid, "allgrids");
+const PostPayGrid = () => {
+  const { selectedClaim } = useSelector((state) => state.payment);
+  console.log(selectedClaim, "selectedClaims");
 
-  const rows = payDataForGrid.map((el, index) => ({
-    id: el.claimId || index,
+  const rows = selectedClaim.map((el) => ({
+    id: el.id,
     patientFirstName: el.patientFirstName,
     patientLastName: el.patientLastName,
     patientAccountNo: el.patientAccountNo,
     claimNumber: el.claimNumber,
-    billed: el.billed,
-    allowed: el.allowed,
-    paid: el.paid,
-    adjusted: el.adjusted,
-    unpaid: el.unpaid,
-    additionalActions: el.additionalActions,
-    balance: el.balance,
-    claimChargesDto: el.claimChargesDto,
+    billed: el.totalBilled,
+    allowed: 0,
+    paid: 0,
+    adjusted: 0,
+    unpaid: 0,
+    additionalActions: 0,
+    balance: el.totalBilled,
   }));
-
-  const payerRows = selectedRowData.map((el, index) => ({
-    id: el.id || index,
-    claimNumber: el.claimNumber,
-    patientAccountNo: el.patientAccountNo,
-    patientFirstName: el.patientFirstName,
-    patientLastName: el.patientLastName,
-    billed: el.totalBilled || formik.values.billed,
-    balance: el.balance || formik.values.balance,
-    allowed: formik.values.allowed,
-    adjusted: formik.values.adjusted,
-    unpaid: formik.values.unpaid,
-    totalCharges: el.totalCharges,
-    paid: formik.values.paid,
-    additionalActions: formik.values.additionalActions,
-    claimChargesDto: el.claimChargesDto,
-  }));
-
-  const totalR = formik.values.isClaim === true ? rows : payerRows;
-  const totalBilled = totalR.reduce((sum, row) => sum + row.billed, 0);
-  const totalAllowed = totalR.reduce((sum, row) => sum + row.allowed, 0);
-  const totalPaid = totalR.reduce((sum, row) => sum + row.paid, 0);
-  const totalAdjusted = totalR.reduce((sum, row) => sum + row.adjusted, 0);
-  const totalUnpaid = totalR.reduce((sum, row) => sum + row.unpaid, 0);
-  const totalBalance = totalR.reduce((sum, row) => sum + row.balance, 0);
-
-  const totalRows = {
-    id: "total",
-    patientFirstName: "Total",
-    patientLastName: "",
-    billed: totalBilled,
-    allowed: totalAllowed,
-    adjusted: totalAdjusted,
-    balance: totalBalance,
-    paid: totalPaid,
-    unpaid: totalUnpaid,
-  };
-
-  const rowsWithTotal = [...rows, totalRows];
   const columns = [
     {
       field: "name",
@@ -103,7 +40,6 @@ const PostPayGrid = ({
       headerAlign: "center",
       align: "center",
     },
-
     {
       field: "claimNumber",
       headerName: "Claim",
@@ -235,7 +171,8 @@ const PostPayGrid = ({
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
-        rows={formik.values.isClaim === true ? rowsWithTotal : payerRows}
+        // rows={formik.values.isClaim === true ? rowsWithTotal : payerRows}
+        rows={rows}
         // columns={formik.values.isClaim === true ? columns : payerColumns}
         columns={columns}
         sx={{
@@ -245,21 +182,21 @@ const PostPayGrid = ({
         }}
         autoHeight
         disableSelectionOnClick
-        components={{
-          NoRowsOverlay: () => (
-            <div
-              style={{ width: "100%", textAlign: "center", padding: "16px" }}
-            >
-              {rowsWithTotal.length === 0 && "No Data Is Added"}
-            </div>
-          ),
-        }}
-        onCellClick={(params) => {
-          if (params.row.id !== "total") {
-            setDetailInfo(params.row.claimChargesDto);
-            setShowDetail(true);
-          }
-        }}
+        // components={{
+        //   NoRowsOverlay: () => (
+        //     <div
+        //       style={{ width: "100%", textAlign: "center", padding: "16px" }}
+        //     >
+        //       {rowsWithTotal.length === 0 && "No Data Is Added"}
+        //     </div>
+        //   ),
+        // }}
+        // onCellClick={(params) => {
+        //   if (params.row.id !== "total") {
+        //     setDetailInfo(params.row.claimChargesDto);
+        //     setShowDetail(true);
+        //   }
+        // }}
       />
     </Box>
   );
