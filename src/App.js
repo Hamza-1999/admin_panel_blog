@@ -34,6 +34,7 @@ import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
 import NewPayment from "./scenes/payment/NewPayment";
 import PostPayDetail from "./scenes/payment/PostPayDetail";
 import CreatePatient from "./scenes/patient/CreatePatient";
+import NewLogin from "./auth/NewLogin";
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -51,7 +52,9 @@ function App() {
           <main className="content">
             {!isLoginPage && <Topbar setIsSidebar={setIsSidebar} />}
             <Routes>
-              <Route path="/" element={<Login />} />
+              {/* <Route path="/" element={<Login />} /> */}
+              <Route path="/" element={<NewLogin />} />
+
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/patient" element={<Patient />} />
 
