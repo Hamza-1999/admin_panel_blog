@@ -10,7 +10,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getClaims, loading } = useSelector((state) => state.claim);
-  console.log(getClaims, "all claims 67");
+
   const rows =
     getClaims && getClaims.result
       ? getClaims.result.map((el) => ({
@@ -30,8 +30,6 @@ const ClaimTable = ({ onCellClick, isModal }) => {
           claimChargesDto: el.claimChargesDto,
         }))
       : [];
-
-  console.log(rows, "all rows in claims");
 
   const columns = [
     {

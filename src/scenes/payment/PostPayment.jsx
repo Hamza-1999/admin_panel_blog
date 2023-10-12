@@ -13,17 +13,18 @@ const PostPayment = ({
   // postPaymentData,
   setShowPostPay,
   setApplyEob,
+  setPaymentDetailDto,
   formik,
 }) => {
   const [showDetail, setShowDetail] = useState(false);
   const [detailInfo, setDetailInfo] = useState([]);
+  console.log(detailInfo, "detailInfoRows");
   const [multipleClaimData, setMultipleClaimData] = useState([]);
   const [openMultiClaimMod, setOpenMultiClaimMod] = useState(false);
+
   // const [isLoading, setIsLoading] = useState();
-  const [selectedRowData, setSelectedRowData] = useState([]);
-  console.log(selectedRowData, "All Selected Row DAta");
-  console.log(formik.values.isClaim, "check is claim");
-  console.log(multipleClaimData, "multipleClaims");
+  // const [selectedRowData, setSelectedRowData] = useState([]);
+
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
     if (conform) {
@@ -34,7 +35,6 @@ const PostPayment = ({
   };
 
   const handleGetMultiClaims = async () => {
-    // console.log("clicked");
     const seqNo = formik.values.payerSequenceNo;
     const url = `${path}/payerClaimDetail/SequenceNo?sequenceNo=${seqNo}`;
 
@@ -64,7 +64,7 @@ const PostPayment = ({
         handleClose={() => setOpenMultiClaimMod(false)}
       >
         <MultipleClaims
-          setSelectedRowData={setSelectedRowData}
+          // setSelectedRowData={setSelectedRowData}
           multipleClaimData={multipleClaimData}
           handleClose={() => setOpenMultiClaimMod(false)}
         />
@@ -76,6 +76,7 @@ const PostPayment = ({
             formik={formik}
             detailInfo={detailInfo}
             setShowDetail={setShowDetail}
+            setPaymentDetailDto={setPaymentDetailDto}
           />
         </Box>
       ) : (
@@ -130,27 +131,24 @@ const PostPayment = ({
             </Stack>
 
             {/* get payer  */}
-            {!formik.values.isClaim ? (
-              <Stack flexDirection="row" alignItems="center">
-                <Typography marginRight="15px">Add Payment For:</Typography>
-                <CustomButton
-                  margin="15px 0 "
-                  variant="contained"
-                  width="150px"
-                  handleClick={handleGetMultiClaims}
-                >
-                  Add Claims
-                </CustomButton>
-              </Stack>
-            ) : null}
+
+            <Stack flexDirection="row" alignItems="center">
+              <Typography marginRight="15px">Add Payment For:</Typography>
+              <CustomButton
+                margin="15px 0 "
+                variant="contained"
+                width="150px"
+                handleClick={handleGetMultiClaims}
+              >
+                Add Claims
+              </CustomButton>
+            </Stack>
           </Box>
 
           {/* Grid here */}
           <PostPayGrid
-            formik={formik}
             setShowDetail={setShowDetail}
             setDetailInfo={setDetailInfo}
-            selectedRowData={selectedRowData}
           />
         </div>
       )}

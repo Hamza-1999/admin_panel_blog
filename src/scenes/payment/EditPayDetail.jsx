@@ -3,25 +3,18 @@ import React from "react";
 import { useState } from "react";
 import CustomButton from "../../components/CustomButton";
 
-const EditPayDetail = ({ data, onSave }) => {
-  console.log(data, "data");
-  const [editData, setEditData] = useState(data);
+const EditPayDetail = ({ data, onSave, handleClose }) => {
+  const [editedData, setEditedData] = useState({ ...data });
+  console.log(editedData, "get edited data");
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    const parsedValue =
-      name === "allowed" || "paid" || "unpaid" || "adjusted"
-        ? parseInt(value)
-        : value;
-
-    setEditData({
-      ...editData,
-      [name]: parsedValue,
-    });
-  };
-
-  const handleSaveClick = () => {
-    onSave(editData);
+  const handleSave = () => {
+    const updatedData = {
+      ...editedData,
+      allowed: parseFloat(editedData.allowed), // Convert to a floating-point number
+      paid: parseFloat(editedData.paid), // Convert to a floating-point number
+    };
+    onSave(updatedData);
+    handleClose();
   };
   return (
     <>
@@ -40,54 +33,45 @@ const EditPayDetail = ({ data, onSave }) => {
         <TextField
           type="number"
           size="small"
-          value={editData.amount}
           label="Amount"
           fullWidth
           InputLabelProps={{ shrink: true }}
-          onChange={handleInputChange}
+          value={editedData.amount}
           name="amount"
+          onChange={(e) =>
+            setEditedData({ ...editedData, amount: e.target.value })
+          }
           variant="outlined"
         />
         <TextField
           type="number"
           size="small"
-          value={editData.allowed}
           label="Allowed"
+          value={editedData.allowed}
           fullWidth
           InputLabelProps={{ shrink: true }}
-          onChange={handleInputChange}
           name="allowed"
+          onChange={(e) =>
+            setEditedData({ ...editedData, allowed: e.target.value })
+          }
           variant="outlined"
         />
         <TextField
           type="number"
           size="small"
-          value={editData.paid}
           label="Paid"
           fullWidth
           InputLabelProps={{ shrink: true }}
-          onChange={handleInputChange}
+          value={editedData.paid}
           name="paid"
           variant="outlined"
-        />
-        <TextField
-          type="number"
-          size="small"
-          value={
-            editData.allowed > 0
-              ? (editData.adjusted = editData.amount - editData.allowed)
-              : 0
+          onChange={(e) =>
+            setEditedData({ ...editedData, paid: e.target.value })
           }
-          label="Adjusted"
-          fullWidth
-          InputLabelProps={{ shrink: true }}
-          onChange={handleInputChange}
-          name="adjusted"
-          variant="outlined"
         />
 
         <div>
-          <CustomButton variant="contained" handleClick={handleSaveClick}>
+          <CustomButton variant="contained" handleClick={handleSave}>
             Save
           </CustomButton>
         </div>
