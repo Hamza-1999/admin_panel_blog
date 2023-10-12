@@ -17,221 +17,15 @@ import {
     ImageList,
    
   } from "@mui/material";
+import { useNavigate } from 'react-router-dom';
 
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 const NewLogin = () => {
+  const navigate= useNavigate()
   return (
     <>
-    
-     {/* <Box className='background'
-   sx={{
-    backgroundColor:"#EDF2F6",
-    height:"100%", 
-    width:"100%",
-    
-   
-   }}>
-   
-   
-      <Box  className="login" >
-<Box
-
-sx={{
-width:"400px",
-height:"520px",
-position:"relative",
- left:"810px",
- top:"-20px",
-
-}}
-> 
-
-<form className='inner'>
-  <Typography style={{fontWeight:"bold",fontSize:"40px",textAlign:"center"}}>Login <span style={{fontWeight:"lighter",fontSize:"40px"}}>Here</span></Typography>
-  <Typography variant='h6'
-  color={"#216FED"}
-  fontFamily={"Poppins"}
-  marginTop={2}
-  >Username</Typography>
-        <TextField style={{width:"100%"}}
-          id="outlined"
-          defaultValue=""
-        />
-
-      <Typography variant='h6'
-       color={"#216FED"}
-       fontFamily={"Poppins"}
-       marginTop={4} sx={{
-        color: {xs: "red", sm:"blue", md:"green"}
-       }}>Password</Typography>
-     <TextField style={{width:"100%",}}
-          id="outlined"
-          defaultValue=""
-        />
-        <br/>
-
-    <Link href="#" underline="none"
-     color={"#DE1D1D"}
-     marginLeft={32}
-     marginTop={4}
-     fontFamily={"Poppins"}>
-  {'Forget Password'}
-</Link>
-    <br/>
-   
-
-    <label  style={{fontSize:"14px",color:"#696969",fontFamily:"poppins"}} >
-      <input type="checkbox" style={{color: "#216FED",height:"15px",width:"15px",marginLeft:"2px",marginTop:"5%"}} />
-        <span style={{marginLeft:"5px"}}>Remember me</span>
-    </label>
-    <br/>
-  
-    <Button style={{color: "#FFF",marginTop:"20%",marginLeft:"22%",backgroundColor:"#0464FF",borderRadius:"10px", border:"1px solid #0464FF",height:"40px",width:"200px"}} variant="outlined" size="medium">
-         Get start
-        </Button>
-
-        </form>
-      </Box>
-      </Box>
-  <Typography marginLeft={120}
-  marginTop={7}>TechMatter PVT.LTD</Typography>
-      </Box>  */}
-
-
-
-
-
-{/* <Box  sx={{
-  backgroundColor: "#EDF2F6",
-  height: "100vh",
-  width: "100%",
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center', 
-  flexDirection: 'column', 
-}}>
-
-  
-<Box className='background' sx={{
-    width: "100%",
-}}>
-  <Box className="login" sx={{
-   
-    maxWidth: "400px", 
-    position: "relative",
-    left:"40%",
-    border:"2px solid green"
-    
-  }}>
-    <form className='inner'>
-      <Typography style={{ fontWeight: "bold", fontSize: "40px", textAlign: "center" }}>
-        Login <span style={{ fontWeight: "lighter", fontSize: "40px" }}>Here</span>
-      </Typography>
-
-      <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={2}>
-        Username
-      </Typography>
-      <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
-
-      <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={4}>
-        Password
-      </Typography>
-      <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
-      <br />
-
-      <Link href="#" underline="none" color="#DE1D1D" marginLeft={2} marginTop={2} fontFamily="Poppins">
-        {'Forget Password'}
-      </Link>
-      <br />
-
-      <label style={{ fontSize: "14px", color: "#696969", fontFamily: "poppins" }}>
-        <input type="checkbox" style={{ color: "#216FED", height: "15px", width: "15px", marginLeft: "2px", marginTop: "5%" }} />
-        <span style={{ marginLeft: "5px" }}>Remember me</span>
-      </label>
-      <br />
-
-      <Button style={{
-        color: "#FFF",
-        marginTop: "4%",
-        backgroundColor: "#0464FF",
-        borderRadius: "10px",
-        border: "1px solid #0464FF",
-        width: "100%", 
-      }} variant="outlined" size="medium">
-        Get start
-      </Button>
-    </form>
-  </Box>
-  </Box>
-
-  <Typography marginTop={3}>TechMatter PVT.LTD</Typography>
-</Box> */}
-
-{/* <Box sx={{
-  backgroundColor: "#EDF2F6",
-  height: "100vh",
-  width: "100%",
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  flexDirection: 'column',
- 
-}}>
-  <Box className='background' sx={{
-    width: "100%",
-    height:"70%",
-}}>
-
-      <form className='inner'>
-        <Typography style={{ fontWeight: "bold", fontSize: "40px", textAlign: "center" }}>
-          Login <span style={{ fontWeight: "lighter", fontSize: "40px" }}>Here</span>
-        </Typography>
-
-        <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={2}>
-          Username
-        </Typography>
-        <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
-
-        <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={4}>
-          Password
-        </Typography>
-        <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
-        <br />
-
-        <Link sx={{
-          position:"relative",
-          top:"10px",
-          right:"0"
-        }}href="#" underline="none" color="#DE1D1D" fontFamily="Poppins">
-          {'Forget Password'}
-        </Link>
-        <br />
-
-        <label style={{ fontSize: "14px", color: "#696969", fontFamily: "poppins" }}>
-          <input type="checkbox" style={{ color: "#216FED", height: "15px", width: "15px", marginLeft: "2px", marginTop: "5%" }} />
-          <span style={{ marginLeft: "5px" }}>Remember me</span>
-        </label>
-        <br />
-
-        <Button style={{
-          color: "#FFF",
-          marginTop: "4%",
-          backgroundColor: "#0464FF",
-          borderRadius: "10px",
-          border: "1px solid #0464FF",
-          width: "100%",
-        }} variant="outlined" size="medium">
-          Get start
-        </Button>
-      </form>
-   
-  </Box>
-
-  <Typography marginTop={3}>TechMatter PVT.LTD</Typography>
-</Box> */}
-
 
 <Box sx={{
   backgroundColor: "#EDF2F6",
@@ -243,18 +37,25 @@ position:"relative",
   flexDirection: 'column',
   position:"relative"
 }}>
+  
   <Box className='background' sx={{
     width: "100%",
-    height: "300px",
+    height: "400px",
   }}>
     <Box sx={{
       width:{xs:"100%", sm:"100%", md:"400px"},
       position:"absolute",
-      top:{xs:"150px", sm:"150px", md:"0"},
-      right:{xs:"0", sm:"0", md:"70px"}
+      top:{xs:"150px", sm:"150px",md:"-37px"},
+      right:{xs:"0", sm:"0", md:"70px"},
+      height:"100%",
+      // boxShadow: "-30px 0px 0px -2px rgba(0, 0, 0, 0.5)",
+     
     }}>
 
-    <form className='inner'>
+    <Box component={"form"} className='inner' sx={{
+       borderRadius: {xs: "38px 38px 0px 0px", sm: "10px", md:"10px"}
+    }}>
+
       <Typography style={{ fontWeight: "bold", fontSize: "40px", textAlign: "center" }}>
         Login <span style={{ fontWeight: "lighter", fontSize: "40px" }}>Here</span>
       </Typography>
@@ -271,9 +72,10 @@ position:"relative",
       <br />
 
       <Link sx={{
-        position: "relative",
-        top: "10px",
-        right: "0",
+        position: "absolute",
+        top: {sm:"280px",xs:"280px"},
+        // lg:1200,md:900,sm:600,xs:before 600
+        left: {lg:"280px",md:"280px",sm:"500px",xs:"180px"}
       }} href="#" underline="none" color="#DE1D1D" fontFamily="Poppins">
         {'Forget Password'}
       </Link>
@@ -287,26 +89,32 @@ position:"relative",
 
       <Button style={{
         color: "#FFF",
-        marginTop: "4%",
+        position:'absolute',
+        top:"400px",
+        left:{lg:"110px",sm:"90px"},
         backgroundColor: "#0464FF",
         borderRadius: "10px",
         border: "1px solid #0464FF",
-        width: "100%",
-      }} variant="outlined" size="medium">
+        width:{lg:"45%",md:"45%",sm:"30%"}
+      }} variant="outlined" size="medium"  onClick={()=>navigate("/dashboard")}>
         Get started
       </Button>
-    </form>
-    </Box>
-  </Box>
-
-</Box>
-  <Typography 
+      <Typography 
   sx={{
     position:"absolute",
-    top:"95%",
-    left:"72%"
+    top:"93%",
+    left:{lg:"37%",sm:"45%",md:"39%" ,xs:"37%"}
   }} >TechMatter PVT.LTD</Typography>
+    </Box>
+    </Box>
+  </Box>     
+</Box>
 
+<Box className="triangle-container">
+<Box className="triangle">
+
+  </Box>
+  </Box>
 
 
 
