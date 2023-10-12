@@ -9,6 +9,7 @@ import { claimInitVal } from "../../../utils/formikInitValues";
 import { useDispatch } from "react-redux";
 import { newClaimAction } from "../../../features/actions/claimAction";
 import { useNavigate } from "react-router-dom";
+import AdditionInfo from "./AdditionInfo";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -91,6 +92,7 @@ const NewClaim = () => {
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
+          <Tab label="Additional Info" value={2} />
         </Tabs>
 
         <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
@@ -139,6 +141,13 @@ const NewClaim = () => {
               formik={formik}
               setClaimChargesDto={setClaimChargesDto}
               claimChargesDto={claimChargesDto}
+            />
+          )}
+          {tabValue === 2 && (
+            <AdditionInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
             />
           )}
         </Box>
