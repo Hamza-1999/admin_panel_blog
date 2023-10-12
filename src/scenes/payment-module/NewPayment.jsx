@@ -23,6 +23,7 @@ import CustomSelectBox from "../../components/CustomSelectBox";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import PostPayment from "../payment/PostPayment";
+import { createPaymentAction } from "../../features/actions/PaymentAction";
 
 const NewPayment = () => {
   const dispatch = useDispatch();
@@ -31,12 +32,18 @@ const NewPayment = () => {
 
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
-
+  const [paymentDetailDto, setPaymentDetailDto] = useState(null);
+  console.log(paymentDetailDto, "all paymentsDto");
   //   formik logic here
   const formik = useFormik({
     initialValues: paymentInitVal3,
     onSubmit: (values) => {
-      console.log(values, "all newpayment2 vals");
+      const postValues = {
+        ...values,
+        paymentDetailDto: paymentDetailDto,
+      };
+      console.log(postValues, "all newpayment2 vals");
+      dispatch(createPaymentAction(postValues));
     },
   });
 
@@ -196,7 +203,10 @@ const NewPayment = () => {
       {/* first window data */}
       <Box margin={"20px"}>
         {showPostPay ? (
-          <PostPayment formik={formik} />
+          <PostPayment
+            formik={formik}
+            setPaymentDetailDto={setPaymentDetailDto}
+          />
         ) : (
           <div>
             <Box>

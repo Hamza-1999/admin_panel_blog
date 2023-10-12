@@ -112,9 +112,14 @@ const MultipleClaims = ({
     const selectedModelRow = selectedRows.map((rowId) =>
       rows.find((el) => el.id === rowId)
     );
+    // Checking if the initially selected row is in the selected rows
+    const initialRow = rows.find((el) => el.id === selectedRows[0]);
+    if (!selectedModelRow.includes(initialRow)) {
+      selectedModelRow.push(initialRow);
+    }
+
     dispatch(addSelectedClaim([...selectedModelRow]));
-    // setSelectedRowData(selectedModelRow);
-    // handleClose();
+    handleClose();
   };
   return (
     <Box sx={{ minHeight: "200px", padding: "15px" }}>

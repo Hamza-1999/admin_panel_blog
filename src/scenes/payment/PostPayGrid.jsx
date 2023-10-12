@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import { useSelector } from "react-redux";
 
-const PostPayGrid = () => {
+const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
   const { selectedClaim } = useSelector((state) => state.payment);
   console.log(selectedClaim, "selectedClaims");
 
@@ -20,6 +20,7 @@ const PostPayGrid = () => {
     unpaid: 0,
     additionalActions: 0,
     balance: el.totalBilled,
+    claimChargesDto: el.claimChargesDto,
   }));
   const columns = [
     {
@@ -191,12 +192,12 @@ const PostPayGrid = () => {
         //     </div>
         //   ),
         // }}
-        // onCellClick={(params) => {
-        //   if (params.row.id !== "total") {
-        //     setDetailInfo(params.row.claimChargesDto);
-        //     setShowDetail(true);
-        //   }
-        // }}
+        onCellClick={(params) => {
+          if (params.row.id !== "total") {
+            setDetailInfo(params.row.claimChargesDto);
+            setShowDetail(true);
+          }
+        }}
       />
     </Box>
   );
