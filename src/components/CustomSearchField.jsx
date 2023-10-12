@@ -1,4 +1,6 @@
 import { Search } from "@mui/icons-material";
+import './Custom-styling/CustomSearchField.css';
+
 import {
   FormControl,
   IconButton,
@@ -17,13 +19,14 @@ const CustomSearchField = ({
   handleBlur,
 }) => {
   return (
-    <div>
+    <div className="customSearchField">
+       <label style={{color:"#216FED"}} htmlFor="">{label}</label>
       <TextField
         size="small"
         fullWidth
-        variant="filled"
+        variant="outlined"
         type={type}
-        label={label}
+        // label={label}
         value={fieldVal || ""}
         name={name}
         onChange={handleChange}
@@ -35,7 +38,7 @@ const CustomSearchField = ({
           endAdornment: (
             <InputAdornment>
               <IconButton onClick={handleModalOpen}>
-                <Search />
+                < Search/>
               </IconButton>
             </InputAdornment>
           ),
