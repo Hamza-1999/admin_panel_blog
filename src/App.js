@@ -31,7 +31,8 @@ import UpdateProvider from "./scenes/custom-setup/provider/UpdateProvider";
 import NewClaim from "./scenes/claim-dir/claim/NewClaim";
 import Claim from "./scenes/claim-dir/claim/Claim";
 import UpdateClaim from "./scenes/claim-dir/claim/UpdateClaim";
-import NewPayment from "./scenes/payment/NewPayment";
+// import NewPayment from "./scenes/payment/NewPayment";
+import NewPayment from "./scenes/payment-module/NewPayment";
 import PostPayDetail from "./scenes/payment/PostPayDetail";
 import CreatePatient from "./scenes/patient/CreatePatient";
 import NewLogin from "./auth/NewLogin";
@@ -87,6 +88,7 @@ function App() {
               />
 
               {/* payment */}
+              {/* <Route path="/payment" element={<NewPayment />} /> */}
               <Route path="/payment" element={<NewPayment />} />
               <Route
                 path="/payment/post/postpay-detail"

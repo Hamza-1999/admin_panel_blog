@@ -8,7 +8,7 @@ import { getPayerAction } from "../../features/actions/payerAction";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 
-const PayerList = ({ handleSelectPayer, handlePaymentPayer, modalFor }) => {
+const PayerList = ({ handleSelectPayer, handlePaymentBy, modalFor }) => {
   const dispatch = useDispatch();
   const { getAllPayer, loading } = useSelector((state) => state.payer);
 
@@ -71,7 +71,7 @@ const PayerList = ({ handleSelectPayer, handlePaymentPayer, modalFor }) => {
             disableSelectionOnClick
             onCellClick={(param) =>
               modalFor === "payment"
-                ? handlePaymentPayer(param.row)
+                ? handlePaymentBy(param.row)
                 : handleSelectPayer(param.row)
             }
           />
