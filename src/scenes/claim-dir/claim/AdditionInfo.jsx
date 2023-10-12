@@ -26,7 +26,7 @@ const AdditionInfo = ({ formik }) => {
   const [documentationMethod, setDocumentationMethod] = useState([]);
   const [documentationType, setDocumentationType] = useState([]);
   const [serviceAuthorization, setServiceAuthorization] = useState([]);
-  console.log(formik.values, "vals1234");
+  console.log(formik.values.formType, "vals1234");
   // Define data fetching URLs
   const dataFetchUrls = {
     delayReason: `${path}/ct-delayReason`,
@@ -75,15 +75,34 @@ const AdditionInfo = ({ formik }) => {
             }}
           >
             <RadioGroup row name="row-radio-buttons-group">
-              <FormControlLabel value={1} control={<Radio />} label="None" />
+              <FormControlLabel
+                value={1}
+                control={
+                  <Radio
+                    checked={formik.values.formType === 1}
+                    onChange={() => formik.setFieldValue("formType", 1)}
+                  />
+                }
+                label="None"
+              />
               <FormControlLabel
                 value={2}
-                control={<Radio />}
+                control={
+                  <Radio
+                    checked={formik.values.formType === 2}
+                    onChange={() => formik.setFieldValue("formType", 2)}
+                  />
+                }
                 label="ANSI Location (For Electronic Claims)"
               />
               <FormControlLabel
                 value={3}
-                control={<Radio />}
+                control={
+                  <Radio
+                    checked={formik.values.formType === 3}
+                    onChange={() => formik.setFieldValue("formType", 3)}
+                  />
+                }
                 label="CMS 1500 (02-12) Box Numbers (For Printed Claims)"
               />
             </RadioGroup>
@@ -233,66 +252,173 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomDatePicker
-                dateLabel="Accident Illness Date"
-                dateValue={formik.values.accidentDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("accidentDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("accidentDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Last Menstrual Period"
-                dateValue={formik.values.lastMenstrualDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("lastMenstrualDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("lastMenstrualDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Initial Treatment Date"
-                dateValue={formik.values.initialTreatmentDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("initialTreatmentDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("initialTreatmentDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Date Last Seen"
-                dateValue={formik.values.lastSeenDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("lastSeenDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("lastSeenDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Unable to Work From Date"
-                dateValue={formik.values.unableToWorkFromDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("unableToWorkFromDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("unableToWorkFromDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Unable to Work To Date"
-                dateValue={formik.values.unableToWorkToDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("unableToWorkToDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("unableToWorkToDate", true)
-                }
-              />
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Accident Illness Date"
+                  dateValue={formik.values.accidentDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("accidentDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("accidentDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : ""}
+                </Typography>
+              </Stack>
+
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Last Menstrual Period"
+                  dateValue={formik.values.lastMenstrualDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("lastMenstrualDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("lastMenstrualDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : ""}
+                </Typography>
+              </Stack>
+
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Initial Treatment Date"
+                  dateValue={formik.values.initialTreatmentDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("initialTreatmentDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("initialTreatmentDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : ""}
+                </Typography>
+              </Stack>
+
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Date Last Seen"
+                  dateValue={formik.values.lastSeenDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("lastSeenDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("lastSeenDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : ""}
+                </Typography>
+              </Stack>
+
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Unable to Work From Date"
+                  dateValue={formik.values.unableToWorkFromDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("unableToWorkFromDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("unableToWorkFromDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack alignItems="center" direction="row">
+                <CustomDatePicker
+                  dateLabel="Unable to Work To Date"
+                  dateValue={formik.values.unableToWorkToDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("unableToWorkToDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("unableToWorkToDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === 1 && "none"}
+                >
+                  {formik.values.formType === 2
+                    ? "ANSI"
+                    : formik.values.formType === 3
+                    ? "CMS"
+                    : ""}
+                </Typography>
+              </Stack>
             </Box>
 
             <Stack direction="row" alignItems="center" marginTop="30px">
@@ -348,8 +474,22 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField label="Claim Codes" />
-              <CustomField label="Other Claim ID" />
+              <CustomField
+                type="text"
+                label="Claim Codes"
+                value={formik.values.claimCodes}
+                name="claimCodes"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="number"
+                label="Other Claim ID"
+                value={formik.values.otherClaimId}
+                name="otherClaimId"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
             <Box
               display="grid"
@@ -363,8 +503,22 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField label="Additional Claim Information" />
-              <CustomField label="Claim Note" />
+              <CustomField
+                type="text"
+                label="Additional Claim Information"
+                value={formik.values.claimInformation}
+                name="claimInformation"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="text"
+                label="Claim Note"
+                value={formik.values.claimNote}
+                name="claimNote"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
 
             <Box
@@ -379,7 +533,14 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField label="Resubmit Reason Code" />
+              <CustomField
+                type="text"
+                label="Resubmit Reason Code"
+                value={formik.values.reasonCode}
+                name="reasonCode"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
 
             <Box
@@ -395,13 +556,13 @@ const AdditionInfo = ({ formik }) => {
               }}
             >
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="reasonDelayCode"
+                value={formik.values.reasonDelayCode}
                 dropdownOptions={delayReason?.map((opt) => ({
                   value: opt.delayReasonCodeName,
                   id: opt.delayReasonCodeId,
                 }))}
-                label="Delail Reason"
+                label="Detail Reason"
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
@@ -419,8 +580,26 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomDatePicker dateLabel="Hospitalized From Date" />
-              <CustomDatePicker dateLabel="Hospitalized To Date" />
+              <CustomDatePicker
+                dateLabel="Hospitalized From Date"
+                dateValue={formik.values.hospitalizedFromDate}
+                handleDateChange={(value) =>
+                  formik.setFieldValue("hospitalizedFromDate", value)
+                }
+                handleDateBlur={() =>
+                  formik.setFieldTouched("hospitalizedFromDate", true)
+                }
+              />
+              <CustomDatePicker
+                dateLabel="Hospitalized To Date"
+                dateValue={formik.values.hospitalizedToDate}
+                handleDateChange={(value) =>
+                  formik.setFieldValue("hospitalizedToDate", value)
+                }
+                handleDateBlur={() =>
+                  formik.setFieldTouched("hospitalizedToDate", true)
+                }
+              />
             </Box>
 
             <Box
@@ -435,7 +614,14 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField label="Lab Charges" />
+              <CustomField
+                type="number"
+                label="Lab Charges"
+                value={formik.values.labCharges}
+                name="labCharges"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
 
             <Box
@@ -451,8 +637,8 @@ const AdditionInfo = ({ formik }) => {
               }}
             >
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="specialProgramCode"
+                value={formik.values.specialProgramCode}
                 dropdownOptions={specialProgram?.map((opt) => ({
                   value: opt.specialProgramName,
                   id: opt.specialProgramId,
@@ -483,8 +669,8 @@ const AdditionInfo = ({ formik }) => {
               }}
             >
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="patientSignature"
+                value={formik.values.patientSignature}
                 dropdownOptions={signaturePatient?.map((opt) => ({
                   value: opt.patientSignatureName,
                   id: opt.patientSignatureId,
@@ -494,8 +680,8 @@ const AdditionInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="insuredSignature"
+                value={formik.values.insuredSignature}
                 dropdownOptions={insureSignature?.map((opt) => ({
                   value: opt.insuredSignatureName,
                   id: opt.insuredSignature,
@@ -505,8 +691,8 @@ const AdditionInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="providerAcceptance"
+                value={formik.values.providerAcceptance}
                 dropdownOptions={providerAcceptance?.map((opt) => ({
                   value: opt.providerAcceptance,
                   id: opt.providerAcceptanceId,
@@ -538,8 +724,8 @@ const AdditionInfo = ({ formik }) => {
               }}
             >
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="documentationMethod"
+                value={formik.values.documentationMethod}
                 dropdownOptions={documentationMethod?.map((opt) => ({
                   value: opt.documentationMethodName,
                   id: opt.documentationMethodId,
@@ -549,8 +735,8 @@ const AdditionInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="documentationType"
+                value={formik.values.documentationType}
                 dropdownOptions={documentationType?.map((opt) => ({
                   value: opt.documentationTypeName,
                   id: opt.documentationTypeId,
@@ -573,8 +759,22 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField label="Patient Height (in.)" />
-              <CustomField label="Patient Weight (lbs.)" />
+              <CustomField
+                type="number"
+                label="Patient Height (in.)"
+                value={formik.values.patientHeight}
+                name="patientHeight"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="number"
+                label="Patient Weight (lbs.)"
+                value={formik.values.patientWeight}
+                name="patientWeight"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
 
             <Box
@@ -590,8 +790,8 @@ const AdditionInfo = ({ formik }) => {
               }}
             >
               <CustomSelectBox
-                // name="genderIdentityName"
-                // value={formik.values.genderIdentityName}
+                name="serviceAuthorization"
+                value={formik.values.serviceAuthorization}
                 dropdownOptions={serviceAuthorization?.map((opt) => ({
                   value: opt.serviceAuthorizationName,
                   id: opt.serviceAuthorizationId,
@@ -600,10 +800,38 @@ const AdditionInfo = ({ formik }) => {
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
               />
-              <CustomField label="Demonstration Project" />
-              <CustomField label="Mammography Certification" />
-              <CustomField label="Investigational Device Exemption" />
-              <CustomField label="Ambulatory Patient Group" />
+              <CustomField
+                type="text"
+                label="Demonstration Project"
+                value={formik.values.demonstrationProject}
+                name="demonstrationProject"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="text"
+                label="Mammography Certification"
+                value={formik.values.mammographyCertification}
+                name="mammographyCertification"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="text"
+                label="Investigational Device Exemption"
+                value={formik.values.investigationalDeviceExemption}
+                name="investigationalDeviceExemption"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
+              <CustomField
+                type="text"
+                label="Ambulatory Patient Group"
+                value={formik.values.ambulatoryPatientGroup}
+                name="ambulatoryPatientGroup"
+                handleChange={formik.handleChange}
+                handleBlur={formik.handleBlur}
+              />
             </Box>
           </AccordionDetails>
         </Accordion>

@@ -1,6 +1,6 @@
 import { TextField } from "@mui/material";
 import React from "react";
-import './Custom-styling/CustomField.css';
+import "./Custom-styling/CustomField.css";
 const CustomField = ({
   type,
   label,
@@ -11,15 +11,12 @@ const CustomField = ({
   isOutlined,
 }) => {
   return (
-    
-      <div>
-      <label style={{color:"#216FED"}} htmlFor="">{label}</label>
-      <input className="customField"
-      
-        
+    <div>
+      <label style={{ color: "#216FED" }}>{label}</label>
+      <input
+        className="customField"
         type={type}
-      
-        value={value || ""}
+        value={value}
         onChange={handleChange}
         onBlur={handleBlur}
         name={name}
@@ -27,7 +24,6 @@ const CustomField = ({
         spellCheck={false}
         // InputLabelProps={{ shrink: true }}
       />
-      
     </div>
   );
 };

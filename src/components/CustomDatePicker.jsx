@@ -12,6 +12,7 @@ const CustomDatePicker = ({
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
       <DatePicker
+        sx={{ width: "100%" }}
         label={dateLabel}
         value={dateValue}
         onChange={handleDateChange}
