@@ -62,6 +62,7 @@ const AdditionInfo = ({ formik }) => {
       setServiceAuthorization
     );
   }, []);
+
   return (
     <>
       <Box margin="20px">
@@ -79,8 +80,8 @@ const AdditionInfo = ({ formik }) => {
                 value={1}
                 control={
                   <Radio
-                    checked={formik.values.formType === 1}
-                    onChange={() => formik.setFieldValue("formType", 1)}
+                    checked={formik.values.formType === "1"}
+                    onChange={() => formik.setFieldValue("formType", "1")}
                   />
                 }
                 label="None"
@@ -89,8 +90,8 @@ const AdditionInfo = ({ formik }) => {
                 value={2}
                 control={
                   <Radio
-                    checked={formik.values.formType === 2}
-                    onChange={() => formik.setFieldValue("formType", 2)}
+                    checked={formik.values.formType === "2"}
+                    onChange={() => formik.setFieldValue("formType", "2")}
                   />
                 }
                 label="ANSI Location (For Electronic Claims)"
@@ -99,8 +100,8 @@ const AdditionInfo = ({ formik }) => {
                 value={3}
                 control={
                   <Radio
-                    checked={formik.values.formType === 3}
-                    onChange={() => formik.setFieldValue("formType", 3)}
+                    checked={formik.values.formType === "3"}
+                    onChange={() => formik.setFieldValue("formType", "3")}
                   />
                 }
                 label="CMS 1500 (02-12) Box Numbers (For Printed Claims)"
@@ -126,7 +127,8 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
+                  // width: "150px",
+                  border: "1px solid red",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -155,9 +157,24 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (EM)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10a"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
                 sx={{ width: "100px" }}
@@ -167,7 +184,7 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
+                  // width: "150px",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -196,9 +213,24 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (AA)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10b"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
                 sx={{ width: "100px" }}
@@ -208,7 +240,7 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
+                  // width: "150px",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -237,6 +269,21 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (OA)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10c"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
 
@@ -270,12 +317,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-439 "
+                    : formik.values.formType === "3"
+                    ? "BOX 14/15*"
                     : ""}
                 </Typography>
               </Stack>
@@ -298,12 +345,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-484"
+                    : formik.values.formType === "3"
+                    ? "BOX 14"
                     : ""}
                 </Typography>
               </Stack>
@@ -326,12 +373,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-454"
+                    : formik.values.formType === "3"
+                    ? "BOX 15"
                     : ""}
                 </Typography>
               </Stack>
@@ -354,12 +401,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-304"
+                    : formik.values.formType === "3"
+                    ? "BOX 15"
                     : ""}
                 </Typography>
               </Stack>
@@ -382,12 +429,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-314"
+                    : formik.values.formType === "3"
+                    ? "BOX 16"
                     : null}
                 </Typography>
               </Stack>
@@ -410,12 +457,12 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-314"
+                    : formik.values.formType === "3"
+                    ? "BOX 16"
                     : ""}
                 </Typography>
               </Stack>
@@ -454,6 +501,21 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CRC-75"
+                    : formik.values.formType === "3"
+                    ? "N/A"
+                    : null}
+                </Typography>
               </RadioGroup>
             </Stack>
           </AccordionDetails>
@@ -474,22 +536,57 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Claim Codes"
-                value={formik.values.claimCodes}
-                name="claimCodes"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="number"
-                label="Other Claim ID"
-                value={formik.values.otherClaimId}
-                name="otherClaimId"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomField
+                  type="text"
+                  label="Claim Codes"
+                  value={formik.values.claimCodes}
+                  name="claimCodes"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A"
+                    : formik.values.formType === "3"
+                    ? "BOX 10d"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack>
+                <CustomField
+                  type="number"
+                  label="Other Claim ID"
+                  value={formik.values.otherClaimId}
+                  name="otherClaimId"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2010BA REF-Y4"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
             <Box
               display="grid"
@@ -503,22 +600,58 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Additional Claim Information"
-                value={formik.values.claimInformation}
-                name="claimInformation"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Claim Note"
-                value={formik.values.claimNote}
-                name="claimNote"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomField
+                  type="text"
+                  label="Additional Claim Information"
+                  value={formik.values.claimInformation}
+                  name="claimInformation"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack>
+                <CustomField
+                  type="text"
+                  label="Claim Note"
+                  value={formik.values.claimNote}
+                  name="claimNote"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-20"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -533,14 +666,31 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Resubmit Reason Code"
-                value={formik.values.reasonCode}
-                name="reasonCode"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomField
+                  type="text"
+                  label="Resubmit Reason Code"
+                  value={formik.values.reasonCode}
+                  name="reasonCode"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-435"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -555,17 +705,34 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomSelectBox
-                name="reasonDelayCode"
-                value={formik.values.reasonDelayCode}
-                dropdownOptions={delayReason?.map((opt) => ({
-                  value: opt.delayReasonCodeName,
-                  id: opt.delayReasonCodeId,
-                }))}
-                label="Detail Reason"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomSelectBox
+                  name="reasonDelayCode"
+                  value={formik.values.reasonDelayCode}
+                  dropdownOptions={delayReason?.map((opt) => ({
+                    value: opt.delayReasonCodeName,
+                    id: opt.delayReasonCodeId,
+                  }))}
+                  label="Detail Reason"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-096"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -580,26 +747,61 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomDatePicker
-                dateLabel="Hospitalized From Date"
-                dateValue={formik.values.hospitalizedFromDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("hospitalizedFromDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("hospitalizedFromDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Hospitalized To Date"
-                dateValue={formik.values.hospitalizedToDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("hospitalizedToDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("hospitalizedToDate", true)
-                }
-              />
+              <Stack>
+                <CustomDatePicker
+                  dateLabel="Hospitalized From Date"
+                  dateValue={formik.values.hospitalizedFromDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("hospitalizedFromDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("hospitalizedFromDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2400 PSI-2"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack>
+                <CustomDatePicker
+                  dateLabel="Hospitalized To Date"
+                  dateValue={formik.values.hospitalizedToDate}
+                  handleDateChange={(value) =>
+                    formik.setFieldValue("hospitalizedToDate", value)
+                  }
+                  handleDateBlur={() =>
+                    formik.setFieldTouched("hospitalizedToDate", true)
+                  }
+                />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-12"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -614,14 +816,16 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomField
-                type="number"
-                label="Lab Charges"
-                value={formik.values.labCharges}
-                name="labCharges"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomField
+                  type="number"
+                  label="Lab Charges"
+                  value={formik.values.labCharges}
+                  name="labCharges"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+              </Stack>
             </Box>
 
             <Box
@@ -636,17 +840,19 @@ const AdditionInfo = ({ formik }) => {
                 },
               }}
             >
-              <CustomSelectBox
-                name="specialProgramCode"
-                value={formik.values.specialProgramCode}
-                dropdownOptions={specialProgram?.map((opt) => ({
-                  value: opt.specialProgramName,
-                  id: opt.specialProgramId,
-                }))}
-                label="Special Program Codes"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack>
+                <CustomSelectBox
+                  name="specialProgramCode"
+                  value={formik.values.specialProgramCode}
+                  dropdownOptions={specialProgram?.map((opt) => ({
+                    value: opt.specialProgramName,
+                    id: opt.specialProgramId,
+                  }))}
+                  label="Special Program Codes"
+                  handleChange={formik.handleChange}
+                  handleBlur={formik.handleBlur}
+                />
+              </Stack>
             </Box>
           </AccordionDetails>
         </Accordion>
