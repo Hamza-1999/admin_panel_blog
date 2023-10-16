@@ -141,7 +141,7 @@ export const claimInitVal = {
   icd_Description_L: "",
 
   // additioal info init vals
-  formType: 1,
+  formType: "1",
   isEmployment: false,
   isAutoAccident: false,
   isOtherAccident: false,
