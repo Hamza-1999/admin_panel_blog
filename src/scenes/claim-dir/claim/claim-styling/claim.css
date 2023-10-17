@@ -1,0 +1,13 @@
+.infoCodeContainer {
+    display: flex;
+    align-items: flex-end;
+    /* flex-direction: row; */
+    /* height: 45px; */
+}
+
+.ft_content {
+    height:45px;
+    text-align: center;
+    background-color: lightgray;
+    padding: 10px;
+}
