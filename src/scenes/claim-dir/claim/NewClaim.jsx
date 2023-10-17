@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { newClaimAction } from "../../../features/actions/claimAction";
 import { useNavigate } from "react-router-dom";
 import AdditionInfo from "./AdditionInfo";
+import "./claim-styling/claim.css";
 
 const NewClaim = () => {
   const navigate = useNavigate();
