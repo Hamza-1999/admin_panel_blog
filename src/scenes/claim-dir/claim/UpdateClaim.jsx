@@ -1,17 +1,4 @@
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  FormControl,
-  IconButton,
-  InputLabel,
-  Menu,
-  Paper,
-  Select,
-  Stack,
-  Tab,
-  Tabs,
-} from "@mui/material";
+import { Box, Button, Stack, Tab, Tabs } from "@mui/material";
 import React, { useEffect } from "react";
 import Header from "../../../components/Header";
 import { useState } from "react";
@@ -256,7 +243,7 @@ const UpdateClaim = () => {
 
             <Dropdown.Menu>
               {/* <Dropdown.Item >Save and Print Claim</Dropdown.Item> */}
-              <Dropdown.Item onClick={handlePreviewClick}>
+              <Dropdown.Item onClick={() => navigate("/pdf-view")}>
                 Show Preview
               </Dropdown.Item>
             </Dropdown.Menu>
