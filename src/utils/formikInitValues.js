@@ -174,6 +174,24 @@ export const claimInitVal = {
   mammographyCertification: "",
   investigationalDeviceExemption: "",
   ambulatoryPatientGroup: "",
+
+  // ambulance info
+  ambulanceClaimType: "false",
+  transportReasonType: "",
+  transportMiles: 0,
+  ambPatientWeight: 0,
+  roundTripReason: "",
+  stretcherReason: "",
+  pickupAddress: "",
+  pickupCity: "",
+  pickupState: "",
+  pickupZipCode: "",
+  dropOffName: "",
+  dropOffAddress: "",
+  dropOffCity: "",
+  dropOffState: "",
+  dropOffZipCode: "",
+  certificationFieldType: "",
 };
 
 export const paymentInitVal3 = {
