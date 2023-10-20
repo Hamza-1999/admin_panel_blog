@@ -26,6 +26,8 @@ import { Expand, ExpandMore } from "@mui/icons-material";
 import { Dropdown } from "react-bootstrap";
 import { pdf } from "@react-pdf/renderer";
 import CmsForm15 from "../../../components/pdfs/CmsForm15";
+import AdditionInfo from "./AdditionInfo";
+import AmbulanceInfo from "./AmbulanceInfo";
 const UpdateClaim = () => {
   const { claimNumber } = useParams();
   const navigate = useNavigate();
@@ -206,6 +208,8 @@ const UpdateClaim = () => {
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
+          <Tab label="Additional Info" value={2} />
+          <Tab label="Ambulance Info" value={3} />
         </Tabs>
 
         {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
@@ -276,6 +280,20 @@ const UpdateClaim = () => {
               setClaimChargesDto={setClaimChargesDto}
               claimChargesDto={claimChargesDto}
               findClaim={findClaim}
+            />
+          )}
+          {tabValue === 2 && (
+            <AdditionInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
+            />
+          )}
+          {tabValue === 3 && (
+            <AmbulanceInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
             />
           )}
         </Box>
