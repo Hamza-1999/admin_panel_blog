@@ -4,13 +4,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useState } from "react";
 import CustomModal from "../../components/CustomModal";
 import EditPayDetail from "./EditPayDetail";
-const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
+const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,setData}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState(null);
   console.log(editedData, "checkEditedDataInfo");
   console.log(detailInfo, "all details Info");
   const formattedData = detailInfo.map((item, index) => ({
     id: item.claimChargesId,
+    claimInfoId: item.claimInfoId,
     procedureCode: item.procedureCode,
     amount: item.amountBilled,
     fromDate: item.fromDate,
@@ -145,9 +146,19 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
 
   // handle done
   const handleDone = () => {
+
+    console.log("rowData" , rowData)
+    let inputData = data;
+    let rowDataId = rowData[0].claimInfoId
+    let findClaimId = inputData.paymentClaimDto.findIndex((val)=> val.claimId == rowDataId)
+    inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData
+    setData(inputData)
+
     console.log(rowData, "row 22222");
+
     setPaymentDetailDto(rowData);
     setShowDetail(false);
+    
   };
 
   return (

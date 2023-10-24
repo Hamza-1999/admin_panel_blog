@@ -7,11 +7,14 @@ import { useDispatch } from "react-redux";
 import { addSelectedClaim } from "../../features/slice/PaymentSlice";
 
 const MultipleClaims = ({
+  data,
+  setData,
   setSelectedRowData,
   multipleClaimData,
   handleClose,
 }) => {
   console.log(multipleClaimData, "allMultiClaims");
+  console.log(data, "data --come");
   const [selectedRows, setSelectedRows] = useState([]);
   // dispatching
   const dispatch = useDispatch();
@@ -20,6 +23,7 @@ const MultipleClaims = ({
   // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
     id: index,
+    claimId: el.claimId,
     claimNumber: el.claimNumber || "N/A",
     patientAccountNo: el.patientAccountNo || "N/A",
     patientFirstName: el.patientFirstName || "N/A",
@@ -109,15 +113,26 @@ const MultipleClaims = ({
 
   // select button logic
   const handleSelectClick = () => {
-    const selectedModelRow = selectedRows.map((rowId) =>
+    let intialData = data;
+    const selectedModelRow = selectedRows.map((rowId) => 
       rows.find((el) => el.id === rowId)
     );
+
+    
+
     // Checking if the initially selected row is in the selected rows
     const initialRow = rows.find((el) => el.id === selectedRows[0]);
     if (!selectedModelRow.includes(initialRow)) {
       selectedModelRow.push(initialRow);
     }
-
+    let selectedRowForData = selectedModelRow.map((val) => ({
+      claimId: val.claimId,
+      claimNumber: val.claimNumber,
+      claimChargesDto: val.claimChargesDto,
+      paymentDetailDto : []
+    }))
+    intialData.paymentClaimDto = selectedRowForData;
+    console.log(intialData , "intial Data after change")
     dispatch(addSelectedClaim([...selectedModelRow]));
     handleClose();
   };
