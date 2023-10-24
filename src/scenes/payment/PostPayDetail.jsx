@@ -132,6 +132,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   const handleSaveEdit = (updatedData) => {
     console.log(updatedData, "all updatedData");
     // Update the original data with the edited data
+    console.log(rowData , "rowData3333")
     const updatedDetailInfo = rowData.map((item) =>
       item.id === updatedData.id ? updatedData : item
     );
@@ -143,6 +144,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
 
   // handle done
   const handleDone = () => {
+    console.log(rowData , "row 22222---")
     setPaymentDetailDto(rowData);
     setShowDetail(false);
   };
