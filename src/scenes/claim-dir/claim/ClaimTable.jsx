@@ -10,7 +10,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { getClaims, loading } = useSelector((state) => state.claim);
-
+  console.log(getClaims, "all claims");
   const rows =
     getClaims && getClaims.result
       ? getClaims.result.map((el) => ({
@@ -23,7 +23,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
           patientAccountNo: el.patientAccountNo,
           providerId: el.providerId,
           patientId: el.patientId,
-          payerId: el.payerInfoId,
+          payerId: el.payerId,
           totalBilled: el.totalBilled,
           fromDate: el.claimChargesDto[0]?.fromDate || "N/A",
           claimStatus: el.claimChargesDto[0]?.claimStatus || "N/A",

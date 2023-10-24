@@ -8,8 +8,8 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState(null);
   console.log(editedData, "checkEditedDataInfo");
-
-  const formattedData = detailInfo.map((item) => ({
+  console.log(detailInfo, "all details Info");
+  const formattedData = detailInfo.map((item, index) => ({
     id: item.claimChargesId,
     procedureCode: item.procedureCode,
     amount: item.amountBilled,
@@ -22,6 +22,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
     deductible: 0,
     claimStatus: item.claimStatus,
     endBalance: item.amountBilled,
+    claimInfoId: item.claimInfoId,
   }));
 
   // rows
@@ -132,7 +133,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   const handleSaveEdit = (updatedData) => {
     console.log(updatedData, "all updatedData");
     // Update the original data with the edited data
-    console.log(rowData , "rowData3333")
+    console.log(rowData, "rowData3333");
     const updatedDetailInfo = rowData.map((item) =>
       item.id === updatedData.id ? updatedData : item
     );
@@ -144,7 +145,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
 
   // handle done
   const handleDone = () => {
-    console.log(rowData , "row 22222---")
+    console.log(rowData, "row 22222");
     setPaymentDetailDto(rowData);
     setShowDetail(false);
   };
