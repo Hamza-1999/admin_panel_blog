@@ -1,4 +1,4 @@
-import { Box, Button, Paper, Stack, Tab, Tabs } from "@mui/material";
+import { Box, Button, Stack, Tab, Tabs } from "@mui/material";
 import React, { useEffect } from "react";
 import Header from "../../../components/Header";
 import { useState } from "react";
@@ -21,7 +21,13 @@ import {
   icdInitDescription,
   modInitCodes,
 } from "./claimInitFunc";
-
+import { MenuItem } from "react-pro-sidebar";
+import { Expand, ExpandMore } from "@mui/icons-material";
+import { Dropdown } from "react-bootstrap";
+import { pdf } from "@react-pdf/renderer";
+import CmsForm15 from "../../../components/pdfs/CmsForm15";
+import AdditionInfo from "./AdditionInfo";
+import AmbulanceInfo from "./AmbulanceInfo";
 const UpdateClaim = () => {
   const { claimNumber } = useParams();
   const navigate = useNavigate();
@@ -170,8 +176,17 @@ const UpdateClaim = () => {
       navigate("/claims");
     }
   };
+
+  console.log(findClaim, "allClaimsVal");
+
+  // pdf preview handle
+  const handlePreviewClick = async () => {
+    const pdfBlob = await pdf(<CmsForm15 pdfData={findClaim} />).toBlob();
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    window.open(pdfUrl, "_blank");
+  };
   return (
-    <Box margin="20px">
+    <Box margin="20px" paddingBottom="10px">
       <Header title="Update Claim" />
       <Stack
         flexDirection={{ xs: "column", sm: "column", md: "row" }}
@@ -185,15 +200,19 @@ const UpdateClaim = () => {
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          sx={{
-            order: { xs: 2, sm: 2, md: 1 },
-          }}
+          sx={
+            {
+              // order: { xs: 2, sm: 2, md: 1 },
+            }
+          }
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
+          <Tab label="Additional Info" value={2} />
+          <Tab label="Ambulance Info" value={3} />
         </Tabs>
 
-        <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
+        {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
           <Button
             type="reset"
             color="error"
@@ -219,6 +238,20 @@ const UpdateClaim = () => {
           >
             Save
           </Button>
+        </Box> */}
+        <Box>
+          <Dropdown>
+            <Dropdown.Toggle variant="light" id="dropdown-basic">
+              Print
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              {/* <Dropdown.Item >Save and Print Claim</Dropdown.Item> */}
+              <Dropdown.Item onClick={() => navigate("/pdf-view")}>
+                Show Preview
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Box>
       </Stack>
 
@@ -226,6 +259,7 @@ const UpdateClaim = () => {
         <Box
           sx={{
             padding: "15px",
+            border: "1px solid lightgrey",
           }}
         >
           {tabValue === 0 &&
@@ -248,8 +282,55 @@ const UpdateClaim = () => {
               findClaim={findClaim}
             />
           )}
+          {tabValue === 2 && (
+            <AdditionInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
+            />
+          )}
+          {tabValue === 3 && (
+            <AmbulanceInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
+            />
+          )}
         </Box>
       </form>
+
+      <Box
+        sx={{
+          // order: { xs: 1, sm: 1, md: 2 }
+          margin: "15px",
+        }}
+      >
+        <Button
+          type="reset"
+          color="error"
+          variant="outlined"
+          form="claimForm"
+          sx={{
+            marginRight: "15px",
+          }}
+          // onSubmit={formik.handleSubmit}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          form="claimForm"
+          // sx={{
+          //   marginRight: "15px",
+          // }}
+          // onSubmit={formik.handleSubmit}
+          sx={{ bgcolor: "#6870fa", color: "#fff" }}
+        >
+          Save
+        </Button>
+      </Box>
     </Box>
   );
 };

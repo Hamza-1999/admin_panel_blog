@@ -102,7 +102,7 @@ const EditPatient = ({ formik }) => {
 
   return (
     <>
-      <Box display="flex" flexDirection="column">
+      <Box  display="flex" flexDirection="column">
         {/* general Info */}
         <Accordion defaultExpanded={true}>
           <AccordionSummary
@@ -110,10 +110,12 @@ const EditPatient = ({ formik }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
+            <Typography 
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+              
+              
             >
               General Information:
             </Typography>

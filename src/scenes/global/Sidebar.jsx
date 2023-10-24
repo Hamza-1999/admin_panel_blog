@@ -153,7 +153,7 @@ const Sidebar = () => {
             </Box>
 
             <Collapse in={isPatientOpen}>
-              <Item
+              {/* <Item
                 title="Manage Account"
                 to="/team"
                 icon={<PeopleOutlinedIcon />}
@@ -166,7 +166,7 @@ const Sidebar = () => {
                 icon={<ContactsOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
               <Item
                 title="Create Patient"
                 to="/createpatient"
@@ -181,13 +181,13 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item
+              {/* <Item
                 title="Payment Plans"
                 to="/invoices"
                 icon={<ReceiptOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
-              />
+              /> */}
             </Collapse>
 
             {/* claims */}
@@ -340,7 +340,7 @@ const Sidebar = () => {
               />
             </Collapse>
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -387,7 +387,7 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-            </Collapse>
+            </Collapse> */}
           </Box>
         </Menu>
       </ProSidebar>

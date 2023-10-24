@@ -7,10 +7,9 @@ import EditPayDetail from "./EditPayDetail";
 const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,setData}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState(null);
-  console.log(detailInfo, "checkEditedDataInfo");
-  console.log(data, "come in postPatDaetail");
-
-  const formattedData = detailInfo.map((item) => ({
+  console.log(editedData, "checkEditedDataInfo");
+  console.log(detailInfo, "all details Info");
+  const formattedData = detailInfo.map((item, index) => ({
     id: item.claimChargesId,
     claimInfoId: item.claimInfoId,
     procedureCode: item.procedureCode,
@@ -24,6 +23,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,
     deductible: 0,
     claimStatus: item.claimStatus,
     endBalance: item.amountBilled,
+    claimInfoId: item.claimInfoId,
   }));
 
   // rows
@@ -134,6 +134,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,
   const handleSaveEdit = (updatedData) => {
     console.log(updatedData, "all updatedData");
     // Update the original data with the edited data
+    console.log(rowData, "rowData3333");
     const updatedDetailInfo = rowData.map((item) =>
       item.id === updatedData.id ? updatedData : item
     );
@@ -145,12 +146,16 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,
 
   // handle done
   const handleDone = () => {
+
     console.log("rowData" , rowData)
     let inputData = data;
     let rowDataId = rowData[0].claimInfoId
     let findClaimId = inputData.paymentClaimDto.findIndex((val)=> val.claimId == rowDataId)
     inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData
     setData(inputData)
+
+    console.log(rowData, "row 22222");
+
     setPaymentDetailDto(rowData);
     setShowDetail(false);
     

@@ -73,7 +73,6 @@ const PostPayment = ({
           handleClose={() => setOpenMultiClaimMod(false)}
         />
       </CustomModal>
-
       {showDetail ? (
         <Box sx={{ width: "100%" }}>
           <PostPayDetail

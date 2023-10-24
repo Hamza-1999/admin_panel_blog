@@ -1,0 +1,19 @@
+
+.inner{
+    
+    background: linear-gradient(180deg, #FFF 0%, #F3F3F3 100%);
+    box-shadow: 0px 0px 40px 0px rgba(0, 0, 0, 0.22);
+    padding: 20px;
+    background-color: #F3F3F3;
+    height: 120%;
+    position: relative;
+}
+
+.background{
+    background-image: url("/public/assets/Rectangle\ 1.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+  
