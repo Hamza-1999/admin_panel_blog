@@ -29,6 +29,7 @@ const NewPayment = () => {
   const dispatch = useDispatch();
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
+  const [data , setData] = useState(paymentInitVal3)
 
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
@@ -42,17 +43,28 @@ const NewPayment = () => {
         ...values,
         paymentDetailDto: paymentDetailDto,
       };
-      console.log(postValues, "all newpayment2 vals");
-      dispatch(createPaymentAction(postValues));
+      console.log(data, "all newpayment2 vals");
+      dispatch(createPaymentAction(data));
     },
   });
 
   //   handling payer type
   const handlePaymentBy = (selectedRow) => {
     if (formik.values.isClaim) {
+      console.log("selected Rows" , selectedRow);
+      
       setOpenClaimModal(true);
       if (selectedRow.primaryPayerInsuranceName) {
         console.log(selectedRow, "selectedRow5667");
+        setData({
+          ...data,
+          paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.primaryPayerInsuranceName,
+          paymentFrom: selectedRow.payerId,
+          payerId: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
+          paymentClaimDto: []
+        })
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
@@ -169,6 +181,7 @@ const NewPayment = () => {
     ) {
       alert("Fill up the required fields");
     } else {
+      console.log("formik.values.paymentBy" , formik.values.paymentBy)
       const loadingBtn = setTimeout(() => {
         setShowPostPay(true);
       }, 1500);
@@ -205,6 +218,8 @@ const NewPayment = () => {
         {showPostPay ? (
           <PostPayment
             formik={formik}
+            data={data}
+            setData={setData}
             setPaymentDetailDto={setPaymentDetailDto}
           />
         ) : (
