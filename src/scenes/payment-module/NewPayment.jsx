@@ -63,7 +63,12 @@ const NewPayment = () => {
           paymentFrom: selectedRow.payerId,
           payerId: selectedRow.payerId,
           payerSequenceNo: selectedRow.payerSequenceNo,
-          paymentClaimDto: []
+          paymentClaimDto: [{
+            claimId: selectedRow.claimChargesDto[0].claimInfoId,
+      claimNumber: selectedRow.claimNumber,
+      claimChargesDto: selectedRow.claimChargesDto,
+      paymentDetailDto : []
+          }]
         })
         formik.setValues((prevValues) => ({
           ...prevValues,
