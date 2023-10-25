@@ -5,8 +5,18 @@ import { setPaymentDataForApi } from "../../features/slice/PaymentSlice";
 import React, { useEffect, useState } from "react";
 import CustomModal from "../../components/CustomModal";
 import EditPayDetail from "./EditPayDetail";
+
+const PostPayDetail = ({
+  detailInfo,
+  setShowDetail,
+  setPaymentDetailDto,
+  data,
+  setData,
+}) => {
+
 import { useDispatch, useSelector } from "react-redux";
 const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
+
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState(null);
   console.log(detailInfo, "checkEditedDataInfo");
@@ -28,7 +38,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
     deductible: 0,
     claimStatus: item.claimStatus,
     endBalance: item.amountBilled,
-    claimInfoId: item.claimInfoId,
+    // claimInfoId: item.claimInfoId,
   }));
 
   // rows
@@ -152,21 +162,31 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   // handle done
   const handleDone = () => {
     console.log("rowData", rowData);
-    let inputData = paymentDataForApi;
+
+    let inputData = data;
     let rowDataId = rowData[0].claimInfoId;
-    console.log("work");
     let findClaimId = inputData.paymentClaimDto.findIndex(
       (val) => val.claimId === rowDataId
     );
-    console.log("findClaimId", inputData.paymentClaimDto[findClaimId]);
+    inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData;
+    setData(inputData);
 
-    // Check if findClaimId is a valid index
-    if (findClaimId !== -1) {
-      let updatedPaymentClaimDto = [...inputData.paymentClaimDto];
-      updatedPaymentClaimDto[findClaimId] = {
-        ...updatedPaymentClaimDto[findClaimId],
-        paymentDetailDto: rowData,
-      };
+//     let inputData = paymentDataForApi;
+//     let rowDataId = rowData[0].claimInfoId;
+//     console.log("work");
+//     let findClaimId = inputData.paymentClaimDto.findIndex(
+//       (val) => val.claimId === rowDataId
+//     );
+//     console.log("findClaimId", inputData.paymentClaimDto[findClaimId]);
+
+//     // Check if findClaimId is a valid index
+//     if (findClaimId !== -1) {
+//       let updatedPaymentClaimDto = [...inputData.paymentClaimDto];
+//       updatedPaymentClaimDto[findClaimId] = {
+//         ...updatedPaymentClaimDto[findClaimId],
+//         paymentDetailDto: rowData,
+//       };
+
 
       let updatedInputData = {
         ...inputData,
@@ -179,6 +199,9 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
     }
     setPaymentDetailDto(rowData);
     setShowDetail(false);
+
+//   };
+
 
   };
 useEffect(()=>{
