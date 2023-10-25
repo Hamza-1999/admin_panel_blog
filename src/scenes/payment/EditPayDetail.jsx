@@ -12,6 +12,7 @@ const EditPayDetail = ({ data, onSave, handleClose }) => {
       ...editedData,
       allowed: parseFloat(editedData.allowed), // Convert to a floating-point number
       paid: parseFloat(editedData.paid), // Convert to a floating-point number
+      adjusted : parseFloat(editedData.amount - editedData.allowed)
     };
     onSave(updatedData);
     handleClose();
