@@ -150,6 +150,7 @@ const PostPayment = ({
             setShowDetail={setShowDetail}
             setDetailInfo={setDetailInfo}
           />
+          {/* <div>Work</div> */}
         </div>
       )}
     </Box>

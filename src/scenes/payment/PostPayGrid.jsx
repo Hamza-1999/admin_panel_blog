@@ -4,8 +4,21 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
-  const { selectedClaim } = useSelector((state) => state.payment);
+  const { selectedClaim  , paymentDataForApi } = useSelector((state) => state.payment);
   console.log(selectedClaim, "selectedClaims");
+
+  const Sum = (id, key) => {
+    console.log("id" , id)
+    let findClaim = paymentDataForApi.paymentClaimDto.find((val) => val.claimId === id);
+    console.log("findClaim222", paymentDataForApi);
+    if (findClaim) {
+      const sum = findClaim.paymentDetailDto.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue[key];
+      }, 0);
+      return sum;
+    }
+    return 0;
+  };
 
   const rows = selectedClaim.map((el) => ({
     id: el.id,
@@ -14,9 +27,9 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
     patientAccountNo: el.patientAccountNo,
     claimNumber: el.claimNumber,
     billed: el.totalBilled,
-    allowed: 0,
-    paid: 0,
-    adjusted: 0,
+    allowed: Sum(el.claimId , "allowed"),
+    paid: Sum(el.claimId , "paid"),
+    adjusted: Sum(el.claimId , "adjusted"),
     unpaid: 0,
     additionalActions: 0,
     balance: el.totalBilled,
