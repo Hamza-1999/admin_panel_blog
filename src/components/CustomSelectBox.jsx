@@ -3,6 +3,10 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CustomModal from "./CustomModal";
+import { ArrowDropDownIcon } from '@mui/icons-material/ArrowDropDown';
+import './Custom-styling/CustomSelectBox.css';
+
+
 
 const CustomSelectBox = ({
   value,
@@ -13,16 +17,18 @@ const CustomSelectBox = ({
   name,
 }) => {
   return (
+    <div >
     <FormControl fullWidth>
-      <InputLabel shrink={true}> {label}</InputLabel>
-      <Select
+      <label style={{color:"#216FED"}} htmlFor="">{label}</label>
+      {/* <InputLabel shrink={true}> {label}</InputLabel> */}
+      <Select className="customSelectBox"
         value={value}
         name={name}
         type="text"
-        label={label}
+        // label={label}
         onChange={handleChange}
         onBlur={handleBlur}
-        variant="outlined"
+       
         native
         id="dropdowns"
         defaultValue=""
@@ -35,10 +41,12 @@ const CustomSelectBox = ({
             <option key={opt.id} value={opt.value}>
               {opt.value}
             </option>
+            
           </>
         ))}
       </Select>
     </FormControl>
+    </div>
   );
 };
 

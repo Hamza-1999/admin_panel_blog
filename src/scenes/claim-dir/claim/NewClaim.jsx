@@ -9,6 +9,9 @@ import { claimInitVal } from "../../../utils/formikInitValues";
 import { useDispatch } from "react-redux";
 import { newClaimAction } from "../../../features/actions/claimAction";
 import { useNavigate } from "react-router-dom";
+import AdditionInfo from "./AdditionInfo";
+import "./claim-styling/claim.css";
+import AmbulanceInfo from "./AmbulanceInfo";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -56,7 +59,7 @@ const NewClaim = () => {
       } catch (error) {
         throw error;
       }
-      action.resetForm();
+      // action.resetForm();
     },
   });
 
@@ -85,15 +88,17 @@ const NewClaim = () => {
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          sx={{
-            order: { xs: 2, sm: 2, md: 1 },
-          }}
+          // sx={{
+          //   order: { xs: 2, sm: 2, md: 1 },
+          // }}
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
+          <Tab label="Additional Info" value={2} />
+          <Tab label="Ambulance Info" value={3} />
         </Tabs>
 
-        <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
+        {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
           <Button
             type="reset"
             color="error"
@@ -118,7 +123,7 @@ const NewClaim = () => {
           >
             Save
           </Button>
-        </Box>
+        </Box> */}
       </Stack>
 
       <form id="claimForm" onSubmit={formik.handleSubmit}>
@@ -141,8 +146,55 @@ const NewClaim = () => {
               claimChargesDto={claimChargesDto}
             />
           )}
+          {tabValue === 2 && (
+            <AdditionInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
+            />
+          )}
+          {tabValue === 3 && (
+            <AmbulanceInfo
+              formik={formik}
+              // setClaimChargesDto={setClaimChargesDto}
+              // claimChargesDto={claimChargesDto}
+            />
+          )}
         </Box>
       </form>
+
+      <Box
+        sx={{
+          // order: { xs: 1, sm: 1, md: 2 }
+          margin: "15px",
+        }}
+      >
+        <Button
+          type="reset"
+          color="error"
+          variant="outlined"
+          form="claimForm"
+          sx={{
+            marginRight: "15px",
+          }}
+          // onSubmit={formik.handleSubmit}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          form="claimForm"
+          // sx={{
+          //   marginRight: "15px",
+          // }}
+          // onSubmit={formik.handleSubmit}
+          sx={{ bgcolor: "#6870fa", color: "#fff" }}
+        >
+          Save
+        </Button>
+      </Box>
     </Box>
   );
 };

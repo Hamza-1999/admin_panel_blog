@@ -6,7 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-
+import "./PatientInfo.css";
 import { ErrorMessage, Field, Formik } from "formik";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
@@ -93,16 +93,16 @@ const PatientInfo = ({ formik }) => {
 
   return (
     <>
-      <Box display="flex" flexDirection="column">
+      <Box  display="flex" flexDirection="column">
         {/* general Info */}
         <Accordion defaultExpanded={true}>
-          <AccordionSummary
+          <AccordionSummary className="accordianSummary"
             expandIcon={<ExpandMore />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
-              variant="h5"
+            <Typography className="accordianSummaryHeading"
+              // variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
             >
@@ -159,8 +159,8 @@ const PatientInfo = ({ formik }) => {
                 label="Driving License"
               />
 
-              {/* payer and provider */}
-              <CustomSearchField />
+             
+       
 
               <CustomSelectBox
                 name="genderIdentityName"
@@ -295,12 +295,12 @@ const PatientInfo = ({ formik }) => {
 
         {/* contact details */}
         <Accordion>
-          <AccordionSummary
+          <AccordionSummary className="accordianSummary"
             expandIcon={<ExpandMore />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
+            <Typography className="accordianSummaryHeading"
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
@@ -365,12 +365,12 @@ const PatientInfo = ({ formik }) => {
 
         {/* Birth Details */}
         <Accordion>
-          <AccordionSummary
+          <AccordionSummary className="accordianSummary"
             expandIcon={<ExpandMore />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
+            <Typography className="accordianSummaryHeading"
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
@@ -424,12 +424,12 @@ const PatientInfo = ({ formik }) => {
 
         {/* addres details */}
         <Accordion>
-          <AccordionSummary
+          <AccordionSummary className="accordianSummary"
             expandIcon={<ExpandMore />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
+            <Typography className="accordianSummaryHeading"
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
@@ -524,19 +524,19 @@ const PatientInfo = ({ formik }) => {
 
         {/* emergency contact */}
         <Accordion>
-          <AccordionSummary
+          <AccordionSummary className="accordianSummary"
             expandIcon={<ExpandMore />}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography
+            <Typography className="accordianSummaryHeading"
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
             >
               Emergency Contact:
             </Typography>
-          </AccordionSummary>
+          </AccordionSummary >
           <AccordionDetails>
             <Box
               display="grid"

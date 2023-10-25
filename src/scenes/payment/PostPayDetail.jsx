@@ -28,6 +28,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
     deductible: 0,
     claimStatus: item.claimStatus,
     endBalance: item.amountBilled,
+    claimInfoId: item.claimInfoId,
   }));
 
   // rows
@@ -138,6 +139,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   const handleSaveEdit = (updatedData) => {
     console.log(updatedData, "all updatedData");
     // Update the original data with the edited data
+    console.log(rowData, "rowData3333");
     const updatedDetailInfo = rowData.map((item) =>
       item.id === updatedData.id ? updatedData : item
     );
