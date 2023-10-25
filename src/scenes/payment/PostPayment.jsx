@@ -11,8 +11,6 @@ import MultipleClaims from "./MultipleClaims";
 
 const PostPayment = ({
   // postPaymentData,
-  data,
-  setData,
   setShowPostPay,
   setApplyEob,
   setPaymentDetailDto,
@@ -21,7 +19,6 @@ const PostPayment = ({
   const [showDetail, setShowDetail] = useState(false);
   const [detailInfo, setDetailInfo] = useState([]);
   console.log(detailInfo, "detailInfoRows");
-  console.log(data , "data come from main page");
   const [multipleClaimData, setMultipleClaimData] = useState([]);
   const [openMultiClaimMod, setOpenMultiClaimMod] = useState(false);
 
@@ -67,8 +64,7 @@ const PostPayment = ({
         handleClose={() => setOpenMultiClaimMod(false)}
       >
         <MultipleClaims
-          data={data}
-          setData= {setData}
+         
           multipleClaimData={multipleClaimData}
           handleClose={() => setOpenMultiClaimMod(false)}
         />
@@ -77,8 +73,7 @@ const PostPayment = ({
       {showDetail ? (
         <Box sx={{ width: "100%" }}>
           <PostPayDetail
-            data= {data}
-            setData={setData}
+           
             formik={formik}
             detailInfo={detailInfo}
             setShowDetail={setShowDetail}
