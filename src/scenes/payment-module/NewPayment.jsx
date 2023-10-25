@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CustomModal from "../../components/CustomModal";
 import { useState } from "react";
 import ClaimTable from "../claim-dir/claim/ClaimTable";
@@ -17,8 +17,8 @@ import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
 import { useFormik } from "formik";
 import { paymentInitVal3 } from "../../utils/formikInitValues";
-import { useDispatch } from "react-redux";
-import { addSelectedClaim } from "../../features/slice/PaymentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedClaim  , setPaymentDataForApi } from "../../features/slice/PaymentSlice";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -30,11 +30,15 @@ const NewPayment = () => {
   const dispatch = useDispatch();
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
+
   const [data, setData] = useState(paymentInitVal3);
 
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
   const [paymentDetailDto, setPaymentDetailDto] = useState(null);
+
+  // get  paymentData For api value in redux
+  let {paymentDataForApi} = useSelector((state)=> state.payment)
   console.log(paymentDetailDto, "all paymentsDto");
   //   formik logic here
   const formik = useFormik({
@@ -45,6 +49,7 @@ const NewPayment = () => {
       //   paymentDetailDto: paymentDetailDto,
       // };
       dispatch(createPaymentAction(data));
+
     },
   });
 
@@ -56,13 +61,14 @@ const NewPayment = () => {
       setOpenClaimModal(true);
       if (selectedRow.primaryPayerInsuranceName) {
         console.log(selectedRow, "selectedRow5667");
-        setData({
-          ...data,
+        dispatch(setPaymentDataForApi({
+          ...paymentDataForApi,
           paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
           paymentFromName: selectedRow.primaryPayerInsuranceName,
           paymentFrom: selectedRow.payerId,
           payerId: selectedRow.payerId,
           payerSequenceNo: selectedRow.payerSequenceNo,
+
           paymentClaimDto: [
             {
               claimId: selectedRow.claimChargesDto[0].claimInfoId,
@@ -72,6 +78,7 @@ const NewPayment = () => {
             },
           ],
         });
+
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
@@ -93,6 +100,19 @@ const NewPayment = () => {
           paymentFrom: selectedRow.payerId,
           payerSequenceNo: selectedRow.payerSequenceNo,
         }));
+        dispatch(setPaymentDataForApi({
+          ...paymentDataForApi,
+          paymentBy: `${selectedRow.payerName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.payerName,
+          paymentFrom: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
+          paymentClaimDto: [{
+            claimId: selectedRow.claimChargesDto[0].claimInfoId,
+            claimNumber: selectedRow.claimNumber,
+            claimChargesDto: selectedRow.claimChargesDto,
+            paymentDetailDto: []
+          }]
+        }))
         setOpenPayerModal(false);
       }
     }
@@ -188,13 +208,19 @@ const NewPayment = () => {
     ) {
       alert("Fill up the required fields");
     } else {
+
       console.log("formik.values.paymentBy", formik.values.paymentBy);
+
       const loadingBtn = setTimeout(() => {
         setShowPostPay(true);
       }, 1500);
       loadingBtn && setApplyEob(true);
     }
   };
+
+  useEffect(()=>{
+   dispatch(setPaymentDataForApi(paymentInitVal3))
+  },[])
 
   return (
     <>
@@ -225,8 +251,7 @@ const NewPayment = () => {
         {showPostPay ? (
           <PostPayment
             formik={formik}
-            data={data}
-            setData={setData}
+            
             setPaymentDetailDto={setPaymentDetailDto}
           />
         ) : (

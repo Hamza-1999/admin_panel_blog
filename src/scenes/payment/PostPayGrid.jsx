@@ -4,8 +4,23 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
-  const { selectedClaim } = useSelector((state) => state.payment);
+  const { selectedClaim  , paymentDataForApi } = useSelector((state) => state.payment);
   console.log(selectedClaim, "selectedClaims");
+
+
+
+  const Sum = (id, key) => {
+    console.log("id" , id)
+    let findClaim = paymentDataForApi.paymentClaimDto.find((val) => val.claimId === id);
+    console.log("findClaim222", paymentDataForApi);
+    if (findClaim) {
+      const sum = findClaim.paymentDetailDto.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue[key];
+      }, 0);
+      return sum;
+    }
+    return 0;
+  };
 
   const rows = selectedClaim.map((el) => ({
     id: el.id,
@@ -14,9 +29,9 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
     patientAccountNo: el.patientAccountNo,
     claimNumber: el.claimNumber,
     billed: el.totalBilled,
-    allowed: 0,
-    paid: 0,
-    adjusted: 0,
+    allowed: Sum(el.claimId  || el.id , "allowed"),
+    paid: Sum(el.claimId  || el.id , "paid"),
+    adjusted: Sum(el.claimId || el.id , "adjusted"),
     unpaid: 0,
     additionalActions: 0,
     balance: el.totalBilled,
@@ -114,7 +129,14 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
       align: "center",
     },
   ];
+  const SumForMainTotal = (key)=>{
+      let total = rows.reduce((sum , current)=> sum + current[key] , 0)
+      console.log("0" , total)
+      return total
+  }
+  const totalRow = { id: "total", patientFirstName : 'Total', billed : SumForMainTotal("billed") , allowed: SumForMainTotal("allowed"), paid: SumForMainTotal("paid") , adjusted:SumForMainTotal("adjusted") ,unpaid :0 , additionalActions: 0 , balance: SumForMainTotal("balance")};
 
+  const totalRows = [...rows , totalRow  ]
   // // payer columns
   // const payerColumns = [
   //   {
@@ -173,7 +195,7 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
     <Box sx={{ width: "100%" }}>
       <DataGrid
         // rows={formik.values.isClaim === true ? rowsWithTotal : payerRows}
-        rows={rows}
+        rows={totalRows}
         // columns={formik.values.isClaim === true ? columns : payerColumns}
         columns={columns}
         sx={{
@@ -193,6 +215,7 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
         //   ),
         // }}
         onCellClick={(params) => {
+          console.log("params.row.id" , params.row.id)
           if (params.row.id !== "total") {
             setDetailInfo(params.row.claimChargesDto);
             setShowDetail(true);

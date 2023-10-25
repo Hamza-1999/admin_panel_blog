@@ -6,6 +6,7 @@ const initialState = {
   loading: false,
   error: null,
   selectedClaim: [],
+  paymentDataForApi : {}
 };
 
 const paymentSlice = createSlice({
@@ -17,6 +18,10 @@ const paymentSlice = createSlice({
       // state.selectedClaim.push(action.payload);
       state.selectedClaim = action.payload;
     },
+    setPaymentDataForApi : (state , action)=>{
+      console.log("action.payload for payment data for Api" , action.payload);
+       state.paymentDataForApi = action.payload
+    }
   },
   extraReducers: {
     [createPaymentAction.pending]: (state) => {
@@ -33,5 +38,5 @@ const paymentSlice = createSlice({
   },
 });
 
-export const { addSelectedClaim } = paymentSlice.actions;
+export const { addSelectedClaim , setPaymentDataForApi } = paymentSlice.actions;
 export default paymentSlice.reducer;

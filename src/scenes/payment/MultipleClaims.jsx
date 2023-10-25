@@ -3,22 +3,21 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addSelectedClaim } from "../../features/slice/PaymentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedClaim  , setPaymentDataForApi} from "../../features/slice/PaymentSlice";
 
 const MultipleClaims = ({
-  data,
-  setData,
   setSelectedRowData,
   multipleClaimData,
   handleClose,
 }) => {
   console.log(multipleClaimData, "allMultiClaims");
-  console.log(data, "data --come");
   const [selectedRows, setSelectedRows] = useState([]);
   // dispatching
   const dispatch = useDispatch();
   console.log(selectedRows, "allselectedrows56");
+  // get payment Data for api from redux
+  let {paymentDataForApi} = useSelector((state)=> state.payment)
   // console.log(selectedRows, "all selected rows");
   // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
@@ -113,7 +112,7 @@ const MultipleClaims = ({
 
   // select button logic
   const handleSelectClick = () => {
-    let intialData = data;
+    let intialData = paymentDataForApi;
     const selectedModelRow = selectedRows.map((rowId) => 
       rows.find((el) => el.id === rowId)
     );
@@ -131,8 +130,12 @@ const MultipleClaims = ({
       claimChargesDto: val.claimChargesDto,
       paymentDetailDto : []
     }))
-    intialData.paymentClaimDto = selectedRowForData;
-    console.log(intialData , "intial Data after change")
+    let updatedInputData = {
+      ...intialData,
+      paymentClaimDto: selectedRowForData
+    }
+    // intialData.paymentClaimDto = selectedRowForData;
+    dispatch(setPaymentDataForApi(updatedInputData))
     dispatch(addSelectedClaim([...selectedModelRow]));
     handleClose();
   };
