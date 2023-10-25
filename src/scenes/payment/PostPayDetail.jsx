@@ -4,7 +4,13 @@ import { DataGrid } from "@mui/x-data-grid";
 import React, { useState } from "react";
 import CustomModal from "../../components/CustomModal";
 import EditPayDetail from "./EditPayDetail";
-const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,setData}) => {
+const PostPayDetail = ({
+  detailInfo,
+  setShowDetail,
+  setPaymentDetailDto,
+  data,
+  setData,
+}) => {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [editedData, setEditedData] = useState(null);
   console.log(editedData, "checkEditedDataInfo");
@@ -23,7 +29,7 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,
     deductible: 0,
     claimStatus: item.claimStatus,
     endBalance: item.amountBilled,
-    claimInfoId: item.claimInfoId,
+    // claimInfoId: item.claimInfoId,
   }));
 
   // rows
@@ -146,19 +152,19 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto , data ,
 
   // handle done
   const handleDone = () => {
-
-    console.log("rowData" , rowData)
+    console.log("rowData", rowData);
     let inputData = data;
-    let rowDataId = rowData[0].claimInfoId
-    let findClaimId = inputData.paymentClaimDto.findIndex((val)=> val.claimId == rowDataId)
-    inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData
-    setData(inputData)
+    let rowDataId = rowData[0].claimInfoId;
+    let findClaimId = inputData.paymentClaimDto.findIndex(
+      (val) => val.claimId === rowDataId
+    );
+    inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData;
+    setData(inputData);
 
     console.log(rowData, "row 22222");
 
     setPaymentDetailDto(rowData);
     setShowDetail(false);
-    
   };
 
   return (

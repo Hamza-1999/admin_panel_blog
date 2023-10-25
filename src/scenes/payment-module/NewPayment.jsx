@@ -30,7 +30,7 @@ const NewPayment = () => {
   const dispatch = useDispatch();
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
-  const [data , setData] = useState(paymentInitVal3)
+  const [data, setData] = useState(paymentInitVal3);
 
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
@@ -40,19 +40,19 @@ const NewPayment = () => {
   const formik = useFormik({
     initialValues: paymentInitVal3,
     onSubmit: (values) => {
-      const postValues = {
-        ...values,
-        paymentDetailDto: paymentDetailDto,
-      };
-  dispatch(createPaymentAction(data));
+      // const postValues = {
+      //   ...values,
+      //   paymentDetailDto: paymentDetailDto,
+      // };
+      dispatch(createPaymentAction(data));
     },
   });
 
   //   handling payer type
   const handlePaymentBy = (selectedRow) => {
     if (formik.values.isClaim) {
-      console.log("selected Rows" , selectedRow);
-      
+      console.log("selected Rows", selectedRow);
+
       setOpenClaimModal(true);
       if (selectedRow.primaryPayerInsuranceName) {
         console.log(selectedRow, "selectedRow5667");
@@ -63,13 +63,15 @@ const NewPayment = () => {
           paymentFrom: selectedRow.payerId,
           payerId: selectedRow.payerId,
           payerSequenceNo: selectedRow.payerSequenceNo,
-          paymentClaimDto: [{
-            claimId: selectedRow.claimChargesDto[0].claimInfoId,
-      claimNumber: selectedRow.claimNumber,
-      claimChargesDto: selectedRow.claimChargesDto,
-      paymentDetailDto : []
-          }]
-        })
+          paymentClaimDto: [
+            {
+              claimId: selectedRow.claimChargesDto[0].claimInfoId,
+              claimNumber: selectedRow.claimNumber,
+              claimChargesDto: selectedRow.claimChargesDto,
+              paymentDetailDto: [],
+            },
+          ],
+        });
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
@@ -117,7 +119,7 @@ const NewPayment = () => {
               onBlur={() => formik.setFieldTouched("checkDate", true)}
               renderInput={(params) => <TextField {...params} />}
               inputFormat="MM/DD/YYYY"
-            // clearable
+              // clearable
             />
           </LocalizationProvider>
         </>
@@ -186,7 +188,7 @@ const NewPayment = () => {
     ) {
       alert("Fill up the required fields");
     } else {
-      console.log("formik.values.paymentBy" , formik.values.paymentBy)
+      console.log("formik.values.paymentBy", formik.values.paymentBy);
       const loadingBtn = setTimeout(() => {
         setShowPostPay(true);
       }, 1500);

@@ -1,4 +1,15 @@
-import { Box, Button, Paper, Stack, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import Header from "../../../components/Header";
 import { useState } from "react";
@@ -12,6 +23,8 @@ import { useNavigate } from "react-router-dom";
 import AdditionInfo from "./AdditionInfo";
 import "./claim-styling/claim.css";
 import AmbulanceInfo from "./AmbulanceInfo";
+import { FormControl, FormLabel } from "react-bootstrap";
+import InsAdditionalinfo from "./InsAdditionalinfo";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -53,7 +66,7 @@ const NewClaim = () => {
         facilityId: facilityId,
         claimChargesUpdatedDto: claimChargesDto,
       };
-      console.log(postValues, "claim postValues");
+      console.log(postValues, "claimPostValues");
       try {
         dispatch(newClaimAction(postValues));
       } catch (error) {
@@ -72,10 +85,42 @@ const NewClaim = () => {
     }
   };
 
-  console.log(formik.values, "form values claims");
+  console.log(formik.values.isProfessional, "check professional values");
   return (
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
+
+      {/* select claim type */}
+      <Stack>
+        <FormLabel id="claimType">Select Claim Type</FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby="claimType"
+          name="row-radio-buttons-group"
+        >
+          <FormControlLabel
+            value={1}
+            control={
+              <Radio
+                checked={formik.values.isProfessional === 1}
+                onChange={() => formik.setFieldValue("isProfessional", 1)}
+              />
+            }
+            label="Professional"
+          />
+          <FormControlLabel
+            value={2}
+            control={
+              <Radio
+                checked={formik.values.isProfessional === 2}
+                onChange={() => formik.setFieldValue("isProfessional", 2)}
+              />
+            }
+            label="Institutional"
+          />
+        </RadioGroup>
+      </Stack>
+
       <Stack
         flexDirection={{ xs: "column", sm: "column", md: "row" }}
         alignItems={{ xs: "flex-start", sm: "flex-start", md: "center" }}
@@ -146,13 +191,16 @@ const NewClaim = () => {
               claimChargesDto={claimChargesDto}
             />
           )}
-          {tabValue === 2 && (
-            <AdditionInfo
-              formik={formik}
-              // setClaimChargesDto={setClaimChargesDto}
-              // claimChargesDto={claimChargesDto}
-            />
-          )}
+          {tabValue === 2 &&
+            (formik.values.isProfessional === 1 ? (
+              <AdditionInfo
+                formik={formik}
+                // setClaimChargesDto={setClaimChargesDto}
+                // claimChargesDto={claimChargesDto}
+              />
+            ) : (
+              <InsAdditionalinfo formik={formik} />
+            ))}
           {tabValue === 3 && (
             <AmbulanceInfo
               formik={formik}

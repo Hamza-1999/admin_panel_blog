@@ -6,7 +6,7 @@ import CustomModal from "./CustomModal";
 import { ArrowDropDownIcon } from "@mui/icons-material/ArrowDropDown";
 import "./Custom-styling/CustomSelectBox.css";
 
-const CustomSelectBox = ({
+const CustomSelectBox2 = ({
   value,
   handleChange,
   handleBlur,
@@ -38,7 +38,7 @@ const CustomSelectBox = ({
           </option>
           {dropdownOptions.map((opt) => (
             <>
-              <option key={opt.id} value={opt.value}>
+              <option key={opt.id} value={opt.id}>
                 {opt.value}
               </option>
             </>
@@ -49,4 +49,4 @@ const CustomSelectBox = ({
   );
 };
 
-export default CustomSelectBox;
+export default CustomSelectBox2;
