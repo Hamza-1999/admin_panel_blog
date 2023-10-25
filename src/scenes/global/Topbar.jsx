@@ -1,4 +1,4 @@
-import { Box, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, Paper, useTheme } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../theme";
 import InputBase from "@mui/material/InputBase";
@@ -18,7 +18,25 @@ const Topbar = () => {
   const localtion = useLocation();
   const isLoginPage = localtion.pathname === "/";
   return (
-    <Box display="flex" justifyContent="flex-end" p={2}>
+    <Box display="flex" justifyContent="space-between" backgroundColor="#F2F6FC" p={2} boxShadow={"7px 0px 19px 0px #00000026"}>
+      <Paper
+      component="form"
+      style={{boxShadow:"none"}}
+      sx={{ p: '2px 4px', display: 'flex', alignItems: 'center', width: 400 }}
+    >
+      <IconButton sx={{ p: '10px' }} aria-label="menu">
+       
+      </IconButton>
+      <InputBase
+        sx={{ ml: 1, flex: 1 }}
+        placeholder="Search Patient"
+        inputProps={{ 'aria-label': 'search' }}
+      />
+      <IconButton type="button" sx={{ p: '10px' }} aria-label="search">
+        <SearchIcon fontSize="25px" />
+      </IconButton>
+      
+    </Paper>
       {/* SEARCH BAR */}
       {/* {!isLoginPage && (
         <Box
