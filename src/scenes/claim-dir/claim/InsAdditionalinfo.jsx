@@ -13,12 +13,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CustomDatePicker from "../../../components/CustomDatePicker";
 import CustomField from "../../../components/CustomField";
 import CustomSelectBox from "../../../components/CustomSelectBox";
 import CustomSelectBox2 from "../../../components/CustomSelectBox2";
-
+import { claimInitVal } from "../../../utils/formikInitValues";
 const InsAdditionalinfo = ({ formik }) => {
   const types = [
     {
@@ -34,6 +34,30 @@ const InsAdditionalinfo = ({ formik }) => {
       type: "Three",
     },
   ];
+  // epsdt certification handling
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState([]);
+  // handle change for the epsdt checkboxes
+  const checkboxHandleChange = (value) => {
+    if (selectedCheckboxes.includes(value)) {
+      setSelectedCheckboxes(
+        selectedCheckboxes.filter((item) => item !== value)
+      );
+    } else {
+      if (selectedCheckboxes.length < 3) {
+        setSelectedCheckboxes([...selectedCheckboxes, value]);
+      }
+    }
+  };
+  // creating copy of initialvalues
+  const claimInitialValues = { ...claimInitVal };
+
+  claimInitialValues.epsdT_1 = selectedCheckboxes[0] || 0;
+  claimInitialValues.epsdT_2 = selectedCheckboxes[1] || 0;
+  claimInitialValues.epsdT_3 = selectedCheckboxes[2] || 0;
+
+  console.log(claimInitialValues.epsdT_1, "epsdt1");
+  console.log(claimInitialValues.epsdT_2, "epsdt2");
+  console.log(claimInitialValues.epsdT_3, "epsdt3");
   return (
     <>
       <Box margin="20px">
@@ -121,7 +145,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 DTP~435"
@@ -153,7 +177,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 DTP~435"
@@ -186,7 +210,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 DTP~435"
@@ -447,7 +471,7 @@ const InsAdditionalinfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(2, minmax(0, 450px))",
+                  md: "repeat(1, minmax(0, 450px))",
                 },
               }}
             >
@@ -490,12 +514,12 @@ const InsAdditionalinfo = ({ formik }) => {
               >
                 <FormControl fullWidth>
                   <CustomField
-                    type="text"
+                    type="number"
                     label="Patient Estimated Amount Due"
-                    // value={formik.values.patientWeight}
-                    name="patientWeight"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
+                    value={formik.values.patientDueAmount}
+                    name="patientDueAmount"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
                   />
                 </FormControl>
 
@@ -504,145 +528,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
-                >
-                  {/* {formik.values.formType === "2"
-                    ? "N/A*"
-                    : formik.values.formType === "3"
-                    ? "BOX 11b"
-                    : null} */}
-                </Typography>
-              </Stack>
-            </Box>
-
-            {/* remarks */}
-            <Box
-              display="grid"
-              gap="20px"
-              sx={{
-                gridTemplateColumns: {
-                  xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 920px))",
-                },
-              }}
-            >
-              <Stack
-                className="infoCodeContainer"
-                sx={{
-                  flexDirection: { xs: "column", sm: "row", md: "row" },
-                }}
-              >
-                <FormControl fullWidth>
-                  <CustomField
-                    type="text"
-                    // label="PPS (Diagnosis Related Group)"
-                    // value={formik.values.patientWeight}
-                    name="patientWeight"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
-                  />
-                </FormControl>
-
-                <Typography
-                  variant="h6"
-                  component="span"
-                  className="ft_content"
-                  width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
-                >
-                  {/* {formik.values.formType === "2"
-                    ? "N/A*"
-                    : formik.values.formType === "3"
-                    ? "BOX 11b"
-                    : null} */}
-                </Typography>
-              </Stack>
-              <Stack
-                className="infoCodeContainer"
-                sx={{
-                  flexDirection: { xs: "column", sm: "row", md: "row" },
-                }}
-              >
-                <FormControl fullWidth>
-                  <CustomField
-                    type="text"
-                    // label="PPS (Diagnosis Related Group)"
-                    // value={formik.values.patientWeight}
-                    name="patientWeight"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
-                  />
-                </FormControl>
-
-                <Typography
-                  variant="h6"
-                  component="span"
-                  className="ft_content"
-                  width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
-                >
-                  {/* {formik.values.formType === "2"
-                    ? "N/A*"
-                    : formik.values.formType === "3"
-                    ? "BOX 11b"
-                    : null} */}
-                </Typography>
-              </Stack>
-              <Stack
-                className="infoCodeContainer"
-                sx={{
-                  flexDirection: { xs: "column", sm: "row", md: "row" },
-                }}
-              >
-                <FormControl fullWidth>
-                  <CustomField
-                    type="text"
-                    // label="PPS (Diagnosis Related Group)"
-                    // value={formik.values.patientWeight}
-                    name="patientWeight"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
-                  />
-                </FormControl>
-
-                <Typography
-                  variant="h6"
-                  component="span"
-                  className="ft_content"
-                  width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
-                >
-                  {/* {formik.values.formType === "2"
-                    ? "N/A*"
-                    : formik.values.formType === "3"
-                    ? "BOX 11b"
-                    : null} */}
-                </Typography>
-              </Stack>
-              <Stack
-                className="infoCodeContainer"
-                sx={{
-                  flexDirection: { xs: "column", sm: "row", md: "row" },
-                }}
-              >
-                <FormControl fullWidth>
-                  <CustomField
-                    type="text"
-                    // label="PPS (Diagnosis Related Group)"
-                    // value={formik.values.patientWeight}
-                    name="patientWeight"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
-                  />
-                </FormControl>
-
-                <Typography
-                  variant="h6"
-                  component="span"
-                  className="ft_content"
-                  width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "N/A*"
@@ -681,10 +567,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="Yes"
                   control={
                     <Radio
-                    //   checked={formik.values.isEmployment}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isEmployment", true)
-                    //   }
+                      checked={formik.values.isEmployment}
+                      onChange={() =>
+                        formik.setFieldValue("isEmployment", true)
+                      }
                     />
                   }
                   label="Yes"
@@ -693,10 +579,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="No"
                   control={
                     <Radio
-                    //   checked={!formik.values.isEmployment}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isEmployment", false)
-                    //   }
+                      checked={!formik.values.isEmployment}
+                      onChange={() =>
+                        formik.setFieldValue("isEmployment", false)
+                      }
                     />
                   }
                   label="No"
@@ -708,7 +594,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-11-1 (EM)"
@@ -737,10 +623,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="Yes"
                   control={
                     <Radio
-                    //   checked={formik.values.isAutoAccident}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isAutoAccident", true)
-                    //   }
+                      checked={formik.values.isAutoAccident}
+                      onChange={() =>
+                        formik.setFieldValue("isAutoAccident", true)
+                      }
                     />
                   }
                   label="Yes"
@@ -749,10 +635,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="No"
                   control={
                     <Radio
-                    //   checked={!formik.values.isAutoAccident}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isAutoAccident", false)
-                    //   }
+                      checked={!formik.values.isAutoAccident}
+                      onChange={() =>
+                        formik.setFieldValue("isAutoAccident", false)
+                      }
                     />
                   }
                   label="No"
@@ -764,7 +650,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-11-1 (AA)"
@@ -793,10 +679,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="Yes"
                   control={
                     <Radio
-                    //   checked={formik.values.isOtherAccident}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isOtherAccident", true)
-                    //   }
+                      checked={formik.values.isOtherAccident}
+                      onChange={() =>
+                        formik.setFieldValue("isOtherAccident", true)
+                      }
                     />
                   }
                   label="Yes"
@@ -805,10 +691,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   value="No"
                   control={
                     <Radio
-                    //   checked={!formik.values.isOtherAccident}
-                    //   onChange={() =>
-                    //     formik.setFieldValue("isOtherAccident", false)
-                    //   }
+                      checked={!formik.values.isOtherAccident}
+                      onChange={() =>
+                        formik.setFieldValue("isOtherAccident", false)
+                      }
                     />
                   }
                   label="No"
@@ -820,7 +706,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-11-1 (OA)"
@@ -856,8 +742,8 @@ const InsAdditionalinfo = ({ formik }) => {
               >
                 <FormControl fullWidth>
                   <CustomSelectBox
-                    name="reasonDelayCode"
-                    // value={formik.values.reasonDelayCode}
+                    name="releaseOfInfoId"
+                    value={formik.values.releaseOfInfoId}
                     dropdownOptions={types?.map((opt) => ({
                       value: opt.type,
                       id: opt.id,
@@ -872,7 +758,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-20"
@@ -889,8 +775,8 @@ const InsAdditionalinfo = ({ formik }) => {
               >
                 <FormControl fullWidth>
                   <CustomSelectBox
-                    name="reasonDelayCode"
-                    // value={formik.values.reasonDelayCode}
+                    name="assignmentOfBenefitId"
+                    value={formik.values.assignmentOfBenefitId}
                     dropdownOptions={types?.map((opt) => ({
                       value: opt.type,
                       id: opt.id,
@@ -905,7 +791,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-20"
@@ -923,8 +809,8 @@ const InsAdditionalinfo = ({ formik }) => {
               >
                 <FormControl fullWidth>
                   <CustomSelectBox
-                    name="reasonDelayCode"
-                    // value={formik.values.reasonDelayCode}
+                    name="providerAcceptance"
+                    value={formik.values.providerAcceptance}
                     dropdownOptions={types?.map((opt) => ({
                       value: opt.type,
                       id: opt.id,
@@ -939,7 +825,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 CLM-20"
@@ -972,25 +858,45 @@ const InsAdditionalinfo = ({ formik }) => {
             >
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={selectedCheckboxes.includes(1)}
+                      onChange={() => checkboxHandleChange(1)}
+                    />
+                  }
                   label="No referral given"
                 />
               </FormGroup>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={selectedCheckboxes.includes(2)}
+                      onChange={() => checkboxHandleChange(2)}
+                    />
+                  }
                   label="Patient refused referral"
                 />
               </FormGroup>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={selectedCheckboxes.includes(3)}
+                      onChange={() => checkboxHandleChange(3)}
+                    />
+                  }
                   label="Patient is currently under treatment"
                 />
               </FormGroup>
               <FormGroup>
                 <FormControlLabel
-                  control={<Checkbox />}
+                  control={
+                    <Checkbox
+                      checked={selectedCheckboxes.includes(4)}
+                      onChange={() => checkboxHandleChange(4)}
+                    />
+                  }
                   label="Patient is reffered to another provider"
                 />
               </FormGroup>
@@ -1025,7 +931,7 @@ const InsAdditionalinfo = ({ formik }) => {
                 <FormControl fullWidth>
                   <CustomSelectBox
                     name="documentationMethod"
-                    // value={formik.values.documentationMethod}
+                    value={formik.values.documentationMethod}
                     dropdownOptions={types?.map((opt) => ({
                       value: opt.type,
                       id: opt.id,
@@ -1040,7 +946,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 PWK-2"
@@ -1059,7 +965,7 @@ const InsAdditionalinfo = ({ formik }) => {
                 <FormControl fullWidth>
                   <CustomSelectBox
                     name="documentationType"
-                    // value={formik.values.documentationType}
+                    value={formik.values.documentationType}
                     dropdownOptions={types?.map((opt) => ({
                       value: opt.type,
                       id: opt.id,
@@ -1074,7 +980,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 PWK-1"
@@ -1107,10 +1013,10 @@ const InsAdditionalinfo = ({ formik }) => {
                   <CustomField
                     type="text"
                     label="Demonstration Project"
-                    // value={formik.values.demonstrationProject}
+                    value={formik.values.demonstrationProject}
                     name="demonstrationProject"
-                    // handleChange={formik.handleChange}
-                    // handleBlur={formik.handleBlur}
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
                   />
                 </FormControl>
                 <Typography
@@ -1118,7 +1024,7 @@ const InsAdditionalinfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  //   display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formType === "1" && "none"}
                 >
                   {/* {formik.values.formType === "2"
                     ? "2300 REF~P4"
