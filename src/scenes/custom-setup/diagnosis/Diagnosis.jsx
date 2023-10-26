@@ -7,7 +7,12 @@ import axios from "axios";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const Diagnosis = ({ formik, handleClose, icdIdentifier }) => {
+const Diagnosis = ({
+  formik,
+  handleClose,
+  icdIdentifier,
+  handleInsDiagnosis,
+}) => {
   const [diagnosisData, setDiagnosisData] = useState([]);
 
   const fetchAllDiagnosis = async () => {
@@ -92,9 +97,11 @@ const Diagnosis = ({ formik, handleClose, icdIdentifier }) => {
           }}
           pageSize={5}
           disableSelectionOnClick
-          onCellClick={(params) =>
-            handleDiagnosis(params.row, `icD_${icdIdentifier}`)
-          }
+          onCellClick={(params) => {
+            formik.values.isProfessional === 1
+              ? handleDiagnosis(params.row, `icD_${icdIdentifier}`)
+              : handleInsDiagnosis(params.row);
+          }}
         />
       </Box>
     </>

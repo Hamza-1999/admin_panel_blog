@@ -25,6 +25,7 @@ import "./claim-styling/claim.css";
 import AmbulanceInfo from "./AmbulanceInfo";
 import { FormControl, FormLabel } from "react-bootstrap";
 import InsAdditionalinfo from "./InsAdditionalinfo";
+import InformationCodes from "./InformationCodes";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -201,13 +202,16 @@ const NewClaim = () => {
             ) : (
               <InsAdditionalinfo formik={formik} />
             ))}
-          {tabValue === 3 && (
-            <AmbulanceInfo
-              formik={formik}
-              // setClaimChargesDto={setClaimChargesDto}
-              // claimChargesDto={claimChargesDto}
-            />
-          )}
+          {tabValue === 3 &&
+            (formik.values.isProfessional === 1 ? (
+              <AdditionInfo
+                formik={formik}
+                // setClaimChargesDto={setClaimChargesDto}
+                // claimChargesDto={claimChargesDto}
+              />
+            ) : (
+              <InformationCodes formik={formik} />
+            ))}
         </Box>
       </form>
 

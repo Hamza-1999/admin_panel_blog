@@ -209,7 +209,10 @@ export const claimInitVal = {
   remarks: "",
   releaseOfInfoId: null,
   assignmentOfBenefitId: null,
-  epsdtCertificationId: null,
+  // providerAcceptAssignment: null,
+  epsdT_1: 0,
+  epsdT_2: 0,
+  epsdT_3: 0,
   principalDiagnosisId: null,
   poa: null,
   admittingDiagnosisId: null,
@@ -226,6 +229,8 @@ export const claimInitVal = {
   valueId: null,
   valueAmount: 0,
   conditionId: null,
+
+  //
 };
 
 export const paymentInitVal3 = {
