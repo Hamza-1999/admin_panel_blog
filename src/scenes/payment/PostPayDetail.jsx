@@ -5,16 +5,8 @@ import { setPaymentDataForApi } from "../../features/slice/PaymentSlice";
 import React, { useEffect, useState } from "react";
 import CustomModal from "../../components/CustomModal";
 import EditPayDetail from "./EditPayDetail";
-
-const PostPayDetail = ({
-  detailInfo,
-  setShowDetail,
-  setPaymentDetailDto,
-  data,
-  setData,
-}) => {
-
 import { useDispatch, useSelector } from "react-redux";
+
 const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
 
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -163,29 +155,21 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
   const handleDone = () => {
     console.log("rowData", rowData);
 
-    let inputData = data;
+    let inputData = paymentDataForApi;
     let rowDataId = rowData[0].claimInfoId;
+    console.log("work");
     let findClaimId = inputData.paymentClaimDto.findIndex(
       (val) => val.claimId === rowDataId
     );
-    inputData.paymentClaimDto[findClaimId].paymentDetailDto = rowData;
-    setData(inputData);
+    console.log("findClaimId", inputData.paymentClaimDto[findClaimId]);
 
-//     let inputData = paymentDataForApi;
-//     let rowDataId = rowData[0].claimInfoId;
-//     console.log("work");
-//     let findClaimId = inputData.paymentClaimDto.findIndex(
-//       (val) => val.claimId === rowDataId
-//     );
-//     console.log("findClaimId", inputData.paymentClaimDto[findClaimId]);
-
-//     // Check if findClaimId is a valid index
-//     if (findClaimId !== -1) {
-//       let updatedPaymentClaimDto = [...inputData.paymentClaimDto];
-//       updatedPaymentClaimDto[findClaimId] = {
-//         ...updatedPaymentClaimDto[findClaimId],
-//         paymentDetailDto: rowData,
-//       };
+    // Check if findClaimId is a valid index
+    if (findClaimId !== -1) {
+      let updatedPaymentClaimDto = [...inputData.paymentClaimDto];
+      updatedPaymentClaimDto[findClaimId] = {
+        ...updatedPaymentClaimDto[findClaimId],
+        paymentDetailDto: rowData,
+      };
 
 
       let updatedInputData = {
@@ -194,8 +178,6 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
       };
 
       dispatch(setPaymentDataForApi(updatedInputData));
-    } else {
-      console.log("Claim ID not found");
     }
     setPaymentDetailDto(rowData);
     setShowDetail(false);

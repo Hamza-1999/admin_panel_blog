@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     width: "49%",
   },
   heading: { fontSize: "12pt", fontWeight: "heavy", margin: "4px 0" },
-  primaryText: { fontSize: "9px", fontWeight: "light" },
+  primaryText: { fontSize: "6px", fontWeight: "ultralight" },
   secondaryText: {
     fontSize: "10pt",
     color: "black",
@@ -65,6 +65,15 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     flexDirection: "row",
+  },
+  flexRowAround: {
+    display: "flex", flexDirection: "row"
+  },
+  flexColAround25: {
+    display:"flex" , flexDirection:"column"  , justifyContent: 'flex-end' , width : "25%"
+  },
+  flexColAround75: {
+    display:"flex" , flexDirection:"column"  , justifyContent: 'flex-end' , width : "75%"
   },
 });
 
@@ -112,88 +121,123 @@ const CmsForm15 = ({ pdfData }) => {
               <View style={styles.bodyWrapper1Content}>
                 <View
                   style={{
-                    border: "1px solid black",
-                    width: "14%",
+                    // border: "1px solid black",
+                    width: "15%",
                   }}
                 >
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <View>
-                      <Text style={styles.primaryText}>1. Medicare</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <Text style={styles.primaryText}>1.</Text>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround75}>
+                      <Text style={styles.primaryText}> MEDICARE</Text>
                       <Text style={styles.primaryText}>(Medicare#)</Text>
                     </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
+                    // border: "1px solid black",
                     width: "14%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Medicaid</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Medicaid#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround75}>
+                      <Text style={styles.primaryText}>MEDICAID</Text>
+                      <Text style={styles.primaryText}>(Medicaid#)</Text>
+                    </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
+                    // border: "1px solid black",
                     width: "14%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Tricare</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Id#/Dod#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround45}>
+                      <Text style={styles.primaryText}>TRICARE</Text>
+                      <Text style={styles.primaryText}>(lD#/DoD#)</Text>
+                    </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
-                    width: "14%",
+                    // border: "1px solid black",
+                    width: "5%",
+                  }}
+                ></View>
+                <View
+                  style={{
+                    // border: "1px solid black",
+                    width: "16%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Champva</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Member Id#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround45}>
+                      <Text style={styles.primaryText}>CHAMPVA</Text>
+                      <Text style={styles.primaryText}>(Member lD#)</Text>
+                    </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
-                    width: "14%",
+                    // border: "1px solid black",
+                    width: "19%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Group Health Plan</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Id#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround75}>
+                      <Text style={styles.primaryText}>GROUP</Text>
+                      <Text style={styles.primaryText}>HEALTH PLAN</Text>
+                      <Text style={styles.primaryText}>(lD#)</Text>
+                    </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
-                    width: "14%",
+                    // border: "1px solid black",
+                    width: "17%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Feca Blklung</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Id#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround75}>
+                      <Text style={styles.primaryText}>FECA</Text>
+                      <Text style={styles.primaryText}>BLK LUNG</Text>
+                      <Text style={styles.primaryText}>(lD#)</Text>
+                    </View>
                   </View>
                 </View>
                 <View
                   style={{
-                    border: "1px solid black",
-                    width: "14%",
+                    // border: "1px solid black",
+                    width: "16%",
                   }}
                 >
-                  <Text style={styles.primaryText}>Other</Text>
-                  <View style={styles.checkboxWrapper}>
-                    <View style={styles.checkbox}></View>
-                    <Text style={styles.primaryText}>(Id#)</Text>
+                  <View style={styles.flexRowAround}>
+                    <View style={styles.flexColAround25}>
+                      <View style={styles.checkbox}></View>
+                    </View>
+                    <View style={styles.flexColAround75}>
+                      <Text style={styles.primaryText}>OTHER</Text>
+                      <Text style={styles.primaryText}>(lD#)</Text>
+                    </View>
                   </View>
                 </View>
               </View>
