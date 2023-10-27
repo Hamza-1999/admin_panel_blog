@@ -7,7 +7,7 @@ import axios from "axios";
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 
-const Diagnosis = ({
+const OtherProcdure = ({
   formik,
   handleClose,
   icdIdentifier,
@@ -15,14 +15,14 @@ const Diagnosis = ({
   handleInsDiagnosis,
 }) => {
   const [diagnosisData, setDiagnosisData] = useState([]);
-  
 
-  const fetchAllDiagnosis = async () => {
+  const fetchAllDiagnosis = async (endPoint) => {
     try {
-      const response = await axios.get(`${path}/ct-diagnosisCode`);
+      const response = await axios.get(`${path}/${endPoint}`);
       console.log(response, "response");
       if (response.status === 200) {
         const data = response.data;
+        console.log("data" , data)
         let usedDiagnose = formik.values?.insClaimInfoDetailDto?.filter((e)=> e.insClaimInfoCodeId === diagnoseTable)
         for (let i = 0; i < usedDiagnose.length; i++) {
           const element = usedDiagnose[i];
@@ -40,11 +40,25 @@ const Diagnosis = ({
     }
   };
 
+
+  const getEndPointOfOtherProcedure = (claimId) =>{
+    if (claimId === 4) {
+        return "ct-otherProcedure"
+    } else if (claimId === 5) {
+        return "ct-occurrenceSpan"
+    }else if (claimId === 6) {
+        return "ct-occurrence"
+    }else if (claimId === 7) {
+        return "ct-value"
+    }else if (claimId === 8) {
+        return "ct-conditionCode"
+    }
+  }
   const rows = diagnosisData.map((el) => ({
-    id: el.diagnosisCodeId,
-    diagnosisDescription: el.diagnosisDescription,
-    codeType: el.codeType,
-    diagnosisCode: el.diagnosisCode,
+    id: el?.occurrenceId || el?.valueId || el?.conditionCodeId || el?.occurrenceSpanId || el?.otherProcedureId,
+    diagnosisDescription: el?.occurrenceDescription || el?.valueDescription || el?.conditionDescription || el?.occurrenceSpanDescription || el?.otherProcedureDescription,
+    codeType: el?.occurrenceCode || el?.valueCode || el?.conditionCode || el?.occurrenceSpanCode || el?.otherProcedureCode,
+    diagnosisCode: null,
   }));
 
   const columns = [
@@ -64,20 +78,13 @@ const Diagnosis = ({
       headerAlign: "center",
       align: "center",
     },
-    {
-      field: "diagnosisCode",
-      headerName: "Description",
-      minWidth: 100,
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-    },
   ];
 
   useEffect(() => {
-    console.log("diagnoseTable" , diagnoseTable)
-    fetchAllDiagnosis();
-  }, []);
+    let currentEndPoint = getEndPointOfOtherProcedure(diagnoseTable)
+    console.log("currentEndPoint" , currentEndPoint)
+    fetchAllDiagnosis(currentEndPoint);
+  },[]);
 
   const handleDiagnosis = (val, field) => {
     console.log(val, "diagnosis values");
@@ -93,11 +100,6 @@ const Diagnosis = ({
 
     handleClose();
   };
-  
-  useEffect(()=>{
-    
-  },[])
-
   return (
     <>
       <Box sx={{ height: "400px", width: "100%" }}>
@@ -124,4 +126,4 @@ const Diagnosis = ({
   );
 };
 
-export default Diagnosis;
+export default OtherProcdure;

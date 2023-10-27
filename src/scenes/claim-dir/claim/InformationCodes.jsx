@@ -5,10 +5,13 @@ import CustomSelectBox2 from "../../../components/CustomSelectBox2";
 import CustomField from "../../../components/CustomField";
 import CustomModal from "../../../components/CustomModal";
 import Diagnosis from "../../custom-setup/diagnosis/Diagnosis";
+import OtherProcdure from "../../custom-setup/other-procedure/OtherProcedure";
+import { SignalCellularNull } from "@mui/icons-material";
 
 const InformationCodes = ({ formik }) => {
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
-
+  const [openProcedureModal, setOpenProcedureModal] = useState(false);
+  console.log("claimDTO", formik.values)
   const types = [
     {
       id: 1,
@@ -23,27 +26,122 @@ const InformationCodes = ({ formik }) => {
       type: "Three",
     },
   ];
+  const [diagnoseTable , setDiagnoseTable] = useState(null)
+
+  let claimInfoCodeName = [
+    {
+      id: 1,
+      name: "Injury Caues"
+    }, {
+      id: 2,
+      name: "Patient Visit Reason"
+    }, {
+      id: 3,
+      name: "Other Diagnosis"
+    }, {
+      id: 4,
+      name: "Other Procedure"
+    }, {
+      id: 5,
+      name: "Occurrence Span"
+    }, {
+      id: 6,
+      name: "Occurrence"
+    }, {
+      id: 7,
+      name: "Value"
+    }, {
+      id: 8,
+      name: "Condition"
+    }
+  ]
 
   //   handle diagnosis
-  const handleInsDiagnosis = (value) => {
-    console.log(value, "check handle diagnos");
+  const handleInsDiagnosis = (value , daignoseTableId) => {
+    console.log(value, daignoseTableId ,"check handle diagnos");
 
+    formik.values.insClaimInfoDetailDto.push({
+      insClaimInfoCTId: value?.id,
+      insClaimInfoCodeId: daignoseTableId,
+      codeType : value?.codeType,
+      description : value?.diagnosisDescription,
+      from: null,
+      to: null,
+      valueAmount: 0,
+      poaId : null,
+    })
+    console.log("formik.value" , formik.values)
     setOpenDiagnosisModal(false);
+    setOpenProcedureModal(false);
   };
+
+  const clickClaimInfoSearch = (claimId) => {
+    if (claimId === 1 || claimId === 2 || claimId === 3) {
+      console.log("daignose model")
+      setDiagnoseTable(claimId)
+      setOpenDiagnosisModal(true)      
+    }else{
+      console.log("procedure model")
+      setDiagnoseTable(claimId)
+      setOpenProcedureModal(true)
+    }
+  }
+
+  const handleValueChange = (parentId , childId , type , e)=>{
+/// store insClaimInfoDetailDto value into insCalimDto Val
+    let insClaimDto = formik?.values?.insClaimInfoDetailDto
+    // findIndex of current Child
+    let found = insClaimDto.findIndex((val)=> val?.insClaimInfoCTId === childId && val?.insClaimInfoCodeId === parentId)
+    // replace values if integer than convert into integer
+     if (found !== -1) {
+      let currentObj = insClaimDto[found]
+      if (type === "valueAmount") {
+        currentObj[type]  = parseFloat(e.target.value)
+      }else{
+        currentObj[type]  = e.target.value
+      }
+      formik.setFieldValue("insClaimInfoDetailDto", insClaimDto);
+    }
+  }
+
+  const handleDelete = (parentId , childId)=>{
+     console.log("parentId , childId " , parentId , childId )
+     let insClaimDto = formik?.values?.insClaimInfoDetailDto
+     // findIndex of current Child
+     let found = insClaimDto.findIndex((val)=> val?.insClaimInfoCTId === childId && val?.insClaimInfoCodeId === parentId)
+     // replace values if integer than convert into integer
+      if (found !== -1) {
+       insClaimDto.splice(found , 1)
+      }
+      formik.setFieldValue("insClaimInfoDetailDto", insClaimDto);
+  }
   return (
     <>
       {/* modals */}
-      <CustomModal
+      { diagnoseTable === 1 || diagnoseTable ===  2 || diagnoseTable ===  3 ? <CustomModal
         open={openDiagnosisModal}
         handleClose={() => setOpenDiagnosisModal(false)}
       >
         <Diagnosis
           handleClose={() => setOpenDiagnosisModal(false)}
           formik={formik}
+          diagnoseTable={diagnoseTable}
           //   icdIdentifier={icdIdentifier}
           handleInsDiagnosis={handleInsDiagnosis}
         />
-      </CustomModal>
+      </CustomModal>  : 
+      <CustomModal
+      open={openProcedureModal}
+        handleClose={() => setOpenProcedureModal(false)}
+      >
+        <OtherProcdure
+          handleClose={() => setOpenProcedureModal(false)}
+          formik={formik}
+          diagnoseTable={diagnoseTable}
+          //   icdIdentifier={icdIdentifier}
+          handleInsDiagnosis={handleInsDiagnosis}
+        />
+      </CustomModal>}
       {/* modals end */}
       <Box
         display="grid"
@@ -139,44 +237,95 @@ const InformationCodes = ({ formik }) => {
           </Typography>
         </Stack>
       </Box>
-      external cause injury
-      <Box
-        display="grid"
-        gap="20px"
-        sx={{
-          marginTop: "20px",
-          gridTemplateColumns: {
-            xs: "repeat(1, minmax(0, 1fr))",
-            sm: "repeat(1, minmax(0, 1fr))",
-            md: "repeat(2, minmax(0, 920px))",
-          },
-        }}
-      >
-        <table style={{ border: "1px solid red" }}>
-          <thead>
-            <tr>
-              <th>Code</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr style={{ verticalAlign: "bottom" }}>
-              <td style={{ width: "40%", border: "1px solid green" }}>
-                <div>
-                  <CustomSearchField
-                    handleModalOpen={() => setOpenDiagnosisModal(true)}
-                  />
-                </div>
-              </td>
-              <td style={{ width: "60%" }}>
-                <div>
-                  <CustomField />
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </Box>
+      {claimInfoCodeName?.map((val, index) => {
+        return (
+          <Box>
+            <Typography sx={{ marginTop: "10px" }} >{val?.name}</Typography>
+            <Box
+              display="grid"
+              gap="20px"
+              sx={{
+                marginTop: "10px",
+                gridTemplateColumns: {
+                  xs: "repeat(1, minmax(0, 1fr))",
+                  sm: "repeat(1, minmax(0, 1fr))",
+                  md: "repeat(2, minmax(0, 920px))",
+                },
+              }}
+            >
+              <table style={{ border: "1px solid black" }}>
+                <thead>
+                  <tr>
+                    <th style={{ border: "1px solid black" }}>Code</th>
+                    {(val.id === 4 || val.id === 5 || val.id === 6) && <th style={{ border: "1px solid black" }}>{ (val?.id === 4 || val?.id === 6) ? "Date" : "From"}</th>}
+                    {(val.id ===  5 ) && <th style={{ border: "1px solid black" }}>To</th>}
+                    {val.id === 7 && <th style={{ border: "1px solid black" }}>Amount</th>}
+                    <th style={{ border: "1px solid black" }}>Description</th>
+                    {val.id === 3 && <th style={{ border: "1px solid black" }}>POA</th>}
+                     <th style={{ border: "1px solid black" , width:"15px" }}></th>
+                  </tr>
+                </thead>
+                {formik?.values?.insClaimInfoDetailDto?.map((el , id)=>{
+                  return(     
+                    el?.insClaimInfoCodeId === val?.id &&
+                    (<tbody>
+                    <tr>
+                      <td style={{cursor:"pointer"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div style={{display:"flex"}}><div>{el?.codeType}</div><div>S</div></div></td>
+                      {(val.id === 4 || val.id === 5 || val.id === 6) && <td> <input
+                        type="date"
+                      value={el?.from}
+                      onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "from"  , e)}
+                      /></td>}
+                      {(val.id ===  5 ) && <td><input
+                        type="date"
+                      value={el?.to}
+                      onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "to" , e)}
+                      /></td>}
+                      {val.id === 7 && <td><input type="number" value={el?.valueAmount} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "valueAmount"  , e)} ></input></td>}
+                      <td>{el?.description}</td>
+                      {val.id === 3 && <td><select value={el?.poaId} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "poaId"  , e)}>
+                        <option  >Select</option>
+                        <option>A</option>
+                        <option>B</option>
+                        <option>C</option>
+                      </select></td>}
+                      <td style={{cursor:"pointer"}} onClick={()=> handleDelete(val?.id , el?.insClaimInfoCTId) }>X</td>
+                    </tr>
+                   
+                  </tbody>)
+                  )
+                })}
+                <tbody>
+                  <tr>
+                    <td style={{cursor:"pointer"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div><div></div><div>Search</div></div></td>
+                    {(val.id === 4 || val.id === 5 || val.id === 6) && <td> <input
+                      type="date"
+                      disabled
+                    // value={selectedDate}
+                    // onChange={handleDateChange}
+                    /></td>}
+                    {(val.id ===  5 ) && <td><input
+                      type="date"
+                      disabled
+                    // value={selectedDate}
+                    // onChange={handleDateChange}
+                    /></td>}
+                    {val.id === 7 && <td><input disabled  type="number"></input></td>}
+                    <td>empty</td>
+                    {val.id === 3 && <td><select disabled>
+                      <option>Select</option>
+                      <option>A</option>
+                      <option>B</option>
+                      <option>C</option>
+                    </select></td>}
+                  </tr>
+                </tbody>
+              </table>
+            </Box>
+          </Box>
+        )
+      })}
+
     </>
   );
 };

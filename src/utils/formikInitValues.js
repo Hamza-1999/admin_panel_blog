@@ -230,7 +230,8 @@ export const claimInitVal = {
   valueAmount: 0,
   conditionId: null,
 
-  //
+  // intial value of INfoCOde DTO
+  insClaimInfoDetailDto : []
 };
 
 export const paymentInitVal3 = {
