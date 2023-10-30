@@ -92,6 +92,12 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     width: "25%",
   },
+  flexRow25: {
+    display: "flex",
+    flexDirection: "row",
+    // justifyContent: "space-between",
+    width: "25%",
+  },
   flexCol: {
     display: "flex",
     flexDirection: "column",
@@ -122,7 +128,7 @@ const styles = StyleSheet.create({
 const CmsForm15 = ({ pdfData }) => {
   return (
     <Document>
-      <Page style={{ padding: "12px" }}>
+      <Page size="LETTER" style={{ padding: "12px" }}>
         <View style={styles.mainContainer}>
           <View style={styles.headerWrapper}>
             <View style={styles.headerContentBox}>
@@ -1153,8 +1159,1015 @@ const CmsForm15 = ({ pdfData }) => {
             </View>
             {/* from 17 point */}
             <View style={styles.bodyContainerInner}>
-              <View style={[styles.bodyWrapper1]}></View>
-              <View style={[styles.bodyWrapper2]}></View>
+              <View style={[styles.bodyWrapper1, styles.flexRow]}>
+                <View style={{ width: "60%" }}>
+                  <View style={[styles.flexRow]}>
+                    <Text style={styles.primaryText}>17. </Text>
+                    <Text style={styles.primaryText}>
+                      NAME OF REFFERING PROVIDER OR OTHER SOURCE
+                    </Text>
+                  </View>
+                  <View style={[styles.flexRow]}>
+                    <View
+                      style={{
+                        borderRight: "0.5px dashed red",
+                        width: "10%",
+                      }}
+                    ></View>
+                    <Text style={styles.primaryTextBlack}>
+                      Referring Provider Name here
+                    </Text>
+                  </View>
+                </View>
+                {/* 17 second part */}
+                <View style={{ width: "40%" }}>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      {
+                        borderBottom: "0.5px dashed red",
+                        backgroundColor: "pink",
+                      },
+                    ]}
+                  >
+                    <Text
+                      style={[
+                        styles.primaryText,
+                        { borderRight: "1px solid red" },
+                      ]}
+                    >
+                      17a.
+                    </Text>
+                    <Text
+                      style={[
+                        styles.primaryText,
+                        { borderRight: "1px solid red" },
+                      ]}
+                    >
+                      NPI
+                    </Text>
+                    <Text style={[styles.primaryTextBlack]}></Text>
+                  </View>
+                  <View style={[styles.flexRow]}>
+                    <Text
+                      style={[
+                        styles.primaryText,
+                        { borderRight: "1px solid red" },
+                      ]}
+                    >
+                      17b.
+                    </Text>
+                    <Text
+                      style={[
+                        styles.primaryText,
+                        { borderRight: "1px solid red" },
+                      ]}
+                    >
+                      NPI
+                    </Text>
+                    <Text style={[styles.primaryTextBlack]}></Text>
+                  </View>
+                </View>
+              </View>
+              {/* 18 part */}
+              <View style={[styles.bodyWrapper2]}>
+                {/* 18 */}
+                <View style={[styles.flexRow]}>
+                  <Text style={[styles.primaryText]}>18. </Text>
+                  <Text style={[styles.primaryText]}>
+                    HOSPITALIZATION DATES RELATED TO CURRENT SERVICES
+                  </Text>
+                </View>
+                {/* 18 second part */}
+                <View style={[styles.flexRow]}>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      styles.alignItemsCenter,
+                      { width: "50%", border: "1px solid green" },
+                    ]}
+                  >
+                    <Text style={[styles.primaryText, { width: "30%" }]}>
+                      FROM
+                    </Text>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        styles.spaceAround,
+                        { width: "70%" },
+                      ]}
+                    >
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>MM</Text>
+                        <Text style={[styles.primaryTextBlack]}>01</Text>
+                      </View>
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>DD</Text>
+                        <Text style={[styles.primaryTextBlack]}>20</Text>
+                      </View>
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>YY</Text>
+                        <Text style={[styles.primaryTextBlack]}>2022</Text>
+                      </View>
+                    </View>
+                  </View>
+                  {/* 16 second part portion II */}
+                  <View
+                    style={[
+                      styles.flexRow,
+                      styles.alignItemsCenter,
+                      { width: "50%", border: "1px solid cyan" },
+                    ]}
+                  >
+                    <Text style={[styles.primaryText, { width: "30%" }]}>
+                      To
+                    </Text>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        styles.spaceAround,
+                        { width: "70%" },
+                      ]}
+                    >
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>MM</Text>
+                        <Text style={[styles.primaryTextBlack]}>01</Text>
+                      </View>
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>DD</Text>
+                        <Text style={[styles.primaryTextBlack]}>20</Text>
+                      </View>
+                      <View style={{ borderRight: "0.5px dashed red" }}>
+                        <Text style={[styles.primaryText]}>YY</Text>
+                        <Text style={[styles.primaryTextBlack]}>2022</Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* from 19 points */}
+            <View style={styles.bodyContainerInner}>
+              <View style={styles.bodyWrapper1}>
+                <View>
+                  <Text style={[styles.primaryText]}>19. </Text>
+                  <Text style={[styles.primaryText]}>
+                    ADDITIONAL CLAIM INFORMATION (Designated by NUCC)
+                  </Text>
+                </View>
+                <View>
+                  <Text style={[styles.primaryTextBlack]}>
+                    19 part text here
+                  </Text>
+                </View>
+              </View>
+              {/* 20 point */}
+              <View style={[styles.bodyWrapper2, { border: "1px solid blue" }]}>
+                <View style={[styles.flexRow]}>
+                  <View style={{ width: "50%", border: "1px solid green" }}>
+                    <Text style={[styles.primaryText]}>OUTSIDE LAB?</Text>
+                  </View>
+                  <View style={{ width: "50%", border: "1px solid cyan" }}>
+                    <Text style={[styles.primaryText]}>$ CHARGES</Text>
+                  </View>
+                </View>
+                <View style={[styles.flexRow]}>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      { borderRight: "1px solid red", width: "33%" },
+                    ]}
+                  >
+                    <View style={styles.flexRow}>
+                      <View style={styles.checkbox}></View>
+                      <Text style={styles.primaryText}>YES</Text>
+                    </View>
+                    <View style={styles.flexRow}>
+                      <View style={styles.checkbox}></View>
+                      <Text style={styles.primaryText}>NO</Text>
+                    </View>
+                  </View>
+                  <View style={{ borderRight: "1px solid red", width: "33%" }}>
+                    <Text></Text>
+                  </View>
+                  <View style={{ width: "33%" }}>
+                    <Text></Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* from 21 point  */}
+            <View
+              style={[
+                styles.bodyContainerInner,
+                { borderBottom: "none !important" },
+              ]}
+            >
+              <View style={styles.bodyWrapper1}>
+                <View
+                  style={[
+                    styles.flexRow,
+                    styles.spaceBetween,
+                    { width: "100%" },
+                  ]}
+                >
+                  <View
+                    style={[
+                      styles.flexRow,
+                      { width: "80%", border: "1px solid green" },
+                    ]}
+                  >
+                    <Text style={styles.primaryText}>21. </Text>
+                    <Text style={styles.primaryText}>
+                      DIAGNOSIS OR NATURE OF ILLNESS OR INJURY Relate A-L to
+                      service line below (24E)
+                    </Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      { width: "20%", border: "1px solid cyan" },
+                    ]}
+                  >
+                    <Text style={styles.primaryText}>ICD Ind. </Text>
+                    <View
+                      style={{
+                        borderRight: "0.5px dashed red",
+                        borderLeft: "0.5px dashed red",
+                      }}
+                    >
+                      <Text style={styles.primaryTextBlack}>0</Text>
+                    </View>
+                  </View>
+                </View>
+                {/* Diagnones Code Field */}
+                <View>
+                  <View style={[styles.flexRow, styles.spaceBetween]}>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>A. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      >
+                        S46311A
+                      </Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>B. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>C. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>D. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                  </View>
+                </View>
+                <View>
+                  <View style={[styles.flexRow, styles.spaceBetween]}>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>E. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      >
+                        S46311A
+                      </Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>F. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>G. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>H. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                  </View>
+                </View>
+                <View>
+                  <View style={[styles.flexRow, styles.spaceBetween]}>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>I. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      >
+                        S46311A
+                      </Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>J. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>K. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                    <View style={styles.flexRow25}>
+                      <Text style={styles.primaryText}>L. </Text>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderBottom: "1px solid red", width: "60%" },
+                        ]}
+                      ></Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View
+                style={[styles.bodyWrapper2, { borderBottom: "1px solid red" }]}
+              >
+                {/* point 22 */}
+                <View>
+                  <View style={[styles.flexRow]}>
+                    <View style={[{ width: "50%" }]}>
+                      <View style={[styles.flexRow]}>
+                        <Text style={styles.primaryText}>22. </Text>
+                        <Text style={styles.primaryText}>
+                          RESUBMISSION CODE
+                        </Text>
+                      </View>
+
+                      <View
+                        style={{ borderRight: "1px solid red", width: "100%" }}
+                      >
+                        <Text style={styles.primaryTextBlack}>Hello</Text>
+                      </View>
+                    </View>
+                    <View style={{ width: "50%" }}>
+                      <View>
+                        <Text style={styles.primaryText}>
+                          ORIGINAL REF. NO.
+                        </Text>
+                      </View>
+                      <View style={{ width: "100%" }}>
+                        <Text style={styles.primaryTextBlack}></Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                {/* point 23 */}
+                <View>
+                  <View style={[styles.flexRow]}>
+                    <Text style={styles.primaryText}>23. </Text>
+                    <Text style={styles.primaryText}>
+                      PRIOR AUTHORIZATION NUMBER
+                    </Text>
+                  </View>
+                  <View>
+                    <Text style={styles.primaryTextBlack}></Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            {/* from 24 point*/}
+            <View style={styles.bodyContainerInner}>
+              <View style={styles.bodyWrapper1}>
+                <View style={[styles.flexRow]}>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      { width: "85%", borderTop: "1px solid red" },
+                    ]}
+                  >
+                    {/* first 35 */}
+                    <View style={{ width: "35%" }}>
+                      <View style={{ borderRight: "1px solid red" }}>
+                        <View style={[styles.flexRow]}>
+                          <Text style={styles.primaryText}>24.</Text>
+                          <Text style={styles.primaryText}>A.</Text>
+                          <Text style={styles.primaryText}>
+                            DATE(S) OF SERVICE
+                          </Text>
+                        </View>
+                        <View style={styles.flexRow}>
+                          <Text
+                            style={[
+                              styles.primaryText,
+                              { width: "50%", textAlign: "center" },
+                            ]}
+                          >
+                            From
+                          </Text>
+                          <Text
+                            style={[
+                              styles.primaryText,
+                              { width: "50%", textAlign: "center" },
+                            ]}
+                          >
+                            To
+                          </Text>
+                        </View>
+
+                        <View style={[styles.flexRow, styles.spaceBetween]}>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { width: "50%", justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text style={[styles.primaryText]}>MM</Text>
+                            <Text style={[styles.primaryText]}>DD</Text>
+                            <Text style={[styles.primaryText]}>YY</Text>
+                          </View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { width: "50%", justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text style={[styles.primaryText]}>MM</Text>
+                            <Text style={[styles.primaryText]}>DD</Text>
+                            <Text style={[styles.primaryText]}>YY</Text>
+                          </View>
+                        </View>
+                      </View>
+                      {/* rows work */}
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              { justifyContent: "space-evenly" },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "15px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryText}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                    </View>
+                    {/* 5% */}
+                    <View style={{ width: "12.5%" }}>
+                      <View
+                        style={{
+                          borderRight: "1px solid red",
+                          // borderLeft: "1px solid red",
+                        }}
+                      >
+                        <Text
+                          style={[styles.primaryText, { textAlign: "center" }]}
+                        >
+                          B. PLACE OF SERVICE
+                        </Text>
+                      </View>
+                    </View>
+                    <View
+                      style={{ width: "12.5%", borderRight: "1px solid red" }}
+                    >
+                      <Text style={styles.primaryText}>C. EMG</Text>
+                    </View>
+                    {/* second 35 */}
+                    <View
+                      style={{ width: "45%", borderRight: "1px solid red" }}
+                    >
+                      <View style={styles.flexRow}>
+                        <Text style={styles.primaryText}>D. </Text>
+                        <Text style={[styles.primaryText, { width: "100%" }]}>
+                          PROCEDURES, SERVICES, OR SUPPLIES
+                        </Text>
+                      </View>
+                      <View style={{ textAlign: "center" }}>
+                        <Text style={styles.primaryText}>
+                          (Explain Unusual Circumstances)
+                        </Text>
+                      </View>
+                      <View style={styles.flexRow}>
+                        <View
+                          style={{ width: "50%", borderRight: "1px solid red" }}
+                        >
+                          <Text style={styles.primaryText}>CPT/HCPCS</Text>
+                        </View>
+                        <View style={{ width: "50%" }}>
+                          <Text
+                            style={[
+                              styles.primaryText,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            MODIFIER
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                  </View>
+                  <View style={{ width: "15%" }}>
+                    <View>
+                      <Text style={styles.primaryText}>
+                        E. DIAGNOSIS POINTER
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.bodyWrapper2}></View>
             </View>
           </View>
         </View>
