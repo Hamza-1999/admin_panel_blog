@@ -178,7 +178,8 @@ const NewClaim = () => {
             padding: "15px",
           }}
         >
-          {tabValue === 0 && (
+          {tabValue === 0
+           && (
             <ClaimInfo
               formik={formik}
               setClaimIds={setClaimIds}

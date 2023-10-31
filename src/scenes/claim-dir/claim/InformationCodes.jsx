@@ -7,6 +7,8 @@ import CustomModal from "../../../components/CustomModal";
 import Diagnosis from "../../custom-setup/diagnosis/Diagnosis";
 import OtherProcdure from "../../custom-setup/other-procedure/OtherProcedure";
 import { SignalCellularNull } from "@mui/icons-material";
+import CloseIcon from '@mui/icons-material/Close';
+import SearchIcon from '@mui/icons-material/Search';
 
 const InformationCodes = ({ formik }) => {
   const [openDiagnosisModal, setOpenDiagnosisModal] = useState(false);
@@ -253,43 +255,46 @@ const InformationCodes = ({ formik }) => {
                 },
               }}
             >
-              <table style={{ border: "1px solid black" }}>
-                <thead>
-                  <tr>
-                    <th style={{ border: "1px solid black" }}>Code</th>
-                    {(val.id === 4 || val.id === 5 || val.id === 6) && <th style={{ border: "1px solid black" }}>{ (val?.id === 4 || val?.id === 6) ? "Date" : "From"}</th>}
-                    {(val.id ===  5 ) && <th style={{ border: "1px solid black" }}>To</th>}
-                    {val.id === 7 && <th style={{ border: "1px solid black" }}>Amount</th>}
-                    <th style={{ border: "1px solid black" }}>Description</th>
-                    {val.id === 3 && <th style={{ border: "1px solid black" }}>POA</th>}
-                     <th style={{ border: "1px solid black" , width:"15px" }}></th>
+              <table style={{ border: "1px solid black" , padding:"2px" , borderRadius:"6px"}}>
+                <thead style={{backgroundColor:"#ECECED"}}>
+                  <tr >
+                    <th style={{ border: "1px solid black"  , padding:"2px"}}>Code</th>
+                    {(val.id === 4 || val.id === 5 || val.id === 6) && <th style={{ border: "1px solid black", padding:"2px" }}>{ (val?.id === 4 || val?.id === 6) ? "Date" : "From"}</th>}
+                    {(val.id ===  5 ) && <th style={{ border: "1px solid black" , padding:"2px"}}>To</th>}
+                    {val.id === 7 && <th style={{ border: "1px solid black" , padding:"2px"}}>Amount</th>}
+                    <th style={{ border: "1px solid black" , padding:"2px"}}>Description</th>
+                    {val.id === 3 && <th style={{ border: "1px solid black", padding:"2px" }}>POA</th>}
+                     <th style={{ border: "1px solid black" , width:"20px" , padding:"2px"}}></th>
                   </tr>
                 </thead>
                 {formik?.values?.insClaimInfoDetailDto?.map((el , id)=>{
                   return(     
                     el?.insClaimInfoCodeId === val?.id &&
                     (<tbody>
+                     
                     <tr>
-                      <td style={{cursor:"pointer"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div style={{display:"flex"}}><div>{el?.codeType}</div><div>S</div></div></td>
-                      {(val.id === 4 || val.id === 5 || val.id === 6) && <td> <input
+                      <td style={{cursor:"pointer" ,border: "1px solid black"  , padding:"2px"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div style={{display:"flex"}}><div>{el?.codeType}</div><div>S</div></div></td>
+                      {(val.id === 4 || val.id === 5 || val.id === 6) && <td style={{ border: "1px solid black" }}> <input
                         type="date"
+                        style={{ padding :"3px" , width:"100%" }}
                       value={el?.from}
                       onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "from"  , e)}
                       /></td>}
-                      {(val.id ===  5 ) && <td><input
+                      {(val.id ===  5 ) && <td style={{ border: "1px solid black"}}><input
                         type="date"
                       value={el?.to}
+                      style={{ padding :"3px" , width:"100%" }}
                       onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "to" , e)}
                       /></td>}
-                      {val.id === 7 && <td><input type="number" value={el?.valueAmount} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "valueAmount"  , e)} ></input></td>}
+                      {val.id === 7 && <td style={{ border: "1px solid black" }}><input style={{ padding :"3px" , width:"100%" }} type="number" value={el?.valueAmount} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "valueAmount"  , e)} ></input></td>}
                       <td>{el?.description}</td>
-                      {val.id === 3 && <td><select value={el?.poaId} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "poaId"  , e)}>
+                      {val.id === 3 && <td ><select value={el?.poaId} style={{ padding :"3px" , width:"100%" }} onChange={(e)=> handleValueChange(val?.id , el?.insClaimInfoCTId , "poaId"  , e)}>
                         <option  >Select</option>
                         <option>A</option>
                         <option>B</option>
                         <option>C</option>
                       </select></td>}
-                      <td style={{cursor:"pointer"}} onClick={()=> handleDelete(val?.id , el?.insClaimInfoCTId) }>X</td>
+                      <td style={{cursor:"pointer" , border: "1px solid black" }} onClick={()=> handleDelete(val?.id , el?.insClaimInfoCTId) }><CloseIcon /></td>
                     </tr>
                    
                   </tbody>)
@@ -297,22 +302,24 @@ const InformationCodes = ({ formik }) => {
                 })}
                 <tbody>
                   <tr>
-                    <td style={{cursor:"pointer"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div><div></div><div>Search</div></div></td>
-                    {(val.id === 4 || val.id === 5 || val.id === 6) && <td> <input
+                    <td style={{cursor:"pointer"  , padding:"2px" , display:"flex" , justifyContent:"flex-end"}} onClick={()=> clickClaimInfoSearch(val?.id)}><div><div></div><div><SearchIcon /></div></div></td>
+                    {(val.id === 4 || val.id === 5 || val.id === 6) && <td style={{ border: "1px solid black"}}> <input
                       type="date"
                       disabled
+                      style={{ padding :"3px" , width:"100%" }}
                     // value={selectedDate}
                     // onChange={handleDateChange}
                     /></td>}
-                    {(val.id ===  5 ) && <td><input
+                    {(val.id ===  5 ) && <td style={{ border: "1px solid black" }}><input
                       type="date"
                       disabled
+                      style={{ padding :"3px" , width:"100%" }}
                     // value={selectedDate}
                     // onChange={handleDateChange}
                     /></td>}
-                    {val.id === 7 && <td><input disabled  type="number"></input></td>}
-                    <td>empty</td>
-                    {val.id === 3 && <td><select disabled>
+                    {val.id === 7 && <td style={{ border: "1px solid black" }}><input disabled style={{ padding :"3px" , width:"100%" }}  type="number"></input></td>}
+                    <td style={{ border: "1px solid black"  , padding:"2px"}}></td>
+                    {val.id === 3 && <td style={{ border: "1px solid black" }}><select disabled style={{ padding :"3px" , width:"100%" }}>
                       <option>Select</option>
                       <option>A</option>
                       <option>B</option>
