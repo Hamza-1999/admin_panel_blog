@@ -29,6 +29,11 @@ const styles = StyleSheet.create({
     fontWeight: "ultralight",
     color: "black",
   },
+  primaryTextBlack2: {
+    fontSize: "7px",
+    fontWeight: "ultralight",
+    color: "black",
+  },
   secondaryText: {
     fontSize: "10pt",
     color: "black",
@@ -122,6 +127,12 @@ const styles = StyleSheet.create({
   },
   alignItemsCenter: {
     alignItems: "center",
+  },
+  alignTextCenter: {
+    textAlign: "center",
+  },
+  justifyContentCenter: {
+    justifyContent: "center",
   },
 });
 
@@ -1095,7 +1106,7 @@ const CmsForm15 = ({ pdfData }) => {
                     style={[
                       styles.flexRow,
                       styles.alignItemsCenter,
-                      { width: "50%", border: "1px solid green" },
+                      { width: "50%" },
                     ]}
                   >
                     <Text style={[styles.primaryText, { width: "30%" }]}>
@@ -1583,12 +1594,21 @@ const CmsForm15 = ({ pdfData }) => {
                   <View
                     style={[
                       styles.flexRow,
-                      { width: "85%", borderTop: "1px solid red" },
+                      {
+                        width: "85%",
+                        borderTop: "1px solid red",
+                      },
                     ]}
                   >
                     {/* first 35 */}
                     <View style={{ width: "35%" }}>
-                      <View style={{ borderRight: "1px solid red" }}>
+                      <View
+                        style={{
+                          borderRight: "1px solid red",
+                          borderBottom: "1px solid red",
+                          height: "30px",
+                        }}
+                      >
                         <View style={[styles.flexRow]}>
                           <Text style={styles.primaryText}>24.</Text>
                           <Text style={styles.primaryText}>A.</Text>
@@ -1641,7 +1661,7 @@ const CmsForm15 = ({ pdfData }) => {
                         </View>
                       </View>
                       {/* rows work */}
-                      <View style={[styles.flexRow, { height: "15px" }]}>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
                         <View
                           style={{
                             width: "50%",
@@ -1656,12 +1676,14 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1669,13 +1691,13 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                         <View
@@ -1692,12 +1714,14 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1705,21 +1729,21 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                       </View>
-                      <View style={[styles.flexRow, { height: "15px" }]}>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
                         <View
                           style={{
                             width: "50%",
-                            borderRight: "1px solid red",
+                            // borderRight: "1px solid red",
                             height: "100%",
                           }}
                         >
@@ -1730,12 +1754,15 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1743,19 +1770,19 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                         <View
                           style={{
                             width: "50%",
-                            borderRight: "1px solid red",
+                            // borderRight: "1px solid red",
                             height: "100%",
                           }}
                         >
@@ -1766,12 +1793,15 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1779,21 +1809,21 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                       </View>
-                      <View style={[styles.flexRow, { height: "15px" }]}>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
                         <View
                           style={{
                             width: "50%",
-                            borderRight: "1px solid red",
+                            // borderRight: "1px solid red",
                             height: "100%",
                           }}
                         >
@@ -1804,12 +1834,15 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1817,19 +1850,19 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                         <View
                           style={{
                             width: "50%",
-                            borderRight: "1px solid red",
+                            // borderRight: "1px solid red",
                             height: "100%",
                           }}
                         >
@@ -1840,12 +1873,15 @@ const CmsForm15 = ({ pdfData }) => {
                             style={[
                               styles.flexRow,
                               // styles.spaceBetween,
-                              { justifyContent: "space-evenly" },
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
                             ]}
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1853,17 +1889,17 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                       </View>
-                      <View style={[styles.flexRow, { height: "15px" }]}>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
                         <View
                           style={{
                             width: "50%",
@@ -1886,7 +1922,7 @@ const CmsForm15 = ({ pdfData }) => {
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1894,13 +1930,13 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                         <View
@@ -1925,7 +1961,7 @@ const CmsForm15 = ({ pdfData }) => {
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -1933,97 +1969,17 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
-                          </View>
-                        </View>
-                      </View>
-                      <View style={[styles.flexRow, { height: "15px" }]}>
-                        <View
-                          style={{
-                            width: "50%",
-                            // borderRight: "1px solid red",
-                            height: "100%",
-                          }}
-                        >
-                          <View
-                            style={{ backgroundColor: "pink", height: "50%" }}
-                          ></View>
-                          <View
-                            style={[
-                              styles.flexRow,
-                              // styles.spaceBetween,
-                              {
-                                justifyContent: "space-evenly",
-                                borderRight: "1px solid red",
-                              },
-                            ]}
-                          >
-                            <Text
-                              style={[
-                                styles.primaryText,
-                                { borderRight: "0.5px dashed red" },
-                              ]}
-                            >
-                              10
-                            </Text>
-                            <Text
-                              style={[
-                                styles.primaryText,
-                                { borderRight: "0.5px dashed red" },
-                              ]}
-                            >
-                              31
-                            </Text>
-                            <Text style={styles.primaryText}>19</Text>
-                          </View>
-                        </View>
-                        <View
-                          style={{
-                            width: "50%",
-                            // borderRight: "1px solid red",
-                            height: "100%",
-                          }}
-                        >
-                          <View
-                            style={{ backgroundColor: "pink", height: "50%" }}
-                          ></View>
-                          <View
-                            style={[
-                              styles.flexRow,
-                              // styles.spaceBetween,
-                              {
-                                justifyContent: "space-evenly",
-                                borderRight: "1px solid red",
-                              },
-                            ]}
-                          >
-                            <Text
-                              style={[
-                                styles.primaryText,
-                                { borderRight: "0.5px dashed red" },
-                              ]}
-                            >
-                              10
-                            </Text>
-                            <Text
-                              style={[
-                                styles.primaryText,
-                                { borderRight: "0.5px dashed red" },
-                              ]}
-                            >
-                              31
-                            </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                       </View>
-                      <View style={[styles.flexRow, { height: "15px" }]}>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
                         <View
                           style={{
                             width: "50%",
@@ -2046,7 +2002,7 @@ const CmsForm15 = ({ pdfData }) => {
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -2054,13 +2010,13 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                         <View
@@ -2085,7 +2041,7 @@ const CmsForm15 = ({ pdfData }) => {
                           >
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
@@ -2093,23 +2049,105 @@ const CmsForm15 = ({ pdfData }) => {
                             </Text>
                             <Text
                               style={[
-                                styles.primaryText,
+                                styles.primaryTextBlack,
                                 { borderRight: "0.5px dashed red" },
                               ]}
                             >
                               31
                             </Text>
-                            <Text style={styles.primaryText}>19</Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={[styles.flexRow, { height: "20px" }]}>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryTextBlack,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
+                          </View>
+                        </View>
+                        <View
+                          style={{
+                            width: "50%",
+                            // borderRight: "1px solid red",
+                            height: "100%",
+                          }}
+                        >
+                          <View
+                            style={{ backgroundColor: "pink", height: "50%" }}
+                          ></View>
+                          <View
+                            style={[
+                              styles.flexRow,
+                              // styles.spaceBetween,
+                              {
+                                justifyContent: "space-evenly",
+                                borderRight: "1px solid red",
+                              },
+                            ]}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              10
+                            </Text>
+                            <Text
+                              style={[
+                                styles.primaryTextBlack,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              31
+                            </Text>
+                            <Text style={styles.primaryTextBlack}>19</Text>
                           </View>
                         </View>
                       </View>
                     </View>
-                    {/* 5% */}
+                    {/* 12.5% */}
                     <View style={{ width: "12.5%" }}>
                       <View
                         style={{
                           borderRight: "1px solid red",
                           // borderLeft: "1px solid red",
+                          borderBottom: "1px solid red",
+                          height: "30px",
                         }}
                       >
                         <Text
@@ -2118,56 +2156,1153 @@ const CmsForm15 = ({ pdfData }) => {
                           B. PLACE OF SERVICE
                         </Text>
                       </View>
-                    </View>
-                    <View
-                      style={{ width: "12.5%", borderRight: "1px solid red" }}
-                    >
-                      <Text style={styles.primaryText}>C. EMG</Text>
-                    </View>
-                    {/* second 35 */}
-                    <View
-                      style={{ width: "45%", borderRight: "1px solid red" }}
-                    >
-                      <View style={styles.flexRow}>
-                        <Text style={styles.primaryText}>D. </Text>
-                        <Text style={[styles.primaryText, { width: "100%" }]}>
-                          PROCEDURES, SERVICES, OR SUPPLIES
-                        </Text>
-                      </View>
-                      <View style={{ textAlign: "center" }}>
-                        <Text style={styles.primaryText}>
-                          (Explain Unusual Circumstances)
-                        </Text>
-                      </View>
-                      <View style={styles.flexRow}>
+
+                      <View
+                        style={{ height: "20px", borderRight: "1px solid red" }}
+                      >
                         <View
-                          style={{ width: "50%", borderRight: "1px solid red" }}
-                        >
-                          <Text style={styles.primaryText}>CPT/HCPCS</Text>
-                        </View>
-                        <View style={{ width: "50%" }}>
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View style={{ height: "50%" }}>
                           <Text
                             style={[
-                              styles.primaryText,
+                              styles.primaryTextBlack,
                               { textAlign: "center" },
                             ]}
                           >
-                            MODIFIER
+                            15
                           </Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text
+                            style={[
+                              styles.primaryTextBlack,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            15
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text
+                            style={[
+                              styles.primaryTextBlack,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            15
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text
+                            style={[
+                              styles.primaryTextBlack,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            15
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text
+                            style={[
+                              styles.primaryTextBlack,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            15
+                          </Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text
+                            style={[
+                              styles.primaryTextBlack,
+                              { textAlign: "center" },
+                            ]}
+                          >
+                            15
+                          </Text>
+                        </View>
+                      </View>
+                    </View>
+                    {/* 12.5% */}
+                    <View
+                      style={{
+                        width: "12.5%",
+                        // borderRight: "1px solid red",
+                      }}
+                    >
+                      <View
+                        style={{
+                          height: "30px",
+                          borderBottom: "1px solid red",
+                          borderRight: "1px solid red",
+                        }}
+                      >
+                        <Text
+                          style={[styles.primaryText, { textAlign: "center" }]}
+                        >
+                          C. EMG
+                        </Text>
+                      </View>
+
+                      {/* rows */}
+                      <View
+                        style={{ height: "20px", borderRight: "1px solid red" }}
+                      >
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View style={{ height: "50%" }}>
+                          <Text></Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text></Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text></Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text></Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text></Text>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ height: "50%", backgroundColor: "pink" }}
+                        ></View>
+                        <View
+                          style={{
+                            height: "50%",
+                            borderRight: "1px solid red",
+                          }}
+                        >
+                          <Text></Text>
+                        </View>
+                      </View>
+                    </View>
+                    {/* second 45% */}
+                    <View style={{ width: "45%" }}>
+                      <View
+                        style={{
+                          height: "30px",
+                          borderBottom: "1px solid red",
+                          borderRight: "1px solid red",
+                        }}
+                      >
+                        <View style={[styles.flexRow]}>
+                          <Text style={styles.primaryText}>D. </Text>
+                          <Text style={[styles.primaryText, { width: "100%" }]}>
+                            PROCEDURES, SERVICES, OR SUPPLIES
+                          </Text>
+                        </View>
+                        <View style={{ textAlign: "center" }}>
+                          <Text style={styles.primaryText}>
+                            (Explain Unusual Circumstances)
+                          </Text>
+                        </View>
+                        <View style={styles.flexRow}>
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text style={styles.primaryText}>CPT/HCPCS</Text>
+                          </View>
+                          <View style={{ width: "60%" }}>
+                            <Text
+                              style={[
+                                styles.primaryText,
+                                { textAlign: "center" },
+                              ]}
+                            >
+                              MODIFIER
+                            </Text>
+                          </View>
+                        </View>
+                      </View>
+
+                      {/* row */}
+                      <View
+                        style={{ height: "20px", borderRight: "1px solid red" }}
+                      >
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View style={[styles.flexRow, { height: "50%" }]}>
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View
+                          style={[
+                            styles.flexRow,
+                            { height: "50%", borderRight: "1px solid red" },
+                          ]}
+                        >
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View
+                          style={[
+                            styles.flexRow,
+                            { height: "50%", borderRight: "1px solid red" },
+                          ]}
+                        >
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View
+                          style={[
+                            styles.flexRow,
+                            { height: "50%", borderRight: "1px solid red" },
+                          ]}
+                        >
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View
+                          style={[
+                            styles.flexRow,
+                            { height: "50%", borderRight: "1px solid red" },
+                          ]}
+                        >
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
+                        </View>
+                      </View>
+                      <View style={{ height: "20px" }}>
+                        <View
+                          style={{ backgroundColor: "pink", height: "50%" }}
+                        ></View>
+                        <View
+                          style={[
+                            styles.flexRow,
+                            { height: "50%", borderRight: "1px solid red" },
+                          ]}
+                        >
+                          <View
+                            style={{
+                              width: "40%",
+                              borderRight: "1px solid red",
+                            }}
+                          >
+                            <Text
+                              style={[
+                                styles.primaryTextBlack2,
+                                styles.alignTextCenter,
+                              ]}
+                            >
+                              1902h897
+                            </Text>
+                          </View>
+                          <View style={[styles.flexRow, { width: "60%" }]}>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                15
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.justifyContentCenter,
+                                styles.flexRow25,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                16
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                                { borderRight: "0.5px dashed red" },
+                              ]}
+                            >
+                              <Text
+                                style={[
+                                  styles.primaryTextBlack2,
+                                  styles.alignTextCenter,
+                                ]}
+                              >
+                                17
+                              </Text>
+                            </View>
+                            <View
+                              style={[
+                                styles.flexRow25,
+                                styles.justifyContentCenter,
+                              ]}
+                            >
+                              <Text style={[styles.primaryTextBlack2]}>18</Text>
+                            </View>
+                          </View>
                         </View>
                       </View>
                     </View>
                   </View>
                   <View style={{ width: "15%" }}>
-                    <View>
-                      <Text style={styles.primaryText}>
+                    <View
+                      style={{
+                        height: "31px",
+                        borderBottom: "1px solid red",
+                      }}
+                    >
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
                         E. DIAGNOSIS POINTER
                       </Text>
+                    </View>
+
+                    {/* rows */}
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
+                    </View>
+                    <View style={{ height: "20px" }}>
+                      <View
+                        style={{ height: "50%", backgroundColor: "pink" }}
+                      ></View>
+                      <View style={{ height: "50%" }}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          ABCD
+                        </Text>
+                      </View>
                     </View>
                   </View>
                 </View>
               </View>
-              <View style={styles.bodyWrapper2}></View>
+              {/* from F  */}
+              <View
+                style={[
+                  styles.bodyWrapper2,
+                  styles.flexRow,
+                  { borderLeft: "none !important" },
+                ]}
+              >
+                <View style={{ width: "30%" }}>
+                  <View
+                    style={[
+                      styles.flexRow,
+                      styles.alignItemsCenter,
+                      styles.justifyContentCenter,
+                      {
+                        height: "31px",
+                        borderBottom: "1px solid red",
+                        borderLeft: "1px solid red",
+                        borderRight: "1px solid red",
+                      },
+                    ]}
+                  >
+                    <Text style={[styles.primaryText]}>F. $ CHARGES</Text>
+                  </View>
+
+                  {/* rows */}
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      borderRight: "1px solid red",
+                      borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        1000
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                          borderRight: "1px solid red",
+                          borderLeft: "1px solid red",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                          borderRight: "1px solid red",
+                          borderLeft: "1px solid red",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                          borderRight: "1px solid red",
+                          borderLeft: "1px solid red",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                          borderRight: "1px solid red",
+                          borderLeft: "1px solid red",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        backgroundColor: "pink",
+                        height: "50%",
+                      }}
+                    ></View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        {
+                          height: "50%",
+                          borderRight: "1px solid red",
+                          borderLeft: "1px solid red",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          {
+                            borderRight: "0.5px dashed red",
+                            textAlign: "right",
+                            width: "80%",
+                          },
+                        ]}
+                      >
+                        250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack, { width: "20%" }]}>
+                        .00
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                <View style={{ width: "10%", border: "1px solid cyan" }}></View>
+                <View
+                  style={{ width: "10%", border: "1px solid yellow" }}
+                ></View>
+                <View
+                  style={{ width: "10%", border: "1px solid black" }}
+                ></View>
+                <View style={{ width: "40%", border: "1px solid blue" }}></View>
+              </View>
             </View>
           </View>
         </View>

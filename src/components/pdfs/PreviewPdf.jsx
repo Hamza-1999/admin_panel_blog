@@ -7,7 +7,8 @@ const PreviewPdf = () => {
   return (
     <>
       <PDFViewer width="100%" height="100%">
-        <CmsUB04 />
+        {/* <CmsUB04 /> */}
+        <CmsForm15 />
       </PDFViewer>
     </>
   );
