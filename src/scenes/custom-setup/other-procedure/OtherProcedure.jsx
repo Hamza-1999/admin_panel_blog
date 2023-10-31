@@ -24,9 +24,11 @@ const OtherProcdure = ({
         const data = response.data;
         console.log("data" , data)
         let usedDiagnose = formik.values?.insClaimInfoDetailDto?.filter((e)=> e.insClaimInfoCodeId === diagnoseTable)
+        console.log("usedDiagnose" , usedDiagnose)
         for (let i = 0; i < usedDiagnose.length; i++) {
           const element = usedDiagnose[i];
-          let findIndex = data.result.findIndex((e)=> e.diagnosisCodeId === element.insClaimInfoCTId)
+          let findIndex = data.result.findIndex((e)=> e?.occurrenceId || e?.valueId || e?.conditionCodeId || e?.occurrenceSpanId || e?.otherProcedureId === element.insClaimInfoCTId)
+          console.log("findIndex" , findIndex , data.result)
           if (findIndex !== -1 ) {
             data?.result?.splice(findIndex , 1)
           }
