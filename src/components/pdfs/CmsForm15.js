@@ -1414,129 +1414,209 @@ const CmsForm15 = ({ pdfData }) => {
                   </View>
                 </View>
                 {/* Diagnones Code Field */}
-                <View>
-                  <View style={[styles.flexRow, styles.spaceBetween]}>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>A. </Text>
-                      <Text
+                <View style={{ paddingTop: "3px", paddingBottom: "3px" }}>
+                  <View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        styles.spaceBetween,
+                        // styles.justifyContentCenter,
+                      ]}
+                    >
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
                       >
-                        S46311A
-                      </Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>B. </Text>
-                      <Text
+                        <Text style={styles.primaryText}>A. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        >
+                          S46311A
+                        </Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>C. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>B. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>D. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>C. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
+                      >
+                        <Text style={styles.primaryText}>D. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View>
-                  <View style={[styles.flexRow, styles.spaceBetween]}>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>E. </Text>
-                      <Text
+                  <View>
+                    <View style={[styles.flexRow, styles.spaceBetween]}>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
                       >
-                        S46311A
-                      </Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>F. </Text>
-                      <Text
+                        <Text style={styles.primaryText}>E. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        >
+                          S46311A
+                        </Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>G. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>F. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>H. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>G. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
+                      >
+                        <Text style={styles.primaryText}>H. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
                     </View>
                   </View>
-                </View>
-                <View>
-                  <View style={[styles.flexRow, styles.spaceBetween]}>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>I. </Text>
-                      <Text
+                  <View>
+                    <View style={[styles.flexRow, styles.spaceBetween]}>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
                       >
-                        S46311A
-                      </Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>J. </Text>
-                      <Text
+                        <Text style={styles.primaryText}>I. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        >
+                          S46311A
+                        </Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>K. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>J. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
-                    </View>
-                    <View style={styles.flexRow25}>
-                      <Text style={styles.primaryText}>L. </Text>
-                      <Text
+                      >
+                        <Text style={styles.primaryText}>K. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
+                      <View
                         style={[
-                          styles.primaryTextBlack,
-                          { borderBottom: "1px solid red", width: "60%" },
+                          styles.flexRow25,
+                          styles.alignItemsCenter,
+                          styles.justifyContentCenter,
                         ]}
-                      ></Text>
+                      >
+                        <Text style={styles.primaryText}>L. </Text>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack,
+                            { borderBottom: "1px solid red", width: "60%" },
+                          ]}
+                        ></Text>
+                      </View>
                     </View>
                   </View>
                 </View>
@@ -1588,7 +1668,7 @@ const CmsForm15 = ({ pdfData }) => {
               </View>
             </View>
             {/* from 24 point*/}
-            <View style={styles.bodyContainerInner}>
+            <View style={[styles.bodyContainerInner]}>
               <View style={styles.bodyWrapper1}>
                 <View style={[styles.flexRow]}>
                   <View
@@ -3294,14 +3374,571 @@ const CmsForm15 = ({ pdfData }) => {
                     </View>
                   </View>
                 </View>
-                <View style={{ width: "10%", border: "1px solid cyan" }}></View>
+                {/* 10% */}
+                <View style={{ width: "10%" }}>
+                  <View
+                    style={{ height: "31px", borderBottom: "1px solid red" }}
+                  >
+                    <Text style={[styles.primaryText]}>G.Days OR UNITS</Text>
+                  </View>
+
+                  {/* ROWS */}
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{ height: "20x", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ backgroundColor: "pink", height: "50%" }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { textAlign: "right" },
+                        ]}
+                      >
+                        1
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                {/* second 10% */}
+                <View style={{ width: "10%" }}>
+                  <View
+                    style={{
+                      height: "31px",
+                      borderBottom: "1px solid red",
+                      borderLeft: "1px solid red",
+                    }}
+                  >
+                    <Text style={[styles.primaryText]}>
+                      H. EPSDT FAMILY PLAN
+                    </Text>
+                  </View>
+
+                  {/* ROWS */}
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View style={{ height: "50%" }}></View>
+                  </View>
+                  <View
+                    style={{ height: "20px", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View
+                      style={{ height: "50%", borderLeft: "1px solid red" }}
+                    ></View>
+                  </View>
+                  <View
+                    style={{ height: "20px", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View
+                      style={{ height: "50%", borderLeft: "1px solid red" }}
+                    ></View>
+                  </View>
+                  <View
+                    style={{ height: "20px", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View
+                      style={{ height: "50%", borderLeft: "1px solid red" }}
+                    ></View>
+                  </View>
+                  <View
+                    style={{ height: "20px", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View
+                      style={{ height: "50%", borderLeft: "1px solid red" }}
+                    ></View>
+                  </View>
+                  <View
+                    style={{ height: "20px", borderBottom: "1px solid red" }}
+                  >
+                    <View
+                      style={{ height: "50%", backgroundColor: "pink" }}
+                    ></View>
+                    <View
+                      style={{ height: "50%", borderLeft: "1px solid red" }}
+                    ></View>
+                  </View>
+                </View>
+
+                {/* third 10% */}
+                <View style={{ width: "10%", borderLeft: "1px solid red" }}>
+                  <View
+                    style={{ height: "31px", borderBottom: "1px solid red" }}
+                  >
+                    <Text style={[styles.primaryText]}>G.Days OR UNITS</Text>
+                  </View>
+
+                  {/* rows */}
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        borderBottom: "0.5px dashed red",
+                        height: "50%",
+                        backgroundColor: "pink",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                  <View style={{ height: "20px" }}>
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text
+                        style={[styles.primaryText, styles.alignTextCenter]}
+                      >
+                        NPI
+                      </Text>
+                    </View>
+                  </View>
+                </View>
+                {/* 40% */}
                 <View
-                  style={{ width: "10%", border: "1px solid yellow" }}
-                ></View>
+                  style={{
+                    width: "40%",
+                    borderLeft: "1px solid red",
+                  }}
+                >
+                  <View
+                    style={{
+                      height: "31px",
+                      borderBottom: "1px solid red",
+                    }}
+                  >
+                    <Text style={[styles.primaryText]}>
+                      J. RENDERING PROVIDER ID. #{" "}
+                    </Text>
+                  </View>
+
+                  {/* rows */}
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                  <View
+                    style={{
+                      height: "20px",
+                      borderBottom: "1px solid red",
+                      // borderLeft: "1px solid red",
+                    }}
+                  >
+                    <View
+                      style={{
+                        height: "50%",
+                        backgroundColor: "pink",
+                        borderBottom: "0.5px dashed red",
+                      }}
+                    ></View>
+                    <View style={{ height: "50%" }}>
+                      <Text style={styles.primaryTextBlack}>1480976</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+
+            {/* from point 25 */}
+            <View style={[styles.bodyContainerInner]}>
+              <View style={[styles.bodyWrapper1, styles.flexRow]}>
+                {/* 40 */}
                 <View
-                  style={{ width: "10%", border: "1px solid black" }}
-                ></View>
-                <View style={{ width: "40%", border: "1px solid blue" }}></View>
+                  style={{
+                    width: "40%",
+                    borderRight: "0.5px solid red",
+                  }}
+                >
+                  <View style={[styles.flexRow]}>
+                    <View style={[styles.flexRow, { width: "70%" }]}>
+                      <Text style={styles.primaryText}>25. </Text>
+                      <Text style={styles.primaryText}>
+                        FEDERAL TAX I.D. NUMBER
+                      </Text>
+                    </View>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        styles.spaceAround,
+                        { width: "30%" },
+                      ]}
+                    >
+                      <Text style={[styles.primaryText]}>SSN</Text>
+                      <Text style={[styles.primaryText]}>EIN</Text>
+                    </View>
+                  </View>
+
+                  <View style={[styles.flexRow]}>
+                    <Text style={[styles.primaryTextBlack, { width: "70%" }]}>
+                      842721554
+                    </Text>
+                    <View
+                      style={[
+                        styles.flexRow,
+                        styles.spaceAround,
+                        {
+                          width: "30%",
+                        },
+                      ]}
+                    >
+                      <View style={[styles.checkbox]}>
+                        <Text style={[styles.primaryTextBlack2]}>X</Text>
+                      </View>
+                      <View style={[styles.checkbox]}>
+                        <Text style={[styles.primaryTextBlack2]}>X</Text>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+                {/* 35 */}
+                <View
+                  style={{
+                    width: "35%",
+                    borderRight: "0.5px solid red",
+                  }}
+                >
+                  <View style={[styles.flexRow]}>
+                    <Text style={styles.primaryText}>26. </Text>
+                    <Text style={styles.primaryText}>PATIENTS ACCOUNT N0</Text>
+                  </View>
+                  <View>
+                    <Text style={[styles.primaryTextBlack]}>COPY1810675</Text>
+                  </View>
+                </View>
+                {/* 25 */}
+                <View
+                  style={{
+                    width: "25%",
+                    // border: "1px solid cyan",
+                  }}
+                >
+                  <View style={[styles.flexRow]}>
+                    <Text style={styles.primaryText}>27. </Text>
+                    <Text style={styles.primaryText}>ACCEPT ASSIGNMENT?</Text>
+                  </View>
+                  <View>
+                    <Text style={[styles.alignTextCenter, { fontSize: "4px" }]}>
+                      (For govt. claims, see back?)
+                    </Text>
+                  </View>
+                  <View style={[styles.flexRow, styles.spaceAround]}>
+                    <View style={[styles.checkboxWrapper]}>
+                      <View style={styles.checkbox}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          X
+                        </Text>
+                      </View>
+                      <Text style={styles.primaryText}>YES</Text>
+                    </View>
+                    <View style={[styles.checkboxWrapper]}>
+                      <View style={styles.checkbox}>
+                        <Text
+                          style={[
+                            styles.primaryTextBlack2,
+                            styles.alignTextCenter,
+                          ]}
+                        >
+                          X
+                        </Text>
+                      </View>
+                      <Text style={styles.primaryText}>NO</Text>
+                    </View>
+                  </View>
+                </View>
+              </View>
+              <View style={[styles.bodyWrapper2, styles.flexRow]}>
+                <View style={{ width: "33%", borderRight: "0.5px solid red" }}>
+                  <View style={[styles.flexRow]}>
+                    <Text style={styles.primaryText}>28. </Text>
+                    <Text style={styles.primaryText}>TOTAL CHARGE</Text>
+                  </View>
+                  <View style={[styles.flexRow]}>
+                    <Text style={[styles.primaryText, { width: "40%" }]}>
+                      $
+                    </Text>
+                    <View style={[styles.flexRow, { width: "60%" }]}>
+                      <Text
+                        style={[
+                          styles.primaryTextBlack,
+                          { borderRight: "0.5px dashed red" },
+                        ]}
+                      >
+                        1250
+                      </Text>
+                      <Text style={[styles.primaryTextBlack]}>.00</Text>
+                    </View>
+                  </View>
+                </View>
+                <View></View>
+                <View></View>
               </View>
             </View>
           </View>
