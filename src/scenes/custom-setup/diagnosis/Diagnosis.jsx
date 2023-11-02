@@ -15,7 +15,6 @@ const Diagnosis = ({
   handleInsDiagnosis,
 }) => {
   const [diagnosisData, setDiagnosisData] = useState([]);
-  
 
   const fetchAllDiagnosis = async () => {
     try {
@@ -23,12 +22,16 @@ const Diagnosis = ({
       console.log(response, "response");
       if (response.status === 200) {
         const data = response.data;
-        let usedDiagnose = formik.values?.insClaimInfoDetailDto?.filter((e)=> e.insClaimInfoCodeId === diagnoseTable)
+        let usedDiagnose = formik.values?.insClaimInfoDetailDto?.filter(
+          (e) => e.insClaimInfoCodeId === diagnoseTable
+        );
         for (let i = 0; i < usedDiagnose.length; i++) {
           const element = usedDiagnose[i];
-          let findIndex = data.result.findIndex((e)=> e.diagnosisCodeId === element.insClaimInfoCTId)
-          if (findIndex !== -1 ) {
-            data?.result?.splice(findIndex , 1)
+          let findIndex = data.result.findIndex(
+            (e) => e.diagnosisCodeId === element.insClaimInfoCTId
+          );
+          if (findIndex !== -1) {
+            data?.result?.splice(findIndex, 1);
           }
         }
         setDiagnosisData(data.result);
@@ -75,7 +78,7 @@ const Diagnosis = ({
   ];
 
   useEffect(() => {
-    console.log("diagnoseTable" , diagnoseTable)
+    console.log("diagnoseTable", diagnoseTable);
     fetchAllDiagnosis();
   }, []);
 
@@ -93,10 +96,8 @@ const Diagnosis = ({
 
     handleClose();
   };
-  
-  useEffect(()=>{
-    
-  },[])
+
+  useEffect(() => {}, []);
 
   return (
     <>
@@ -114,9 +115,9 @@ const Diagnosis = ({
           pageSize={5}
           disableSelectionOnClick
           onCellClick={(params) => {
-            formik.values.isProfessional === 1
+            formik.values.claimTypeId === 1
               ? handleDiagnosis(params.row, `icD_${icdIdentifier}`)
-              : handleInsDiagnosis(params.row , diagnoseTable);
+              : handleInsDiagnosis(params.row, diagnoseTable);
           }}
         />
       </Box>

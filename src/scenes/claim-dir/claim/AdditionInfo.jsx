@@ -17,6 +17,7 @@ import CustomSelectBox from "../../../components/CustomSelectBox";
 import { getData } from "../../../config/axiosFunctions";
 import path from "../../../config/apiUrl";
 import { Form } from "formik";
+import CustomSelectBox2 from "../../../components/CustomSelectBox2";
 
 const AdditionInfo = ({ formik }) => {
   const [delayReason, setDelayReason] = useState([]);
@@ -27,7 +28,7 @@ const AdditionInfo = ({ formik }) => {
   const [documentationMethod, setDocumentationMethod] = useState([]);
   const [documentationType, setDocumentationType] = useState([]);
   const [serviceAuthorization, setServiceAuthorization] = useState([]);
-  console.log(formik.values.formType, "vals1234");
+  console.log(insureSignature, "signatureInsured");
   // Define data fetching URLs
   const dataFetchUrls = {
     delayReason: `${path}/ct-delayReason`,
@@ -81,8 +82,8 @@ const AdditionInfo = ({ formik }) => {
                 value={1}
                 control={
                   <Radio
-                    checked={formik.values.formType === "1"}
-                    onChange={() => formik.setFieldValue("formType", "1")}
+                    checked={formik.values.formTypeId === 1}
+                    onChange={() => formik.setFieldValue("formTypeId", 1)}
                   />
                 }
                 label="None"
@@ -91,8 +92,8 @@ const AdditionInfo = ({ formik }) => {
                 value={2}
                 control={
                   <Radio
-                    checked={formik.values.formType === "2"}
-                    onChange={() => formik.setFieldValue("formType", "2")}
+                    checked={formik.values.formTypeId === 2}
+                    onChange={() => formik.setFieldValue("formTypeId", 2)}
                   />
                 }
                 label="ANSI Location (For Electronic Claims)"
@@ -101,8 +102,8 @@ const AdditionInfo = ({ formik }) => {
                 value={3}
                 control={
                   <Radio
-                    checked={formik.values.formType === "3"}
-                    onChange={() => formik.setFieldValue("formType", "3")}
+                    checked={formik.values.formTypeId === 3}
+                    onChange={() => formik.setFieldValue("formTypeId", 3)}
                   />
                 }
                 label="CMS 1500 (02-12) Box Numbers (For Printed Claims)"
@@ -163,11 +164,11 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-11-1 (EM)"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 10a"
                     : ""}
                 </Typography>
@@ -219,11 +220,11 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-11-1 (AA)"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 10b"
                     : ""}
                 </Typography>
@@ -275,11 +276,11 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-11-1 (OA)"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 10c"
                     : ""}
                 </Typography>
@@ -321,11 +322,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-439 "
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 14/15*"
                     : ""}
                 </Typography>
@@ -354,11 +355,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-484"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 14"
                     : ""}
                 </Typography>
@@ -387,11 +388,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-454"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 15"
                     : ""}
                 </Typography>
@@ -420,11 +421,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-304"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 15"
                     : ""}
                 </Typography>
@@ -453,11 +454,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-314"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 16"
                     : null}
                 </Typography>
@@ -486,11 +487,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP-314"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 16"
                     : ""}
                 </Typography>
@@ -537,11 +538,11 @@ const AdditionInfo = ({ formik }) => {
                   textAlign="center"
                   bgcolor="lightgray"
                   height="100%"
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CRC-75"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "N/A"
                     : null}
                 </Typography>
@@ -586,11 +587,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "N/A"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 10d"
                     : null}
                 </Typography>
@@ -617,11 +618,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "38%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2010BA REF-Y4"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -661,11 +662,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "30%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "N/A"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -692,11 +693,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "30%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 NTE~ADD"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -736,11 +737,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "N/A*"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -766,9 +767,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="reasonDelayCode"
-                    value={formik.values.reasonDelayCode}
+                  <CustomSelectBox2
+                    value={formik.values.reasonDelayCodeId}
+                    name="reasonDelayCodeId"
                     dropdownOptions={delayReason?.map((opt) => ({
                       value: opt.delayReasonCodeName,
                       id: opt.delayReasonCodeId,
@@ -776,6 +777,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Detail Reason"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -783,11 +785,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-20"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -829,11 +831,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP~435"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -862,11 +864,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 DTP~096"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -906,11 +908,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "30%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2400 PS1-2"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -936,9 +938,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="specialProgramCode"
-                    value={formik.values.specialProgramCode}
+                  <CustomSelectBox2
+                    name="specialProgramCodeId"
+                    value={formik.values.specialProgramCodeId}
                     dropdownOptions={specialProgram?.map((opt) => ({
                       value: opt.specialProgramName,
                       id: opt.specialProgramId,
@@ -946,6 +948,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Special Program Codes"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -953,11 +956,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "30%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-12"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -990,9 +993,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="patientSignature"
-                    value={formik.values.patientSignature}
+                  <CustomSelectBox2
+                    name="patientSignatureId"
+                    value={formik.values.patientSignatureId}
                     dropdownOptions={signaturePatient?.map((opt) => ({
                       value: opt.patientSignatureName,
                       id: opt.patientSignatureId,
@@ -1000,6 +1003,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Patient's Signature on File"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1007,11 +1011,11 @@ const AdditionInfo = ({ formik }) => {
                   component="p"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-09"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1024,16 +1028,17 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="insuredSignature"
-                    value={formik.values.insuredSignature}
+                  <CustomSelectBox2
+                    value={formik.values.insuredSignatureId}
+                    name="insuredSignatureId"
                     dropdownOptions={insureSignature?.map((opt) => ({
                       value: opt.insuredSignatureName,
-                      id: opt.insuredSignature,
+                      id: opt.insuredSignatureId,
                     }))}
                     label="Insured's Signature"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1041,11 +1046,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-08"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1058,9 +1063,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="providerAcceptance"
-                    value={formik.values.providerAcceptance}
+                  <CustomSelectBox2
+                    name="providerAcceptanceId"
+                    value={formik.values.providerAcceptanceId}
                     dropdownOptions={providerAcceptance?.map((opt) => ({
                       value: opt.providerAcceptance,
                       id: opt.providerAcceptanceId,
@@ -1068,6 +1073,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Provider Accept Assignment"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1075,11 +1081,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 CLM-07"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1113,9 +1119,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="documentationMethod"
-                    value={formik.values.documentationMethod}
+                  <CustomSelectBox2
+                    name="documentationMethodId"
+                    value={formik.values.documentationMethodId}
                     dropdownOptions={documentationMethod?.map((opt) => ({
                       value: opt.documentationMethodName,
                       id: opt.documentationMethodId,
@@ -1123,6 +1129,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Documentation Method"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1130,11 +1137,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 PWK-2"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1147,9 +1154,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="documentationType"
-                    value={formik.values.documentationType}
+                  <CustomSelectBox2
+                    name="documentationTypeId"
+                    value={formik.values.documentationTypeId}
                     dropdownOptions={documentationType?.map((opt) => ({
                       value: opt.documentationTypeName,
                       id: opt.documentationTypeId,
@@ -1157,6 +1164,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Documentation Type"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1164,11 +1172,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 PWK-1"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1208,11 +1216,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2400 ME-3"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1239,11 +1247,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "N/A*"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1269,9 +1277,9 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomSelectBox
-                    name="serviceAuthorization"
-                    value={formik.values.serviceAuthorization}
+                  <CustomSelectBox2
+                    name="serviceAuthorizationId"
+                    value={formik.values.serviceAuthorizationId}
                     dropdownOptions={serviceAuthorization?.map((opt) => ({
                       value: opt.serviceAuthorizationName,
                       id: opt.serviceAuthorizationId,
@@ -1279,6 +1287,7 @@ const AdditionInfo = ({ formik }) => {
                     label="Service Authorization Exception"
                     handleChange={formik.handleChange}
                     handleBlur={formik.handleBlur}
+                    formik={formik}
                   />
                 </FormControl>
                 <Typography
@@ -1286,11 +1295,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 REF~4N"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1317,11 +1326,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 REF~P4"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1348,11 +1357,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 REF~EW"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1380,11 +1389,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 REF~LX"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>
@@ -1410,11 +1419,11 @@ const AdditionInfo = ({ formik }) => {
                   component="span"
                   className="ft_content"
                   width={{ xs: "100%", sm: "30%", md: "38%" }}
-                  display={formik.values.formType === "1" && "none"}
+                  display={formik.values.formTypeId === 1 && "none"}
                 >
-                  {formik.values.formType === "2"
+                  {formik.values.formTypeId === 2
                     ? "2300 REF~1S"
-                    : formik.values.formType === "3"
+                    : formik.values.formTypeId === 3
                     ? "BOX 11b"
                     : null}
                 </Typography>

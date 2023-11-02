@@ -13,6 +13,7 @@ const CustomSelectBox2 = ({
   label,
   dropdownOptions,
   name,
+  formik,
 }) => {
   return (
     <div>
@@ -20,29 +21,28 @@ const CustomSelectBox2 = ({
         <label style={{ color: "#216FED" }} htmlFor="">
           {label}
         </label>
-        {/* <InputLabel shrink={true}> {label}</InputLabel> */}
         <Select
           className="customSelectBox"
           value={value}
           name={name}
-          type="text"
+          type="number"
           // label={label}
-          onChange={handleChange}
+          onChange={(e) => formik.setFieldValue(name, Number(e.target.value))}
           onBlur={handleBlur}
           native
           id="dropdowns"
           defaultValue=""
         >
-          <option value="" style={{ color: "lightgray !important" }}>
-            Select
-          </option>
-          {dropdownOptions.map((opt) => (
-            <>
-              <option key={opt.id} value={opt.id}>
-                {opt.value}
-              </option>
-            </>
-          ))}
+          <option style={{ color: "lightgray !important" }}>Select</option>
+          {dropdownOptions.map((opt) => {
+            return (
+              <>
+                <option itemType="number" key={opt.id} value={opt.id}>
+                  {opt.value}
+                </option>
+              </>
+            );
+          })}
         </Select>
       </FormControl>
     </div>

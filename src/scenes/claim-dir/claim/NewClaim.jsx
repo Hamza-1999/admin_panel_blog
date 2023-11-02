@@ -77,6 +77,8 @@ const NewClaim = () => {
     },
   });
 
+  // console.log(formik.values, "frequencyType");
+
   // handle cancel
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
@@ -86,7 +88,7 @@ const NewClaim = () => {
     }
   };
 
-  console.log(formik.values.isProfessional, "check professional values");
+  // console.log(formik.values.isProfessional, "check professional values");
   return (
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
@@ -103,8 +105,8 @@ const NewClaim = () => {
             value={1}
             control={
               <Radio
-                checked={formik.values.isProfessional === 1}
-                onChange={() => formik.setFieldValue("isProfessional", 1)}
+                checked={formik.values.claimTypeId === 1}
+                onChange={() => formik.setFieldValue("claimTypeId", 1)}
               />
             }
             label="Professional"
@@ -113,8 +115,8 @@ const NewClaim = () => {
             value={2}
             control={
               <Radio
-                checked={formik.values.isProfessional === 2}
-                onChange={() => formik.setFieldValue("isProfessional", 2)}
+                checked={formik.values.claimTypeId === 2}
+                onChange={() => formik.setFieldValue("claimTypeId", 2)}
               />
             }
             label="Institutional"
@@ -141,7 +143,14 @@ const NewClaim = () => {
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
           <Tab label="Additional Info" value={2} />
-          <Tab label="Ambulance Info" value={3} />
+          <Tab
+            label={
+              formik.values.claimTypeId === 1
+                ? "Ambulance Info"
+                : "Information Codes"
+            }
+            value={3}
+          />
         </Tabs>
 
         {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
@@ -178,8 +187,7 @@ const NewClaim = () => {
             padding: "15px",
           }}
         >
-          {tabValue === 0
-           && (
+          {tabValue === 0 && (
             <ClaimInfo
               formik={formik}
               setClaimIds={setClaimIds}
@@ -194,7 +202,7 @@ const NewClaim = () => {
             />
           )}
           {tabValue === 2 &&
-            (formik.values.isProfessional === 1 ? (
+            (formik.values.claimTypeId === 1 ? (
               <AdditionInfo
                 formik={formik}
                 // setClaimChargesDto={setClaimChargesDto}
@@ -204,8 +212,8 @@ const NewClaim = () => {
               <InsAdditionalinfo formik={formik} />
             ))}
           {tabValue === 3 &&
-            (formik.values.isProfessional === 1 ? (
-              <AdditionInfo
+            (formik.values.claimTypeId === 1 ? (
+              <AmbulanceInfo
                 formik={formik}
                 // setClaimChargesDto={setClaimChargesDto}
                 // claimChargesDto={claimChargesDto}
