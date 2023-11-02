@@ -24,6 +24,7 @@ import CustomSelectBox from "../../components/CustomSelectBox";
 import { Expand, ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
 import CustomSearchField from "../../components/CustomSearchField";
+import CustomButton from "../../components/CustomButton";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -291,6 +292,7 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
+          
         </Accordion>
 
         {/* contact details */}
@@ -362,6 +364,8 @@ const PatientInfo = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
+        
+       
 
         {/* Birth Details */}
         <Accordion>
@@ -378,7 +382,7 @@ const PatientInfo = ({ formik }) => {
               Birth Details:
             </Typography>
           </AccordionSummary>
-
+           
           <AccordionDetails>
             <Box
               display="grid"
@@ -421,6 +425,7 @@ const PatientInfo = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
+        
 
         {/* addres details */}
         <Accordion>
@@ -437,7 +442,6 @@ const PatientInfo = ({ formik }) => {
               Address Details:
             </Typography>
           </AccordionSummary>
-
           <AccordionDetails>
             <Box
               display="grid"
@@ -521,6 +525,7 @@ const PatientInfo = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
+       
 
         {/* emergency contact */}
         <Accordion>

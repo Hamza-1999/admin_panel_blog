@@ -10,16 +10,18 @@ const CustomButton = ({
   color,
 }) => {
   const buttonStyle = {
-    color: "fff",
-    width: { width },
+    color: "#FFF",
+    width:'100px',
     margin: margin,
-    backgroundColor: "#6870fa",
+    backgroundColor: "#2F78EE",
     fontSize: ".8rem",
     fontWeight: "500",
     letterSpacing: "1.24px",
     wordSpacing: "3px",
+    margin:"10px",
+    textTransform:"inherit",
     "&:hover": {
-      backgroundColor: "#6770fa",
+      backgroundColor: "#2F78EE",
     },
   };
   return (

@@ -91,11 +91,13 @@ const NewLogin = () => {
         color: "#FFF",
         position:'absolute',
         top:"400px",
-        left:{lg:"110px",sm:"90px"},
+        // left:{lg:"110px",sm:"90px"},
+        left:{lg:"110px",xs:"0"},
         backgroundColor: "#0464FF",
         borderRadius: "10px",
         border: "1px solid #0464FF",
-        width:{lg:"45%",md:"45%",sm:"30%"}
+        // width:{lg:"48%",md:"45%",sm:"30%"}
+        width:"48%",
       }} variant="outlined" size="medium"  onClick={()=>navigate("/dashboard")}>
         Get started
       </Button>

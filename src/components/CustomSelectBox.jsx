@@ -3,9 +3,8 @@ import InputLabel from "@mui/material/InputLabel";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import CustomModal from "./CustomModal";
-import { ArrowDropDownIcon } from '@mui/icons-material/ArrowDropDown';
 import './Custom-styling/CustomSelectBox.css';
-
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 
 
 const CustomSelectBox = ({
@@ -32,6 +31,11 @@ const CustomSelectBox = ({
         native
         id="dropdowns"
         defaultValue=""
+        // InputProps={{
+        //   endAdornment: (
+        //     <ArrowDropDownIcon style={{ color: "#216FED" }} />
+        //   ),
+        // }}
       >
         <option value="0" style={{ color: "lightgray !important" }}>
           Select
@@ -41,6 +45,9 @@ const CustomSelectBox = ({
             <option key={opt.id} value={opt.value}>
               {opt.value}
             </option>
+
+       
+            
             
           </>
         ))}
@@ -49,5 +56,7 @@ const CustomSelectBox = ({
     </div>
   );
 };
+
+
 
 export default CustomSelectBox;

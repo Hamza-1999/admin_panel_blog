@@ -13,6 +13,7 @@ import PayerInfo from "./PayerInfo";
 import { patientInitValues } from "../../utils/formikInitValues";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import CustomButton from "../../components/CustomButton";
 // import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
 
 const CreatePatient = () => {
@@ -97,25 +98,28 @@ const CreatePatient = () => {
           // alignItems="center"
           justifyContent="space-between"
         >
-          <Tabs
-            value={tabValue}
-            onChange={handleTabChange}
-            // sx={{ marginBottom: "10px" }}
-            sx={{
-              order: { xs: 2, sm: 2, md: 1 },
-              marginBottom: "10px",
-            }}
-          >
-            <Tab label="Patient Info" value={0} />
-            <Tab label="Insurance Info" value={1} />
-            <Tab label="Payer Info" value={2} />
-          </Tabs>
+          
+
+<Tabs
+  value={tabValue}
+  onChange={handleTabChange}
+
+  sx={{
+    order: { xs: 2, sm: 2, md: 1 },
+    marginBottom: "10px",
+    borderRadius: "10px 10px 0 0"
+    
+  }} 
+>
+  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Patient Info" value={0} />
+  <Tab style={{fontSize:"16px"}}  className="tabsdesigning"  label="Insurance Info" value={1} />
+  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Payer Info" value={2} />
+</Tabs>
 
           <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
-            <Button
+            <CustomButton
               type="reset"
               color="error"
-              variant="outlined"
               form="claimForm"
               sx={{
                 marginRight: "15px",
@@ -123,8 +127,8 @@ const CreatePatient = () => {
               onClick={handleCancel}
             >
               Cancel
-            </Button>
-            <Button
+            </CustomButton>
+            <CustomButton
               type="submit"
               color="secondary"
               variant="contained"
@@ -136,7 +140,7 @@ const CreatePatient = () => {
               // onSubmit={formik.handleSubmit}
             >
               {loading ? "Saving..." : "Save"}
-            </Button>
+            </CustomButton>
           </Box>
         </Stack>
         <form
