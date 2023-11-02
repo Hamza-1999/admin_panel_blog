@@ -141,7 +141,7 @@ export const claimInitVal = {
   icd_Description_L: "",
 
   // additioal info init vals
-  formType: 1,
+  formType: "1",
   isEmployment: false,
   isAutoAccident: false,
   isOtherAccident: false,
@@ -174,6 +174,64 @@ export const claimInitVal = {
   mammographyCertification: "",
   investigationalDeviceExemption: "",
   ambulatoryPatientGroup: "",
+
+  // ambulance info
+  ambulanceClaimType: "false",
+  transportReasonType: "",
+  transportMiles: 0,
+  ambPatientWeight: 0,
+  roundTripReason: "",
+  stretcherReason: "",
+  pickupAddress: "",
+  pickupCity: "",
+  pickupState: "",
+  pickupZipCode: "",
+  dropOffName: "",
+  dropOffAddress: "",
+  dropOffCity: "",
+  dropOffState: "",
+  dropOffZipCode: "",
+  certificationFieldType: "",
+
+  // institutional
+  isProfessional: 1,
+  statementCoversFromDate: null,
+  statementCoversToDate: null,
+  admissionDate: null,
+  admissionHourId: null,
+  admissionTypeId: null,
+  admissionSourceId: null,
+  dischargeHourId: null,
+  patientStatusId: null,
+  delayReasonCodeId: null,
+  pps: "",
+  patientDueAmount: 0,
+  remarks: "",
+  releaseOfInfoId: null,
+  assignmentOfBenefitId: null,
+  // providerAcceptAssignment: null,
+  epsdT_1: 0,
+  epsdT_2: 0,
+  epsdT_3: 0,
+  principalDiagnosisId: null,
+  poa: null,
+  admittingDiagnosisId: null,
+  injuryCauseId: null,
+  patientVisitReasonId: null,
+  otherDiagnosisId: null,
+  principalProcedureId: null,
+  principalProcedureDate: null,
+  occurrenceSpanId: null,
+  occurrenceSpanFromDate: null,
+  occurrenceSpanToDate: null,
+  occurrenceId: null,
+  occurrenceDate: null,
+  valueId: null,
+  valueAmount: 0,
+  conditionId: null,
+
+  // intial value of INfoCOde DTO
+  insClaimInfoDetailDto : []
 };
 
 export const paymentInitVal3 = {

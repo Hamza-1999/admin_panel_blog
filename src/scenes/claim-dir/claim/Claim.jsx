@@ -16,7 +16,7 @@ import ClaimTable from "./ClaimTable";
 
 const Claim = () => {
   const navigate = useNavigate();
-  // const { loading } = useSelector((state) => state.claim);
+
   return (
     <Box margin="20px">
       <Header title="Claim" />

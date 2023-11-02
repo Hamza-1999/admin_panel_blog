@@ -1,4 +1,15 @@
-import { Box, Button, Paper, Stack, Tab, Tabs } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControlLabel,
+  Paper,
+  Radio,
+  RadioGroup,
+  Stack,
+  Tab,
+  Tabs,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import Header from "../../../components/Header";
 import { useState } from "react";
@@ -10,6 +21,11 @@ import { useDispatch } from "react-redux";
 import { newClaimAction } from "../../../features/actions/claimAction";
 import { useNavigate } from "react-router-dom";
 import AdditionInfo from "./AdditionInfo";
+import "./claim-styling/claim.css";
+import AmbulanceInfo from "./AmbulanceInfo";
+import { FormControl, FormLabel } from "react-bootstrap";
+import InsAdditionalinfo from "./InsAdditionalinfo";
+import InformationCodes from "./InformationCodes";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -51,13 +67,13 @@ const NewClaim = () => {
         facilityId: facilityId,
         claimChargesUpdatedDto: claimChargesDto,
       };
-      console.log(postValues, "claim postValues");
+      console.log(postValues, "claimPostValues");
       try {
         dispatch(newClaimAction(postValues));
       } catch (error) {
         throw error;
       }
-      action.resetForm();
+      // action.resetForm();
     },
   });
 
@@ -70,10 +86,42 @@ const NewClaim = () => {
     }
   };
 
-  console.log(formik.values, "form values claims");
+  console.log(formik.values.isProfessional, "check professional values");
   return (
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
+
+      {/* select claim type */}
+      <Stack>
+        <FormLabel id="claimType">Select Claim Type</FormLabel>
+        <RadioGroup
+          row
+          aria-labelledby="claimType"
+          name="row-radio-buttons-group"
+        >
+          <FormControlLabel
+            value={1}
+            control={
+              <Radio
+                checked={formik.values.isProfessional === 1}
+                onChange={() => formik.setFieldValue("isProfessional", 1)}
+              />
+            }
+            label="Professional"
+          />
+          <FormControlLabel
+            value={2}
+            control={
+              <Radio
+                checked={formik.values.isProfessional === 2}
+                onChange={() => formik.setFieldValue("isProfessional", 2)}
+              />
+            }
+            label="Institutional"
+          />
+        </RadioGroup>
+      </Stack>
+
       <Stack
         flexDirection={{ xs: "column", sm: "column", md: "row" }}
         alignItems={{ xs: "flex-start", sm: "flex-start", md: "center" }}
@@ -86,16 +134,17 @@ const NewClaim = () => {
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          sx={{
-            order: { xs: 2, sm: 2, md: 1 },
-          }}
+          // sx={{
+          //   order: { xs: 2, sm: 2, md: 1 },
+          // }}
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
           <Tab label="Additional Info" value={2} />
+          <Tab label="Ambulance Info" value={3} />
         </Tabs>
 
-        <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
+        {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
           <Button
             type="reset"
             color="error"
@@ -120,7 +169,7 @@ const NewClaim = () => {
           >
             Save
           </Button>
-        </Box>
+        </Box> */}
       </Stack>
 
       <form id="claimForm" onSubmit={formik.handleSubmit}>
@@ -129,7 +178,8 @@ const NewClaim = () => {
             padding: "15px",
           }}
         >
-          {tabValue === 0 && (
+          {tabValue === 0
+           && (
             <ClaimInfo
               formik={formik}
               setClaimIds={setClaimIds}
@@ -143,15 +193,61 @@ const NewClaim = () => {
               claimChargesDto={claimChargesDto}
             />
           )}
-          {tabValue === 2 && (
-            <AdditionInfo
-              formik={formik}
-              // setClaimChargesDto={setClaimChargesDto}
-              // claimChargesDto={claimChargesDto}
-            />
-          )}
+          {tabValue === 2 &&
+            (formik.values.isProfessional === 1 ? (
+              <AdditionInfo
+                formik={formik}
+                // setClaimChargesDto={setClaimChargesDto}
+                // claimChargesDto={claimChargesDto}
+              />
+            ) : (
+              <InsAdditionalinfo formik={formik} />
+            ))}
+          {tabValue === 3 &&
+            (formik.values.isProfessional === 1 ? (
+              <AdditionInfo
+                formik={formik}
+                // setClaimChargesDto={setClaimChargesDto}
+                // claimChargesDto={claimChargesDto}
+              />
+            ) : (
+              <InformationCodes formik={formik} />
+            ))}
         </Box>
       </form>
+
+      <Box
+        sx={{
+          // order: { xs: 1, sm: 1, md: 2 }
+          margin: "15px",
+        }}
+      >
+        <Button
+          type="reset"
+          color="error"
+          variant="outlined"
+          form="claimForm"
+          sx={{
+            marginRight: "15px",
+          }}
+          // onSubmit={formik.handleSubmit}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          form="claimForm"
+          // sx={{
+          //   marginRight: "15px",
+          // }}
+          // onSubmit={formik.handleSubmit}
+          sx={{ bgcolor: "#6870fa", color: "#fff" }}
+        >
+          Save
+        </Button>
+      </Box>
     </Box>
   );
 };

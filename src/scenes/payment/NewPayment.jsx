@@ -1,6 +1,10 @@
+import React, { useEffect } from "react";
+import CustomModal from "../../components/CustomModal";
+import { useState } from "react";
+import ClaimTable from "../claim-dir/claim/ClaimTable";
+import PayerList from "../patient/PayerList";
 import {
   Box,
-  Button,
   CircularProgress,
   FormControlLabel,
   Radio,
@@ -8,113 +12,100 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect } from "react";
-import Header from "../../components/Header";
-import CustomSearchField from "../../components/CustomSearchField";
-import { useFormik } from "formik";
-import {
-  paymentInitValue,
-  paymentInitValue2,
-} from "../../utils/formikInitValues";
-import { useState } from "react";
-import CustomModal from "../../components/CustomModal";
-import PayerList from "../patient/PayerList";
 import CustomField from "../../components/CustomField";
+import CustomSearchField from "../../components/CustomSearchField";
+import CustomButton from "../../components/CustomButton";
+import { useFormik } from "formik";
+import { paymentInitVal3 } from "../../utils/formikInitValues";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedClaim  , setPaymentDataForApi } from "../../features/slice/PaymentSlice";
+import CustomSelectBox from "../../components/CustomSelectBox";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import CustomSelectBox from "../../components/CustomSelectBox";
-import ClaimTable from "../claim-dir/claim/ClaimTable";
-import CustomButton from "../../components/CustomButton";
-import { useNavigate } from "react-router-dom";
-import PostPayment from "./PostPayment";
-import { useDispatch } from "react-redux";
+import PostPayment from "../payment/PostPayment";
 import { createPaymentAction } from "../../features/actions/PaymentAction";
-import { toast } from "react-toastify";
+import axios from "axios";
 
 const NewPayment = () => {
+  const dispatch = useDispatch();
   const [openClaimModal, setOpenClaimModal] = useState(false);
   const [openPayerModal, setOpenPayerModal] = useState(false);
-  const dispatch = useDispatch();
-  // const [postPaymentData, setPostPaymentData] = useState({});
+
   const [showPostPay, setShowPostPay] = useState(false);
   const [applyEob, setApplyEob] = useState(false);
-  // console.log(postPaymentData, "allpostPayData");
+  const [paymentDetailDto, setPaymentDetailDto] = useState(null);
+
+  // get  paymentData For api value in redux
+  let {paymentDataForApi} = useSelector((state)=> state.payment)
+  console.log(paymentDetailDto, "all paymentsDto");
+  //   formik logic here
   const formik = useFormik({
-    // initialValues: paymentInitValue2,
-    onSubmit: (values, action) => {
-      console.log(values, "payment");
-      // dispatch(createPaymentAction(values));
-      // toast.success("Payment Created Successfully!");
-      // action.resetForm();
-      setShowPostPay(false);
-      setApplyEob(false);
+    initialValues: paymentInitVal3,
+    onSubmit: (values) => {
+      const postValues = {
+        ...values,
+        paymentDetailDto: paymentDetailDto,
+      };
+      dispatch(createPaymentAction(paymentDataForApi));
     },
   });
 
-  const creditCardOpt = [
-    {
-      id: 1,
-      cardType: "Visa",
-    },
-    {
-      id: 2,
-      cardType: "Master",
-    },
-    {
-      id: 3,
-      cardType: "American Express",
-    },
-    {
-      id: 4,
-      cardType: "Discover",
-    },
-    {
-      id: 5,
-      cardType: "Other",
-    },
-  ];
-
-  const onCellClick = (val) => {
-    handlePaymentBy(val);
-  };
-
-  const handlePaymentBy = (val) => {
-    console.log(val, "tableVal");
+  //   handling payer type
+  const handlePaymentBy = (selectedRow) => {
     if (formik.values.isClaim) {
+      console.log("selected Rows", selectedRow);
+
       setOpenClaimModal(true);
-      if (val.primaryPayerInsuranceName && val.payerSequenceNo) {
+      if (selectedRow.primaryPayerInsuranceName) {
+        console.log(selectedRow, "selectedRow5667");
+        dispatch(setPaymentDataForApi({
+          ...paymentDataForApi,
+          paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.primaryPayerInsuranceName,
+          paymentFrom: selectedRow.payerId,
+          payerId: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
+          paymentClaimDto: [{
+            claimId: selectedRow.claimChargesDto[0].claimInfoId,
+            claimNumber: selectedRow.claimNumber,
+            claimChargesDto: selectedRow.claimChargesDto,
+            paymentDetailDto: []
+          }]
+        }))
         formik.setValues((prevValues) => ({
           ...prevValues,
-          paymentBy: `${val.primaryPayerInsuranceName} (${val.payerSequenceNo})`,
-          paymentFrom: val.payerId,
-          paymentFromName: val.primaryPayerInsuranceName,
-          payerId: val.payerId,
-          providerId: val.providerId,
-          patientId: val.patientId,
-          patientFirstName: val.patientFirstName,
-          patientLastName: val.patientLastName,
-          patientAccountNo: val.patientAccountNo,
-          claimNumber: val.claimNumber,
-          dateOfService: val.dateOfService,
-          claimInfoId: val.id,
-          payerSequenceNo: val.payerSequenceNo,
-          billed: val.totalBilled,
-          balance: val.totalBilled,
-          claimChargesDto: val.claimChargesDto,
+          paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.primaryPayerInsuranceName,
+          paymentFrom: selectedRow.payerId,
+          payerId: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
         }));
+        dispatch(addSelectedClaim([selectedRow]));
         setOpenClaimModal(false);
       }
     } else {
       setOpenPayerModal(true);
-      if (val.payerName || val.payerSequenceNo) {
+      if (selectedRow.payerName) {
         formik.setValues((prevValues) => ({
           ...prevValues,
-          paymentBy: `${val.payerName} (${val.payerSequenceNo})`,
-          paymentFrom: val.payerId,
-          paymentFromName: val.payerName,
-          payerId: val.payerId,
-          payerSequenceNo: val.payerSequenceNo,
+          paymentBy: `${selectedRow.payerName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.payerName,
+          paymentFrom: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
         }));
+        dispatch(setPaymentDataForApi({
+          ...paymentDataForApi,
+          paymentBy: `${selectedRow.payerName} (${selectedRow.payerSequenceNo})`,
+          paymentFromName: selectedRow.payerName,
+          paymentFrom: selectedRow.payerId,
+          payerSequenceNo: selectedRow.payerSequenceNo,
+          paymentClaimDto: [{
+            claimId: selectedRow.claimChargesDto[0].claimInfoId,
+            claimNumber: selectedRow.claimNumber,
+            claimChargesDto: selectedRow.claimChargesDto,
+            paymentDetailDto: []
+          }]
+        }))
         setOpenPayerModal(false);
       }
     }
@@ -141,7 +132,7 @@ const NewPayment = () => {
               onBlur={() => formik.setFieldTouched("checkDate", true)}
               renderInput={(params) => <TextField {...params} />}
               inputFormat="MM/DD/YYYY"
-              // clearable
+            // clearable
             />
           </LocalizationProvider>
         </>
@@ -178,6 +169,29 @@ const NewPayment = () => {
     }
   };
 
+  const creditCardOpt = [
+    {
+      id: 1,
+      cardType: "Visa",
+    },
+    {
+      id: 2,
+      cardType: "Master",
+    },
+    {
+      id: 3,
+      cardType: "American Express",
+    },
+    {
+      id: 4,
+      cardType: "Discover",
+    },
+    {
+      id: 5,
+      cardType: "Other",
+    },
+  ];
+
   // apply eob handle
   const handleApplyEOB = () => {
     if (
@@ -187,6 +201,8 @@ const NewPayment = () => {
     ) {
       alert("Fill up the required fields");
     } else {
+      console.log("paymentDataForApi" , paymentDataForApi);
+      console.log("formik.values.paymentBy", formik.values.paymentBy)
       const loadingBtn = setTimeout(() => {
         setShowPostPay(true);
       }, 1500);
@@ -194,26 +210,9 @@ const NewPayment = () => {
     }
   };
 
-  // reload useEffect
-  useEffect(() => {
-    const handleBeforeUnload = (e) => {
-      e.preventDefault();
-      e.returnValue = "";
-      const confirmationMessage = "Are you sure you want to reload this page?";
-      e.returnValue = confirmationMessage;
-
-      const userResponse = window.confirm(confirmationMessage);
-      if (userResponse) {
-        window.location.reload();
-      }
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, []);
+  useEffect(()=>{
+   dispatch(setPaymentDataForApi(paymentInitVal3))
+  },[])
 
   return (
     <>
@@ -223,28 +222,29 @@ const NewPayment = () => {
       >
         <ClaimTable
           handleClose={() => setOpenClaimModal(false)}
-          onCellClick={onCellClick}
+          onCellClick={handlePaymentBy}
           isModal={true}
         />
       </CustomModal>
+      {/* payer modal */}
       <CustomModal
         open={openPayerModal}
         handleClose={() => setOpenPayerModal(false)}
       >
         <PayerList
           handleClose={() => setOpenPayerModal(false)}
-          onCellClick={(val) => handlePaymentBy(val)}
           modalFor="payment"
           handlePaymentBy={handlePaymentBy}
         />
       </CustomModal>
 
+      {/* first window data */}
       <Box margin={"20px"}>
         {showPostPay ? (
           <PostPayment
-            setShowPostPay={setShowPostPay}
-            setApplyEob={setApplyEob}
             formik={formik}
+            
+            setPaymentDetailDto={setPaymentDetailDto}
           />
         ) : (
           <div>
@@ -254,7 +254,7 @@ const NewPayment = () => {
                 margin="0 0 15px"
                 handleClick={handleApplyEOB}
               >
-                {applyEob ? <CircularProgress /> : "Apply as EOB"}
+                {applyEob ? <CircularProgress /> : "Apply As EOB"}
               </CustomButton>
             </Box>
             <Stack
@@ -280,9 +280,9 @@ const NewPayment = () => {
                 <CustomSearchField
                   type="text"
                   label="Payment By"
+                  handleModalOpen={handlePaymentBy}
                   name="paymentBy"
                   fieldVal={formik.values.paymentBy}
-                  handleModalOpen={handlePaymentBy}
                   handleBlur={formik.handleBlur}
                   handleChange={formik.handleChange}
                 />
@@ -408,3 +408,4 @@ const NewPayment = () => {
 };
 
 export default NewPayment;
+

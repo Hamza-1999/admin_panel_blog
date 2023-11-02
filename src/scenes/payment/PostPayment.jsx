@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../../components/Header";
 import CustomButton from "../../components/CustomButton";
 import PostPayGrid from "./PostPayGrid";
@@ -8,6 +8,7 @@ import path from "../../config/apiUrl";
 import axios from "axios";
 import CustomModal from "../../components/CustomModal";
 import MultipleClaims from "./MultipleClaims";
+import { useSelector } from "react-redux";
 
 const PostPayment = ({
   // postPaymentData,
@@ -21,10 +22,11 @@ const PostPayment = ({
   console.log(detailInfo, "detailInfoRows");
   const [multipleClaimData, setMultipleClaimData] = useState([]);
   const [openMultiClaimMod, setOpenMultiClaimMod] = useState(false);
+  const [appliedValue , setAppliedValue] = useState(0)
 
   // const [isLoading, setIsLoading] = useState();
   // const [selectedRowData, setSelectedRowData] = useState([]);
-
+  let {paymentDataForApi } = useSelector((state)=> state.payment)
   const handleCancel = () => {
     const conform = window.confirm("Are you sure you want to cancel?");
     if (conform) {
@@ -54,6 +56,19 @@ const PostPayment = ({
 
     setOpenMultiClaimMod(true);
   };
+const sumAppliedValue = ()=>{
+  let total = 0
+  for (let i = 0; i < paymentDataForApi.paymentClaimDto.length; i++) {
+    const element = paymentDataForApi.paymentClaimDto[i];
+       let totalofSingleClaim = element.paymentDetailDto.reduce((sum , current)=> sum + current.allowed
+       , 0)
+       total += totalofSingleClaim
+  }
+  setAppliedValue(total)
+}
+  useEffect(()=>{
+    sumAppliedValue()
+  },[paymentDataForApi])
   return (
     <Box margin="20px">
       <Header title="New Payment" subtitle="" />
@@ -64,15 +79,15 @@ const PostPayment = ({
         handleClose={() => setOpenMultiClaimMod(false)}
       >
         <MultipleClaims
-          // setSelectedRowData={setSelectedRowData}
+         
           multipleClaimData={multipleClaimData}
           handleClose={() => setOpenMultiClaimMod(false)}
         />
       </CustomModal>
-
       {showDetail ? (
         <Box sx={{ width: "100%" }}>
           <PostPayDetail
+           
             formik={formik}
             detailInfo={detailInfo}
             setShowDetail={setShowDetail}
@@ -122,11 +137,11 @@ const PostPayment = ({
                 <strong>Amount:</strong> $ {formik.values.paymentAmount}
               </Typography>
               <Typography variant="h5" component="span">
-                <strong>Applied:</strong> $ {formik.values.applied}
+                <strong>Applied:</strong> $ {appliedValue}
               </Typography>
               <Typography variant="h5" component="span">
                 <strong>Unapplied:</strong> ${" "}
-                {formik.values.paymentAmount - formik.values.applied}
+                {formik.values.paymentAmount - appliedValue}
               </Typography>
             </Stack>
 
@@ -150,6 +165,7 @@ const PostPayment = ({
             setShowDetail={setShowDetail}
             setDetailInfo={setDetailInfo}
           />
+          {/* <div>Work</div> */}
         </div>
       )}
     </Box>

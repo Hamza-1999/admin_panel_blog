@@ -3,8 +3,8 @@ import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 import CustomButton from "../../components/CustomButton";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { addSelectedClaim } from "../../features/slice/PaymentSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addSelectedClaim  , setPaymentDataForApi} from "../../features/slice/PaymentSlice";
 
 const MultipleClaims = ({
   setSelectedRowData,
@@ -16,10 +16,13 @@ const MultipleClaims = ({
   // dispatching
   const dispatch = useDispatch();
   console.log(selectedRows, "allselectedrows56");
+  // get payment Data for api from redux
+  let {paymentDataForApi} = useSelector((state)=> state.payment)
   // console.log(selectedRows, "all selected rows");
   // console.log(multipleClaimData, "allClaims");
   const rows = multipleClaimData.map((el, index) => ({
     id: index,
+    claimId: el.claimId,
     claimNumber: el.claimNumber || "N/A",
     patientAccountNo: el.patientAccountNo || "N/A",
     patientFirstName: el.patientFirstName || "N/A",
@@ -109,15 +112,30 @@ const MultipleClaims = ({
 
   // select button logic
   const handleSelectClick = () => {
-    const selectedModelRow = selectedRows.map((rowId) =>
+    let intialData = paymentDataForApi;
+    const selectedModelRow = selectedRows.map((rowId) => 
       rows.find((el) => el.id === rowId)
     );
+
+    
+
     // Checking if the initially selected row is in the selected rows
     const initialRow = rows.find((el) => el.id === selectedRows[0]);
     if (!selectedModelRow.includes(initialRow)) {
       selectedModelRow.push(initialRow);
     }
-
+    let selectedRowForData = selectedModelRow.map((val) => ({
+      claimId: val.claimId,
+      claimNumber: val.claimNumber,
+      claimChargesDto: val.claimChargesDto,
+      paymentDetailDto : []
+    }))
+    let updatedInputData = {
+      ...intialData,
+      paymentClaimDto: selectedRowForData
+    }
+    // intialData.paymentClaimDto = selectedRowForData;
+    dispatch(setPaymentDataForApi(updatedInputData))
     dispatch(addSelectedClaim([...selectedModelRow]));
     handleClose();
   };

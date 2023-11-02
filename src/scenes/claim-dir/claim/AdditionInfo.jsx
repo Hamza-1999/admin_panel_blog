@@ -16,6 +16,7 @@ import CustomField from "../../../components/CustomField";
 import CustomSelectBox from "../../../components/CustomSelectBox";
 import { getData } from "../../../config/axiosFunctions";
 import path from "../../../config/apiUrl";
+import { Form } from "formik";
 
 const AdditionInfo = ({ formik }) => {
   const [delayReason, setDelayReason] = useState([]);
@@ -62,6 +63,7 @@ const AdditionInfo = ({ formik }) => {
       setServiceAuthorization
     );
   }, []);
+
   return (
     <>
       <Box margin="20px">
@@ -79,8 +81,8 @@ const AdditionInfo = ({ formik }) => {
                 value={1}
                 control={
                   <Radio
-                    checked={formik.values.formType === 1}
-                    onChange={() => formik.setFieldValue("formType", 1)}
+                    checked={formik.values.formType === "1"}
+                    onChange={() => formik.setFieldValue("formType", "1")}
                   />
                 }
                 label="None"
@@ -89,8 +91,8 @@ const AdditionInfo = ({ formik }) => {
                 value={2}
                 control={
                   <Radio
-                    checked={formik.values.formType === 2}
-                    onChange={() => formik.setFieldValue("formType", 2)}
+                    checked={formik.values.formType === "2"}
+                    onChange={() => formik.setFieldValue("formType", "2")}
                   />
                 }
                 label="ANSI Location (For Electronic Claims)"
@@ -99,8 +101,8 @@ const AdditionInfo = ({ formik }) => {
                 value={3}
                 control={
                   <Radio
-                    checked={formik.values.formType === 3}
-                    onChange={() => formik.setFieldValue("formType", 3)}
+                    checked={formik.values.formType === "3"}
+                    onChange={() => formik.setFieldValue("formType", "3")}
                   />
                 }
                 label="CMS 1500 (02-12) Box Numbers (For Printed Claims)"
@@ -126,7 +128,6 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -155,9 +156,24 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (EM)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10a"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
                 sx={{ width: "100px" }}
@@ -167,7 +183,7 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
+                  // width: "150px",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -196,9 +212,24 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (AA)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10b"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
-            <Stack direction="row" alignItems="center">
+            <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
                 sx={{ width: "100px" }}
@@ -208,7 +239,7 @@ const AdditionInfo = ({ formik }) => {
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
-                  width: "150px",
+                  // width: "150px",
                 }}
                 row
                 name="row-radio-buttons-group"
@@ -237,6 +268,21 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-11-1 (OA)"
+                    : formik.values.formType === "3"
+                    ? "BOX 10c"
+                    : ""}
+                </Typography>
               </RadioGroup>
             </Stack>
 
@@ -247,175 +293,205 @@ const AdditionInfo = ({ formik }) => {
                 marginTop: "30px",
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(2, minmax(0, 1fr))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  sm: "repeat(1, minmax(0, 1fr))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Accident Illness Date"
-                  dateValue={formik.values.accidentDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("accidentDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("accidentDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Accident Illness Date"
+                    dateValue={formik.values.accidentDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("accidentDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("accidentDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-439 "
+                    : formik.values.formType === "3"
+                    ? "BOX 14/15*"
                     : ""}
                 </Typography>
               </Stack>
 
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Last Menstrual Period"
-                  dateValue={formik.values.lastMenstrualDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("lastMenstrualDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("lastMenstrualDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Last Menstrual Period"
+                    dateValue={formik.values.lastMenstrualDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("lastMenstrualDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("lastMenstrualDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-484"
+                    : formik.values.formType === "3"
+                    ? "BOX 14"
                     : ""}
                 </Typography>
               </Stack>
 
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Initial Treatment Date"
-                  dateValue={formik.values.initialTreatmentDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("initialTreatmentDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("initialTreatmentDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Initial Treatment Date"
+                    dateValue={formik.values.initialTreatmentDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("initialTreatmentDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("initialTreatmentDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-454"
+                    : formik.values.formType === "3"
+                    ? "BOX 15"
                     : ""}
                 </Typography>
               </Stack>
 
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Date Last Seen"
-                  dateValue={formik.values.lastSeenDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("lastSeenDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("lastSeenDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Date Last Seen"
+                    dateValue={formik.values.lastSeenDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("lastSeenDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("lastSeenDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-304"
+                    : formik.values.formType === "3"
+                    ? "BOX 15"
                     : ""}
                 </Typography>
               </Stack>
 
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Unable to Work From Date"
-                  dateValue={formik.values.unableToWorkFromDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("unableToWorkFromDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("unableToWorkFromDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Unable to Work From Date"
+                    dateValue={formik.values.unableToWorkFromDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("unableToWorkFromDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("unableToWorkFromDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-314"
+                    : formik.values.formType === "3"
+                    ? "BOX 16"
                     : null}
                 </Typography>
               </Stack>
 
-              <Stack alignItems="center" direction="row">
-                <CustomDatePicker
-                  dateLabel="Unable to Work To Date"
-                  dateValue={formik.values.unableToWorkToDate}
-                  handleDateChange={(value) =>
-                    formik.setFieldValue("unableToWorkToDate", value)
-                  }
-                  handleDateBlur={() =>
-                    formik.setFieldTouched("unableToWorkToDate", true)
-                  }
-                />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Unable to Work To Date"
+                    dateValue={formik.values.unableToWorkToDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("unableToWorkToDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("unableToWorkToDate", true)
+                    }
+                  />
+                </FormControl>
                 <Typography
-                  variant="h5"
-                  component="p"
-                  padding="10px"
-                  textAlign="center"
-                  bgcolor="lightgray"
-                  height="100%"
-                  display={formik.values.formType === 1 && "none"}
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
                 >
-                  {formik.values.formType === 2
-                    ? "ANSI"
-                    : formik.values.formType === 3
-                    ? "CMS"
+                  {formik.values.formType === "2"
+                    ? "2300 DTP-314"
+                    : formik.values.formType === "3"
+                    ? "BOX 16"
                     : ""}
                 </Typography>
               </Stack>
@@ -454,6 +530,21 @@ const AdditionInfo = ({ formik }) => {
                   }
                   label="No"
                 />
+                <Typography
+                  variant="h5"
+                  component="p"
+                  padding="10px"
+                  textAlign="center"
+                  bgcolor="lightgray"
+                  height="100%"
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CRC-75"
+                    : formik.values.formType === "3"
+                    ? "N/A"
+                    : null}
+                </Typography>
               </RadioGroup>
             </Stack>
           </AccordionDetails>
@@ -470,26 +561,71 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Claim Codes"
-                value={formik.values.claimCodes}
-                name="claimCodes"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="number"
-                label="Other Claim ID"
-                value={formik.values.otherClaimId}
-                name="otherClaimId"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Claim Codes"
+                    value={formik.values.claimCodes}
+                    name="claimCodes"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A"
+                    : formik.values.formType === "3"
+                    ? "BOX 10d"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="number"
+                    label="Other Claim ID"
+                    value={formik.values.otherClaimId}
+                    name="otherClaimId"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "38%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2010BA REF-Y4"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
             <Box
               display="grid"
@@ -499,26 +635,72 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 620px))",
+                  md: "repeat(1, minmax(0, 920px))",
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Additional Claim Information"
-                value={formik.values.claimInformation}
-                name="claimInformation"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Claim Note"
-                value={formik.values.claimNote}
-                name="claimNote"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Additional Claim Information"
+                    value={formik.values.claimInformation}
+                    name="claimInformation"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "30%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Claim Note"
+                    value={formik.values.claimNote}
+                    name="claimNote"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "30%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 NTE~ADD"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -529,18 +711,40 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 300px))",
+                  md: "repeat(1, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomField
-                type="text"
-                label="Resubmit Reason Code"
-                value={formik.values.reasonCode}
-                name="reasonCode"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Resubmit Reason Code"
+                    value={formik.values.reasonCode}
+                    name="reasonCode"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A*"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -551,21 +755,43 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 620px))",
+                  md: "repeat(1, minmax(0, 920px))",
                 },
               }}
             >
-              <CustomSelectBox
-                name="reasonDelayCode"
-                value={formik.values.reasonDelayCode}
-                dropdownOptions={delayReason?.map((opt) => ({
-                  value: opt.delayReasonCodeName,
-                  id: opt.delayReasonCodeId,
-                }))}
-                label="Detail Reason"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="reasonDelayCode"
+                    value={formik.values.reasonDelayCode}
+                    dropdownOptions={delayReason?.map((opt) => ({
+                      value: opt.delayReasonCodeName,
+                      id: opt.delayReasonCodeId,
+                    }))}
+                    label="Detail Reason"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-20"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -576,30 +802,75 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomDatePicker
-                dateLabel="Hospitalized From Date"
-                dateValue={formik.values.hospitalizedFromDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("hospitalizedFromDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("hospitalizedFromDate", true)
-                }
-              />
-              <CustomDatePicker
-                dateLabel="Hospitalized To Date"
-                dateValue={formik.values.hospitalizedToDate}
-                handleDateChange={(value) =>
-                  formik.setFieldValue("hospitalizedToDate", value)
-                }
-                handleDateBlur={() =>
-                  formik.setFieldTouched("hospitalizedToDate", true)
-                }
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Hospitalized From Date"
+                    dateValue={formik.values.hospitalizedFromDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("hospitalizedFromDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("hospitalizedFromDate", true)
+                    }
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 DTP~435"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomDatePicker
+                    dateLabel="Hospitalized To Date"
+                    dateValue={formik.values.hospitalizedToDate}
+                    handleDateChange={(value) =>
+                      formik.setFieldValue("hospitalizedToDate", value)
+                    }
+                    handleDateBlur={() =>
+                      formik.setFieldTouched("hospitalizedToDate", true)
+                    }
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 DTP~096"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -610,18 +881,40 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 300px))",
+                  md: "repeat(1, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomField
-                type="number"
-                label="Lab Charges"
-                value={formik.values.labCharges}
-                name="labCharges"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="number"
+                    label="Lab Charges"
+                    value={formik.values.labCharges}
+                    name="labCharges"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "30%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2400 PS1-2"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -632,21 +925,43 @@ const AdditionInfo = ({ formik }) => {
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
                   sm: "repeat(1, minmax(0, 1fr))",
-                  md: "repeat(1, minmax(0, 620px))",
+                  md: "repeat(1, minmax(0, 920px))",
                 },
               }}
             >
-              <CustomSelectBox
-                name="specialProgramCode"
-                value={formik.values.specialProgramCode}
-                dropdownOptions={specialProgram?.map((opt) => ({
-                  value: opt.specialProgramName,
-                  id: opt.specialProgramId,
-                }))}
-                label="Special Program Codes"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="specialProgramCode"
+                    value={formik.values.specialProgramCode}
+                    dropdownOptions={specialProgram?.map((opt) => ({
+                      value: opt.specialProgramName,
+                      id: opt.specialProgramId,
+                    }))}
+                    label="Special Program Codes"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "30%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-12"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
           </AccordionDetails>
         </Accordion>
@@ -663,44 +978,112 @@ const AdditionInfo = ({ formik }) => {
               sx={{
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(2, minmax(0, ))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomSelectBox
-                name="patientSignature"
-                value={formik.values.patientSignature}
-                dropdownOptions={signaturePatient?.map((opt) => ({
-                  value: opt.patientSignatureName,
-                  id: opt.patientSignatureId,
-                }))}
-                label="Patient's Signature on File"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomSelectBox
-                name="insuredSignature"
-                value={formik.values.insuredSignature}
-                dropdownOptions={insureSignature?.map((opt) => ({
-                  value: opt.insuredSignatureName,
-                  id: opt.insuredSignature,
-                }))}
-                label="Insured's Signature"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomSelectBox
-                name="providerAcceptance"
-                value={formik.values.providerAcceptance}
-                dropdownOptions={providerAcceptance?.map((opt) => ({
-                  value: opt.providerAcceptance,
-                  id: opt.providerAcceptanceId,
-                }))}
-                label="Provider Accept Assignment"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="patientSignature"
+                    value={formik.values.patientSignature}
+                    dropdownOptions={signaturePatient?.map((opt) => ({
+                      value: opt.patientSignatureName,
+                      id: opt.patientSignatureId,
+                    }))}
+                    label="Patient's Signature on File"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="p"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-09"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="insuredSignature"
+                    value={formik.values.insuredSignature}
+                    dropdownOptions={insureSignature?.map((opt) => ({
+                      value: opt.insuredSignatureName,
+                      id: opt.insuredSignature,
+                    }))}
+                    label="Insured's Signature"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-08"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="providerAcceptance"
+                    value={formik.values.providerAcceptance}
+                    dropdownOptions={providerAcceptance?.map((opt) => ({
+                      value: opt.providerAcceptance,
+                      id: opt.providerAcceptanceId,
+                    }))}
+                    label="Provider Accept Assignment"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 CLM-07"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
           </AccordionDetails>
         </Accordion>
@@ -718,33 +1101,78 @@ const AdditionInfo = ({ formik }) => {
               sx={{
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(2, minmax(0, 300px))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomSelectBox
-                name="documentationMethod"
-                value={formik.values.documentationMethod}
-                dropdownOptions={documentationMethod?.map((opt) => ({
-                  value: opt.documentationMethodName,
-                  id: opt.documentationMethodId,
-                }))}
-                label="Documentation Method"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomSelectBox
-                name="documentationType"
-                value={formik.values.documentationType}
-                dropdownOptions={documentationType?.map((opt) => ({
-                  value: opt.documentationTypeName,
-                  id: opt.documentationTypeId,
-                }))}
-                label="Documentation Type"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="documentationMethod"
+                    value={formik.values.documentationMethod}
+                    dropdownOptions={documentationMethod?.map((opt) => ({
+                      value: opt.documentationMethodName,
+                      id: opt.documentationMethodId,
+                    }))}
+                    label="Documentation Method"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 PWK-2"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="documentationType"
+                    value={formik.values.documentationType}
+                    dropdownOptions={documentationType?.map((opt) => ({
+                      value: opt.documentationTypeName,
+                      id: opt.documentationTypeId,
+                    }))}
+                    label="Documentation Type"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 PWK-1"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -754,27 +1182,72 @@ const AdditionInfo = ({ formik }) => {
                 marginTop: "20px",
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(2, minmax(0, 300px))",
-                  md: "repeat(2, minmax(0, 300px))",
+                  sm: "repeat(2, minmax(0, 1fr))",
+                  md: "repeat(2, minmax(0, 450px))",
                 },
               }}
             >
-              <CustomField
-                type="number"
-                label="Patient Height (in.)"
-                value={formik.values.patientHeight}
-                name="patientHeight"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="number"
-                label="Patient Weight (lbs.)"
-                value={formik.values.patientWeight}
-                name="patientWeight"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="number"
+                    label="Patient Height (in.)"
+                    value={formik.values.patientHeight}
+                    name="patientHeight"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2400 ME-3"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="number"
+                    label="Patient Weight (lbs.)"
+                    value={formik.values.patientWeight}
+                    name="patientWeight"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "N/A*"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
 
             <Box
@@ -784,54 +1257,168 @@ const AdditionInfo = ({ formik }) => {
                 marginTop: "20px",
                 gridTemplateColumns: {
                   xs: "repeat(1, minmax(0, 1fr))",
-                  sm: "repeat(1, minmax(0, 620px))",
-                  md: "repeat(1, minmax(0, 620px))",
+                  sm: "repeat(1, minmax(0, 1fr))",
+                  md: "repeat(1, minmax(0, 920px))",
                 },
               }}
             >
-              <CustomSelectBox
-                name="serviceAuthorization"
-                value={formik.values.serviceAuthorization}
-                dropdownOptions={serviceAuthorization?.map((opt) => ({
-                  value: opt.serviceAuthorizationName,
-                  id: opt.serviceAuthorizationId,
-                }))}
-                label="Service Authorization Exception"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Demonstration Project"
-                value={formik.values.demonstrationProject}
-                name="demonstrationProject"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Mammography Certification"
-                value={formik.values.mammographyCertification}
-                name="mammographyCertification"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Investigational Device Exemption"
-                value={formik.values.investigationalDeviceExemption}
-                name="investigationalDeviceExemption"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
-              <CustomField
-                type="text"
-                label="Ambulatory Patient Group"
-                value={formik.values.ambulatoryPatientGroup}
-                name="ambulatoryPatientGroup"
-                handleChange={formik.handleChange}
-                handleBlur={formik.handleBlur}
-              />
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomSelectBox
+                    name="serviceAuthorization"
+                    value={formik.values.serviceAuthorization}
+                    dropdownOptions={serviceAuthorization?.map((opt) => ({
+                      value: opt.serviceAuthorizationName,
+                      id: opt.serviceAuthorizationId,
+                    }))}
+                    label="Service Authorization Exception"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 REF~4N"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Demonstration Project"
+                    value={formik.values.demonstrationProject}
+                    name="demonstrationProject"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 REF~P4"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Mammography Certification"
+                    value={formik.values.mammographyCertification}
+                    name="mammographyCertification"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 REF~EW"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Investigational Device Exemption"
+                    value={formik.values.investigationalDeviceExemption}
+                    name="investigationalDeviceExemption"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 REF~LX"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
+              <Stack
+                className="infoCodeContainer"
+                sx={{
+                  flexDirection: { xs: "column", sm: "row", md: "row" },
+                }}
+              >
+                <FormControl fullWidth>
+                  <CustomField
+                    type="text"
+                    label="Ambulatory Patient Group"
+                    value={formik.values.ambulatoryPatientGroup}
+                    name="ambulatoryPatientGroup"
+                    handleChange={formik.handleChange}
+                    handleBlur={formik.handleBlur}
+                  />
+                </FormControl>
+                <Typography
+                  variant="h6"
+                  component="span"
+                  className="ft_content"
+                  width={{ xs: "100%", sm: "30%", md: "38%" }}
+                  display={formik.values.formType === "1" && "none"}
+                >
+                  {formik.values.formType === "2"
+                    ? "2300 REF~1S"
+                    : formik.values.formType === "3"
+                    ? "BOX 11b"
+                    : null}
+                </Typography>
+              </Stack>
             </Box>
           </AccordionDetails>
         </Accordion>
