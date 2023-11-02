@@ -62,7 +62,7 @@ const ClaimCharges = ({
 
       <>
         <div>
-          {formik.values.isProfessional === 1 ? (
+          {formik.values.claimTypeId === 1 ? (
             <Box
               sx={{
                 display: "flex",

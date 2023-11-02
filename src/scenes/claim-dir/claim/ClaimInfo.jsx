@@ -28,6 +28,7 @@ import Facility from "../../custom-setup/facility/Facility";
 import BillingProvider from "../../custom-setup/billing-provider/BillingProvider";
 import RenderingProvider from "../../custom-setup/rendering-provider/RenderingProvider";
 import InsuredParty from "../../custom-setup/insured-party/InsuredParty";
+import CustomSelectBox2 from "../../../components/CustomSelectBox2";
 
 const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
   const [isAccordionOpen, setIsAccordionOpen] = useState(false);
@@ -40,7 +41,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
   const [frequencyOpt, setFrequencyOpt] = useState([]);
   const [policyTypeOpt, setPolicyTypeOpt] = useState([]);
   const dispatch = useDispatch();
-
+  console.log(frequencyOpt, "freOptions");
   const handleAccordionChange = () => {
     setIsAccordionOpen(!isAccordionOpen);
   };
@@ -163,9 +164,9 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
             label="Reference #"
           />
 
-          <CustomSelectBox
-            value={formik.values.claimFrequency}
-            name="claimFrequency"
+          <CustomSelectBox2
+            value={formik.values.frequencyTypeId}
+            name="frequencyTypeId"
             dropdownOptions={frequencyOpt?.map((opt) => ({
               value: opt.claimFrequencyName,
               id: opt.claimFrequencyId,
@@ -173,6 +174,7 @@ const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
             label="Frequncy Type"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
+            formik={formik}
           />
         </Box>
 

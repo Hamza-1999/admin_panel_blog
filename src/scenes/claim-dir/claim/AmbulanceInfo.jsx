@@ -18,6 +18,7 @@ import CustomField from "../../../components/CustomField";
 import { getData } from "../../../config/axiosFunctions";
 import path from "../../../config/apiUrl";
 import CustomSelectBox from "../../../components/CustomSelectBox";
+import CustomSelectBox2 from "../../../components/CustomSelectBox2";
 
 const AmbulanceInfo = ({ formik }) => {
   const [transportReason, setTransportReason] = useState([]);
@@ -94,9 +95,9 @@ const AmbulanceInfo = ({ formik }) => {
           },
         }}
       >
-        <CustomSelectBox
-          name="transportReasonType"
-          value={formik.values.transportReasonType}
+        <CustomSelectBox2
+          value={formik.values.transportReasonId}
+          name="transportReasonId"
           dropdownOptions={transportReason?.map((opt) => ({
             value: opt.transportReasonType,
             id: opt.transportReasonId,
@@ -104,6 +105,7 @@ const AmbulanceInfo = ({ formik }) => {
           label="Transport Reason"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
+          formik={formik}
         />
         <CustomField
           type="text"

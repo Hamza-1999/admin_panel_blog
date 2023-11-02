@@ -22,6 +22,7 @@ const CustomField = ({
         name={name}
         // label={label}
         spellCheck={false}
+        min={0}
         // InputLabelProps={{ shrink: true }}
       />
     </div>

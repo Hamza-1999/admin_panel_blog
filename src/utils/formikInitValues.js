@@ -90,10 +90,10 @@ export const claimInitVal = {
   primaryPayerPolicyType: "",
   primaryPayerCopayDue: null,
   // payerSequenceNo: null,
-  claimFrequency: "",
+  frequencyTypeId: null,
   referenceNumber: null,
-  facilityName: "",
-  claimType: "Professional",
+
+  claimTypeId: 1,
   // tcn: "abc",
   // totalCharges: 200,
   // totalBilled: 200,
@@ -141,7 +141,7 @@ export const claimInitVal = {
   icd_Description_L: "",
 
   // additioal info init vals
-  formType: "1",
+  formTypeId: 1,
   isEmployment: false,
   isAutoAccident: false,
   isOtherAccident: false,
@@ -157,19 +157,19 @@ export const claimInitVal = {
   claimInformation: "",
   claimNote: "",
   reasonCode: "",
-  reasonDelayCode: "",
+  reasonDelayCodeId: null,
   hospitalizedFromDate: null,
   hospitalizedToDate: null,
   labCharges: 0,
-  specialProgramCode: "",
-  patientSignature: "",
-  insuredSignature: "",
-  providerAcceptance: "",
-  documentationMethod: "",
-  documentationType: "",
+  specialProgramCodeId: null,
+  patientSignatureId: null,
+  insuredSignatureId: null,
+  providerAcceptanceId: null,
+  documentationMethodId: null,
+  documentationTypeId: null,
   patientHeight: 0,
   patientWeight: 0,
-  serviceAuthorization: "",
+  serviceAuthorizationId: null,
   demonstrationProject: "",
   mammographyCertification: "",
   investigationalDeviceExemption: "",
@@ -177,7 +177,7 @@ export const claimInitVal = {
 
   // ambulance info
   ambulanceClaimType: "false",
-  transportReasonType: "",
+  transportReasonId: null,
   transportMiles: 0,
   ambPatientWeight: 0,
   roundTripReason: "",
@@ -194,7 +194,7 @@ export const claimInitVal = {
   certificationFieldType: "",
 
   // institutional
-  isProfessional: 1,
+  // isProfessional: 1,
   statementCoversFromDate: null,
   statementCoversToDate: null,
   admissionDate: null,
@@ -231,7 +231,7 @@ export const claimInitVal = {
   conditionId: null,
 
   // intial value of INfoCOde DTO
-  insClaimInfoDetailDto : []
+  insClaimInfoDetailDto: [],
 };
 
 export const paymentInitVal3 = {
