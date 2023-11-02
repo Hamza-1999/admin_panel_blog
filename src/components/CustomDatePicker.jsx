@@ -2,6 +2,8 @@ import { TextField } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React from "react";
+import "./Custom-styling/CustomDatePicker.css";
+
 
 const CustomDatePicker = ({
   dateValue,
@@ -10,8 +12,10 @@ const CustomDatePicker = ({
   dateLabel,
 }) => {
   return (
-    <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-      <DatePicker
+    
+    
+    <LocalizationProvider   dateAdapter={AdapterDayjs} locale="en">
+      <DatePicker 
         sx={{ width: "100%" }}
         label={dateLabel}
         value={dateValue}
@@ -19,9 +23,11 @@ const CustomDatePicker = ({
         onBlur={handleDateBlur}
         renderInput={(params) => <TextField {...params} />}
         inputFormat="MM/DD/YYYY"
-        // clearable
+        
       />
     </LocalizationProvider>
+  
+    
   );
 };
 
