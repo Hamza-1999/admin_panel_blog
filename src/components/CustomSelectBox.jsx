@@ -21,23 +21,17 @@ const CustomSelectBox = ({
     <div >
     <FormControl fullWidth>
       <label style={{color:"#216FED"}} htmlFor="">{label}</label>
-      {/* <InputLabel shrink={true}> {label}</InputLabel> */}
       <Select className="customSelectBox"
         value={value}
         name={name}
         type="text"
-        // label={label}
+   
         onChange={handleChange}
         onBlur={handleBlur}
        
         native
         id="dropdowns"
         defaultValue=""
-        // InputProps={{
-        //   endAdornment: (
-        //     <ArrowDropDownIcon style={{ color: "#216FED" }} />
-        //   ),
-        // }}
       >
         <option value="0" style={{ color: "lightgray !important" }}>
           Select

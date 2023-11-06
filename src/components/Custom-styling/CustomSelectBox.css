@@ -1,15 +1,9 @@
 .customSelectBox{
-    
         display: block;
         border-radius: 7px;
-        height: 45px;
+        height: 45px !important;
         /* border: 1px solid red !important; */
         width: 100%;
         outline: none !important;
-        border: 1px solid #C0C0C0;
-        
-    
+        border: 1px solid #C0C0C0;         
 }
-/* .customSelectBox:active{
-    border: none !important;
-} */
