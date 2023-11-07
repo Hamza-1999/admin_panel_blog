@@ -12,6 +12,7 @@ const Form = () => {
   };
 
   return (
+    <Box className="backgroundpatient container-fluid h-100 ">
     <Box m="20px">
       <Header title="CREATE USER" subtitle="Create a New User Profile" />
 
@@ -125,6 +126,7 @@ const Form = () => {
           </form>
         )}
       </Formik>
+    </Box>
     </Box>
   );
 };

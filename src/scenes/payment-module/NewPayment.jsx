@@ -216,6 +216,7 @@ const NewPayment = () => {
 
   return (
     <>
+    <Box className="backgroundpatient ">
       <CustomModal
         open={openClaimModal}
         handleClose={() => setOpenClaimModal(false)}
@@ -402,6 +403,7 @@ const NewPayment = () => {
             </Stack>
           </div>
         )}
+      </Box>
       </Box>
     </>
   );

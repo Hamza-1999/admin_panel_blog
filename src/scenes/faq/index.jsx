@@ -11,6 +11,7 @@ const FAQ = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   return (
+    <Box className="backgroundpatient ">
     <Box m="20px">
       <Header title="FAQ" subtitle="Frequently Asked Questions Page" />
 
@@ -79,6 +80,7 @@ const FAQ = () => {
           </Typography>
         </AccordionDetails>
       </Accordion>
+    </Box>
     </Box>
   );
 };

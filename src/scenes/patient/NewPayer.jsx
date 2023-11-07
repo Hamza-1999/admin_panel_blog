@@ -68,6 +68,7 @@ const NewPayer = ({ handleClose }) => {
   }, []);
   return (
     <>
+
       <Typography
         variant="h6"
         component={"h1"}
@@ -293,7 +294,9 @@ const NewPayer = ({ handleClose }) => {
             </Button>
           </Box>
         </Box>
+  
       </form>
+    
     </>
   );
 };

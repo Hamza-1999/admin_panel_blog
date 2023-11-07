@@ -48,6 +48,7 @@ const Calendar = () => {
   };
 
   return (
+    <Box className="backgroundpatient ">
     <Box m="20px">
       <Header title="Appointments" subtitle="Full Appointments Interactive Page" />
 
@@ -125,6 +126,7 @@ const Calendar = () => {
           />
         </Box>
       </Box>
+    </Box>
     </Box>
   );
 };

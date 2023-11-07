@@ -24,6 +24,7 @@ import userImg from '../../assets/user.png'
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  
   return (
     <MenuItem
       active={selected === title}
@@ -151,7 +152,7 @@ const Sidebar = () => {
             )}
           </Box>
           <Box paddingLeft={isCollapsed ? undefined : "4px"}>
-            <Item
+            <Item 
               title="Dashboard"
               to="/dashboard"
               icon={<HomeOutlinedIcon />}
@@ -168,8 +169,8 @@ const Sidebar = () => {
               }}
               onClick={() => setIsPatientOpen(!isPatientOpen)}
             >
-              <Typography
-                variant="h6"
+              <Typography style={{fontWeight:'bold'}}
+                variant="h4"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
@@ -193,14 +194,14 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               /> */}
-              <Item
+              <Item 
                 title="Create Patient"
                 to="/createpatient"
                 icon={<ContactsOutlinedIcon />}
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item
+              <Item 
                 title="Manage Patient"
                 to="/managepatient  "
                 icon={<ContactsOutlinedIcon />}
@@ -226,8 +227,8 @@ const Sidebar = () => {
               }}
               onClick={() => setIsClaimOpen(!isClaimOpen)}
             >
-              <Typography
-                variant="h6"
+              <Typography style={{fontWeight:'bold'}}
+                variant="h4"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
@@ -262,8 +263,8 @@ const Sidebar = () => {
               }}
               onClick={() => setIsPaymentOpen(!isPaymentOpen)}
             >
-              <Typography
-                variant="h6"
+              <Typography style={{fontWeight:'bold'}}
+                variant="h4"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
@@ -298,8 +299,8 @@ const Sidebar = () => {
               }}
               onClick={() => setIsCustomSetupOpen(!isCustomSetupOpen)}
             >
-              <Typography
-                variant="h6"
+              <Typography style={{fontWeight:'bold'}}
+                variant="h4"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
@@ -333,8 +334,8 @@ const Sidebar = () => {
               }}
               onClick={() => setIsPagesOpen(!isPagesOpen)}
             >
-              <Typography
-                variant="h6"
+              <Typography style={{fontWeight:'bold'}}
+                variant="h4"
                 color={colors.grey[300]}
                 sx={{ m: "15px 0 5px 20px" }}
               >
@@ -422,3 +423,14 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+
+
+// .Item-title[title="Create Patient"] {
+//   color: blue; 
+// }
+
+
+// .Item-title[title="Manage Patient"] {
+//   color: green; 
+// }

@@ -89,8 +89,11 @@ const CreatePatient = () => {
     }
   };
 
+  
   return (
-    <Box margin="20px" paddingBottom={"25px"}>
+  
+    <Box className="backgroundpatient ">
+    <Box  margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
       <Box>
         <Stack
@@ -111,10 +114,45 @@ const CreatePatient = () => {
     
   }} 
 >
-  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Patient Info" value={0} />
-  <Tab style={{fontSize:"16px"}}  className="tabsdesigning"  label="Insurance Info" value={1} />
-  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Payer Info" value={2} />
+  <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Patient Info" value={0} />
+  <Tab  style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Insurance Info" value={1} />
+  <Tab  style={{fontSize:"18px",fontWeight:"bold"}}className="tabsdesigning"  label="Payer Info" value={2} />
 </Tabs>
+
+
+
+ {/* import React, { useState } from 'react';
+
+const TabComponent = () => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  const handleTabClick = (tabIndex) => {
+    setActiveTab(tabIndex);
+  };
+
+  return (
+    <div>
+      <div className="tabs">
+        <div
+          style={{
+            fontSize: "18px",
+            fontWeight: "bold",
+          }}
+          className={`tabsdesigning ${activeTab === 0 ? 'active' : ''}`}
+          onClick={() => handleTabClick(0)}
+        >
+          Patient Info
+        </div>
+       
+      </div>
+    </div>
+  );
+};
+
+export default TabComponent;  */}
+
+
+
 
           <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
             <CustomButton
@@ -157,6 +195,8 @@ const CreatePatient = () => {
         </form>
       </Box>
     </Box>
+    </Box>
+  
   );
 };
 

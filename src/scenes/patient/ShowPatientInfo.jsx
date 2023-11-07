@@ -47,6 +47,7 @@ const ShowPatientInfo = () => {
   }, [dispatch]);
   return (
     <>
+        <Box className="backgroundpatient ">
       <Box width={"100%"} padding={"20px"}>
         <Header title="Patient Details" subtitle="" />
         <div style={{ background: "lightgray" }}>
@@ -729,6 +730,7 @@ const ShowPatientInfo = () => {
             </AccordionDetails>
           </Accordion>
         </Box>
+      </Box>
       </Box>
     </>
   );

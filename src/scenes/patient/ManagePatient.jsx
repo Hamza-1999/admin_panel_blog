@@ -24,7 +24,8 @@ const ManagePatient = () => {
 
   if (error) {
     return (
-      <Box m={"20px"}>
+      
+      <Box m={"20px" }>
         <Header title="MANAGE PATIENT" subtitle="Show all patients" />
         <div>Error loading data. Please try again later.</div>
       </Box>
@@ -98,6 +99,7 @@ const ManagePatient = () => {
   ];
 
   return (
+    <Box className="backgroundpatient ">
     <Box m={"20px"}>
       <Header title="MANAGE PATIENT" subtitle="Show all patients" />
       {loading ? (
@@ -124,6 +126,8 @@ const ManagePatient = () => {
         </Box>
       )}
     </Box>
+    </Box>
+   
   );
 };
 

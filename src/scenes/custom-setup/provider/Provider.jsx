@@ -25,6 +25,7 @@ const Provider = () => {
     getProviders.result?.length === 0
   ) {
     return (
+      <Box className="backgroundpatient h-100 container-fluid ">
       <Box m={"20px"}>
         <Header title=" All Providers" />
         {loading ? (
@@ -63,6 +64,7 @@ const Provider = () => {
             </Box>
           </>
         )}
+      </Box>
       </Box>
     );
   }
@@ -179,6 +181,7 @@ const Provider = () => {
         />
       </Box>
     </Box>
+    
   );
 };
 

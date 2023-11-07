@@ -15,7 +15,8 @@ const CustomDatePicker = ({
     
     
     <LocalizationProvider   dateAdapter={AdapterDayjs} locale="en">
-      <DatePicker className="customDatePicker"
+      
+      <DatePicker 
         sx={{ width: "100%" }}
         label={dateLabel}
         value={dateValue}
@@ -26,9 +27,10 @@ const CustomDatePicker = ({
         
       />
     </LocalizationProvider>
-    // <input type="date" value={dateValue}  onChange={handleDateChange} onBlur={handleDateBlur}/>
+   
     
   );
 };
 
 export default CustomDatePicker;
+  // <input type="date" value={dateValue}  onChange={handleDateChange} onBlur={handleDateBlur}/>

@@ -35,7 +35,7 @@
     background-color: '#EDF2F6';
     outline: 'none';
     transition:background-color 0.1s ease; 
-    transition: color 0.1s ease;
+    transition: color 0.4s ease;
     border-radius: "20px 20px 0 0";
     text-transform: inherit !important;
  
@@ -44,4 +44,7 @@
     background-color: #216FED;
     color: #FCFCFC;
     
+  }
+  .backgroundpatient{
+    background-color: #EDF2F6;
   }
