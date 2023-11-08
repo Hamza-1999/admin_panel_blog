@@ -41,10 +41,6 @@ const CustomSelectBox = ({
             <option key={opt.id} value={opt.value}>
               {opt.value}
             </option>
-
-       
-            
-            
           </>
         ))}
       </Select>

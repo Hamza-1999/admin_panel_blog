@@ -68,16 +68,23 @@ const NewPayer = ({ handleClose }) => {
   }, []);
   return (
     <>
-
+    <Box>
       <Typography
         variant="h6"
         component={"h1"}
         fontSize={"1.6rem"}
         marginBottom={4}
+        padding={1}
+        fontWeight={"bold"}
+        sx={{background:"#F2F0F0"}}
+
       >
         New Payer
-        <Box component={"hr"} />
+        {/* <Box component={"hr"} /> */}
       </Typography>
+      <Box padding="14px">
+  
+
       <form onSubmit={handleSubmit}>
         <Box
           display="grid"
@@ -103,10 +110,13 @@ const NewPayer = ({ handleClose }) => {
             id="payerName"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+          width:"200px",
+        height:'45px',
+      background:"#E9E9E9" }}
           />
           {/* payer type */}
-          <CustomSelectBox
+          <CustomSelectBox 
             value={values.payerType}
             name="payerType"
             dropdownOptions={payerTypeOpt?.map((opt) => ({
@@ -131,7 +141,12 @@ const NewPayer = ({ handleClose }) => {
             id="planName"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+
+
+          width:"300px",
+        height:'61px',
+      background:"#E9E9E9" }} 
           />
 
           <TextField
@@ -147,7 +162,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerFax"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } ,
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9"}}
           />
           <TextField
             size="small"
@@ -162,7 +180,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerPhone"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -177,7 +198,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerGroupNumber"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -192,7 +216,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerEmail"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -207,7 +234,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerWebsite"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -222,7 +252,10 @@ const NewPayer = ({ handleClose }) => {
             id="payerZipCode"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -237,7 +270,9 @@ const NewPayer = ({ handleClose }) => {
             id="payerCityName"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },    width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
           <TextField
             size="small"
@@ -252,7 +287,9 @@ const NewPayer = ({ handleClose }) => {
             id="payerStateName"
             // error={!!touched.firstName && !!errors.firstName}
             // helperText={touched.firstName && errors.firstName}
-            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } }}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },    width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
           />
 
           <TextareaAutosize
@@ -289,13 +326,15 @@ const NewPayer = ({ handleClose }) => {
           />
 
           <Box>
-            <Button type="submit" variant="contained" color="secondary">
+            <Button style={{background:'#2F78EE',borderRadius:'7px',width:'220px',height:'45px',color:"white",fontSize:'18px'}} type="submit" variant="contained" color="secondary">
               {loading ? "Creating Payer..." : "Create Payer"}
             </Button>
           </Box>
         </Box>
   
       </form>
+      </Box>
+    </Box>
     
     </>
   );

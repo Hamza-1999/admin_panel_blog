@@ -403,11 +403,11 @@ const PatientInfo = ({ formik }) => {
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
     <DatePicker className="customDatePicker"
       // label="Date of Death"
-      value={formik.values.dateOfDeath}
+      value={formik.values.dateOfBirth}
       onChange={(value) =>
-        formik.setFieldValue("dateOfDeath", value)
+        formik.setFieldValue("dateOfBirth", value)
       }
-      onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
+      onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
       renderInput={(params) => <TextField {...params} />}
       inputFormat="MM/DD/YYYY"
     />

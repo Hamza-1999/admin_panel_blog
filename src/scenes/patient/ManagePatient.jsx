@@ -107,9 +107,10 @@ const ManagePatient = () => {
         <Typography>Loading...</Typography>
       ) : (
         <Box height={"400px"} width={"100%"}>
-          <DataGrid
+          <DataGrid 
             rows={rows}
             columns={columns}
+            style={{fontSize:"15px"}}
             initialState={{
               pagination: {
                 paginationModel: {

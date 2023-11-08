@@ -19,8 +19,10 @@ const CustomSearchField = ({
   handleBlur,
 }) => {
   return (
-    <div >
-      <label style={{color:"#216FED"}} htmlFor="">{label}</label>
+   
+   
+    <div>
+      <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
       <TextField className="customSearchField"
         size="small"
         fullWidth
@@ -46,6 +48,9 @@ const CustomSearchField = ({
         InputLabelProps={{ shrink: true }}
       />
     </div>
+   
+
+
    
   );
 };
