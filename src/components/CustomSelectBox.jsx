@@ -20,24 +20,18 @@ const CustomSelectBox = ({
   return (
     <div >
     <FormControl fullWidth>
-      <label style={{color:"#216FED"}} htmlFor="">{label}</label>
-      {/* <InputLabel shrink={true}> {label}</InputLabel> */}
+      <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
       <Select className="customSelectBox"
         value={value}
         name={name}
         type="text"
-        // label={label}
+   
         onChange={handleChange}
         onBlur={handleBlur}
        
         native
         id="dropdowns"
         defaultValue=""
-        // InputProps={{
-        //   endAdornment: (
-        //     <ArrowDropDownIcon style={{ color: "#216FED" }} />
-        //   ),
-        // }}
       >
         <option value="0" style={{ color: "lightgray !important" }}>
           Select
@@ -47,10 +41,6 @@ const CustomSelectBox = ({
             <option key={opt.id} value={opt.value}>
               {opt.value}
             </option>
-
-       
-            
-            
           </>
         ))}
       </Select>

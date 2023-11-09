@@ -89,8 +89,11 @@ const CreatePatient = () => {
     }
   };
 
+  
   return (
-    <Box margin="20px" paddingBottom={"25px"}>
+  
+    <Box className="backgroundpatient ">
+    <Box  margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
       <Box>
         <Stack
@@ -111,10 +114,11 @@ const CreatePatient = () => {
     
   }} 
 >
-  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Patient Info" value={0} />
-  <Tab style={{fontSize:"16px"}}  className="tabsdesigning"  label="Insurance Info" value={1} />
-  <Tab style={{fontSize:"16px"}} className="tabsdesigning"  label="Payer Info" value={2} />
+  <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Patient Info" value={0} />
+  <Tab  style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Insurance Info" value={1} />
+  <Tab  style={{fontSize:"18px",fontWeight:"bold"}}className="tabsdesigning"  label="Payer Info" value={2} />
 </Tabs>
+
 
           <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
             <CustomButton
@@ -157,6 +161,8 @@ const CreatePatient = () => {
         </form>
       </Box>
     </Box>
+    </Box>
+  
   );
 };
 

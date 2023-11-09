@@ -186,6 +186,7 @@ const UpdateClaim = () => {
     window.open(pdfUrl, "_blank");
   };
   return (
+    <Box className="backgroundpatient ">
     <Box margin="20px" paddingBottom="10px">
       <Header title="Update Claim" />
       <Stack
@@ -331,6 +332,7 @@ const UpdateClaim = () => {
           Save
         </Button>
       </Box>
+    </Box>
     </Box>
   );
 };

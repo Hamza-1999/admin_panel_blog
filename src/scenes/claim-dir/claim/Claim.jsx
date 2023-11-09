@@ -18,6 +18,7 @@ const Claim = () => {
   const navigate = useNavigate();
 
   return (
+    <Box className="backgroundpatient ">
     <Box margin="20px">
       <Header title="Claim" />
       <Stack
@@ -37,6 +38,7 @@ const Claim = () => {
       </Stack>
 
       <ClaimTable isModal={false} />
+    </Box>
     </Box>
   );
 };

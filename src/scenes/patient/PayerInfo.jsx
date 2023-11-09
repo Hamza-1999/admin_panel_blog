@@ -68,7 +68,10 @@ const PayerInfo = ({ formik }) => {
       </CustomModal>
 
       <Box display="flex" flexDirection="column" gap={5}>
-        <Typography variant="h5" component={"h4"} marginBottom="8px">
+        <Typography variant="h5" component={"h2"}
+        fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+        fontWeight={'bold'}
+         >
           Payer Information:
         </Typography>
         <Box
@@ -107,6 +110,7 @@ const PayerInfo = ({ formik }) => {
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
+
         </Box>
 
         <Box
@@ -130,10 +134,12 @@ const PayerInfo = ({ formik }) => {
             <FormControl
               sx={{
                 width: { xs: "100%", sm: "100%" },
+                marginTop:"8px",
                 fontSize: "1rem",
+               
               }}
             >
-              <CustomSearchField
+              <CustomSearchField 
                 label="Payer Name"
                 type="text"
                 fieldVal={formik.values.payerInfoPayerName}
@@ -143,9 +149,9 @@ const PayerInfo = ({ formik }) => {
                 handleModalOpen={() => setOpenPyerListModal(true)}
               />
             </FormControl>
-            <Button
-              sx={{ width: "10%" }}
-              variant="outlined"
+            <Button 
+              sx={{ width: "10%",marginTop:'32px',marginRight:'40px',marginLeft:"10px",marginBottom:"4px",color:'#216FED'}}
+              variant="outlined" 
               onClick={() => setOpenNewPayerModal(true)}
             >
               <Add />
@@ -227,7 +233,7 @@ const PayerInfo = ({ formik }) => {
             },
           }}
         >
-          <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Effective Date"
               value={formik.values.payerInfoEffectiveDate}
@@ -241,9 +247,25 @@ const PayerInfo = ({ formik }) => {
               inputFormat="MM/DD/YYYY"
               // clearable
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
 
-          <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+
+<div>
+  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Effective Date</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <DatePicker className="payerInfoEffectiveDate"
+      value={formik.values.dateOfDeath}
+      onChange={(value) =>
+        formik.setFieldValue("payerInfoEffectiveDate", value)
+      }
+      onBlur={() => formik.setFieldTouched("payerInfoEffectiveDate", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div>
+
+          {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
             <DatePicker
               label="Termination Date"
               value={formik.values.payerInfoTerminationDate}
@@ -257,7 +279,23 @@ const PayerInfo = ({ formik }) => {
               inputFormat="MM/DD/YYYY"
               clearable
             />
-          </LocalizationProvider>
+          </LocalizationProvider> */}
+
+
+<div>
+  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Termination Date</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <DatePicker className="payerInfoTerminationDate"
+      value={formik.values.dateOfDeath}
+      onChange={(value) =>
+        formik.setFieldValue("payerInfoTerminationDate", value)
+      }
+      onBlur={() => formik.setFieldTouched("payerInfoTerminationDate", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div>
         </Box>
       </Box>
     </>

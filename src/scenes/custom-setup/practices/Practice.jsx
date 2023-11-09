@@ -104,6 +104,7 @@ const Practice = () => {
   ];
 
   return (
+    <Box className="backgroundpatient ">
     <Box margin={"20px"}>
       <Header title="All Practice" subtitle="" />
 
@@ -159,6 +160,7 @@ const Practice = () => {
           }
         />
       </Box>
+    </Box>
     </Box>
   );
 };

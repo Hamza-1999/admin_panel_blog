@@ -5,6 +5,7 @@ import {
   Box,
   TextField,
   Typography,
+ 
 } from "@mui/material";
 import "./PatientInfo.css";
 import { ErrorMessage, Field, Formik } from "formik";
@@ -105,7 +106,8 @@ const PatientInfo = ({ formik }) => {
             <Typography className="accordianSummaryHeading"
               // variant="h5"
               component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              fontWeight={'bold'}
             >
               General Information:
             </Typography>
@@ -395,8 +397,24 @@ const PatientInfo = ({ formik }) => {
                 },
               }}
             >
-              <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-                <DatePicker
+
+<div>
+  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Birth</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <DatePicker className="customDatePicker"
+      // label="Date of Death"
+      value={formik.values.dateOfBirth}
+      onChange={(value) =>
+        formik.setFieldValue("dateOfBirth", value)
+      }
+      onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div>
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+                <DatePicker className="customDatePicker"
                   label="Date of Birth"
                   value={formik.values.dateOfBirth}
                   onChange={(value) => {
@@ -405,12 +423,12 @@ const PatientInfo = ({ formik }) => {
                   onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  // clearable
+                  
                 />
-              </LocalizationProvider>
+              </LocalizationProvider> */}
 
-              <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-                <DatePicker
+              {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+                <DatePicker className="customDatePicker"
                   label="Date of Death"
                   value={formik.values.dateOfDeath}
                   onChange={(value) =>
@@ -419,9 +437,25 @@ const PatientInfo = ({ formik }) => {
                   onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  // clearable
+               
                 />
-              </LocalizationProvider>
+              </LocalizationProvider> */}
+
+  <div>
+  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Death</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <DatePicker className="customDatePicker"
+      // label="Date of Death"
+      value={formik.values.dateOfDeath}
+      onChange={(value) =>
+        formik.setFieldValue("dateOfDeath", value)
+      }
+      onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div>
             </Box>
           </AccordionDetails>
         </Accordion>

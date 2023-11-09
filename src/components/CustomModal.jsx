@@ -11,12 +11,13 @@ const CustomModal = ({ children, open, handleClose }) => {
     width: { xs: "80%", sm: "auto", md: "auto" },
     minWidth: { xs: "80%", sm: "450px", md: "600px" },
     bgcolor: "background.paper",
-    border: "2px solid #000",
+    border: "1px solid grey",
     boxShadow: 24,
     minHeight: "100px",
     maxHeight: "600px",
     overflowY: "scroll",
-    padding: "15px",
+    borderRadius: "20px"
+    // padding: "15px",
     // padding: "16px", // Adding some padding to the modal content
   };
 

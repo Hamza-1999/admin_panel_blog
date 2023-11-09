@@ -12,7 +12,7 @@ const CustomField = ({
 }) => {
   return (
     <div>
-      <label style={{ color: "#216FED" }}>{label}</label>
+      <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>{label}</label>
       <input
         className="customField"
         type={type}

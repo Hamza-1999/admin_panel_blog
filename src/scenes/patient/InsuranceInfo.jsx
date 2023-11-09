@@ -14,6 +14,9 @@ import { useDispatch } from "react-redux";
 import { getData } from "../../config/axiosFunctions";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import CustomField from "../../components/CustomField";
+// import "./createpatient.css";
+import "./insuranceInfo.css";
+
 
 const InsuranceInfo = ({ formik }) => {
   console.log(formik.values, "allformikvalsinsurance");
@@ -63,8 +66,10 @@ const InsuranceInfo = ({ formik }) => {
     <Box display="flex" flexDirection="column" gap={5}>
       <Typography
         variant="h5"
+        
         component={"h2"}
-        fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+        fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+        fontWeight={'bold'}
       >
         Primary Insurance:
       </Typography>
@@ -118,7 +123,7 @@ const InsuranceInfo = ({ formik }) => {
           handleBlur={formik.handleBlur}
         />
 
-        <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+        {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
           <DatePicker
             label="Date of Birth"
             value={formik.values.insuredDateOfBirth}
@@ -130,7 +135,23 @@ const InsuranceInfo = ({ formik }) => {
             inputFormat="MM/DD/YYYY"
             clearable
           />
-        </LocalizationProvider>
+        </LocalizationProvider> */}
+
+
+<div>
+  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Birth</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <DatePicker className="insuranceDatePicker"
+      value={formik.values.dateOfDeath}
+      onChange={(value) =>
+        formik.setFieldValue("dateOfBirth", value)
+      }
+      onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div>
 
         {/* gender identity */}
         <CustomSelectBox
@@ -247,7 +268,7 @@ const InsuranceInfo = ({ formik }) => {
       </Box>
       {/*Employee details  */}
       <div>
-        <Typography variant="h5" component={"h4"} marginBottom="8px">
+        <Typography variant="h3" component={"h4"} marginBottom="8px"  color="#414141">
           Employee Details :
         </Typography>
         <Box

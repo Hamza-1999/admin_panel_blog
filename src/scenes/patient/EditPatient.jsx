@@ -102,6 +102,7 @@ const EditPatient = ({ formik }) => {
 
   return (
     <>
+    <Box className="backgroundpatient ">
       <Box  display="flex" flexDirection="column">
         {/* general Info */}
         <Accordion defaultExpanded={true}>
@@ -409,7 +410,7 @@ const EditPatient = ({ formik }) => {
                   onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  // clearable
+          
                 />
               </LocalizationProvider>
 
@@ -423,7 +424,7 @@ const EditPatient = ({ formik }) => {
                   onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
                   renderInput={(params) => <TextField {...params} />}
                   inputFormat="MM/DD/YYYY"
-                  // clearable
+                  
                 />
               </LocalizationProvider>
             </Box>
@@ -620,6 +621,7 @@ const EditPatient = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
+      </Box>
       </Box>
     </>
   );

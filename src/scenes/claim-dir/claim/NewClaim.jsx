@@ -90,6 +90,7 @@ const NewClaim = () => {
 
   // console.log(formik.values.isProfessional, "check professional values");
   return (
+    <Box className="backgroundpatient ">
     <Box margin="20px">
       <Header title="Claim" subtitle="Create a New Claim" />
 
@@ -256,6 +257,7 @@ const NewClaim = () => {
           Save
         </Button>
       </Box>
+    </Box>
     </Box>
   );
 };
