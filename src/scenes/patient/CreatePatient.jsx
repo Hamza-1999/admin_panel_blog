@@ -120,40 +120,6 @@ const CreatePatient = () => {
 </Tabs>
 
 
-
- {/* import React, { useState } from 'react';
-
-const TabComponent = () => {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const handleTabClick = (tabIndex) => {
-    setActiveTab(tabIndex);
-  };
-
-  return (
-    <div>
-      <div className="tabs">
-        <div
-          style={{
-            fontSize: "18px",
-            fontWeight: "bold",
-          }}
-          className={`tabsdesigning ${activeTab === 0 ? 'active' : ''}`}
-          onClick={() => handleTabClick(0)}
-        >
-          Patient Info
-        </div>
-       
-      </div>
-    </div>
-  );
-};
-
-export default TabComponent;  */}
-
-
-
-
           <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
             <CustomButton
               type="reset"

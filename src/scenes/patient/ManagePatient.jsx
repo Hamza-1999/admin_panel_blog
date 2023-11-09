@@ -7,6 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatientAction } from "../../features/actions/createPatientAction";
 import { useNavigate } from "react-router-dom";
+import "./managepatient.css";
 
 const ManagePatient = () => {
   const navigate = useNavigate();
@@ -60,10 +61,12 @@ const ManagePatient = () => {
   }
 
   const columns = [
+   
     {
       field: "firstName",
       headerName: "First Name",
       width: 200,
+      headerClassName: 'bold-header',
       headerAlign: "center",
       align: "center",
     },
@@ -110,7 +113,6 @@ const ManagePatient = () => {
           <DataGrid 
             rows={rows}
             columns={columns}
-            style={{fontSize:"15px"}}
             initialState={{
               pagination: {
                 paginationModel: {
