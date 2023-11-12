@@ -4,6 +4,7 @@ import {
   TextField,
   TextareaAutosize,
   Typography,
+  Grid,
 } from "@mui/material";
 import React from "react";
 import CustomSelectBox from "../../components/CustomSelectBox";
@@ -196,8 +197,7 @@ const NewPayer = ({ handleClose }) => {
             value={values.payerGroupNumber}
             name="payerGroupNumber"
             id="payerGroupNumber"
-            // error={!!touched.firstName && !!errors.firstName}
-            // helperText={touched.firstName && errors.firstName}
+
             sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
             width:"300px",
             height:'45px',
@@ -335,6 +335,357 @@ const NewPayer = ({ handleClose }) => {
       </form>
       </Box>
     </Box>
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+<Box>
+      <Typography
+        variant="h6"
+        component={"h1"}
+        fontSize={"1.6rem"}
+        marginBottom={4}
+        padding={1}
+        fontWeight={"bold"}
+        sx={{background:"#F2F0F0"}}
+
+      >
+        New Payer
+        {/* <Box component={"hr"} /> */}
+      </Typography>
+      <Box padding="14px">
+      <form onSubmit={handleSubmit}>
+        <Box
+          display="grid"
+          gap="30px"
+        >
+
+<Grid container spacing={1}>
+
+  <Grid item md={4}>
+    <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Name"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerName}
+            name="payerName"
+            id="payerName"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+          width:"200px",
+        height:'45px',
+      background:"#E9E9E9" }}
+          />
+         
+  </Grid>
+
+
+
+  <Grid item md={4}>
+  <CustomSelectBox 
+            value={values.payerType}
+            name="payerType"
+            dropdownOptions={payerTypeOpt?.map((opt) => ({
+              value: opt.payerType,
+              id: opt.payerTypeId,
+            }))}
+            label="Payer Type"
+            handleChange={handleChange}
+            handleBlur={handleBlur}
+          
+          sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+
+
+width:"200px",
+height:'61px',
+marginBottom:'-20px',
+background:"#E9E9E9" }} 
+/>
+</Grid>
+  <Grid item md={4}>
+
+<TextField
+  size="small"
+  fullWidth
+
+  type="text"
+  label="Plan Name"
+  onBlur={handleBlur}
+  onChange={handleChange}
+  value={values.planName}
+  name="planName"
+  id="planName"
+  // error={!!touched.firstName && !!errors.firstName}
+  // helperText={touched.firstName && errors.firstName}
+  sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+
+
+width:"200px",
+height:'61px',
+background:"#E9E9E9" }} 
+/>
+</Grid>
+
+</Grid>
+
+
+<Grid container spacing={2}>
+
+  <Grid item md={6}>
+  <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Fax"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerFax}
+            name="payerFax"
+            id="payerFax"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" } ,
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9"}}
+          />
+         
+  </Grid>
+
+  <Grid item md={6}>
+  <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Phone Number"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerPhone}
+            name="payerPhone"
+            id="payerPhone"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+         
+  </Grid>
+</Grid>
+
+
+<Grid container spacing={2}>
+
+  <Grid item md={6}>
+  <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="number"
+            label="Group Number"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerGroupNumber}
+            name="payerGroupNumber"
+            id="payerGroupNumber"
+
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+         
+  </Grid>
+
+  <Grid item md={6}>
+
+  <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Email"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerEmail}
+            name="payerEmail"
+            id="payerEmail"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+
+
+
+
+
+</Grid>
+</Grid>
+
+
+<Grid container spacing={2}>
+
+  <Grid item md={6}>
+  <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Website"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerWebsite}
+            name="payerWebsite"
+            id="payerWebsite"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+       
+  </Grid>
+
+  <Grid item md={6}>
+
+          <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="Zipcode"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerZipCode}
+            name="payerZipCode"
+            id="payerZipCode"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },
+            width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+
+
+
+
+</Grid>
+</Grid>
+
+<Grid container spacing={2}>
+<Grid item md={6}>
+<TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="City"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerCityName}
+            name="payerCityName"
+            id="payerCityName"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },    width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+          </Grid>
+
+<Grid item md={6}>
+          <TextField
+            size="small"
+            fullWidth
+            variant="filled"
+            type="text"
+            label="State"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerStateName}
+            name="payerStateName"
+            id="payerStateName"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            sx={{ gridColumn: { xs: "span 1", sm: "span 1", md: "span 1" },    width:"300px",
+            height:'45px',
+          background:"#E9E9E9" }}
+          />
+
+</Grid>
+</Grid>
+
+<Grid container spacing={2}>
+<Grid item md={6}>
+<TextareaAutosize
+            size="small"
+            fullWidth
+            minRows={5}
+            variant="filled"
+            type="text"
+            placeholder="Address"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.payerAddress}
+            name="payerAddress"
+            id="payerAddress"
+            // error={!!touched.firstName && !!errors.firstName}
+            // helperText={touched.firstName && errors.firstName}
+            style={{ width: '300px' }}
+          />
+    
+          </Grid>
+
+<Grid item md={6}>
+     
+
+<TextareaAutosize
+  size="small"
+  minRows={5}
+  fullWidth
+  variant="filled"
+  type="text"
+  placeholder="Claim Address"
+  onBlur={handleBlur}
+  onChange={handleChange}
+  value={values.payerClaimOfficeAddress}
+  name="payerClaimOfficeAddress"
+  id="payerClaimOfficeAddress"
+  style={{ width: '300px' }}
+/>
+
+</Grid>
+</Grid>
+</Box>
+</form>
+</Box>
+</Box>
+
     
     </>
   );

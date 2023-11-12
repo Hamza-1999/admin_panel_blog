@@ -102,7 +102,7 @@ const EditPatient = ({ formik }) => {
 
   return (
     <>
-    <Box className="backgroundpatient ">
+    <Box className="backgroundpatient">
       <Box  display="flex" flexDirection="column">
         {/* general Info */}
         <Accordion defaultExpanded={true}>

@@ -6,9 +6,7 @@
 .customSearchField{
         display: block;
         border-radius: 7px;
-        height: 40px !important;
-        /* border: 1px solid red !important; */
-        width: 100%;
-        outline: none !important;
+        width:400px;
+       
         border: 1px solid #C0C0C0;         
 }

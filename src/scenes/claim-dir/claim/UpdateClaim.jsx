@@ -28,6 +28,9 @@ import { pdf } from "@react-pdf/renderer";
 import CmsForm15 from "../../../components/pdfs/CmsForm15";
 import AdditionInfo from "./AdditionInfo";
 import AmbulanceInfo from "./AmbulanceInfo";
+import  "../../patient/createpatient.css";
+
+
 const UpdateClaim = () => {
   const { claimNumber } = useParams();
   const navigate = useNavigate();
@@ -198,14 +201,11 @@ const UpdateClaim = () => {
           width: { xs: "95%", sm: "75%", md: "50%" },
         }}
       >
-        <Tabs
+       <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          sx={
-            {
-              // order: { xs: 2, sm: 2, md: 1 },
-            }
-          }
+        
+          
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />

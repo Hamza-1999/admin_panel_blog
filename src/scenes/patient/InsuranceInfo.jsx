@@ -351,6 +351,18 @@ const InsuranceInfo = ({ formik }) => {
         </Box>
       </div>
     </Box>
+
+
+
+
+
+
+
+
+
+
+
+
   );
 };
 

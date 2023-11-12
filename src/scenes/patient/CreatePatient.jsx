@@ -120,6 +120,11 @@ const CreatePatient = () => {
 </Tabs>
 
 
+
+
+
+
+
           <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
             <CustomButton
               type="reset"
@@ -141,7 +146,7 @@ const CreatePatient = () => {
               sx={{
                 marginRight: "30px",
               }}
-              // onSubmit={formik.handleSubmit}
+            
             >
               {loading ? "Saving..." : "Save"}
             </CustomButton>
@@ -152,7 +157,7 @@ const CreatePatient = () => {
           onSubmit={formik.handleSubmit}
           className={`formContainer ${!isFormVisible ? "hidden" : ""}`}
         >
-          {/* <div > */}
+          
           <Box className="formContent">
             {tabValue === 0 && <PatientInfo formik={formik} />}
             {tabValue === 1 && <InsuranceInfo formik={formik} />}

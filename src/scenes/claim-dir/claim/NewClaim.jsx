@@ -134,12 +134,10 @@ const NewClaim = () => {
           width: { xs: "95%", sm: "75%", md: "50%" },
         }}
       >
-        <Tabs
+        {/* <Tabs
           value={tabValue}
           onChange={handleTabChange}
-          // sx={{
-          //   order: { xs: 2, sm: 2, md: 1 },
-          // }}
+      
         >
           <Tab label="Claim" value={0} />
           <Tab label="Charges" value={1} />
@@ -152,7 +150,36 @@ const NewClaim = () => {
             }
             value={3}
           />
-        </Tabs>
+        </Tabs> */}
+
+        <Tabs
+          value={tabValue}
+          onChange={handleTabChange}
+          sx={{
+            order: { xs: 2, sm: 2, md: 1 },
+            marginBottom: "10px",
+            borderRadius: "10px 10px 0 0",
+           
+            
+          }} 
+          
+        >
+          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning" label="Claim" value={0} />
+          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"label="Charges" value={1} />
+          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"label="Additional Info" value={2} />
+          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"
+            label={
+              formik.values.claimTypeId === 1
+                ? "Ambulance Info"
+                : "Information Codes"
+            }
+            value={3}
+          />
+              </Tabs> 
+
+
+
+
 
         {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
           <Button
