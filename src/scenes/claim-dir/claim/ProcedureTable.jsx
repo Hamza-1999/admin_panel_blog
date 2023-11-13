@@ -150,7 +150,7 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
   return (
     
     // <Box sx={{ width: "100%",borderRadius:'20px',background:'white'}}>
-      <DataGrid style={{background:'white',borderRadius:'20px'}}
+      <DataGrid style={{background:'white',borderRadius:'20px',boxShadow: '3px 4px 11px 0px rgba(0, 0, 0, 0.10)'}}
         rows={rows}
         columns={columns}
         sx={{

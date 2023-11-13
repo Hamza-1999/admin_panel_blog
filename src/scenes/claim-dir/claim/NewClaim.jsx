@@ -26,6 +26,7 @@ import AmbulanceInfo from "./AmbulanceInfo";
 import { FormControl, FormLabel } from "react-bootstrap";
 import InsAdditionalinfo from "./InsAdditionalinfo";
 import InformationCodes from "./InformationCodes";
+import CustomButton from "../../../components/CustomButton";
 
 const NewClaim = () => {
   const navigate = useNavigate();
@@ -127,12 +128,12 @@ const NewClaim = () => {
 
       <Stack
         flexDirection={{ xs: "column", sm: "column", md: "row" }}
-        alignItems={{ xs: "flex-start", sm: "flex-start", md: "center" }}
+        // alignItems={{ xs: "flex-start", sm: "flex-start", md: "center" }}
         justifyContent="space-between"
-        gap={"15px"}
-        sx={{
-          width: { xs: "95%", sm: "75%", md: "50%" },
-        }}
+        // gap={"15px"}
+        // sx={{
+        //   width: { xs: "95%", sm: "75%", md: "50%" },
+        // }}
       >
 
         
@@ -166,10 +167,10 @@ const NewClaim = () => {
           }} 
           
         >
-          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning" label="Claim" value={0} />
-          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"label="Charges" value={1} />
-          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"label="Additional Info" value={2} />
-          <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"
+          <Tab  className="tabsdesigning" label="Claim" value={0} />
+          <Tab  className="tabsdesigning"label="Charges" value={1} />
+          <Tab className="tabsdesigning"label="Additional Info" value={2} />
+          <Tab className="tabsdesigning"
             label={
               formik.values.claimTypeId === 1
                 ? "Ambulance Info"
@@ -177,37 +178,20 @@ const NewClaim = () => {
             }
             value={3}
           />
-
-
-   
-      
               </Tabs> 
-              {/* <Box
-      
-      >
-        <Button
-          type="reset"
-          color="error"
-          variant="outlined"
-          form="claimForm"
-          sx={{
-            marginRight: "15px",
-          }}
-          
-          onClick={handleCancel}
-        >
-          Cancel
-        </Button>
-        <Button
+              <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
+        
+            <Button
           type="submit"
           variant="contained"
           form="claimForm"
         
-          sx={{ bgcolor: "#6870fa", color: "#fff" }}
+          sx={{ bgcolor: "#6870fa", color: "#fff",marginRight: "30px",background:'#0061FF',width: '110px',fontSize:'13px',
+          height: '35px' }}
         >
           Save
         </Button>
-      </Box>  */}
+          </Box>
       </Stack>
 
       

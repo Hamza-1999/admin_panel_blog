@@ -515,10 +515,10 @@ lineHeight: 'normal'}}>New#</label>
       >
         <Typography style={{color: 'black',
 
-fontFamily: 'Poppins',
-fontSize: '25px',
+
+fontSize: '30px',
 fontStyle: 'normal',
-fontWeight: '600',
+fontWeight: '700',
 lineHeight: 'normal'}}>Claim#</Typography>
         <Box
           display="grid"
