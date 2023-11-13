@@ -36,6 +36,7 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      
     },
     {
       field: "toDate",
@@ -48,7 +49,7 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
 
     {
       field: "procedureCode",
-      headerName: "Procesdure",
+      headerName: "Procedure",
       width: 150,
       headerAlign: "center",
       align: "center",
@@ -147,13 +148,16 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
   ];
 
   return (
-    <Box sx={{ width: "100%" }}>
-      <DataGrid
+    
+    // <Box sx={{ width: "100%",borderRadius:'20px',background:'white'}}>
+      <DataGrid style={{background:'white',borderRadius:'20px'}}
         rows={rows}
         columns={columns}
         sx={{
           "& .header-bg": {
             backgroundColor: "lightgrey",
+            color: 'black',
+            fontSize: '19px',
           },
         }}
         autoHeight
@@ -167,7 +171,7 @@ const ProcedureTable = ({ claimChargesDto, setClaimChargesDto }) => {
           ),
         }}
       />
-    </Box>
+    // </Box>
   );
 };
 

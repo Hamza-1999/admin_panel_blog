@@ -305,9 +305,9 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              variant="h5"
               component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              fontWeight={'bold'}
             >
               Contact Details:
             </Typography>
@@ -377,9 +377,10 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              variant="h5"
+              // variant="h5"
               component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              fontWeight={'bold'}
             >
               Birth Details:
             </Typography>
@@ -469,9 +470,9 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+               component={"h2"}
+               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+               fontWeight={'bold'}
             >
               Address Details:
             </Typography>
@@ -569,9 +570,9 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
+             component={"h2"}
+             fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+             fontWeight={'bold'}
             >
               Emergency Contact:
             </Typography>

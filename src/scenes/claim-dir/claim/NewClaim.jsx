@@ -134,6 +134,8 @@ const NewClaim = () => {
           width: { xs: "95%", sm: "75%", md: "50%" },
         }}
       >
+
+        
         {/* <Tabs
           value={tabValue}
           onChange={handleTabChange}
@@ -175,39 +177,40 @@ const NewClaim = () => {
             }
             value={3}
           />
+
+
+   
+      
               </Tabs> 
-
-
-
-
-
-        {/* <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
-          <Button
-            type="reset"
-            color="error"
-            variant="outlined"
-            form="claimForm"
-            sx={{
-              marginRight: "15px",
-            }}
-            onClick={handleCancel}
-          >
-            Cancel
-          </Button>
-          <Button
-            type="submit"
-            variant="contained"
-            form="claimForm"
-            // sx={{
-            //   marginRight: "15px",
-            // }}
-            // onSubmit={formik.handleSubmit}
-            sx={{ bgcolor: "#6870fa", color: "#fff" }}
-          >
-            Save
-          </Button>
-        </Box> */}
+              {/* <Box
+      
+      >
+        <Button
+          type="reset"
+          color="error"
+          variant="outlined"
+          form="claimForm"
+          sx={{
+            marginRight: "15px",
+          }}
+          
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          type="submit"
+          variant="contained"
+          form="claimForm"
+        
+          sx={{ bgcolor: "#6870fa", color: "#fff" }}
+        >
+          Save
+        </Button>
+      </Box>  */}
       </Stack>
+
+      
 
       <form id="claimForm" onSubmit={formik.handleSubmit}>
         <Box
@@ -252,9 +255,9 @@ const NewClaim = () => {
         </Box>
       </form>
 
-      <Box
+      {/* <Box
         sx={{
-          // order: { xs: 1, sm: 1, md: 2 }
+         
           margin: "15px",
         }}
       >
@@ -266,7 +269,7 @@ const NewClaim = () => {
           sx={{
             marginRight: "15px",
           }}
-          // onSubmit={formik.handleSubmit}
+          
           onClick={handleCancel}
         >
           Cancel
@@ -275,15 +278,12 @@ const NewClaim = () => {
           type="submit"
           variant="contained"
           form="claimForm"
-          // sx={{
-          //   marginRight: "15px",
-          // }}
-          // onSubmit={formik.handleSubmit}
+        
           sx={{ bgcolor: "#6870fa", color: "#fff" }}
         >
           Save
         </Button>
-      </Box>
+      </Box> */}
     </Box>
     </Box>
   );
