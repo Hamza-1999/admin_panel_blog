@@ -1,5 +1,5 @@
 import { Search } from "@mui/icons-material";
-import './Custom-styling/CustomSearchField.css';
+import './Custom-styling/ClaimSearchField.css';
 
 import {
   FormControl,
@@ -23,10 +23,9 @@ const ClaimSearchField = ({
    
     <div>
       <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
-      <TextField className="customSearchField"
+      <TextField className="claimSearchField"
         size="small"
         fullWidth
-        variant="outlined"
         type={type}
         // label={label}
         value={fieldVal || ""}
@@ -35,6 +34,7 @@ const ClaimSearchField = ({
         onBlur={handleBlur}
         sx={{
           cursor: "default",
+          // width: "400px",
         }}
         InputProps={{
           endAdornment: (
@@ -45,7 +45,7 @@ const ClaimSearchField = ({
             </InputAdornment>
           ),
         }}
-        InputLabelProps={{ shrink: true }}
+        InputLabelProps={{ shrink: false }}
       />
     </div>
    

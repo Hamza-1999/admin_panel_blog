@@ -72,7 +72,9 @@ const ClaimCharges = ({
                 overflowY: "scroll",
                 border: "1px solid lightgrey",
                 padding: "12px",
-                width: { xs: "95%", sm: "75%", md: "50%" },
+                width: { xs: "95%", sm: "75%", md: "100%" },
+                background:'white',
+                borderRadius:'20px'
               }}
             >
               <Box>
@@ -529,10 +531,11 @@ const ClaimCharges = ({
               Add Procedures
             </Button>
 
-            <ProcedureTable
+            <ProcedureTable 
               claimChargesDto={claimChargesDto}
               setClaimChargesDto={setClaimChargesDto}
               findClaim={findClaim}
+              
             />
           </Box>
         </div>
