@@ -16,6 +16,7 @@ import CustomSelectBox from "../../components/CustomSelectBox";
 import CustomField from "../../components/CustomField";
 // import "./createpatient.css";
 import "./insuranceInfo.css";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 
 const InsuranceInfo = ({ formik }) => {
@@ -65,11 +66,8 @@ const InsuranceInfo = ({ formik }) => {
   return (
     <Box display="flex" flexDirection="column" gap={5}>
       <Typography
-        variant="h5"
-        
-        component={"h2"}
-        fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-        fontWeight={'bold'}
+         component="h3"
+         fontWeight={'bold'}
       >
         Primary Insurance:
       </Typography>
@@ -139,9 +137,9 @@ const InsuranceInfo = ({ formik }) => {
 
 
 <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Birth</label>
+  <label className="customLabel">Date of Birth</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="insuranceDatePicker"
+    <CustomDatePicker className="insuranceDatePicker"
       value={formik.values.dateOfDeath}
       onChange={(value) =>
         formik.setFieldValue("dateOfBirth", value)
@@ -268,7 +266,8 @@ const InsuranceInfo = ({ formik }) => {
       </Box>
       {/*Employee details  */}
       <div>
-        <Typography variant="h3" component={"h4"} marginBottom="8px"  color="#414141">
+        <Typography   component="h4" fontWeight={'bold'}
+               marginBottom="8px"  color="#414141">
           Employee Details :
         </Typography>
         <Box

@@ -34,6 +34,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
 import { ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 const EditPatient = ({ formik }) => {
   // const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -111,15 +112,14 @@ const EditPatient = ({ formik }) => {
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography 
+           <Typography
               variant="h5"
               component={"h2"}
               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
-              
-              
             >
-              General Information:
+          General Information:
             </Typography>
+
           </AccordionSummary>
 
           <AccordionDetails>

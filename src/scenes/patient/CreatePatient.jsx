@@ -73,7 +73,7 @@ const CreatePatient = () => {
     initialValues: patientInitValues,
     onSubmit: (values, action) => {
       try {
-        handleFormSubmit(values);
+        // handleFormSubmit(values);
         console.log(values, "checking submit values of createPatient");
       } catch (error) {
         console.error("Error creating patient:", error);

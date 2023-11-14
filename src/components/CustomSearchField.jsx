@@ -1,5 +1,6 @@
 import { Search } from "@mui/icons-material";
 import './Custom-styling/CustomSearchField.css';
+import './Custom-styling/CustomLabel.css';
 
 import {
   FormControl,
@@ -19,8 +20,8 @@ const CustomSearchField = ({
   handleBlur,
 }) => {
   return (
-   
-   
+    
+  
     // <div >
     //   <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
       
@@ -50,9 +51,11 @@ const CustomSearchField = ({
     //     InputLabelProps={{ shrink: true }}
     //   />
     // </div>
+   
+    <>
 
     <div>
-  <label className="customSearchLabel" htmlFor="">{label}</label>
+  <label className="customLabel" htmlFor="">{label}</label>
 
   <div style={{ position: 'relative' }}>
     <input
@@ -73,6 +76,41 @@ const CustomSearchField = ({
     </div>
   </div>
 </div>  
+
+
+
+
+{/* <div>
+  <label className="customSearchLabel" htmlFor="">{label}</label>
+
+  <div className="d-flex">
+    <input
+      className="customSearchField"
+      type={type}
+      autoComplete="off"
+      value={fieldVal || ""}
+      name={name}
+      onChange={handleChange}
+      onBlur={handleBlur}
+      spellCheck={false}
+    />
+      <IconButton onClick={handleModalOpen}>
+        <Search style={{ color: 'black' }} />
+      </IconButton>
+    
+  </div>
+</div> */}
+
+
+
+
+</>
+
+
+
+
+
+
   );
 }
 

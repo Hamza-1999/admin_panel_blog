@@ -26,6 +26,7 @@ import { Expand, ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
+import CustomDatePicker from "../../components/CustomDatePicker";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -105,8 +106,7 @@ const PatientInfo = ({ formik }) => {
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              component="h3"
               fontWeight={'bold'}
             >
               General Information:
@@ -305,8 +305,7 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              component="h3"
               fontWeight={'bold'}
             >
               Contact Details:
@@ -378,8 +377,7 @@ const PatientInfo = ({ formik }) => {
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
+              component="h3"
               fontWeight={'bold'}
             >
               Birth Details:
@@ -400,9 +398,9 @@ const PatientInfo = ({ formik }) => {
             >
 
 <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Birth</label>
+  <label className="customLabel">Date of Birth</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="customDatePicker"
+    <CustomDatePicker className="customDatePicker"
       // label="Date of Death"
       value={formik.values.dateOfBirth}
       onChange={(value) =>
@@ -443,9 +441,9 @@ const PatientInfo = ({ formik }) => {
               </LocalizationProvider> */}
 
   <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Death</label>
+  <label className="customLabel">Date of Death</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="customDatePicker"
+    <CustomDatePicker className="customDatePicker"
       // label="Date of Death"
       value={formik.values.dateOfDeath}
       onChange={(value) =>
@@ -470,9 +468,8 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-               component={"h2"}
-               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-               fontWeight={'bold'}
+                component="h3"
+                fontWeight={'bold'}
             >
               Address Details:
             </Typography>
@@ -570,9 +567,8 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-             component={"h2"}
-             fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-             fontWeight={'bold'}
+            component="h3"
+            fontWeight={'bold'}
             >
               Emergency Contact:
             </Typography>

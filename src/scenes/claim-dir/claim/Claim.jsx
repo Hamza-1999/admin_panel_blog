@@ -13,6 +13,7 @@ import { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { useNavigate } from "react-router-dom";
 import ClaimTable from "./ClaimTable";
+import CustomButton from "../../../components/CustomButton";
 
 const Claim = () => {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ const Claim = () => {
     <Box className="backgroundpatient ">
     <Box margin="20px">
       <Header title="Claim" />
-      <Stack
+      {/* <Stack
         sx={{
           borderBottom: "1px solid grey",
           padding: "10px 20px 15px",
@@ -35,8 +36,20 @@ const Claim = () => {
         >
           Add Claim
         </Button>
-      </Stack>
+      </Stack> */}
 
+<Box>
+     
+            <CustomButton
+              type="button"
+              handleClick={() => navigate("/claims/new")}
+              isBlue={true}
+              padding="5px 30px"
+            >
+               Add Claim
+            </CustomButton>
+          </Box>
+         
       <ClaimTable isModal={false} />
     </Box>
     </Box>

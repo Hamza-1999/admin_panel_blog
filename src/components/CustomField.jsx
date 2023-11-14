@@ -1,6 +1,7 @@
 import { TextField } from "@mui/material";
 import React from "react";
 import "./Custom-styling/CustomField.css";
+import "./Custom-styling/CustomLabel.css"
 const CustomField = ({
   type,
   label,
@@ -12,7 +13,7 @@ const CustomField = ({
 }) => {
   return (
     <div>
-      <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>{label}</label>
+      <label className="customLabel">{label}</label>
       <input
         className="customField"
         type={type}
