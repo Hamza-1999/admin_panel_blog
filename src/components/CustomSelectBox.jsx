@@ -6,9 +6,6 @@ import CustomModal from "./CustomModal";
 
 import './Custom-styling/CustomSelectBox.css';
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-
-
-
 const CustomSelectBox = ({
   value,
   handleChange,
@@ -18,14 +15,13 @@ const CustomSelectBox = ({
   name,
 }) => {
   return (
-    <div >
+    <div>
     <FormControl fullWidth>
       <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
       <Select className="customSelectBox"
         value={value}
         name={name}
         type="text"
-   
         onChange={handleChange}
         onBlur={handleBlur}
        
@@ -48,7 +44,4 @@ const CustomSelectBox = ({
     </div>
   );
 };
-
-
-
 export default CustomSelectBox;
