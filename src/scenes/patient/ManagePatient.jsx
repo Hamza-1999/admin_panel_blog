@@ -7,7 +7,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useDispatch, useSelector } from "react-redux";
 import { getPatientAction } from "../../features/actions/createPatientAction";
 import { useNavigate } from "react-router-dom";
-import "./managepatient.css";
+// import "./managepatient.css";
 
 const ManagePatient = () => {
   const navigate = useNavigate();
@@ -25,8 +25,7 @@ const ManagePatient = () => {
 
   if (error) {
     return (
-      
-      <Box m={"20px" }>
+      <Box m={"20px"}>
         <Header title="MANAGE PATIENT" subtitle="Show all patients" />
         <div>Error loading data. Please try again later.</div>
       </Box>
@@ -61,12 +60,11 @@ const ManagePatient = () => {
   }
 
   const columns = [
-   
     {
       field: "firstName",
       headerName: "First Name",
       width: 200,
-      headerClassName: 'bold-header',
+      headerClassName: "bold-header",
       headerAlign: "center",
       align: "center",
     },
@@ -103,34 +101,33 @@ const ManagePatient = () => {
 
   return (
     <Box className="backgroundpatient ">
-    <Box m={"20px"}>
-      <Header title="MANAGE PATIENT" subtitle="Show all patients" />
-      {loading ? (
-        // <CircularProgress />
-        <Typography>Loading...</Typography>
-      ) : (
-        <Box height={"400px"} width={"100%"}>
-          <DataGrid 
-            rows={rows}
-            columns={columns}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 5,
+      <Box m={"20px"}>
+        <Header title="MANAGE PATIENT" subtitle="Show all patients" />
+        {loading ? (
+          // <CircularProgress />
+          <Typography>Loading...</Typography>
+        ) : (
+          <Box height={"400px"} width={"100%"}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 5,
+                  },
                 },
-              },
-            }}
-            pageSize={5}
-            disableSelectionOnClick
-            onCellClick={(params) =>
-              navigate(`/showpatient/${params.row.accountNo}`)
-            }
-          />
-        </Box>
-      )}
+              }}
+              pageSize={5}
+              disableSelectionOnClick
+              onCellClick={(params) =>
+                navigate(`/showpatient/${params.row.accountNo}`)
+              }
+            />
+          </Box>
+        )}
+      </Box>
     </Box>
-    </Box>
-   
   );
 };
 
