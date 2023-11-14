@@ -96,6 +96,7 @@ const CreatePatient = () => {
     <Box  margin="20px" paddingBottom={"25px"}>
       <Header title="CREATE PATIENT" subtitle="Create a New Patient Profile" />
       <Box>
+        
         <Stack
           sx={{ flexDirection: { xs: "column", sm: "column", md: "row" } }}
           // alignItems="center"
@@ -114,9 +115,9 @@ const CreatePatient = () => {
     
   }} 
 >
-  <Tab style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Patient Info" value={0} />
-  <Tab  style={{fontSize:"18px",fontWeight:"bold"}} className="tabsdesigning"  label="Insurance Info" value={1} />
-  <Tab  style={{fontSize:"18px",fontWeight:"bold"}}className="tabsdesigning"  label="Payer Info" value={2} />
+  <Tab  className="tabsdesigning"  label="Patient Info" value={0} />
+  <Tab   className="tabsdesigning"  label="Insurance Info" value={1} />
+  <Tab className="tabsdesigning"  label="Payer Info" value={2} />
 </Tabs>
 
 

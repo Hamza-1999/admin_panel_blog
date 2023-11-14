@@ -100,6 +100,13 @@ const ClaimTable = ({ onCellClick, isModal }) => {
           rows={rows}
           editMode="row"
           columns={columns}
+          sx={{
+            "& .header-bg": {
+              backgroundColor: "lightgrey",
+              color: 'black',
+              fontSize: '18px',
+            },
+          }}
           initialState={{
             pagination: {
               paginationModel: {
