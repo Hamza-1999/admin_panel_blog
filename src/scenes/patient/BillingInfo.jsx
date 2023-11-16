@@ -16,6 +16,7 @@ import { getData } from "../../config/axiosFunctions";
 import path from "../../config/apiUrl";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomField from "../../components/CustomField";
+import CheckBox from "../../components/CheckBox";
 
 const BillingInfo = ({ formik }) => {
   const [statementType, setStatementType] = useState([]);
@@ -139,7 +140,7 @@ const BillingInfo = ({ formik }) => {
         <AccordionDetails>
           <FormGroup>
             <FormControlLabel control={
-            <Checkbox sx={{width:"30px" }} />} 
+            <CheckBox/>} 
 
 label={
   <Typography variant="h4" fontWeight='600'>

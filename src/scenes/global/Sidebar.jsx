@@ -21,6 +21,7 @@ import Claim from "../claim-dir/claim/Claim";
 import sideBarCover from '../../assets/siderbar.png'
 import userBackground from '../../assets/background.png'
 import userImg from '../../assets/user.png'
+import '../../components/Custom-styling/Sidebar.css'
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
@@ -321,15 +322,17 @@ const Sidebar = () => {
             </Collapse> */}
 
 
-<Collapse in={isCustomSetupOpen}>
-  <Item
-    title="Practice"
-    to="/practice"
-    icon={<PersonOutlinedIcon />}
-    selected={selected}
-    setSelected={setSelected}
-    
-  />
+<Collapse  in={isCustomSetupOpen}>
+
+
+<Item
+  title="Practice"
+  to="/practice"
+  icon={<PersonOutlinedIcon />}
+  selected={selected}
+  setSelected={setSelected}
+
+/>
   <Item
     title="Provider"
     to="/provider"
@@ -338,6 +341,7 @@ const Sidebar = () => {
     setSelected={setSelected}
   
   />
+
 
 
 

@@ -25,8 +25,8 @@ const CustomButton = ({
     textTransform:"inherit",
     padding: padding,
     "&:hover": {
-      backgroundColor: "#2fa8ee",
-     
+      backgroundColor: isBlue ? "#2fa8ee": '#b8b4b4'
+      
     },
 
 
