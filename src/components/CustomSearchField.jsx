@@ -70,7 +70,7 @@ const CustomSearchField = ({
 
     <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)' }}>
       <IconButton onClick={handleModalOpen}>
-        <Search style={{color:'black'}} />
+        <Search style={{color:'black',fontSize:'2rem'}} />
       </IconButton>
     </div>
   </div>
