@@ -18,9 +18,7 @@ const CustomSelectBox2 = ({
   return (
     <div>
       <FormControl fullWidth>
-        <label style={{ color: '#216FED',
-fontSize:"17px",fontWeight:'bold',
-lineHeight: 'normal'}} htmlFor="">
+        <label className="customLabel" htmlFor="">
           {label}
         </label>
         <Select

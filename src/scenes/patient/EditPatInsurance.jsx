@@ -64,8 +64,9 @@ const EditPatInsurance = ({ formik, editFormData, setEditFormData }) => {
   return (
     <Box display="flex" flexDirection="column" gap={5}>
       <Typography
-        variant="h5"
+        
         component={"h2"}
+        fontWeight="bold"
         fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.4rem" }}
       >
         Primary Insurance:

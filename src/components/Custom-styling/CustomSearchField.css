@@ -11,8 +11,7 @@
 
 .customSearchField{
         display: block;
-        /* width:400px; */
-        border-radius: 7px 0px 0px 7px;
+        /* border-radius: 7px 0px 0px 7px; */
         background: #F2F0F0;
         border: 1px solid #C0C0C0;   
         width: 100%;
@@ -24,3 +23,7 @@
         cursor: default;
         margin-top:5px ;    
 }
+
+
+  
+  

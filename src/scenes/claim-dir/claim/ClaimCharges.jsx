@@ -526,12 +526,13 @@ const ClaimCharges = ({
             <Button
               onClick={handleAddProcedure}
               variant="contained"
-              sx={{ bgcolor: "#2F78EE", color: "#fff", marginBottom: "15px",borderRadius: '7px',width: '300px',
-              height: '47px',color: '#FFF',
+              sx={{ bgcolor: "#2F78EE", color: "#fff", marginBottom: "15px",borderRadius: '7px',width: '160px',
+              height: '42px',
+              color: '#FFF',
               fontFamily: 'Calibri',
-              fontSize: '20px',
+              fontSize: '1rem',
               fontStyle: 'normal',
-              fontWeight: '700',
+              fontWeight: '400',
               lineHeight: 'normal'}}
             >
               Add Procedures

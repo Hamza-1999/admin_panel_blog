@@ -79,7 +79,7 @@ const EditPayerInfo = ({ formik }) => {
         <NewPayer />
       </CustomModal>
 
-      <Box display="flex" flexDirection="column" gap={5}>
+      <Box display="flex" flexDirection="column" gap={5} >
         <Typography variant="h5" component={"h4"} marginBottom="8px">
           Payer Information:
         </Typography>

@@ -47,13 +47,19 @@ const BillingInfo = ({ formik }) => {
   return (
     <Box display="flex" flexDirection="column">
       <Accordion defaultExpanded={true}>
-        <AccordionSummary>Statement Options</AccordionSummary>
+        <AccordionSummary>
+          <Typography variant="h2" fontWeight='600' >Statement Options</Typography>
+        </AccordionSummary>
 
         <AccordionDetails>
           <Box display="flex" gap="20px" flexDirection="column">
-            <FormGroup>
-              <FormControlLabel control={<Checkbox />} label="Send Statement" />
-            </FormGroup>
+            {/* <FormGroup>
+             <FormControlLabel 
+              className="customLabel"
+              control={<Checkbox />} label="Send Statement" />
+            </FormGroup> */}
+
+
 
             {/* statement type */}
             <Box
@@ -95,18 +101,18 @@ const BillingInfo = ({ formik }) => {
             </Box>
             {/* comment */}
             <Stack>
-              <label>Patient Comment (applies to user print statements)</label>
+              <label  className="customLabel">Patient Comment (applies to user print statements)</label>
               <TextareaAutosize
                 minRows={10}
                 value={formik.values.patientComment1}
                 name="patientComment1"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none" }}
+                style={{ resize: "none", fontSize:"1.5rem" }}
               />
             </Stack>
             <Box sx={{ width: { xs: "100%", sm: "100%", md: "50%" } }}>
-              <label style={{ display: "block" }}>
+              <label className="customLabel" style={{ display: "block" }}>
                 Patient Comment (applies to automated statements)
               </label>
               <TextareaAutosize
@@ -115,7 +121,7 @@ const BillingInfo = ({ formik }) => {
                 name="patientComment2"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none", width: "100%" }}
+                style={{ resize: "none", width: "100%", fontSize:"1.5rem" }}
               />
             </Box>
           </Box>
@@ -123,11 +129,15 @@ const BillingInfo = ({ formik }) => {
       </Accordion>
       {/* collection options */}
       <Accordion>
-        <AccordionSummary>Collection Options</AccordionSummary>
+        <AccordionSummary >
+       <Typography variant="h2" fontWeight="600">
+       Collection Options
+     </Typography>
+     </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
             <FormControlLabel control={<Checkbox />} label="Send Statement" />
-            <Typography variant="h5" component="p" fontSize=".8rem">
+            <Typography variant="h3" component="p" fontSize="1.6rem" marginBottom={'5px'}>
               (applies to statement automation and batch printing)
             </Typography>
           </FormGroup>
@@ -167,16 +177,26 @@ const BillingInfo = ({ formik }) => {
       </Accordion>
       {/* payment portal */}
       <Accordion>
-        <AccordionSummary>Payment Portal Options</AccordionSummary>
+        {/* <AccordionSummary>Payment Portal Options</AccordionSummary> */}
+        <AccordionSummary >
+       <Typography variant="h2" fontWeight="600">
+       Payment Portal Options
+     </Typography>
+     </AccordionSummary>
         <AccordionDetails>
           <Box>
-            <Typography>No Payment Portal</Typography>
+            <Typography component="h4" fontWeight="500">No Payment Portal</Typography>
           </Box>
         </AccordionDetails>
       </Accordion>
       {/* guarantor */}
       <Accordion>
-        <AccordionSummary>Guarantor</AccordionSummary>
+        {/* <AccordionSummary>Guarantor</AccordionSummary> */}
+        <AccordionSummary >
+       <Typography variant="h2" fontWeight="600">
+       Guarantor
+     </Typography>
+     </AccordionSummary>
         <AccordionDetails>
           <Box display="flex" flexDirection="column" gap="20px">
             <Box width={{ xs: "100%", sm: "60%", md: "50%" }}>

@@ -68,12 +68,72 @@ const PayerInfo = ({ formik }) => {
       </CustomModal>
 
       <Box display="flex" flexDirection="column" gap={5}>
-        <Typography variant="h5" component={"h2"}
-        fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-        fontWeight={'bold'}
+        <Typography  component="h2"
+              fontWeight='600'
          >
           Payer Information:
         </Typography>
+
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(4, minmax(0, 1fr))",
+            },
+          }}
+        >
+          <CustomField
+            type="number"
+            label="Copay"
+            value={formik.values.payerInfoCopayAmount}
+            name="payerInfoCopayAmount"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+          />
+          <CustomField
+            type="number"
+            label="Co-Insurance %"
+            value={formik.values.payerInfoCoInsurancePercent}
+            name="payerInfoCoInsurancePercent"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+          />
+          <CustomField
+            type="number"
+            label="Deductible"
+            value={formik.values.payerInfoDeductibleAmount}
+            name="payerInfoDeductibleAmount"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+          />
+          <CustomField
+            type="number"
+            label="Out of Pocket Max"
+            value={formik.values.payerInfoOutOfPocketMax}
+            name="payerInfoOutOfPocketMax"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+          />
+        </Box>
+
+
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(4, minmax(0, 1fr))",
+            },
+          }}
+        >
+        
+        </Box>
+
         <Box
           display="grid"
           gap="30px"
@@ -82,7 +142,9 @@ const PayerInfo = ({ formik }) => {
               xs: "repeat(1, minmax(0, 1fr))",
               sm: "1fr 3fr",
               md: "repeat(4, minmax(0, 1fr))",
+              
             },
+            width:{xs:'90%',md:'90%'}
           }}
         >
           {/* priority type */}
@@ -177,7 +239,7 @@ const PayerInfo = ({ formik }) => {
           />
         </Box>
 
-        <Box
+        {/* <Box
           display="grid"
           gap="30px"
           sx={{
@@ -220,7 +282,7 @@ const PayerInfo = ({ formik }) => {
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
           />
-        </Box>
+        </Box> */}
 
         <Box
           display="grid"

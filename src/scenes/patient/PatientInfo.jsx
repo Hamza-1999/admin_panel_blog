@@ -26,6 +26,7 @@ import { Expand, ExpandMore } from "@mui/icons-material";
 import CustomField from "../../components/CustomField";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
+import CustomDatePicker from "../../components/CustomDatePicker";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -99,15 +100,14 @@ const PatientInfo = ({ formik }) => {
         {/* general Info */}
         <Accordion defaultExpanded={true}>
           <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-              fontWeight={'bold'}
+              component="h2"
+              fontWeight="600"
             >
               General Information:
             </Typography>
@@ -300,14 +300,13 @@ const PatientInfo = ({ formik }) => {
         {/* contact details */}
         <Accordion>
           <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-              fontWeight={'bold'}
+              component="h2"
+              fontWeight="600"
             >
               Contact Details:
             </Typography>
@@ -372,15 +371,14 @@ const PatientInfo = ({ formik }) => {
         {/* Birth Details */}
         <Accordion>
           <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component={"h2"}
-              fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-              fontWeight={'bold'}
+              component="h2"
+              fontWeight="600"
             >
               Birth Details:
             </Typography>
@@ -400,9 +398,9 @@ const PatientInfo = ({ formik }) => {
             >
 
 <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Birth</label>
+  <label className="customLabel">Date of Birth</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="customDatePicker"
+    <CustomDatePicker className="customDatePicker"
       // label="Date of Death"
       value={formik.values.dateOfBirth}
       onChange={(value) =>
@@ -414,38 +412,10 @@ const PatientInfo = ({ formik }) => {
     />
   </LocalizationProvider>
 </div>
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-                <DatePicker className="customDatePicker"
-                  label="Date of Birth"
-                  value={formik.values.dateOfBirth}
-                  onChange={(value) => {
-                    formik.setFieldValue("dateOfBirth", value);
-                  }}
-                  onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
-                  renderInput={(params) => <TextField {...params} />}
-                  inputFormat="MM/DD/YYYY"
-                  
-                />
-              </LocalizationProvider> */}
-
-              {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-                <DatePicker className="customDatePicker"
-                  label="Date of Death"
-                  value={formik.values.dateOfDeath}
-                  onChange={(value) =>
-                    formik.setFieldValue("dateOfDeath", value)
-                  }
-                  onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
-                  renderInput={(params) => <TextField {...params} />}
-                  inputFormat="MM/DD/YYYY"
-               
-                />
-              </LocalizationProvider> */}
-
   <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Date of Death</label>
+  <label className="customLabel">Date of Death</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="customDatePicker"
+    <CustomDatePicker className="customDatePicker"
       // label="Date of Death"
       value={formik.values.dateOfDeath}
       onChange={(value) =>
@@ -465,15 +435,14 @@ const PatientInfo = ({ formik }) => {
         {/* addres details */}
         <Accordion>
           <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore />}
+             expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-               component={"h2"}
-               fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-               fontWeight={'bold'}
-            >
+                component="h2"
+                fontWeight="600"  
+                          >
               Address Details:
             </Typography>
           </AccordionSummary>
@@ -565,14 +534,13 @@ const PatientInfo = ({ formik }) => {
         {/* emergency contact */}
         <Accordion>
           <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-             component={"h2"}
-             fontSize={{ xs: ".9rem", sm: "1.1rem", md: "1.8rem" }}
-             fontWeight={'bold'}
+            component="h2"
+            fontWeight="600"
             >
               Emergency Contact:
             </Typography>

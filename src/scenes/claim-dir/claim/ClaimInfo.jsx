@@ -32,7 +32,7 @@ import BillingProvider from "../../custom-setup/billing-provider/BillingProvider
 import RenderingProvider from "../../custom-setup/rendering-provider/RenderingProvider";
 import InsuredParty from "../../custom-setup/insured-party/InsuredParty";
 import CustomSelectBox2 from "../../../components/CustomSelectBox2";
-import ClaimSearchField from "../../../components/ClaimSearchField";
+
 
 
 const ClaimInfo = ({ formik, setClaimIds, setFacilityId }) => {
@@ -441,16 +441,22 @@ lineHeight: 'normal'}}>New#</label>
 
 
 
-      <Box style={{background:'white',borderRadius:'20px'}}display="flex" flexDirection="column"
-  // sx={{
-  //   height: "100vh", 
-  //   display: "flex",
-  //   alignItems: "center", 
-  //   justifyContent: "center", 
-  // }}
-  >
-     
-      {/* patient modal */}
+
+
+
+
+
+
+
+
+
+
+
+      
+
+     <Box style={{background:'white',borderRadius:'20px'}}display="flex" flexDirection="column">
+
+   
       <CustomModal
         open={openPatientModal}
         handleClose={() => setOpenPatientModal(false)}
@@ -463,7 +469,7 @@ lineHeight: 'normal'}}>New#</label>
           formik={formik}
         />
       </CustomModal>
-      {/* facility modal */}
+     
       <CustomModal
         open={openFacilityModal}
         handleClose={() => setOpenFacilityModal(false)}
@@ -474,7 +480,7 @@ lineHeight: 'normal'}}>New#</label>
           setFieldValue={formik.setFieldValue}
         />
       </CustomModal>
-      {/* billing provider */}
+
       <CustomModal
         open={openBillingProviderMod}
         handleClose={() => setOpenBillingProviderMod(false)}
@@ -485,7 +491,7 @@ lineHeight: 'normal'}}>New#</label>
           setValues={formik.setValues}
         />
       </CustomModal>
-      {/* rendering provider */}
+      
       <CustomModal
         open={openRenderingProviderMod}
         handleClose={() => setOpenRenderingProviderMod(false)}
@@ -496,7 +502,7 @@ lineHeight: 'normal'}}>New#</label>
           setValues={formik.setValues}
         />
       </CustomModal>
-      {/* Insurance modal */}
+ 
       <CustomModal
         open={openInsuredParty}
         handleClose={() => setOpenInsuredParty(false)}
@@ -507,18 +513,17 @@ lineHeight: 'normal'}}>New#</label>
           setValues={formik.setValues}
         />
       </CustomModal>
-      <Box 
+      <Box
         display="flex"
         sx={{ width: { xs: "95%", sm: "75%", md: "90%" },marginLeft:'40px',marginTop:'20px', marginBottom:'20px'}}
         flexDirection="column"
         gap={"20px"}
+
       >
         <Typography style={{color: 'black',
-
-
-fontSize: '30px',
+fontSize: '25px',
 fontStyle: 'normal',
-fontWeight: '700',
+fontWeight: '600',
 lineHeight: 'normal'}}>Claim#</Typography>
         <Box
           display="grid"
@@ -537,9 +542,9 @@ lineHeight: 'normal'}}>Claim#</Typography>
             <label style={{color: '#216FED',
 
 fontFamily: 'Poppins',
-fontSize: '19px',
+fontSize: '15px',
 fontStyle: 'normal',
-fontWeight: '600',
+fontWeight: '400',
 lineHeight: 'normal'}}>New#</label>
             <TextField
               size="small"
@@ -547,6 +552,7 @@ lineHeight: 'normal'}}>New#</label>
               fullWidth
               variant="filled"
               disabled
+              label="#New"
               style={{background:'white'}}
             />
           </FormControl>
@@ -560,61 +566,63 @@ lineHeight: 'normal'}}>New#</label>
             label="Reference #"
           />
 
-<CustomSelectBox2   
-  value={formik.values.frequencyTypeId}
-  name="frequencyTypeId"
-  dropdownOptions={frequencyOpt?.map((opt) => ({
-    value: opt.claimFrequencyName,
-    id: opt.claimFrequencyId,
-  }))}
-  label="Frequncy Type"
-  handleChange={formik.handleChange}
-  handleBlur={formik.handleBlur}
-  formik={formik}
-/>
-
+          <CustomSelectBox2
+            value={formik.values.frequencyTypeId}
+            name="frequencyTypeId"
+            dropdownOptions={frequencyOpt?.map((opt) => ({
+              value: opt.claimFrequencyName,
+              id: opt.claimFrequencyId,
+            }))}
+            label="Frequncy Type"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            formik={formik}
+          />
         </Box>
 
-        
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(2, minmax(0, 1fr))",
+            },
+          }}
+        >
+          <CustomSearchField
+            label="Patient"
+            type="text"
+            handleModalOpen={() => setOpenPatientModal(true)}
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.patientName}
+            name="patientName"
+          />
 
-        <Grid container spacing={2}>
-  <Grid item md={6}>
-    <CustomSearchField
-      label="Patient"
-      type="text"
-      handleModalOpen={() => setOpenPatientModal(true)}
-      handleChange={formik.handleChange}
-      handleBlur={formik.handleBlur}
-      fieldVal={formik.values.patientName}
-      name="patientName"
-      
-    />
-  </Grid>
-
-
-
-
-
-<Grid item md={6}>
-<CustomSearchField 
-  label="Billing Provider"
-  type="text"
-  handleChange={formik.handleChange}
-  handleBlur={formik.handleBlur}
-  fieldVal={formik.values.billingProviderName}
-  name="billingProviderName"
-  handleModalOpen={() => setOpenBillingProviderMod(true)}
-  
-/>
-
-
-</Grid>
-</Grid>
-
-
-<Grid container  spacing={2}>
-  <Grid item md={6}>
-  <CustomSearchField
+<CustomSearchField
+            label="Biling Provider"
+            type="text"
+            handleChange={formik.handleChange}
+            handleBlur={formik.handleBlur}
+            fieldVal={formik.values.billingProviderName}
+            name="billingProviderName"
+            handleModalOpen={() => setOpenBillingProviderMod(true)}
+          />
+        </Box>
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(2, minmax(0, 1fr))",
+            },
+          }}
+        >
+          <CustomSearchField
             label="Rendering Provider"
             type="text"
             handleChange={formik.handleChange}
@@ -623,11 +631,7 @@ lineHeight: 'normal'}}>New#</label>
             name="renderingProviderName"
             handleModalOpen={() => setOpenRenderingProviderMod(true)}
           />
-         
-  </Grid>
-
-<Grid item md={6}>
-<CustomSearchField
+           <CustomSearchField
             label="Facility"
             type="text"
             handleModalOpen={() => setOpenFacilityModal(true)}
@@ -636,28 +640,25 @@ lineHeight: 'normal'}}>New#</label>
             fieldVal={formik.values.facilityName}
             name="facilityName"
           />
-</Grid>
-</Grid>
+        </Box>
+  
 
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(2, minmax(0, 1fr))",
+            },
+          }}
+        >
+          <CustomSearchField type="text" label="Secondary Insurance" />
 
-
-
-
-
-
-
-<Grid container spacing={2}>
-  <Grid item md={6}>
-  <CustomSearchField type="text" label="Secondary Insurance" />
-  </Grid>
-<Grid item md={6}>
-
-<CustomSearchField type="text" label="Tertiary Insurance" />
-</Grid>
-</Grid>
-
-
-
+          <CustomSearchField type="text" label="Tertiary Insurance" />
+        </Box>
+     
         <Accordion defaultExpanded={false} onChange={handleAccordionChange}>
           <AccordionSummary expandIcon={<ExpandMore />}>
             <Typography>
@@ -731,9 +732,20 @@ lineHeight: 'normal'}}>New#</label>
           </AccordionDetails>
         </Accordion>
 
-        <Grid  container spacing={2}>
-  <Grid item md={6}>
-  <CustomSearchField
+        <Box
+          display="grid"
+          gap="30px"
+          sx={{
+            gridTemplateColumns: {
+              xs: "repeat(1, minmax(0, 1fr))",
+              sm: "repeat(2, minmax(0, 1fr))",
+              md: "repeat(2, minmax(0, 1fr))",
+            },
+          }}
+        >
+        
+
+<CustomSearchField
             label="Primary Insurance"
             type="text"
             handleChange={formik.handleChange}
@@ -742,10 +754,8 @@ lineHeight: 'normal'}}>New#</label>
             name="primaryPayerInsuranceName"
             handleModalOpen={() => setOpenInsuredParty(true)}
           />
-  </Grid>
-<Grid item md={6}>
 
-            <CustomField
+<CustomField
             label="Office Location"
             type="text"
             handleChange={formik.handleChange}
@@ -753,17 +763,17 @@ lineHeight: 'normal'}}>New#</label>
             value={formik.values.practiceAddress}
             name="practiceAddress"
           />
-
-
-</Grid>
-</Grid>
-   
+        </Box>
+        
       </Box>
       </Box>
-      
-
     </>
   );
 };
 
 export default ClaimInfo;
+
+
+      
+
+
