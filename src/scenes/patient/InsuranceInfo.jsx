@@ -66,8 +66,8 @@ const InsuranceInfo = ({ formik }) => {
   return (
     <Box display="flex" flexDirection="column" gap={5}>
       <Typography
-         component="h3"
-         fontWeight={'bold'}
+         component="h2"
+         fontWeight='600'
       >
         Primary Insurance:
       </Typography>

@@ -160,8 +160,7 @@ const CreatePatient = () => {
               </CustomButton>
               <CustomButton
                 type="submit"
-                color="secondary"
-                variant="contained"
+                isBlue={true}
                 form="patientForm"
                 disabled={loading}
                 sx={{

@@ -17,7 +17,6 @@ import CustomButton from "../../../components/CustomButton";
 
 const Claim = () => {
   const navigate = useNavigate();
-
   return (
     <Box className="backgroundpatient ">
     <Box margin="20px">

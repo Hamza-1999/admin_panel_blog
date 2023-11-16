@@ -1,6 +1,5 @@
 import { Search } from "@mui/icons-material";
 import './Custom-styling/CustomSearchField.css';
-import './Custom-styling/CustomLabel.css';
 
 import {
   FormControl,

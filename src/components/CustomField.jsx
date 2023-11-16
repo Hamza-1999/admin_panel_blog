@@ -1,7 +1,6 @@
 import { TextField } from "@mui/material";
 import React from "react";
 import "./Custom-styling/CustomField.css";
-import "./Custom-styling/CustomLabel.css"
 const CustomField = ({
   type,
   label,

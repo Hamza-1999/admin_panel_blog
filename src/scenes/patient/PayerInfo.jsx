@@ -68,8 +68,8 @@ const PayerInfo = ({ formik }) => {
       </CustomModal>
 
       <Box display="flex" flexDirection="column" gap={5}>
-        <Typography  component="h3"
-              fontWeight={'bold'}
+        <Typography  component="h2"
+              fontWeight='600'
          >
           Payer Information:
         </Typography>

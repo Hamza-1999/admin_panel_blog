@@ -5,7 +5,6 @@ import Select from "@mui/material/Select";
 import CustomModal from "./CustomModal";
 
 import './Custom-styling/CustomSelectBox.css';
-import "./Custom-styling/CustomLabel.css"
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { Input } from "@mui/material";
 const CustomSelectBox = ({

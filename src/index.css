@@ -62,3 +62,13 @@ h3 {
 h4{
   font-size: 1.7rem !important;
 }
+
+.customLabel{
+  font-size:1.5rem ;
+  font-weight:bold;
+  font-family: 'Inter', sans-serif;
+  color: #216FED !important;
+  
+}
+
+
