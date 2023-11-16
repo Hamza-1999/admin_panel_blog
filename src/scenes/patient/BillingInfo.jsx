@@ -61,6 +61,8 @@ const BillingInfo = ({ formik }) => {
 
 
 
+
+
             {/* statement type */}
             <Box
               display="grid"
@@ -136,8 +138,16 @@ const BillingInfo = ({ formik }) => {
      </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="Send Statement" />
-            <Typography variant="h3" component="p" fontSize="1.6rem" marginBottom={'5px'}>
+            <FormControlLabel control={
+            <Checkbox sx={{width:"30px" }} />} 
+
+label={
+  <Typography variant="h4" fontWeight='600'>
+Send Statement
+  </Typography>
+}
+/>
+            <Typography variant="h3" component="p" fontSize="1.4rem" marginBottom={'6px'} marginTop={'8px'}>
               (applies to statement automation and batch printing)
             </Typography>
           </FormGroup>
@@ -288,14 +298,14 @@ const BillingInfo = ({ formik }) => {
             </Box>
 
             <Stack>
-              <label>Address</label>
+              <label className="customLabel">Address</label>
               <TextareaAutosize
                 value={formik.values.guarantorAddress}
                 name="guarantorAddress"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 minRows={5}
-                style={{ resize: "none" }}
+                style={{ resize: "none",fontSize:"1.5rem" }}
               />
             </Stack>
 
@@ -332,13 +342,22 @@ const BillingInfo = ({ formik }) => {
                 />
               </FormControl>
             </Stack>
+    <FormGroup>
+      <FormControlLabel  
+        control={<Checkbox/>}
+        label={
+          <Typography variant="h4" fontWeight='600'>
+            International Address
+          </Typography>
+        }
+       
+        // label="International Address"
+      />
+    </FormGroup>
 
-            <FormGroup>
-              <FormControlLabel
-                control={<Checkbox />}
-                label="International Address"
-              />
-            </FormGroup>
+
+
+
 
             <Box
               display="grid"
@@ -390,14 +409,16 @@ const BillingInfo = ({ formik }) => {
               />
             </FormControl>
             <Stack>
-              <label>Remarks</label>
+              <label className="customLabel">
+                  Remarks
+                  </label>
               <TextareaAutosize
                 minRows={4}
                 value={formik.values.guarantorRemarks}
                 name="guarantorRemarks"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none", width: "100%" }}
+                style={{ resize: "none", width: "100%",fontSize:"1.5rem" }}
               />
             </Stack>
           </Box>

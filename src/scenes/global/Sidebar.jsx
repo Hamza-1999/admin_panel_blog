@@ -21,6 +21,7 @@ import Claim from "../claim-dir/claim/Claim";
 import sideBarCover from '../../assets/siderbar.png'
 import userBackground from '../../assets/background.png'
 import userImg from '../../assets/user.png'
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -152,7 +153,7 @@ const Sidebar = () => {
             )}
           </Box>
           <Box paddingLeft={isCollapsed ? undefined : "4px"}>
-            <Item 
+            <Item sx={{fontSize:'20px'}}
               title="Dashboard"
               to="/dashboard"
               icon={<HomeOutlinedIcon />}
@@ -180,20 +181,7 @@ const Sidebar = () => {
             </Box>
 
             <Collapse in={isPatientOpen}>
-              {/* <Item
-                title="Manage Account"
-                to="/team"
-                icon={<PeopleOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
-              <Item
-                title="Patient Information"
-                to="/patient"
-                icon={<ContactsOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              /> */}
+             
               <Item 
                 title="Create Patient"
                 to="/createpatient"
@@ -201,13 +189,20 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-              <Item 
-                title="Manage Patient"
-                to="/managepatient  "
-                icon={<ContactsOutlinedIcon />}
-                selected={selected}
-                setSelected={setSelected}
-              />
+               
+               
+
+<Item
+  title="Manage Patient"
+  to="/managepatient"
+  icon={<ContactsOutlinedIcon />}
+  selected={selected}
+  setSelected={setSelected}
+  style={{fontSize:'2rem'}}
+/>
+
+ 
+             
               {/* <Item
                 title="Payment Plans"
                 to="/invoices"
@@ -308,7 +303,7 @@ const Sidebar = () => {
               </Typography>
               {isCustomSetupOpen ? <ExpandLess /> : <ExpandMore />}
             </Box>
-            <Collapse in={isCustomSetupOpen}>
+            {/* <Collapse in={isCustomSetupOpen}>
               <Item
                 title="Practice"
                 to="/practice"
@@ -323,7 +318,31 @@ const Sidebar = () => {
                 selected={selected}
                 setSelected={setSelected}
               />
-            </Collapse>
+            </Collapse> */}
+
+
+<Collapse in={isCustomSetupOpen}>
+  <Item
+    title="Practice"
+    to="/practice"
+    icon={<PersonOutlinedIcon />}
+    selected={selected}
+    setSelected={setSelected}
+    
+  />
+  <Item
+    title="Provider"
+    to="/provider"
+    icon={<PersonOutlinedIcon />}
+    selected={selected}
+    setSelected={setSelected}
+  
+  />
+
+
+
+</Collapse>
+
 
             <Box
               sx={{

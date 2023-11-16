@@ -115,31 +115,31 @@ const CreatePatient = () => {
               }}
             >
               <Tab
-                style={{ fontSize: "18px", fontWeight: "bold" }}
+                // style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Patient Info"
                 value={0}
               />
               <Tab
-                style={{ fontSize: "18px", fontWeight: "bold" }}
+                // style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Insurance Info"
                 value={1}
               />
               <Tab
-                style={{ fontSize: "18px", fontWeight: "bold" }}
+                // style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Payer Info"
                 value={2}
               />
               <Tab
-                style={{ fontSize: "18px", fontWeight: "bold" }}
+                // style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Billing Info"
                 value={3}
               />
               <Tab
-                style={{ fontSize: "18px", fontWeight: "bold" }}
+                // style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Claim Defaults"
                 value={4}
@@ -151,6 +151,7 @@ const CreatePatient = () => {
                 type="reset"
                 color="error"
                 form="claimForm"
+                isBlue={false}
                 sx={{
                   marginRight: "15px",
                 }}

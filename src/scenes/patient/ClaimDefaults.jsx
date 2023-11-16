@@ -5,6 +5,7 @@ import {
   Box,
   FormControl,
   Stack,
+  Typography,
 } from "@mui/material";
 import React from "react";
 import CustomSearchField from "./../../components/CustomSearchField";
@@ -43,7 +44,10 @@ const ClaimDefaults = ({ formik }) => {
       </Stack>
 
       <Accordion>
-        <AccordionSummary>Assignment</AccordionSummary>
+        <AccordionSummary>
+          <Typography variant='h2' fontWeight='600'>
+          Assignment
+            </Typography></AccordionSummary>
         <AccordionDetails>
           <Box display="flex" flexDirection="column" gap="20px">
             <FormControl>
@@ -57,8 +61,14 @@ const ClaimDefaults = ({ formik }) => {
       </Accordion>
       {/* default codes */}
       <Accordion>
-        <AccordionSummary>Default Codes</AccordionSummary>
-        <AccordionDetails>Work later</AccordionDetails>
+        <AccordionSummary>
+        <Typography variant='h2' fontWeight='600'>
+         Default Codes
+            </Typography></AccordionSummary>
+        <AccordionDetails>
+        <Typography variant='h4' fontWeight='500'>
+        Work later
+            </Typography></AccordionDetails>
       </Accordion>
     </Box>
   );
