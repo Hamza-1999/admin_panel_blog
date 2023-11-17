@@ -1,16 +1,14 @@
 import React from 'react'
+import './Custom-styling/CheckBox.css';
+
 
 const CheckBox=() =>{
   return (
     <>
-    <div style={{border:'2px solid green'}}>
-      <label className='d-flex'>
-        <input
-          type="checkbox"
-         
-        />
-        Check me
-        </label>
+ 
+<div className="checkbox-container">
+        <input type="checkbox" id="myCheckbox"/> 
+        <label   htmlFor="" class="checkbox-label"></label> 
     </div>
    
     </>
