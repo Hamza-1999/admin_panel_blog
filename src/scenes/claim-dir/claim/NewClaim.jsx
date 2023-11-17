@@ -93,8 +93,9 @@ const NewClaim = () => {
   return (
     <Box className="backgroundpatient ">
     <Box margin="20px">
-      <Header title="Claim" subtitle="Create a New Claim" />
-
+   
+     <Header 
+       title="Claim" subtitle="Create a New Claim" />
       {/* select claim type */}
       <Stack>
         <FormLabel id="claimType">Select Claim Type</FormLabel>

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import CustomModal from "../../components/CustomModal";
 import PayerList from "./PayerList";
 import NewPayer from "./NewPayer";
+
+import '.'
 import {
   Box,
   Button,
@@ -21,11 +23,13 @@ import { useDispatch } from "react-redux";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomField from "../../components/CustomField";
 
+
 const EditPayerInfo = ({ formik }) => {
   const [priorityOptions, setPriorityOptions] = useState([]);
   const [policyTypeOptions, setPolicyTypeOptions] = useState([]);
   const [openNewPayerModal, setOpenNewPayerModal] = useState(false);
   const [openPyerListModal, setOpenPyerListModal] = useState(false);
+  
 
   // initializing dispatch
   const dispatch = useDispatch();
@@ -220,7 +224,7 @@ const EditPayerInfo = ({ formik }) => {
           />
           <CustomField
             type="number"
-            label="Out of Pocket Max"
+            label="Out of Pocket Maxeeeeee"
             value={formik.values.payerInfoOutOfPocketMax}
             name="payerInfoOutOfPocketMax"
             handleChange={formik.handleChange}
@@ -256,6 +260,7 @@ const EditPayerInfo = ({ formik }) => {
           </LocalizationProvider>
 
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+          
             <DatePicker
               label="Termination Date"
               value={formik.values.payerInfoTerminationDate}
@@ -270,6 +275,24 @@ const EditPayerInfo = ({ formik }) => {
               clearable
             />
           </LocalizationProvider>
+
+
+
+          {/* <div>
+  <label className="customLabel">Date of Death</label>
+  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+    <CustomDatePicker className="customDatePicker"
+      // label="Date of Death"
+      value={formik.values.dateOfDeath}
+      onChange={(value) =>
+        formik.setFieldValue("dateOfDeath", value)
+      }
+      onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
+      renderInput={(params) => <TextField {...params} />}
+      inputFormat="MM/DD/YYYY"
+    />
+  </LocalizationProvider>
+</div> */}
         </Box>
       </Box>
     </>

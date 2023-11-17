@@ -64,9 +64,12 @@ const Sidebar = () => {
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
+          fontSize:"1rem !important",
         },
         "& .pro-inner-item": {
           padding: "5px 35px 5px 20px !important",
+          // background:'red !important',
+          // fontSize:"1rem !important",
         },
         "& .pro-inner-item:hover": {
           color: "#868dfb !important",
@@ -92,6 +95,7 @@ const Sidebar = () => {
               style={{
                 // margin: "10px 0 20px 0",
                 color: colors.grey[100],
+                fontSize:'1rem'
               }}
             >
               {!isCollapsed && (
@@ -333,14 +337,20 @@ const Sidebar = () => {
   setSelected={setSelected}
 
 />
+<span >
   <Item
-    title="Provider"
+  // {/* <span className="item-icon">{<PersonOutlinedIcon />}</span>
+  // <span className="item-title">Provider</span>
+  //     <span className="item-link">{"/provider"}</span> */}
+    
+   title="Provider"
     to="/provider"
     icon={<PersonOutlinedIcon />}
     selected={selected}
     setSelected={setSelected}
   
   />
+  </span>
 
 
 

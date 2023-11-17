@@ -104,7 +104,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
             "& .header-bg": {
               backgroundColor: "lightgrey",
               color: 'black',
-              fontSize: '18px',
+              fontSize: '16px',
             },
           }}
           initialState={{
@@ -122,8 +122,10 @@ const ClaimTable = ({ onCellClick, isModal }) => {
                   width: "100%",
                   textAlign: "center",
                   padding: "16px",
+                 
                 }}
               >
+                
                 {getClaims.result?.length === 0 && "No Data Is Added"}
               </div>
             ),

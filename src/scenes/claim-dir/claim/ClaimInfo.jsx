@@ -660,8 +660,8 @@ lineHeight: 'normal'}}>New#</label>
         </Box>
      
         <Accordion defaultExpanded={false} onChange={handleAccordionChange}>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography>
+          <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+            <Typography variant="h2" fontWeight='600'>
               {!isAccordionOpen
                 ? "Show Primary Policy Details"
                 : "Hide Primary Policy Details"}
