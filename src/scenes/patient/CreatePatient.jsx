@@ -150,7 +150,7 @@ const CreatePatient = () => {
               <CustomButton
                 type="reset"
                 color="error"
-                form="claimForm"
+                padding={'7px'}
                 isBlue={false}
                 sx={{
                   marginRight: "15px",
@@ -162,6 +162,7 @@ const CreatePatient = () => {
               <CustomButton
                 type="submit"
                 isBlue={true}
+                padding={'7px'}
                 form="patientForm"
                 disabled={loading}
                 sx={{

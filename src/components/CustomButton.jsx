@@ -17,7 +17,7 @@ const CustomButton = ({
     color: isBlue ? "#fff" : "#000",
     margin: margin,
     backgroundColor: isBlue ? "#2F78EE " :  "#D3D3D3",
-    fontSize: "1.1rem",
+    fontSize: "1.3rem",
     fontWeight: "500",
     letterSpacing: "1.24px",
     wordSpacing: "3px",

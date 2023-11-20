@@ -20,6 +20,7 @@ const CustomSelectBox = ({
     <FormControl fullWidth>
       <label className="customLabel" htmlFor="">{label}</label>
       <Select className="customSelectBox"
+      
         value={value}
         name={name}
         type="text"
@@ -28,8 +29,9 @@ const CustomSelectBox = ({
         native
         id="dropdowns"
         defaultValue=""
+        
       >
-        <option value="0" style={{ color: "lightgray !important" }}>
+        <option value="0" style={{ color: "lightgray !important"}}>
           Select
         </option>
         {dropdownOptions.map((opt) => (

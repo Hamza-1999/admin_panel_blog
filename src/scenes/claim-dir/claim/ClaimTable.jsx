@@ -40,6 +40,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      
     },
     {
       field: "name",
