@@ -32,6 +32,7 @@ const CustomSelectBox2 = ({
           native
           id="dropdowns"
           defaultValue=""
+         
         >
           <option style={{ color: "lightgray !important" }}>Select</option>
           {dropdownOptions.map((opt) => {

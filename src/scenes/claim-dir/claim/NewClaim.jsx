@@ -182,16 +182,33 @@ const NewClaim = () => {
               </Tabs> 
               <Box sx={{ order: { xs: 1, sm: 1, md: 2 } }}>
         
-            <Button
-          type="submit"
-          variant="contained"
-          form="claimForm"
-        
-          sx={{ bgcolor: "#6870fa", color: "#fff",marginRight: "30px",background:'#0061FF',width: '110px',fontSize:'13px',
-          height: '35px' }}
-        >
-          Save
-        </Button>
+          
+  <CustomButton
+                type="reset"
+                color="error"
+                form="claimForm"
+                padding={'7px'}
+                isBlue={false}
+                sx={{
+                  marginRight: "15px",
+                }}
+                onClick={handleCancel}
+              >
+                Cancel
+              </CustomButton>
+
+<CustomButton
+                type="submit"
+                variant="contained"
+                form="claimForm"
+                isBlue={true}
+                padding={'7px'}
+                sx={{
+                  marginRight: "30px",
+                }}
+              >
+                Save
+              </CustomButton>
           </Box>
       </Stack>
 

@@ -69,7 +69,7 @@ const AdditionInfo = ({ formik }) => {
     <>
       <Box margin="20px">
         <div>
-          <Typography variant="h5" component={"p"}>
+          <Typography variant="h2" fontWeight={'400'}>
             Show Additional Information about each field
           </Typography>
           <FormControl

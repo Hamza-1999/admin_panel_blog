@@ -520,11 +520,9 @@ lineHeight: 'normal'}}>New#</label>
         gap={"20px"}
 
       >
-        <Typography style={{color: 'black',
-fontSize: '25px',
-fontStyle: 'normal',
+        <Typography variant="h1" style={{color: 'black',
 fontWeight: '600',
-lineHeight: 'normal'}}>Claim#</Typography>
+}}>Claim#</Typography>
         <Box
           display="grid"
           gap="30px"
@@ -754,7 +752,7 @@ lineHeight: 'normal'}}>New#</label>
             name="primaryPayerInsuranceName"
             handleModalOpen={() => setOpenInsuredParty(true)}
           />
-
+<div style={{marginTop:'4px'}}>
 <CustomField
             label="Office Location"
             type="text"
@@ -763,6 +761,7 @@ lineHeight: 'normal'}}>New#</label>
             value={formik.values.practiceAddress}
             name="practiceAddress"
           />
+          </div>
         </Box>
         
       </Box>
