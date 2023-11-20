@@ -106,7 +106,7 @@ const PatientInfo = ({ formik }) => {
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component="h2"
+              component="h3"
               fontWeight="600"
             >
               General Information:
@@ -305,7 +305,7 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-              component="h2"
+              component="h3"
               fontWeight="600"
             >
               Contact Details:
@@ -377,7 +377,7 @@ const PatientInfo = ({ formik }) => {
           >
             <Typography className="accordianSummaryHeading"
               // variant="h5"
-              component="h2"
+              component="h3"
               fontWeight="600"
             >
               Birth Details:
@@ -440,7 +440,7 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-                component="h2"
+                component="h3"
                 fontWeight="600"  
                           >
               Address Details:
@@ -539,7 +539,7 @@ const PatientInfo = ({ formik }) => {
             id="panel1a-header"
           >
             <Typography className="accordianSummaryHeading"
-            component="h2"
+            component="h3"
             fontWeight="600"
             >
               Emergency Contact:

@@ -106,9 +106,11 @@ const ClaimCharges = ({
                 <Box
                   sx={{
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
+                    
                   }}
                 >
-                  <CustomSearchField
+                  <div style={{marginTop:'13px'}}>
+                  <CustomSearchField 
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("A")}
                     handleChange={formik.handleChange}
@@ -116,6 +118,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_A}
                     name="icd_Description_A"
                   />
+                   </div>
                 </Box>
               </Box>
               <Box
@@ -129,6 +132,7 @@ const ClaimCharges = ({
                   },
                 }}
               >
+               
                 <CustomField
                   type="text"
                   label="ICD B"
@@ -144,6 +148,7 @@ const ClaimCharges = ({
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
                   }}
                 >
+                   <div style={{marginTop:'13px'}}>
                   <CustomSearchField
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("B")}
@@ -152,6 +157,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_B}
                     name="icd_Description_B"
                   />
+                  </div>
                 </Box>
               </Box>
               <Box
@@ -165,6 +171,7 @@ const ClaimCharges = ({
                   },
                 }}
               >
+                <div style={{marginTop:'13px'}}>
                 <CustomField
                   type="text"
                   label="ICD C"
@@ -174,12 +181,13 @@ const ClaimCharges = ({
                   name="icD_Code_C"
                   isOutlined={true}
                 />
-
+</div>
                 <Box
                   sx={{
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
                   }}
                 >
+                  <div style={{marginTop:'13px'}}>
                   <CustomSearchField
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("C")}
@@ -188,6 +196,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_C}
                     name="icd_Description_C"
                   />
+                  </div>
                 </Box>
               </Box>
               <Box
@@ -216,6 +225,7 @@ const ClaimCharges = ({
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
                   }}
                 >
+                  <div style={{marginTop:'13px'}}>
                   <CustomSearchField
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("D")}
@@ -224,6 +234,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_D}
                     name="icd_Description_D"
                   />
+                  </div>
                 </Box>
               </Box>
               <Box
@@ -252,6 +263,7 @@ const ClaimCharges = ({
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
                   }}
                 >
+                  <div style={{marginTop:'13px'}}>
                   <CustomSearchField
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("E")}
@@ -260,6 +272,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_E}
                     name="icd_Description_E"
                   />
+                  </div>
                 </Box>
               </Box>
               <Box
@@ -288,6 +301,7 @@ const ClaimCharges = ({
                     gridColumn: { xs: "span 1", sm: "span 2", md: "span 3" },
                   }}
                 >
+                  <div style={{marginTop:'13px'}}>
                   <CustomSearchField
                     type="text"
                     handleModalOpen={() => handleOpenDiagnosisModal("F")}
@@ -296,6 +310,7 @@ const ClaimCharges = ({
                     fieldVal={formik.values.icd_Description_F}
                     name="icd_Description_F"
                   />
+                  </div>
                 </Box>
               </Box>
               <Box

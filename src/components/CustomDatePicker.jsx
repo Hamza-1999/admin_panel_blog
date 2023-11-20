@@ -110,31 +110,26 @@ const CustomDatePicker = ({
         {dateLabel}
       </label>
       <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-        <DatePicker
+        <DatePicker className="customDatePicker"
           sx={{
             width: "100%",
+            
             background: "white",
             "& .MuiInputBase-input": {
-              fontSize: "1.3rem", // Change the font size of the input
-              fontFamily: "YourCustomFont, sans-serif", // Change the font family
+              fontSize: "1.3rem", 
+             
             },
             "& .MuiInputLabel-root": {
-              fontSize: "1.5rem", // Change the font size of the label
-              fontFamily: "YourCustomFont, sans-serif", // Change the font family
+              fontSize: "1.5rem", 
             },
-            // "& .MuiPopover-root .MuiTypography-root": {
-            //   fontSize: "1.5rem", // Change the font size of the text inside the Popper
-            //   fontFamily: "YourCustomFont, sans-serif", // Change the font family
-            // },
+          
+           
           }}
           value={dateValue}
           onChange={handleDateChange}
           onBlur={handleDateBlur}
           renderInput={(params) => <TextField {...params} />}
           inputFormat="MM/DD/YYYY"
-          // PopperProps={{
-          //   style: { fontSize: "1.5rem" },
-          // }}
         />
       </LocalizationProvider>
     </div>

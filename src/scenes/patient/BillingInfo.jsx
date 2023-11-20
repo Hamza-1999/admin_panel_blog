@@ -17,6 +17,7 @@ import path from "../../config/apiUrl";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomField from "../../components/CustomField";
 import CheckBox from "../../components/CheckBox";
+import { ExpandMore } from "@mui/icons-material";
 
 const BillingInfo = ({ formik }) => {
   const [statementType, setStatementType] = useState([]);
@@ -48,9 +49,26 @@ const BillingInfo = ({ formik }) => {
   return (
     <Box display="flex" flexDirection="column">
       <Accordion defaultExpanded={true}>
-        <AccordionSummary>
+        {/* <AccordionSummary className="accordianSummary">
+       
           <Typography variant="h2" fontWeight='600' >Statement Options</Typography>
-        </AccordionSummary>
+          {<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+        </AccordionSummary> */}
+
+
+<AccordionSummary className="accordianSummary"
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography className="accordianSummaryHeading"
+              // variant="h5"
+              component="h3"
+              fontWeight="600"
+            >
+              Statement Options
+            </Typography>
+          </AccordionSummary>
 
         <AccordionDetails>
           <Box display="flex" gap="20px" flexDirection="column">
@@ -132,11 +150,14 @@ const BillingInfo = ({ formik }) => {
       </Accordion>
       {/* collection options */}
       <Accordion>
-        <AccordionSummary >
-       <Typography variant="h2" fontWeight="600">
+        <AccordionSummary className="accordianSummary"
+            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+            aria-controls="panel1a-content"
+            id="panel1a-header" >
+       <Typography variant="h3" fontWeight="600">
        Collection Options
      </Typography>
-     </AccordionSummary>
+     </AccordionSummary >
         <AccordionDetails>
           <FormGroup>
             <FormControlLabel control={
@@ -144,7 +165,7 @@ const BillingInfo = ({ formik }) => {
 
 label={
   <Typography variant="h4" fontWeight='600'>
-Send Statement
+     Send Statement
   </Typography>
 }
 />
@@ -189,22 +210,30 @@ Send Statement
       {/* payment portal */}
       <Accordion>
         {/* <AccordionSummary>Payment Portal Options</AccordionSummary> */}
-        <AccordionSummary >
-       <Typography variant="h2" fontWeight="600">
+        <AccordionSummary
+        className="accordianSummary"
+        expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+        aria-controls="panel1a-content"
+        id="panel1a-header" >
+       <Typography variant="h3" fontWeight="600">
        Payment Portal Options
      </Typography>
      </AccordionSummary>
         <AccordionDetails>
           <Box>
-            <Typography component="h4" fontWeight="500">No Payment Portal</Typography>
+            <Typography component="h5" fontWeight="500">No Payment Portal</Typography>
           </Box>
         </AccordionDetails>
       </Accordion>
       {/* guarantor */}
       <Accordion>
         {/* <AccordionSummary>Guarantor</AccordionSummary> */}
-        <AccordionSummary >
-       <Typography variant="h2" fontWeight="600">
+        <AccordionSummary 
+        className="accordianSummary"
+        expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+        aria-controls="panel1a-content"
+        id="panel1a-header">
+       <Typography variant="h3" fontWeight="600">
        Guarantor
      </Typography>
      </AccordionSummary>
@@ -345,7 +374,7 @@ Send Statement
             </Stack>
     <FormGroup>
       <FormControlLabel  
-        control={<Checkbox/>}
+        control={<CheckBox/>}
         label={
           <Typography variant="h4" fontWeight='600'>
             International Address

@@ -12,6 +12,7 @@ import NewPayer from "./NewPayer";
 import PayerList from "./PayerList";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomField from "../../components/CustomField";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 const PayerInfo = ({ formik }) => {
   const dispatch = useDispatch();
@@ -140,11 +141,13 @@ const PayerInfo = ({ formik }) => {
           sx={{
             gridTemplateColumns: {
               xs: "repeat(1, minmax(0, 1fr))",
-              sm: "1fr 3fr",
+              sm: "repeat(2, minmax(0, 1fr))",
+              // sm: "1fr 3fr",
               md: "repeat(4, minmax(0, 1fr))",
               
             },
-            width:{xs:'90%',md:'90%'}
+            // width:{xs:'90%',md:'90%'}
+            width:{xs:'90%',md:'100%'}
           }}
         >
           {/* priority type */}
@@ -173,9 +176,28 @@ const PayerInfo = ({ formik }) => {
             handleBlur={formik.handleBlur}
           />
 
+<CustomField style={{marginBottom:'1rem'}}
+            label="Member Id"
+            type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoMemberId}
+            name="payerInfoMemberId"
+            handleBlur={formik.handleBlur}
+            
+          />
+          {/* group id */}
+          <CustomField
+            label="Group Id"
+            type="number"
+            handleChange={formik.handleChange}
+            value={formik.values.payerInfoGroupId}
+            name="payerInfoGroupId"
+            handleBlur={formik.handleBlur}
+          />
+
         </Box>
 
-        <Box
+        {/* <Box
           display="grid"
           gap="30px"
           sx={{
@@ -183,14 +205,26 @@ const PayerInfo = ({ formik }) => {
               xs: "repeat(1, minmax(0, 1fr))",
               sm: "repeat(2, minmax(0, 1fr))",
               md: "3fr 1fr 1fr",
+             
             },
           }}
-        >
+        > */}
           <Box
             sx={{
               display: "flex",
               width: "100%",
-              gridColumn: { xs: "1 / span 1", sm: "1 / span 2", md: "auto" },
+
+            
+              // gridColumn: { xs: "1 / span 1", sm: "1 / span 2", md: "auto" },
+
+              
+              gridTemplateColumns: {
+                xs: "repeat(1, minmax(0, 1fr))",
+                sm: "repeat(1, minmax(0, 1fr))",
+                md: "repeat(1, minmax(0, 1fr))",
+               
+              },
+              
             }}
           >
             <FormControl
@@ -212,23 +246,24 @@ const PayerInfo = ({ formik }) => {
               />
             </FormControl>
             <Button 
-              sx={{ width: "10%",marginTop:'32px',marginRight:'40px',marginLeft:"10px",marginBottom:"4px",color:'#216FED'}}
+              sx={{ marginTop:'38px',marginRight:'40px',marginLeft:"10px",marginBottom:"4px",color:'#216FED'}}
               variant="outlined" 
               onClick={() => setOpenNewPayerModal(true)}
             >
               <Add />
             </Button>
           </Box>
-          {/* payer info member id */}
-          <CustomField
+        
+          {/* <CustomField style={{marginBottom:'1rem'}}
             label="Member Id"
             type="number"
             handleChange={formik.handleChange}
             value={formik.values.payerInfoMemberId}
             name="payerInfoMemberId"
             handleBlur={formik.handleBlur}
+            
           />
-          {/* group id */}
+     
           <CustomField
             label="Group Id"
             type="number"
@@ -236,53 +271,9 @@ const PayerInfo = ({ formik }) => {
             value={formik.values.payerInfoGroupId}
             name="payerInfoGroupId"
             handleBlur={formik.handleBlur}
-          />
-        </Box>
+          /> */}
+        {/* </Box> */}
 
-        {/* <Box
-          display="grid"
-          gap="30px"
-          sx={{
-            gridTemplateColumns: {
-              xs: "repeat(1, minmax(0, 1fr))",
-              sm: "repeat(2, minmax(0, 1fr))",
-              md: "repeat(4, minmax(0, 1fr))",
-            },
-          }}
-        >
-          <CustomField
-            type="number"
-            label="Copay"
-            value={formik.values.payerInfoCopayAmount}
-            name="payerInfoCopayAmount"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-          />
-          <CustomField
-            type="number"
-            label="Co-Insurance %"
-            value={formik.values.payerInfoCoInsurancePercent}
-            name="payerInfoCoInsurancePercent"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-          />
-          <CustomField
-            type="number"
-            label="Deductible"
-            value={formik.values.payerInfoDeductibleAmount}
-            name="payerInfoDeductibleAmount"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-          />
-          <CustomField
-            type="number"
-            label="Out of Pocket Max"
-            value={formik.values.payerInfoOutOfPocketMax}
-            name="payerInfoOutOfPocketMax"
-            handleChange={formik.handleChange}
-            handleBlur={formik.handleBlur}
-          />
-        </Box> */}
 
         <Box
           display="grid"
@@ -291,31 +282,14 @@ const PayerInfo = ({ formik }) => {
             gridTemplateColumns: {
               xs: "repeat(1, minmax(0, 1fr))",
               sm: "repeat(2, minmax(0, 1fr))",
-              md: "repeat(4, minmax(0, 1fr))",
+              md: "repeat(2, minmax(0, 1fr))",
             },
           }}
         >
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-            <DatePicker
-              label="Effective Date"
-              value={formik.values.payerInfoEffectiveDate}
-              onChange={(value) =>
-                formik.setFieldValue("payerInfoEffectiveDate", value)
-              }
-              onBlur={() =>
-                formik.setFieldTouched("payerInfoEffectiveDate", true)
-              }
-              renderInput={(params) => <TextField {...params} />}
-              inputFormat="MM/DD/YYYY"
-              // clearable
-            />
-          </LocalizationProvider> */}
-
-
 <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Effective Date</label>
+  <label className="customLabel">Effective Date</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="payerInfoEffectiveDate"
+    <CustomDatePicker className="payerInfoEffectiveDate"
       value={formik.values.dateOfDeath}
       onChange={(value) =>
         formik.setFieldValue("payerInfoEffectiveDate", value)
@@ -327,27 +301,10 @@ const PayerInfo = ({ formik }) => {
   </LocalizationProvider>
 </div>
 
-          {/* <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-            <DatePicker
-              label="Termination Date"
-              value={formik.values.payerInfoTerminationDate}
-              onChange={(value) =>
-                formik.setFieldValue("payerInfoTerminationDate", value)
-              }
-              onBlur={() =>
-                formik.setFieldTouched("payerInfoTerminationDate", true)
-              }
-              renderInput={(params) => <TextField {...params} />}
-              inputFormat="MM/DD/YYYY"
-              clearable
-            />
-          </LocalizationProvider> */}
-
-
 <div>
-  <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }}>Termination Date</label>
+  <label className="customLabel">Termination Date</label>
   <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <DatePicker className="payerInfoTerminationDate"
+    <CustomDatePicker className="payerInfoTerminationDate"
       value={formik.values.dateOfDeath}
       onChange={(value) =>
         formik.setFieldValue("payerInfoTerminationDate", value)

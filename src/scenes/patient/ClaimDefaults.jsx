@@ -11,6 +11,8 @@ import React from "react";
 import CustomSearchField from "./../../components/CustomSearchField";
 import CustomSelectBox2 from "../../components/CustomSelectBox2";
 import CustomField from "../../components/CustomField";
+import { ExpandMore } from "@mui/icons-material";
+
 
 const ClaimDefaults = ({ formik }) => {
   return (
@@ -44,8 +46,11 @@ const ClaimDefaults = ({ formik }) => {
       </Stack>
 
       <Accordion>
-        <AccordionSummary>
-          <Typography variant='h2' fontWeight='600'>
+        <AccordionSummary className="accordianSummary"
+         aria-controls="panel1a-content"
+         id="panel1a-header"
+         expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+          <Typography variant='h3' fontWeight='600'>
           Assignment
             </Typography></AccordionSummary>
         <AccordionDetails>
@@ -61,10 +66,14 @@ const ClaimDefaults = ({ formik }) => {
       </Accordion>
       {/* default codes */}
       <Accordion>
-        <AccordionSummary>
-        <Typography variant='h2' fontWeight='600'>
+        <AccordionSummary className="accordianSummary"
+         aria-controls="panel1a-content"
+         id="panel1a-header"
+         expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+        <Typography variant='h3' fontWeight='600'>
          Default Codes
-            </Typography></AccordionSummary>
+            </Typography>
+            </AccordionSummary>
         <AccordionDetails>
         <Typography variant='h4' fontWeight='500'>
         Work later
