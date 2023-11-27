@@ -1,3 +1,5 @@
+
+import { ExpandMore, Search } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,6 +10,7 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  
 } from "@mui/material";
 import { Box, Stack } from "@mui/system";
 import React, { useEffect, useState } from "react";
@@ -69,7 +72,7 @@ const AdditionInfo = ({ formik }) => {
     <>
       <Box margin="20px">
         <div>
-          <Typography variant="h2" fontWeight={'400'}>
+          <Typography variant="h2" style={{color:'black',fontWeight:'600'}}>
             Show Additional Information about each field
           </Typography>
           <FormControl
@@ -77,8 +80,10 @@ const AdditionInfo = ({ formik }) => {
               margin: "20px 0",
             }}
           >
+           
             <RadioGroup row name="row-radio-buttons-group">
-              <FormControlLabel
+             
+              <FormControlLabel 
                 value={1}
                 control={
                   <Radio
@@ -88,6 +93,7 @@ const AdditionInfo = ({ formik }) => {
                 }
                 label="None"
               />
+              
               <FormControlLabel
                 value={2}
                 control={
@@ -113,16 +119,16 @@ const AdditionInfo = ({ formik }) => {
         </div>
         {/* patient condition */}
         <Accordion>
-          <AccordionSummary>
-            <Typography>Patient Condition</Typography>
+          <AccordionSummary  expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+            <Typography variant="h3" fontWeight={'600'}>Patient Condition</Typography>
           </AccordionSummary>
 
           <AccordionDetails>
-            <Typography>Is Patient Condition Related to:</Typography>
+            <Typography variant="h4" fontWeight={'500'}>Is Patient Condition Related to:</Typography>
             <Stack direction="row" alignItems="center" marginTop="30px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
-                sx={{ width: "100px" }}
+                sx={{ width: "100px",fontSize:'1.4rem' }}
               >
                 Employement
               </FormLabel>
@@ -133,7 +139,7 @@ const AdditionInfo = ({ formik }) => {
                 row
                 name="row-radio-buttons-group"
               >
-                <FormControlLabel
+                <FormControlLabel 
                   value="Yes"
                   control={
                     <Radio
@@ -144,6 +150,7 @@ const AdditionInfo = ({ formik }) => {
                     />
                   }
                   label="Yes"
+                  style={{ fontSize: '20%' }}
                 />
                 <FormControlLabel
                   value="No"
@@ -177,13 +184,14 @@ const AdditionInfo = ({ formik }) => {
             <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
-                sx={{ width: "100px" }}
+                sx={{ width: "100px", fontSize:'1.4rem' }}
               >
                 Auto Accident
               </FormLabel>
               <RadioGroup
                 sx={{
                   marginLeft: "20px",
+                  
                   // width: "150px",
                 }}
                 row
@@ -233,7 +241,7 @@ const AdditionInfo = ({ formik }) => {
             <Stack direction="row" alignItems="center" marginTop="15px">
               <FormLabel
                 id="demo-row-radio-buttons-group-label"
-                sx={{ width: "100px" }}
+                sx={{ width: "100px" ,fontSize:'1.4rem'}}
               >
                 Other Accident
               </FormLabel>
@@ -499,7 +507,7 @@ const AdditionInfo = ({ formik }) => {
             </Box>
 
             <Stack direction="row" alignItems="center" marginTop="30px">
-              <FormLabel id="demo-row-radio-buttons-group-label">
+              <FormLabel sx={{fontSize:'1.5rem'}} id="demo-row-radio-buttons-group-label">
                 Patient is homebound?
               </FormLabel>
               <RadioGroup
@@ -552,7 +560,8 @@ const AdditionInfo = ({ formik }) => {
         </Accordion>
         {/* Claim Information */}
         <Accordion>
-          <AccordionSummary>Claim Information</AccordionSummary>
+          <AccordionSummary  expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+            <Typography variant="h3" fontWeight={'600'}>Claim Information</Typography></AccordionSummary>
 
           <AccordionDetails>
             <Box
@@ -815,7 +824,8 @@ const AdditionInfo = ({ formik }) => {
                 }}
               >
                 <FormControl fullWidth>
-                  <CustomDatePicker
+             
+                  <CustomDatePicker className='customDatePicker'
                     dateLabel="Hospitalized From Date"
                     dateValue={formik.values.hospitalizedFromDate}
                     handleDateChange={(value) =>
@@ -970,8 +980,8 @@ const AdditionInfo = ({ formik }) => {
         </Accordion>
         {/* Assignment of benefits */}
         <Accordion>
-          <AccordionSummary>
-            <Typography>Assignment of Benefits</Typography>
+          <AccordionSummary  expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+            <Typography variant="h3" fontWeight={'600'}>Assignment of Benefits</Typography>
           </AccordionSummary>
 
           <AccordionDetails>
@@ -1096,8 +1106,8 @@ const AdditionInfo = ({ formik }) => {
 
         {/* other reference information */}
         <Accordion>
-          <AccordionSummary>
-            <Typography>Other Reference Information</Typography>
+          <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+            <Typography variant="h3" fontWeight={'600'}>Other Reference Information</Typography>
           </AccordionSummary>
 
           <AccordionDetails>

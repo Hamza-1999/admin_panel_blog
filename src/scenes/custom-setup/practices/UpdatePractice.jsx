@@ -26,6 +26,8 @@ import {
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
 import { useNavigate, useParams } from "react-router-dom";
 import SearchNpi from "./npi/SearchNpi";
+import CustomSearchField from "../../../components/CustomSearchField";
+import CustomButton from "../../../components/CustomButton";
 
 const UpdatePractice = () => {
   const dispatch = useDispatch();
@@ -224,7 +226,7 @@ const UpdatePractice = () => {
               },
             }}
           >
-            <TextField
+            <CustomSearchField
               type="number"
               size="small"
               variant="filled"
@@ -247,7 +249,7 @@ const UpdatePractice = () => {
                 ),
               }}
             />
-
+<div style={{marginTop:'5px'}}>
             <CustomSelectBox
               value={values.organizationTypeName}
               name="organizationTypeName"
@@ -259,6 +261,7 @@ const UpdatePractice = () => {
               handleChange={handleChange}
               handleBlur={handleBlur}
             />
+            </div>
           </Box>
 
           <Box
@@ -273,7 +276,7 @@ const UpdatePractice = () => {
               },
             }}
           >
-            <TextField
+            <CustomSearchField
               type="text"
               size="small"
               variant="filled"
@@ -618,9 +621,9 @@ const UpdatePractice = () => {
           )}
 
           <Box margin={"20px 0"}>
-            <Button variant="contained" color="secondary" type="submit">
+            <CustomButton variant="contained" isBlue={true}  type="submit">
               Update
-            </Button>
+            </CustomButton>
           </Box>
         </form>
       </Box>

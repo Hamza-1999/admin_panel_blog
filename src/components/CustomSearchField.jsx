@@ -22,36 +22,7 @@ const CustomSearchField = ({
   touched,
 }) => {
   return (
-    // <div >
-    //   <label style={{ color: "#216FED",fontSize:"17px",fontWeight:'bold' }} htmlFor="">{label}</label>
-
-    //   <TextField className="customSearchField"
-    //     size="small"
-    //     fullWidth
-    //     variant="outlined"
-    //     type={type}
-    //     // label={label}
-    //     value={fieldVal || ""}
-    //     name={name}
-    //     onChange={handleChange}
-    //     onBlur={handleBlur}
-    //     sx={{
-    //       cursor: "default",
-    //       // height: "70px"
-    //     }}
-    //     InputProps={{
-    //       endAdornment: (
-    //         <InputAdornment>
-    //           <IconButton onClick={handleModalOpen}>
-    //             < Search/>
-    //           </IconButton>
-    //         </InputAdornment>
-    //       ),
-    //     }}
-    //     InputLabelProps={{ shrink: true }}
-    //   />
-    // </div>
-
+    
     <>
       <div>
         <label className="customLabel" htmlFor="">
@@ -83,7 +54,6 @@ const CustomSearchField = ({
             </IconButton>
           </div>
         </div>
-
         {isRequired && error[name] && touched[name] ? (
           <div
             style={{
@@ -97,27 +67,6 @@ const CustomSearchField = ({
           </div>
         ) : null}
       </div>
-
-      {/* <div>
-  <label className="customSearchLabel" htmlFor="">{label}</label>
-
-  <div className="d-flex">
-    <input
-      className="customSearchField"
-      type={type}
-      autoComplete="off"
-      value={fieldVal || ""}
-      name={name}
-      onChange={handleChange}
-      onBlur={handleBlur}
-      spellCheck={false}
-    />
-      <IconButton onClick={handleModalOpen}>
-        <Search style={{ color: 'black' }} />
-      </IconButton>
-    
-  </div>
-</div> */}
     </>
   );
 };

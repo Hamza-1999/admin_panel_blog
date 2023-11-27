@@ -67,6 +67,8 @@ const ManagePatient = () => {
       headerClassName: "bold-header",
       headerAlign: "center",
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "lastName",
@@ -74,6 +76,8 @@ const ManagePatient = () => {
       headerAlign: "center",
       width: 200,
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "dateOfBirth",
@@ -81,6 +85,8 @@ const ManagePatient = () => {
       width: 200,
       align: "center",
       headerAlign: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "genderIdentityName",
@@ -88,6 +94,8 @@ const ManagePatient = () => {
       width: 200,
       align: "center",
       headerAlign: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "accountType",
@@ -96,6 +104,8 @@ const ManagePatient = () => {
       align: "center",
       headerAlign: "center",
       cursor: "pointer",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
   ];
 
@@ -111,6 +121,16 @@ const ManagePatient = () => {
             <DataGrid
               rows={rows}
               columns={columns}
+              sx={{
+                "& .header-bg": {
+                  backgroundColor: "lightgrey",
+                  color: 'black',
+                  fontSize: '16px',
+                },
+                "& .cell-content": {
+                  fontSize: '1.2rem', 
+                }
+              }}
               initialState={{
                 pagination: {
                   paginationModel: {

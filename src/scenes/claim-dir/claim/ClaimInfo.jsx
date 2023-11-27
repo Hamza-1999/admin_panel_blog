@@ -428,30 +428,6 @@ lineHeight: 'normal'}}>New#</label>
         </Box>
       </Box>
       </Box> */}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       
 
      <Box style={{background:'white',borderRadius:'20px'}}display="flex" flexDirection="column">
@@ -533,6 +509,7 @@ fontWeight: '600',
               md: "repeat(3, minmax(0, 1fr))",
             },
             alignItems: "flex-end",
+            width:{xs:'90%',sm:'100%',md:'100%'}
           }}
         >
           
@@ -587,6 +564,7 @@ lineHeight: 'normal'}}>New#</label>
               sm: "repeat(2, minmax(0, 1fr))",
               md: "repeat(2, minmax(0, 1fr))",
             },
+            width:{xs:'90%',sm:'100%',md:'100%'}
           }}
         >
           <CustomSearchField
@@ -618,6 +596,7 @@ lineHeight: 'normal'}}>New#</label>
               sm: "repeat(2, minmax(0, 1fr))",
               md: "repeat(2, minmax(0, 1fr))",
             },
+            width:{xs:'90%',sm:'100%',md:'100%'}
           }}
         >
           <CustomSearchField
@@ -641,7 +620,7 @@ lineHeight: 'normal'}}>New#</label>
         </Box>
   
 
-        <Box
+        <Box 
           display="grid"
           gap="30px"
           sx={{
@@ -650,6 +629,7 @@ lineHeight: 'normal'}}>New#</label>
               sm: "repeat(2, minmax(0, 1fr))",
               md: "repeat(2, minmax(0, 1fr))",
             },
+            width:{xs:'90%',sm:'100%',md:'100%'}
           }}
         >
           <CustomSearchField type="text" label="Secondary Insurance" />
@@ -658,7 +638,7 @@ lineHeight: 'normal'}}>New#</label>
         </Box>
      
         <Accordion defaultExpanded={false} onChange={handleAccordionChange}>
-          <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+          <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"  , width:{xs:'90%',sm:'100%',md:'100%'}}}/>}>
             <Typography variant="h2" fontWeight='600'>
               {!isAccordionOpen
                 ? "Show Primary Policy Details"
@@ -675,6 +655,7 @@ lineHeight: 'normal'}}>New#</label>
                   sm: "repeat(3, minmax(0, 1fr))",
                   md: "repeat(3, minmax(0, 1fr))",
                 },
+                
               }}
             >
               <CustomField
@@ -716,6 +697,7 @@ lineHeight: 'normal'}}>New#</label>
                   sm: "repeat(3, minmax(0, 1fr))",
                   md: "repeat(3, minmax(0, 1fr))",
                 },
+                
               }}
             >
               <CustomField
@@ -739,6 +721,7 @@ lineHeight: 'normal'}}>New#</label>
               sm: "repeat(2, minmax(0, 1fr))",
               md: "repeat(2, minmax(0, 1fr))",
             },
+            width:{xs:'90%',sm:'100%',md:'100%'}
           }}
         >
         

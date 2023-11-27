@@ -7,6 +7,8 @@ import { useEffect } from "react";
 import { getPracticeAction } from "../../../features/actions/practiceAction";
 import { useNavigate } from "react-router-dom";
 import { Add } from "@mui/icons-material";
+import CustomSearchField from "../../../components/CustomSearchField";
+import CustomButton from "../../../components/CustomButton";
 
 const Practice = () => {
   const dispatch = useDispatch();
@@ -79,6 +81,8 @@ const Practice = () => {
       headerAlign: "center",
       filterable: true,
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "primaryAddress",
@@ -86,6 +90,8 @@ const Practice = () => {
       minWidth: 160,
       headerAlign: "center",
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "sequenceNo",
@@ -93,6 +99,8 @@ const Practice = () => {
       headerName: "Seq#",
       headerAlign: "center",
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "practiceNPINo",
@@ -100,6 +108,8 @@ const Practice = () => {
       headerName: "NPI",
       headerAlign: "center",
       align: "center",
+      headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
   ];
 
@@ -121,31 +131,50 @@ const Practice = () => {
             alignItems: "center",
             justifyContent: "space-between",
             flexDirection: { xs: "column", sm: "row" },
+            
             gap: "15px",
           }}
         >
-          <TextField
-            fullWidth
+
+          <Box  sx={{marginRight:{xs:'220px',sm:'100px',md:'0'}}}>
+          <CustomSearchField 
+            // fullWidth
             value={searchPractice}
             onChange={(e) => setSearchPractice(e.target.value)}
             variant="outlined"
-            size="small"
             label="Search"
           />
-          <Box width={{ xs: "100%", sm: "65%", md: "65%" }}>
-            <Button
+          </Box>
+          <Box width={{ xs: "100%", sm: "65%", md: "60%" }}
+          sx={{marginTop:'25px',
+          marginLeft:{xs:'0',md:'10px'}}}
+          
+          >
+            <CustomButton 
               fullWidth
               variant="contained"
-              color="secondary"
+              isBlue={true}
+              padding={'5px'}
               onClick={() => navigate("/practice/new")}
+             
             >
               <Add /> Add Practice
-            </Button>
+            </CustomButton>
           </Box>
         </Box>
         <DataGrid
           rows={filteredRow}
           columns={columns}
+          sx={{
+            "& .header-bg": {
+              backgroundColor: "lightgrey",
+              color: 'black',
+              fontSize: '16px',
+            },
+            "& .cell-content": {
+              fontSize: '1.2rem', 
+            }
+          }}
           initialState={{
             pagination: {
               paginationModel: {

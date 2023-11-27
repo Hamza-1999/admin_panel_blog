@@ -15,6 +15,7 @@ import {
 import CustomField from "../../components/CustomField";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
+import CustomDatePicker from "../../components/CustomDatePicker";
 import { useFormik } from "formik";
 import { paymentInitVal3 } from "../../utils/formikInitValues";
 import { useDispatch, useSelector } from "react-redux";
@@ -119,14 +120,15 @@ const NewPayment = () => {
           <CustomField
             value={formik.values.checkNumber}
             type="text"
-            label="Check/EFT #"
+            label="Check/EFT#"
             handleChange={formik.handleChange}
             handleBlur={formik.handleBlur}
             name="checkNumber"
           />
 
+
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-            <DatePicker
+            <CustomDatePicker className="customDatePicker"
               label="From"
               value={formik.values.checkDate}
               onChange={(newDate) => formik.setFieldValue("checkDate", newDate)}
@@ -136,6 +138,7 @@ const NewPayment = () => {
             // clearable
             />
           </LocalizationProvider>
+         
         </>
       );
     } else if (formik.values.paymentMethodId === "3") {
@@ -252,6 +255,7 @@ const NewPayment = () => {
             <Box>
               <CustomButton
                 variant="contained"
+                isBlue={true}
                 margin="0 0 15px"
                 handleClick={handleApplyEOB}
               >
