@@ -49,26 +49,11 @@ const BillingInfo = ({ formik }) => {
   return (
     <Box display="flex" flexDirection="column">
       <Accordion defaultExpanded={true}>
-        {/* <AccordionSummary className="accordianSummary">
-       
-          <Typography variant="h2" fontWeight='600' >Statement Options</Typography>
-          {<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
-        </AccordionSummary> */}
-
-
-<AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography className="accordianSummaryHeading"
-              // variant="h5"
-              component="h3"
-              fontWeight="600"
-            >
-              Statement Options
-            </Typography>
-          </AccordionSummary>
+        <AccordionSummary>
+          <Typography variant="h2" fontWeight="600">
+            Statement Options
+          </Typography>
+        </AccordionSummary>
 
         <AccordionDetails>
           <Box display="flex" gap="20px" flexDirection="column">
@@ -77,10 +62,6 @@ const BillingInfo = ({ formik }) => {
               className="customLabel"
               control={<Checkbox />} label="Send Statement" />
             </FormGroup> */}
-
-
-
-
 
             {/* statement type */}
             <Box
@@ -122,14 +103,16 @@ const BillingInfo = ({ formik }) => {
             </Box>
             {/* comment */}
             <Stack>
-              <label  className="customLabel">Patient Comment (applies to user print statements)</label>
+              <label className="customLabel">
+                Patient Comment (applies to user print statements)
+              </label>
               <TextareaAutosize
                 minRows={10}
                 value={formik.values.patientComment1}
                 name="patientComment1"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none", fontSize:"1.5rem" }}
+                style={{ resize: "none", fontSize: "1.5rem" }}
               />
             </Stack>
             <Box sx={{ width: { xs: "100%", sm: "100%", md: "50%" } }}>
@@ -142,7 +125,7 @@ const BillingInfo = ({ formik }) => {
                 name="patientComment2"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none", width: "100%", fontSize:"1.5rem" }}
+                style={{ resize: "none", width: "100%", fontSize: "1.5rem" }}
               />
             </Box>
           </Box>
@@ -150,26 +133,20 @@ const BillingInfo = ({ formik }) => {
       </Accordion>
       {/* collection options */}
       <Accordion>
-        <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
-            aria-controls="panel1a-content"
-            id="panel1a-header" >
-       <Typography variant="h3" fontWeight="600">
-       Collection Options
-     </Typography>
-     </AccordionSummary >
+        <AccordionSummary>
+          <Typography variant="h2" fontWeight="600">
+            Collection Options
+          </Typography>
+        </AccordionSummary>
         <AccordionDetails>
           <FormGroup>
-            <FormControlLabel control={
-            <CheckBox/>} 
-
-label={
-  <Typography variant="h4" fontWeight='600'>
-     Send Statement
-  </Typography>
-}
-/>
-            <Typography variant="h3" component="p" fontSize="1.4rem" marginBottom={'6px'} marginTop={'8px'}>
+            <FormControlLabel control={<Checkbox />} label="Send Statement" />
+            <Typography
+              variant="h3"
+              component="p"
+              fontSize="1.6rem"
+              marginBottom={"5px"}
+            >
               (applies to statement automation and batch printing)
             </Typography>
           </FormGroup>
@@ -184,7 +161,7 @@ label={
             <Box width={{ xs: "100%", sm: "30%", md: "35%" }}>
               <CustomDatePicker
                 dateLabel="Collection Date"
-                dateValue={formik.values.hospitalizedToDate}
+                dateValue={formik.values.collectionDate}
                 handleDateChange={(value) =>
                   formik.setFieldValue("collectionDate", value)
                 }
@@ -210,33 +187,27 @@ label={
       {/* payment portal */}
       <Accordion>
         {/* <AccordionSummary>Payment Portal Options</AccordionSummary> */}
-        <AccordionSummary
-        className="accordianSummary"
-        expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
-        aria-controls="panel1a-content"
-        id="panel1a-header" >
-       <Typography variant="h3" fontWeight="600">
-       Payment Portal Options
-     </Typography>
-     </AccordionSummary>
+        <AccordionSummary>
+          <Typography variant="h2" fontWeight="600">
+            Payment Portal Options
+          </Typography>
+        </AccordionSummary>
         <AccordionDetails>
           <Box>
-            <Typography component="h5" fontWeight="500">No Payment Portal</Typography>
+            <Typography component="h4" fontWeight="500">
+              No Payment Portal
+            </Typography>
           </Box>
         </AccordionDetails>
       </Accordion>
       {/* guarantor */}
       <Accordion>
         {/* <AccordionSummary>Guarantor</AccordionSummary> */}
-        <AccordionSummary 
-        className="accordianSummary"
-        expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
-        aria-controls="panel1a-content"
-        id="panel1a-header">
-       <Typography variant="h3" fontWeight="600">
-       Guarantor
-     </Typography>
-     </AccordionSummary>
+        <AccordionSummary>
+          <Typography variant="h2" fontWeight="600">
+            Guarantor
+          </Typography>
+        </AccordionSummary>
         <AccordionDetails>
           <Box display="flex" flexDirection="column" gap="20px">
             <Box width={{ xs: "100%", sm: "60%", md: "50%" }}>
@@ -335,7 +306,7 @@ label={
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 minRows={5}
-                style={{ resize: "none",fontSize:"1.5rem" }}
+                style={{ resize: "none", fontSize: "1.5rem" }}
               />
             </Stack>
 
@@ -372,22 +343,18 @@ label={
                 />
               </FormControl>
             </Stack>
-    <FormGroup>
-      <FormControlLabel  
-        control={<CheckBox/>}
-        label={
-          <Typography variant="h4" fontWeight='600'>
-            International Address
-          </Typography>
-        }
-       
-        // label="International Address"
-      />
-    </FormGroup>
+            <FormGroup>
+              <FormControlLabel
+                control={<CheckBox />}
+                label={
+                  <Typography variant="h4" fontWeight="600">
+                    International Address
+                  </Typography>
+                }
 
-
-
-
+                // label="International Address"
+              />
+            </FormGroup>
 
             <Box
               display="grid"
@@ -439,16 +406,14 @@ label={
               />
             </FormControl>
             <Stack>
-              <label className="customLabel">
-                  Remarks
-                  </label>
+              <label className="customLabel">Remarks</label>
               <TextareaAutosize
                 minRows={4}
                 value={formik.values.guarantorRemarks}
                 name="guarantorRemarks"
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
-                style={{ resize: "none", width: "100%",fontSize:"1.5rem" }}
+                style={{ resize: "none", width: "100%", fontSize: "1.5rem" }}
               />
             </Stack>
           </Box>

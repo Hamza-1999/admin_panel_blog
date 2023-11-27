@@ -16,6 +16,7 @@ import { toast } from "react-toastify";
 import CustomButton from "../../components/CustomButton";
 import BillingInfo from "./BillingInfo";
 import ClaimDefaults from "./ClaimDefaults";
+import MainInsurance from "./MainInsurance";
 // import { getInsuranceAction } from "../../features/actions/patientInsuranceAction";
 
 const CreatePatient = () => {
@@ -35,15 +36,7 @@ const CreatePatient = () => {
   };
 
   const handleFormSubmit = (formValues) => {
-    // const requiredFields = ["firstName", "lastName"];
-    // const emptyFields = requiredFields.filter(
-    //   (fieldName) => !formValues[fieldName]
-    // );
-
-    // if (emptyFields.length > 0) {
-    //   alert("Please fill the required fields first");
-    //   return;
-    // }
+    // console.log(formValues, "checkFormVals");
     if (
       formik.values.firstName.length === 0 &&
       formik.values.lastName.length === 0
@@ -63,6 +56,7 @@ const CreatePatient = () => {
     } else {
       try {
         dispatch(newPatientAction(formValues));
+        console.log(formValues, "gettinFormVals");
       } catch (error) {
         console.error("Error creating patient:", error);
       }
@@ -72,14 +66,14 @@ const CreatePatient = () => {
   const formik = useFormik({
     initialValues: patientInitValues,
     onSubmit: (values, action) => {
+      console.log(values, "getValsFormData");
       try {
-        // handleFormSubmit(values);
+        handleFormSubmit(values);
         console.log(values, "checking submit values of createPatient");
       } catch (error) {
         console.error("Error creating patient:", error);
       }
-      action.resetForm();
-      // console.log(values)
+      // action.resetForm();
     },
   });
 
@@ -115,34 +109,40 @@ const CreatePatient = () => {
               }}
             >
               <Tab
-                // style={{ fontSize: "18px", fontWeight: "bold" }}
+                style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Patient Info"
                 value={0}
               />
               <Tab
-                // style={{ fontSize: "18px", fontWeight: "bold" }}
+                style={{ fontSize: "18px", fontWeight: "bold" }}
+                className="tabsdesigning"
+                label="Insurance Information"
+                value={1}
+              />
+              {/* <Tab
+                style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Insurance Info"
                 value={1}
               />
               <Tab
-                // style={{ fontSize: "18px", fontWeight: "bold" }}
+                style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Payer Info"
                 value={2}
-              />
+              /> */}
               <Tab
-                // style={{ fontSize: "18px", fontWeight: "bold" }}
+                style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Billing Info"
-                value={3}
+                value={2}
               />
               <Tab
-                // style={{ fontSize: "18px", fontWeight: "bold" }}
+                style={{ fontSize: "18px", fontWeight: "bold" }}
                 className="tabsdesigning"
                 label="Claim Defaults"
-                value={4}
+                value={3}
               />
             </Tabs>
 
@@ -150,7 +150,7 @@ const CreatePatient = () => {
               <CustomButton
                 type="reset"
                 color="error"
-                padding={'7px'}
+                padding={"7px"}
                 isBlue={false}
                 sx={{
                   marginRight: "15px",
@@ -162,8 +162,8 @@ const CreatePatient = () => {
               <CustomButton
                 type="submit"
                 isBlue={true}
-                padding={'7px'}
-                form="patientForm"
+                padding={"7px"}
+                formId="patientForm"
                 disabled={loading}
                 sx={{
                   marginRight: "30px",
@@ -180,10 +180,11 @@ const CreatePatient = () => {
           >
             <Box className="formContent">
               {tabValue === 0 && <PatientInfo formik={formik} />}
-              {tabValue === 1 && <InsuranceInfo formik={formik} />}
-              {tabValue === 2 && <PayerInfo formik={formik} />}
-              {tabValue === 3 && <BillingInfo formik={formik} />}
-              {tabValue === 4 && <ClaimDefaults formik={formik} />}
+              {tabValue === 1 && <MainInsurance formik={formik} />}
+              {/* {tabValue === 1 && <InsuranceInfo formik={formik} />}
+              {tabValue === 2 && <PayerInfo formik={formik} />} */}
+              {tabValue === 2 && <BillingInfo formik={formik} />}
+              {tabValue === 3 && <ClaimDefaults formik={formik} />}
             </Box>
           </form>
         </Box>
