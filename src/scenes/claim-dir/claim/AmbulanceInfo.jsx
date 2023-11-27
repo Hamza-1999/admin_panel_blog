@@ -1,3 +1,4 @@
+import { ExpandMore, Search } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -19,6 +20,8 @@ import { getData } from "../../../config/axiosFunctions";
 import path from "../../../config/apiUrl";
 import CustomSelectBox from "../../../components/CustomSelectBox";
 import CustomSelectBox2 from "../../../components/CustomSelectBox2";
+// import CheckBox from "../../components/CheckBox";
+import CheckBox from "../../../components/CheckBox";
 
 const AmbulanceInfo = ({ formik }) => {
   const [transportReason, setTransportReason] = useState([]);
@@ -46,7 +49,7 @@ const AmbulanceInfo = ({ formik }) => {
       <Stack direction="row" alignItems="center" marginTop="30px">
         <FormLabel
           id="demo-row-radio-buttons-group-label"
-          sx={{ width: "150px" }}
+          sx={{ width: "150px",fontSize:'1.5rem' }}
         >
           Ambulamce Claim
         </FormLabel>
@@ -102,6 +105,7 @@ const AmbulanceInfo = ({ formik }) => {
             value: opt.transportReasonType,
             id: opt.transportReasonId,
           }))}
+          
           label="Transport Reason"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
@@ -156,8 +160,8 @@ const AmbulanceInfo = ({ formik }) => {
 
       {/* pickup address */}
       <Accordion sx={{ marginTop: "20px" }}>
-        <AccordionSummary>
-          <Typography variant="h4">Pickup Address</Typography>
+        <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+          <Typography variant="h3" fontWeight={'600'}>Pickup Address</Typography>
         </AccordionSummary>
 
         <AccordionDetails>
@@ -174,11 +178,12 @@ const AmbulanceInfo = ({ formik }) => {
           >
             <TextareaAutosize
               placeholder="Address"
+              minRows={4}
               value={formik.values.pickupAddress}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="pickupAddress"
-              minRows={"4"}
+              style={{ resize: "none", width: "100%",fontSize:"1.5rem" }}
             />
           </Box>
           <Box
@@ -218,16 +223,17 @@ const AmbulanceInfo = ({ formik }) => {
               handleBlur={formik.handleBlur}
             />
           </Box>
-
-          <FormGroup>
-            <FormControlLabel control={<Checkbox />} label="International" />
+<div style={{marginTop:'10px'}}>
+          <FormGroup >
+            <FormControlLabel  control={<CheckBox />} label="International" />
           </FormGroup>
+          </div>
         </AccordionDetails>
       </Accordion>
       {/* dropoff address */}
       <Accordion>
-        <AccordionSummary>
-          <Typography variant="h4">Dropoff Address</Typography>
+        <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+          <Typography variant="h3" fontWeight={'600'}>Dropoff Address</Typography>
         </AccordionSummary>
 
         <AccordionDetails>
@@ -257,6 +263,7 @@ const AmbulanceInfo = ({ formik }) => {
               onBlur={formik.handleBlur}
               name="dropOffAddress"
               minRows={"4"}
+              style={{ resize: "none", width: "100%",fontSize:"1.5rem" }}
             />
           </Box>
           <Box
@@ -300,11 +307,11 @@ const AmbulanceInfo = ({ formik }) => {
       </Accordion>
       {/* certification fields */}
       <Accordion>
-        <AccordionSummary>
-          <Typography variant="h4">Certification Fields</Typography>
+        <AccordionSummary expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+          <Typography variant="h3" fontWeight={'600'}>Certification Fields</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>Select up to 5</Typography>
+          <Typography variant='h5' style={{marginTop:'-20px',marginBottom:'10px'}} fontWeight={'500'}>Select up to 5</Typography>
           <Box
             display="grid"
             gap="10px"
@@ -318,49 +325,49 @@ const AmbulanceInfo = ({ formik }) => {
           >
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient was admitted to a hospital"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient was moved by stretcher"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient was unconcious or in shock"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient was transported in an emergency situation"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient had to be physically restrained"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient had visible hemorrhaging"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Ambulance service was medically necessary"
               />
             </FormGroup>
             <FormGroup>
               <FormControlLabel
-                control={<Checkbox />}
+                control={<CheckBox />}
                 label="Patient was confined to a bed or chair"
               />
             </FormGroup>

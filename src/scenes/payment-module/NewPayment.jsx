@@ -28,6 +28,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import PostPayment from "../payment/PostPayment";
 import { createPaymentAction } from "../../features/actions/PaymentAction";
 import axios from "axios";
+import CustomDatePicker from "../../components/CustomDatePicker";
 
 const NewPayment = () => {
   const dispatch = useDispatch();
@@ -136,7 +137,7 @@ const NewPayment = () => {
           />
 
           <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-            <DatePicker
+            <CustomDatePicker
               label="From"
               value={formik.values.checkDate}
               onChange={(newDate) => formik.setFieldValue("checkDate", newDate)}
@@ -173,7 +174,7 @@ const NewPayment = () => {
         <CustomField
           value={formik.values.checkNumber}
           type="text"
-          label="Check/EFT #"
+          label="Check/EFT#"
           handleChange={formik.handleChange}
           handleBlur={formik.handleBlur}
           name="checkNumber"

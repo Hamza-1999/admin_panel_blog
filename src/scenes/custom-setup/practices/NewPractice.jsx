@@ -24,6 +24,8 @@ import { newPracticeAction } from "../../../features/actions/practiceAction";
 import TaxonomyCategories from "./taxonomy/TaxonomyCategories";
 import { useNavigate } from "react-router-dom";
 import SearchNpi from "./npi/SearchNpi";
+import CustomSearchField from "../../../components/CustomSearchField";
+import CustomButton from "../../../components/CustomButton";
 
 const NewPractice = () => {
   const dispatch = useDispatch();
@@ -178,7 +180,7 @@ const NewPractice = () => {
               },
             }}
           >
-            <TextField
+            <CustomSearchField
               type="number"
               size="small"
               variant="filled"
@@ -201,7 +203,7 @@ const NewPractice = () => {
                 ),
               }}
             />
-
+<div style={{marginTop:'4px'}}>
             <CustomSelectBox
               value={values.organizationTypeName}
               name="organizationTypeName"
@@ -213,6 +215,7 @@ const NewPractice = () => {
               handleChange={handleChange}
               handleBlur={handleBlur}
             />
+            </div>
           </Box>
 
           <Box
@@ -228,7 +231,7 @@ const NewPractice = () => {
               },
             }}
           >
-            <TextField
+            <CustomSearchField
               type="text"
               size="small"
               variant="filled"
@@ -258,7 +261,7 @@ const NewPractice = () => {
             )}
           </Box>
           <Box marginTop={"30px"}>
-            <Typography variant="h5" component="h5">
+            <Typography variant="h3" fontWeight={'500'}>
               Sequence
             </Typography>
           </Box>
@@ -337,8 +340,8 @@ const NewPractice = () => {
           </Box>
 
           <Accordion>
-            <AccordionSummary expandIcon={<ExpandMore />}>
-              <Typography variant="h5" component={"h4"}>
+            <AccordionSummary  expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+              <Typography variant="h3" fontWeight={'600'}>
                 Primary Office
               </Typography>
             </AccordionSummary>
@@ -362,6 +365,7 @@ const NewPractice = () => {
                   onBlur={handleBlur}
                   name="primaryAddress"
                   minRows={"5"}
+                  style={{ resize: "none", fontSize:"1.5rem",marginTop:'-10px'}}
                 />
               </Box>
 
@@ -472,9 +476,9 @@ const NewPractice = () => {
             </AccordionDetails>
           </Accordion>
 
-          <Box marginTop={"30px"}>
-            <label>
-              <input
+          <Box marginTop={"20px"}>
+            <label style={{fontSize:'1.4rem'}}>
+              <input 
                 type="checkbox"
                 name="isPayToAddressSame"
                 checked={values.isPayToAddressSame}
@@ -485,8 +489,8 @@ const NewPractice = () => {
           </Box>
           {!values.isPayToAddressSame && (
             <Accordion sx={{ marginTop: "10px" }}>
-              <AccordionSummary expandIcon={<ExpandMore />}>
-                <Typography variant="h5" component={"h4"}>
+              <AccordionSummary  expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}>
+                <Typography variant="h3" fontWeight={'600'}>
                   Pay-To Address
                 </Typography>
               </AccordionSummary>
@@ -510,6 +514,7 @@ const NewPractice = () => {
                     onBlur={handleBlur}
                     name="payToAddress"
                     minRows={"5"}
+                    style={{ resize: "none", fontSize:"1.5rem",marginTop:'-10px' }}
                   />
                 </Box>
 
@@ -578,9 +583,9 @@ const NewPractice = () => {
           )}
 
           <Box margin={"20px 0"}>
-            <Button variant="outlined" color="secondary" type="submit">
+            <CustomButton  isBlue={true} type="submit">
               Save
-            </Button>
+            </CustomButton>
           </Box>
         </form>
       </Box>

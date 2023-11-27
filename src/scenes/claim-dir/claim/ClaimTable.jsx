@@ -40,6 +40,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      cellClassName: "cell-content"
       
     },
     {
@@ -54,6 +55,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
       editField: "name", // Add this line
       valueGetter: (params) =>
         `${params.row.patientFirstName} ${params.row.patientLastName}`,
+        cellClassName: "cell-content"
     },
     {
       field: "fromDate",
@@ -63,6 +65,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
     {
       field: "claimStatus",
@@ -72,6 +75,7 @@ const ClaimTable = ({ onCellClick, isModal }) => {
       headerAlign: "center",
       align: "center",
       headerClassName: "header-bg",
+      cellClassName: "cell-content"
     },
   ];
 
@@ -107,6 +111,9 @@ const ClaimTable = ({ onCellClick, isModal }) => {
               color: 'black',
               fontSize: '16px',
             },
+            "& .cell-content": {
+              fontSize: '1.2rem', 
+            }
           }}
           initialState={{
             pagination: {
