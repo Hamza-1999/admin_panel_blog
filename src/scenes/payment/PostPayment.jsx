@@ -58,11 +58,13 @@ const PostPayment = ({
   };
 const sumAppliedValue = ()=>{
   let total = 0
-  for (let i = 0; i < paymentDataForApi.paymentClaimDto.length; i++) {
-    const element = paymentDataForApi.paymentClaimDto[i];
-       let totalofSingleClaim = element.paymentDetailDto.reduce((sum , current)=> sum + current.allowed
-       , 0)
-       total += totalofSingleClaim
+  if (paymentDataForApi.paymentClaimDto) {
+    for (let i = 0; i < paymentDataForApi.paymentClaimDto.length; i++) {
+      const element = paymentDataForApi.paymentClaimDto[i];
+         let totalofSingleClaim = element.paymentDetailDto.reduce((sum , current)=> sum + current.allowed
+         , 0)
+         total += totalofSingleClaim
+    }
   }
   setAppliedValue(total)
 }
@@ -119,16 +121,16 @@ const sumAppliedValue = ()=>{
           >
             <Typography variant="h4" component="p">
               Payment -{" "}
-              {formik.values.paymentMethod === "creditCard"
-                ? formik.values.creditCardType
-                : formik.values.paymentMethod === "check"
+              {formik.values.paymentMethodId === "3"
+                ? formik.values.creditCardTypeId
+                : formik.values.paymentMethodId === "1"
                 ? "Check"
                 : "EFT"}{" "}
               from <span>{formik.values.paymentBy}</span>
             </Typography>
 
             <Stack margin="20px 0 10px">
-              {formik.values.paymentMethod === "check" && (
+              {formik.values.paymentMethodId === "1" && (
                 <Typography variant="h5" component="span">
                   <strong>Check:</strong> {formik.values.checkNumber}
                 </Typography>

@@ -18,7 +18,10 @@ import CustomButton from "../../components/CustomButton";
 import { useFormik } from "formik";
 import { paymentInitVal3 } from "../../utils/formikInitValues";
 import { useDispatch, useSelector } from "react-redux";
-import { addSelectedClaim  , setPaymentDataForApi } from "../../features/slice/PaymentSlice";
+import {
+  addSelectedClaim,
+  setPaymentDataForApi,
+} from "../../features/slice/PaymentSlice";
 import CustomSelectBox from "../../components/CustomSelectBox";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -36,17 +39,17 @@ const NewPayment = () => {
   const [paymentDetailDto, setPaymentDetailDto] = useState(null);
 
   // get  paymentData For api value in redux
-  let {paymentDataForApi} = useSelector((state)=> state.payment)
-  console.log(paymentDetailDto, "all paymentsDto");
+  let { paymentDataForApi } = useSelector((state) => state.payment);
   //   formik logic here
   const formik = useFormik({
     initialValues: paymentInitVal3,
     onSubmit: (values) => {
       const postValues = {
         ...values,
-        paymentDetailDto: paymentDetailDto,
+        paymentClaimDto: paymentDataForApi.paymentClaimDto,
       };
-      dispatch(createPaymentAction(paymentDataForApi));
+      console.log("paymentDataForApi" , postValues)
+      dispatch(createPaymentAction(postValues));
     },
   });
 
@@ -58,20 +61,24 @@ const NewPayment = () => {
       setOpenClaimModal(true);
       if (selectedRow.primaryPayerInsuranceName) {
         console.log(selectedRow, "selectedRow5667");
-        dispatch(setPaymentDataForApi({
-          ...paymentDataForApi,
-          paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
-          paymentFromName: selectedRow.primaryPayerInsuranceName,
-          paymentFrom: selectedRow.payerId,
-          payerId: selectedRow.payerId,
-          payerSequenceNo: selectedRow.payerSequenceNo,
-          paymentClaimDto: [{
-            claimId: selectedRow.claimChargesDto[0].claimInfoId,
-            claimNumber: selectedRow.claimNumber,
-            claimChargesDto: selectedRow.claimChargesDto,
-            paymentDetailDto: []
-          }]
-        }))
+        dispatch(
+          setPaymentDataForApi({
+            ...paymentDataForApi,
+            paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
+            paymentFromName: selectedRow.primaryPayerInsuranceName,
+            paymentFrom: selectedRow.payerId,
+            payerId: selectedRow.payerId,
+            payerSequenceNo: selectedRow.payerSequenceNo,
+            paymentClaimDto: [
+              {
+                claimId: selectedRow.claimChargesDto[0].claimInfoId,
+                claimNumber: selectedRow.claimNumber,
+                claimChargesDto: selectedRow.claimChargesDto,
+                paymentDetailDto: [],
+              },
+            ],
+          })
+        );
         formik.setValues((prevValues) => ({
           ...prevValues,
           paymentBy: ` ${selectedRow.primaryPayerInsuranceName} (${selectedRow.payerSequenceNo})`,
@@ -93,26 +100,30 @@ const NewPayment = () => {
           paymentFrom: selectedRow.payerId,
           payerSequenceNo: selectedRow.payerSequenceNo,
         }));
-        dispatch(setPaymentDataForApi({
-          ...paymentDataForApi,
-          paymentBy: `${selectedRow.payerName} (${selectedRow.payerSequenceNo})`,
-          paymentFromName: selectedRow.payerName,
-          paymentFrom: selectedRow.payerId,
-          payerSequenceNo: selectedRow.payerSequenceNo,
-          paymentClaimDto: [{
-            claimId: selectedRow.claimChargesDto[0].claimInfoId,
-            claimNumber: selectedRow.claimNumber,
-            claimChargesDto: selectedRow.claimChargesDto,
-            paymentDetailDto: []
-          }]
-        }))
+        dispatch(
+          setPaymentDataForApi({
+            ...paymentDataForApi,
+            paymentBy: `${selectedRow.payerName} (${selectedRow.payerSequenceNo})`,
+            paymentFromName: selectedRow.payerName,
+            paymentFrom: selectedRow.payerId,
+            payerSequenceNo: selectedRow.payerSequenceNo,
+            paymentClaimDto: [
+              {
+                claimId: selectedRow.claimChargesDto[0].claimInfoId,
+                claimNumber: selectedRow.claimNumber,
+                claimChargesDto: selectedRow.claimChargesDto,
+                paymentDetailDto: [],
+              },
+            ],
+          })
+        );
         setOpenPayerModal(false);
       }
     }
   };
 
   const renderSourceOptions = () => {
-    if (formik.values.paymentMethod === "check") {
+    if (formik.values.paymentMethodId === 1) {
       return (
         <>
           <CustomField
@@ -132,28 +143,32 @@ const NewPayment = () => {
               onBlur={() => formik.setFieldTouched("checkDate", true)}
               renderInput={(params) => <TextField {...params} />}
               inputFormat="MM/DD/YYYY"
-            // clearable
+              // clearable
             />
           </LocalizationProvider>
         </>
       );
-    } else if (formik.values.paymentMethod === "creditCard") {
+    } else if (formik.values.paymentMethodId === 3) {
       return (
         <>
+          
           <CustomSelectBox
-            value={formik.values.creditCardType}
-            name="creditCardType"
+            value={formik.values.creditCardTypeId}
+            name="creditCardTypeId"
             dropdownOptions={creditCardOpt?.map((opt) => ({
               value: opt.cardType,
               id: opt.id,
             }))}
             label="Credit Card Type"
-            handleChange={formik.handleChange}
+            //  handleChange={formik.handleChange}
+             handleChange={(e)=>{
+                formik.setFieldValue("creditCardTypeId" , Number(e.target.value))
+             }}
             handleBlur={formik.handleBlur}
           />
         </>
       );
-    } else if (formik.values.paymentMethod === "eft") {
+    } else if (formik.values.paymentMethodId === 4) {
       return (
         <CustomField
           value={formik.values.checkNumber}
@@ -201,8 +216,9 @@ const NewPayment = () => {
     ) {
       alert("Fill up the required fields");
     } else {
-      console.log("paymentDataForApi" , paymentDataForApi);
-      console.log("formik.values.paymentBy", formik.values.paymentBy)
+      console.log("formik.values" , formik.values)
+      console.log("paymentDataForApi", paymentDataForApi);
+      console.log("formik.values.paymentBy", formik.values.paymentBy);
       const loadingBtn = setTimeout(() => {
         setShowPostPay(true);
       }, 1500);
@@ -210,200 +226,210 @@ const NewPayment = () => {
     }
   };
 
-  useEffect(()=>{
-   dispatch(setPaymentDataForApi(paymentInitVal3))
-  },[])
+  useEffect(() => {
+    dispatch(setPaymentDataForApi(paymentInitVal3));
+  }, []);
 
   return (
     <>
-    <Box className="backgroundpatient ">
-      <CustomModal
-        open={openClaimModal}
-        handleClose={() => setOpenClaimModal(false)}
-      >
-        <ClaimTable
+      <Box className="backgroundpatient ">
+        <CustomModal
+          open={openClaimModal}
           handleClose={() => setOpenClaimModal(false)}
-          onCellClick={handlePaymentBy}
-          isModal={true}
-        />
-      </CustomModal>
-      {/* payer modal */}
-      <CustomModal
-        open={openPayerModal}
-        handleClose={() => setOpenPayerModal(false)}
-      >
-        <PayerList
-          handleClose={() => setOpenPayerModal(false)}
-          modalFor="payment"
-          handlePaymentBy={handlePaymentBy}
-        />
-      </CustomModal>
-
-      {/* first window data */}
-      <Box margin={"20px"}>
-        {showPostPay ? (
-          <PostPayment
-            formik={formik}
-            
-            setPaymentDetailDto={setPaymentDetailDto}
+        >
+          <ClaimTable
+            handleClose={() => setOpenClaimModal(false)}
+            onCellClick={handlePaymentBy}
+            isModal={true}
           />
-        ) : (
-          <div>
-            <Box>
-              <CustomButton
-                variant="contained"
-                margin="0 0 15px"
-                handleClick={handleApplyEOB}
-              >
-                {applyEob ? <CircularProgress /> : "Apply As EOB"}
-              </CustomButton>
-            </Box>
-            <Stack
-              sx={{
-                width: { xs: "95%", sm: "75%", md: "50%" },
-                border: "1px solid lightgrey",
-                borderRadius: "10px",
-                padding: "15px",
-              }}
-            >
-              <Box
-                display="grid"
-                gap="30px"
-                margin={"20px 0"}
+        </CustomModal>
+        {/* payer modal */}
+        <CustomModal
+          open={openPayerModal}
+          handleClose={() => setOpenPayerModal(false)}
+        >
+          <PayerList
+            handleClose={() => setOpenPayerModal(false)}
+            modalFor="payment"
+            handlePaymentBy={handlePaymentBy}
+          />
+        </CustomModal>
+
+        {/* first window data */}
+        <Box margin={"20px"}>
+          {showPostPay ? (
+            <PostPayment
+              formik={formik}
+              setPaymentDetailDto={setPaymentDetailDto}
+            />
+          ) : (
+            <div>
+              <Box>
+                <CustomButton
+                  variant="contained"
+                  margin="0 0 15px"
+                  handleClick={handleApplyEOB}
+                >
+                  {applyEob ? <CircularProgress /> : "Apply As EOB"}
+                </CustomButton>
+              </Box>
+              <Stack
                 sx={{
-                  gridTemplateColumns: {
-                    xs: "repeat(1, minmax(0, 1fr))",
-                    sm: "repeat(1, minmax(0, 1fr))",
-                    md: "repeat(1, minmax(0, 1fr))",
-                  },
+                  width: { xs: "95%", sm: "75%", md: "50%" },
+                  border: "1px solid lightgrey",
+                  borderRadius: "10px",
+                  padding: "15px",
                 }}
               >
-                <CustomSearchField
-                  type="text"
-                  label="Payment By"
-                  handleModalOpen={handlePaymentBy}
-                  name="paymentBy"
-                  fieldVal={formik.values.paymentBy}
-                  handleBlur={formik.handleBlur}
-                  handleChange={formik.handleChange}
-                />
+                <Box
+                  display="grid"
+                  gap="30px"
+                  margin={"20px 0"}
+                  sx={{
+                    gridTemplateColumns: {
+                      xs: "repeat(1, minmax(0, 1fr))",
+                      sm: "repeat(1, minmax(0, 1fr))",
+                      md: "repeat(1, minmax(0, 1fr))",
+                    },
+                  }}
+                >
+                  <CustomSearchField
+                    type="text"
+                    label="Payment By"
+                    handleModalOpen={handlePaymentBy}
+                    name="paymentBy"
+                    fieldVal={formik.values.paymentBy}
+                    handleBlur={formik.handleBlur}
+                    handleChange={formik.handleChange}
+                  />
+
+                  <Stack flexDirection={"row"} alignItems={"center"}>
+                    <FormControlLabel
+                      label="Claim"
+                      control={
+                        <Radio
+                          value="claim"
+                          variant="soft"
+                          name="claim"
+                          checked={formik.values.isClaim}
+                          onChange={() => formik.setFieldValue("isClaim", true)}
+                        />
+                      }
+                    />
+                    <FormControlLabel
+                      label="Payer"
+                      control={
+                        <Radio
+                          value="payer"
+                          variant="soft"
+                          name="payer"
+                          checked={!formik.values.isClaim}
+                          onChange={() =>
+                            formik.setFieldValue("isClaim", false)
+                          }
+                        />
+                      }
+                    />
+                  </Stack>
+                </Box>
+
+                <Box
+                  display="grid"
+                  gap="30px"
+                  margin={"20px 0"}
+                  sx={{
+                    gridTemplateColumns: {
+                      xs: "repeat(1, minmax(0, 1fr))",
+                      sm: "repeat(2, minmax(0, 1fr))",
+                      md: "repeat(2, minmax(0, 1fr))",
+                    },
+                  }}
+                >
+                  <CustomField
+                    type="text"
+                    label="Payment From"
+                    value={formik.values.paymentFromName}
+                    name="paymentFromName"
+                    handleBlur={formik.handleBlur}
+                    handleChange={formik.handleChange}
+                  />
+                  <CustomField
+                    type="number"
+                    label="Payment Amount"
+                    value={formik.values.paymentAmount}
+                    name="paymentAmount"
+                    handleBlur={formik.handleBlur}
+                    handleChange={formik.handleChange}
+                  />
+                </Box>
 
                 <Stack flexDirection={"row"} alignItems={"center"}>
+                  <Typography marginRight={"20px"}>Source:</Typography>
                   <FormControlLabel
-                    label="Claim"
+                    label="Check"
                     control={
                       <Radio
-                        value="claim"
+                        value="1"
                         variant="soft"
-                        name="claim"
-                        checked={formik.values.isClaim}
-                        onChange={() => formik.setFieldValue("isClaim", true)}
+                        name="paymentMethodId"
+                        checked={formik.values.paymentMethodId === 1}
+                        // onChange={formik.handleChange}
+                        onChange={(e)=>{
+                                formik.setFieldValue("paymentMethodId" , Number(e.target.value))
+                        }}
                       />
                     }
                   />
                   <FormControlLabel
-                    label="Payer"
+                    label="Credit Card"
                     control={
                       <Radio
-                        value="payer"
+                        value="3"
                         variant="soft"
-                        name="payer"
-                        checked={!formik.values.isClaim}
-                        onChange={() => formik.setFieldValue("isClaim", false)}
+                        name="paymentMethodId"
+                        checked={formik.values.paymentMethodId === 3}
+                        // onChange={formik.handleChange}
+                        onChange={(e)=>{
+                          formik.setFieldValue("paymentMethodId" , Number(e.target.value))
+                  }}
+                      />
+                    }
+                  />
+                  <FormControlLabel
+                    label="Electronic Fund Transfer"
+                    control={
+                      <Radio
+                        value="4"
+                        variant="soft"
+                        name="paymentMethodId"
+                        checked={formik.values.paymentMethodId === 4}
+                        // onChange={formik.handleChange}
+                        onChange={(e)=>{
+                          formik.setFieldValue("paymentMethodId" , Number(e.target.value))
+                  }}
                       />
                     }
                   />
                 </Stack>
-              </Box>
 
-              <Box
-                display="grid"
-                gap="30px"
-                margin={"20px 0"}
-                sx={{
-                  gridTemplateColumns: {
-                    xs: "repeat(1, minmax(0, 1fr))",
-                    sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(2, minmax(0, 1fr))",
-                  },
-                }}
-              >
-                <CustomField
-                  type="text"
-                  label="Payment From"
-                  value={formik.values.paymentFromName}
-                  name="paymentFromName"
-                  handleBlur={formik.handleBlur}
-                  handleChange={formik.handleChange}
-                />
-                <CustomField
-                  type="number"
-                  label="Payment Amount"
-                  value={formik.values.paymentAmount}
-                  name="paymentAmount"
-                  handleBlur={formik.handleBlur}
-                  handleChange={formik.handleChange}
-                />
-              </Box>
-
-              <Stack flexDirection={"row"} alignItems={"center"}>
-                <Typography marginRight={"20px"}>Source:</Typography>
-                <FormControlLabel
-                  label="Check"
-                  control={
-                    <Radio
-                      value="check"
-                      variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "check"}
-                      onChange={formik.handleChange}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  label="Credit Card"
-                  control={
-                    <Radio
-                      value="creditCard"
-                      variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "creditCard"}
-                      onChange={formik.handleChange}
-                    />
-                  }
-                />
-                <FormControlLabel
-                  label="Electronic Fund Transfer"
-                  control={
-                    <Radio
-                      value="eft"
-                      variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "eft"}
-                      onChange={formik.handleChange}
-                    />
-                  }
-                />
+                <Box
+                  display="grid"
+                  gap="30px"
+                  margin={"20px 0"}
+                  sx={{
+                    gridTemplateColumns: {
+                      xs: "repeat(1, minmax(0, 1fr))",
+                      sm: "repeat(2, minmax(0, 1fr))",
+                      md: "repeat(2, minmax(0, 1fr))",
+                    },
+                  }}
+                >
+                  {renderSourceOptions()}
+                </Box>
               </Stack>
-
-              <Box
-                display="grid"
-                gap="30px"
-                margin={"20px 0"}
-                sx={{
-                  gridTemplateColumns: {
-                    xs: "repeat(1, minmax(0, 1fr))",
-                    sm: "repeat(2, minmax(0, 1fr))",
-                    md: "repeat(2, minmax(0, 1fr))",
-                  },
-                }}
-              >
-                {renderSourceOptions()}
-              </Box>
-            </Stack>
-          </div>
-        )}
-      </Box>
+            </div>
+          )}
+        </Box>
       </Box>
     </>
   );
