@@ -28,8 +28,9 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
     adjusted: 0,
     unpaid: 0,
     deductible: 0,
+    endBalance : 0,
+    otherCredits : 0,
     claimStatus: item.claimStatus,
-    endBalance: item.amountBilled,
     // claimInfoId: item.claimInfoId,
   }));
 
@@ -123,6 +124,14 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
       align: "center",
     },
     {
+      field: "otherCredits",
+      headerName: "Other Credits",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    },
+    {
       field: "claimStatus",
       headerName: "Status",
       flex: 1,
@@ -130,6 +139,14 @@ const PostPayDetail = ({ detailInfo, setShowDetail, setPaymentDetailDto }) => {
       headerAlign: "center",
       align: "center",
     },
+    {
+      field: "endBalance",
+      headerName: "End Balance",
+      flex: 1,
+      minWidth: 150,
+      headerAlign: "center",
+      align: "center",
+    }
   ];
 
   const handleEditClick = (row) => {

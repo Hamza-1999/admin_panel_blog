@@ -6,13 +6,43 @@ import CustomButton from "../../components/CustomButton";
 const EditPayDetail = ({ data, onSave, handleClose }) => {
   const [editedData, setEditedData] = useState({ ...data });
   console.log(editedData, "get edited data");
-
+  const otherCalculation = (e) => {
+    let allowedPlusAdjusted = parseFloat(e.allowed + e.amount - e.allowed);
+    let additionalOtherCredits = parseFloat(
+      allowedPlusAdjusted > e.amount ? allowedPlusAdjusted - e.amount : 0
+    );
+    return parseFloat(additionalOtherCredits);
+  };
   const handleSave = () => {
     const updatedData = {
       ...editedData,
       allowed: parseFloat(editedData.allowed), // Convert to a floating-point number
       paid: parseFloat(editedData.paid), // Convert to a floating-point number
-      adjusted : parseFloat(editedData.amount - editedData.allowed)
+      unpaid:
+        editedData.deductible > 0
+          ? 0
+          : parseFloat(
+              editedData.paid > editedData.allowed
+                ? 0
+                : editedData.allowed - editedData.paid
+            ),
+      endBalance: parseFloat(
+        editedData.paid > editedData.allowed
+          ? 0
+          : editedData.allowed - editedData.paid
+      ),
+      otherCredits: parseFloat(
+        editedData.paid > editedData.allowed
+          ? editedData.adjusted > editedData.amount - editedData.allowed
+            ?-1 * (parseFloat(editedData.paid) -
+              parseFloat(editedData.allowed) +
+              parseFloat(editedData.adjusted) +
+              parseFloat(editedData.allowed) -
+              parseFloat(editedData.amount))
+            :   editedData.allowed - editedData.paid
+          : 0
+      ),
+      claimStatus : editedData.paid > editedData.allowed ? "PAID" : "DUE AMOUNT",
     };
     onSave(updatedData);
     handleClose();
@@ -53,7 +83,11 @@ const EditPayDetail = ({ data, onSave, handleClose }) => {
           InputLabelProps={{ shrink: true }}
           name="allowed"
           onChange={(e) =>
-            setEditedData({ ...editedData, allowed: e.target.value })
+            setEditedData({
+              ...editedData,
+              allowed: e.target.value,
+              adjusted: Math.abs(parseFloat(editedData.amount - e.target.value)),
+            })
           }
           variant="outlined"
         />
@@ -67,8 +101,59 @@ const EditPayDetail = ({ data, onSave, handleClose }) => {
           name="paid"
           variant="outlined"
           onChange={(e) =>
-            setEditedData({ ...editedData, paid: e.target.value })
+            setEditedData({
+              ...editedData,
+              paid: e.target.value,
+            })
           }
+        />
+        <TextField
+          type="number"
+          size="small"
+          label="Adjusted"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          value={editedData.adjusted}
+          name="adjusted"
+          variant="outlined"
+          onChange={(e) => {
+            if (e.target.value) {
+              setEditedData({ ...editedData, adjusted: e.target.value });
+            }
+          }}
+        />
+        <TextField
+          type="number"
+          size="small"
+          label="Unpaid"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          value={editedData.unpaid}
+          name="unpaid"
+          variant="outlined"
+          onChange={(e) => {
+            if (e.target.value) {
+              setEditedData({ ...editedData, unpaid: e.target.value });
+            }
+          }}
+        />
+        <TextField
+          type="number"
+          size="small"
+          label="Deductible"
+          fullWidth
+          InputLabelProps={{ shrink: true }}
+          value={editedData.deductible}
+          name="deductible"
+          variant="outlined"
+          onChange={(e) => {
+            if (e.target.value) {
+              setEditedData({
+                ...editedData,
+                deductible: e.target.value,
+              });
+            }
+          }}
         />
 
         <div>

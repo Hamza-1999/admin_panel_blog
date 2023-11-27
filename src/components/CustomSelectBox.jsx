@@ -36,7 +36,7 @@ const CustomSelectBox = ({
         </option>
         {dropdownOptions.map((opt) => (
           <>
-            <option key={opt.id} value={opt.value}>
+            <option key={opt.id} value={opt.id}>
               {opt.value}
             </option>
           </>

@@ -5,19 +5,21 @@ import { useSelector } from "react-redux";
 
 const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
   const { selectedClaim  , paymentDataForApi } = useSelector((state) => state.payment);
-  console.log(selectedClaim, "selectedClaims");
+  console.log(paymentDataForApi, "selectedClaims");
 
 
 
   const Sum = (id, key) => {
-    console.log("id" , id)
-    let findClaim = paymentDataForApi.paymentClaimDto.find((val) => val.claimId === id);
-    console.log("findClaim222", paymentDataForApi);
-    if (findClaim) {
-      const sum = findClaim.paymentDetailDto.reduce((accumulator, currentValue) => {
-        return accumulator + currentValue[key];
-      }, 0);
-      return sum;
+    if (paymentDataForApi?.paymentClaimDto) {
+      let findClaim = paymentDataForApi?.paymentClaimDto.find((val) => val.claimId === id);
+      console.log("findClaim222", paymentDataForApi);
+      if (findClaim) {
+        const sum = findClaim.paymentDetailDto.reduce((accumulator, currentValue) => {
+          return accumulator + parseFloat(currentValue[key]);
+        }, 0);
+        return sum;
+      }
+      return 0;
     }
     return 0;
   };
@@ -32,7 +34,7 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
     allowed: Sum(el.claimId  || el.id , "allowed"),
     paid: Sum(el.claimId  || el.id , "paid"),
     adjusted: Sum(el.claimId || el.id , "adjusted"),
-    unpaid: 0,
+    unpaid: Sum(el.claimId  || el.id , "unpaid"),
     additionalActions: 0,
     balance: el.totalBilled,
     claimChargesDto: el.claimChargesDto,
@@ -134,7 +136,7 @@ const PostPayGrid = ({ setDetailInfo, setShowDetail }) => {
       console.log("0" , total)
       return total
   }
-  const totalRow = { id: "total", patientFirstName : 'Total', billed : SumForMainTotal("billed") , allowed: SumForMainTotal("allowed"), paid: SumForMainTotal("paid") , adjusted:SumForMainTotal("adjusted") ,unpaid :0 , additionalActions: 0 , balance: SumForMainTotal("balance")};
+  const totalRow = { id: "total", patientFirstName : 'Total', billed : SumForMainTotal("billed") , allowed: SumForMainTotal("allowed"), paid: SumForMainTotal("paid") , adjusted:SumForMainTotal("adjusted") ,unpaid :SumForMainTotal("unpaid") , additionalActions: SumForMainTotal("additionalActions") , balance: SumForMainTotal("balance")};
 
   const totalRows = [...rows , totalRow  ]
   // // payer columns

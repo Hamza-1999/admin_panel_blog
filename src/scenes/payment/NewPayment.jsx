@@ -46,7 +46,8 @@ const NewPayment = () => {
         ...values,
         paymentDetailDto: paymentDetailDto,
       };
-      dispatch(createPaymentAction(paymentDataForApi));
+      console.log("paymentDataForApi" , paymentDataForApi)
+      // dispatch(createPaymentAction(paymentDataForApi));
     },
   });
 
@@ -112,7 +113,7 @@ const NewPayment = () => {
   };
 
   const renderSourceOptions = () => {
-    if (formik.values.paymentMethod === "check") {
+    if (formik.values.paymentMethodId === "1") {
       return (
         <>
           <CustomField
@@ -137,7 +138,7 @@ const NewPayment = () => {
           </LocalizationProvider>
         </>
       );
-    } else if (formik.values.paymentMethod === "creditCard") {
+    } else if (formik.values.paymentMethodId === "3") {
       return (
         <>
           <CustomSelectBox
@@ -153,7 +154,7 @@ const NewPayment = () => {
           />
         </>
       );
-    } else if (formik.values.paymentMethod === "eft") {
+    } else if (formik.values.paymentMethodId === "4") {
       return (
         <CustomField
           value={formik.values.checkNumber}
@@ -351,11 +352,14 @@ const NewPayment = () => {
                   label="Check"
                   control={
                     <Radio
-                      value="check"
+                      value="1"
                       variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "check"}
+                      name="paymentMethodId"
+                      checked={formik.values.paymentMethodId === "1"}
                       onChange={formik.handleChange}
+                      // onChange={(e)=>{
+                      //  console.log("e checkvv" , e)
+                      // }}
                     />
                   }
                 />
@@ -363,10 +367,10 @@ const NewPayment = () => {
                   label="Credit Card"
                   control={
                     <Radio
-                      value="creditCard"
+                      value="3"
                       variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "creditCard"}
+                      name="paymentMethodId"
+                      checked={formik.values.paymentMethodId === "3"}
                       onChange={formik.handleChange}
                     />
                   }
@@ -375,10 +379,10 @@ const NewPayment = () => {
                   label="Electronic Fund Transfer"
                   control={
                     <Radio
-                      value="eft"
+                      value="4"
                       variant="soft"
-                      name="paymentMethod"
-                      checked={formik.values.paymentMethod === "eft"}
+                      name="paymentMethodId"
+                      checked={formik.values.paymentMethodId === "4"}
                       onChange={formik.handleChange}
                     />
                   }
