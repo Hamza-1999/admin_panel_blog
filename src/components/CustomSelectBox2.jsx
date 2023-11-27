@@ -25,14 +25,12 @@ const CustomSelectBox2 = ({
           className="customSelectBox"
           value={value}
           name={name}
-          type="number"
           // label={label}
           onChange={(e) => formik.setFieldValue(name, Number(e.target.value))}
           onBlur={handleBlur}
           native
           id="dropdowns"
           defaultValue=""
-         
         >
           <option style={{ color: "lightgray !important" }}>Select</option>
           {dropdownOptions.map((opt) => {

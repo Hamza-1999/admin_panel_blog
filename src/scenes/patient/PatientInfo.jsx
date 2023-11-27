@@ -5,7 +5,6 @@ import {
   Box,
   TextField,
   Typography,
- 
 } from "@mui/material";
 import "./PatientInfo.css";
 import { ErrorMessage, Field, Formik } from "formik";
@@ -27,6 +26,7 @@ import CustomField from "../../components/CustomField";
 import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import CustomSelectBox2 from "../../components/CustomSelectBox2";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -46,8 +46,6 @@ const PatientInfo = ({ formik }) => {
   const [countryOptions, setCountryOptions] = useState([]);
   const [stateOptions, setStateOptions] = useState([]);
   const [residenceOptions, setResidenceOptions] = useState([]);
-
-  const dispatch = useDispatch();
 
   // Define data fetching URLs
   const dataFetchUrls = {
@@ -92,19 +90,30 @@ const PatientInfo = ({ formik }) => {
     fetchDataOptions(dataFetchUrls.sexualOrientation, setSexOrientationOptions);
     fetchDataOptions(dataFetchUrls.states, setStateOptions);
     fetchDataOptions(dataFetchUrls.studentStatus, setStudentStatusOpt);
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
-      <Box  display="flex" flexDirection="column">
+      <Box display="flex" flexDirection="column">
         {/* general Info */}
         <Accordion defaultExpanded={true}>
-          <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+          <AccordionSummary
+            className="accordianSummary"
+            expandIcon={
+              <ExpandMore
+                sx={{
+                  fontSize: "25px",
+                  color: "#216FED",
+                  border: "1px solid #216FED",
+                  borderRadius: "50px",
+                }}
+              />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className="accordianSummaryHeading"
+            <Typography
+              className="accordianSummaryHeading"
               // variant="h5"
               component="h3"
               fontWeight="600"
@@ -162,12 +171,9 @@ const PatientInfo = ({ formik }) => {
                 label="Driving License"
               />
 
-             
-       
-
-              <CustomSelectBox
-                name="genderIdentityName"
-                value={formik.values.genderIdentityName}
+              <CustomSelectBox2
+                value={formik.values.GenderIdentityStatusId}
+                name="GenderIdentityStatusId"
                 dropdownOptions={genderOptions?.map((opt) => ({
                   value: opt.genderIdentityName,
                   id: opt.genderIdentityId,
@@ -175,12 +181,14 @@ const PatientInfo = ({ formik }) => {
                 label="Gender"
                 handleChange={formik.handleChange}
                 handleBlur={formik.handleBlur}
+                formik={formik}
               />
 
               {/* sexual orientation dropdown */}
-              <CustomSelectBox
-                name="sexualOrientationName"
-                value={formik.values.sexualOrientationName}
+              <CustomSelectBox2
+                formik={formik}
+                name="sexualOrientationId"
+                value={formik.values.sexualOrientationId}
                 dropdownOptions={sexOrientationOptions?.map((opt) => ({
                   value: opt.sexualOrientationName,
                   id: opt.sexualOrientationId,
@@ -191,9 +199,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* marital status */}
-              <CustomSelectBox
-                name="maritalStatusName"
-                value={formik.values.maritalStatusName}
+              <CustomSelectBox2
+                formik={formik}
+                name="maritalStatusId"
+                value={formik.values.maritalStatusId}
                 dropdownOptions={maritalOptions?.map((opt) => ({
                   value: opt.maritalStatusName,
                   id: opt.maritalStatusId,
@@ -204,9 +213,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* Race Status */}
-              <CustomSelectBox
-                value={formik.values.raceStatusName}
-                name="raceStatusName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.raceStatusId}
+                name="raceStatusId"
                 dropdownOptions={raceOptions?.map((opt) => ({
                   value: opt.raceStatusName,
                   id: opt.raceStatusId,
@@ -217,9 +227,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* account types */}
-              <CustomSelectBox
-                value={formik.values.accountType}
-                name="accountType"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.accountTypeId}
+                name="accountTypeId"
                 dropdownOptions={accountTypeOptions?.map((opt) => ({
                   value: opt.accountType,
                   id: opt.accountTypeId,
@@ -230,9 +241,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* employeement status */}
-              <CustomSelectBox
-                value={formik.values.employmentStatusName}
-                name="employmentStatusName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.employmentStatusId}
+                name="employmentStatusId"
                 dropdownOptions={employeementOptions?.map((opt) => ({
                   value: opt.employmentStatusName,
                   id: opt.employmentStatusId,
@@ -243,9 +255,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* referrel source*/}
-              <CustomSelectBox
-                value={formik.values.referralSourceName}
-                name="referralSourceName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.referralSourceId}
+                name="referralSourceId"
                 dropdownOptions={referenceOptions?.map((opt) => ({
                   value: opt.referralSourceName,
                   id: opt.referralSourceId,
@@ -256,9 +269,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* relation to patient */}
-              <CustomSelectBox
-                value={formik.values.relationShipToPatientName}
-                name="relationShipToPatientName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.relationShipToPatientId}
+                name="relationShipToPatientId"
                 dropdownOptions={patienRelationOpt?.map((opt) => ({
                   value: opt.relationShipToPatientName,
                   id: opt.relationShipToPatientId,
@@ -269,9 +283,10 @@ const PatientInfo = ({ formik }) => {
               />
 
               {/* Ethnicity Status*/}
-              <CustomSelectBox
-                value={formik.values.ethnicityName}
-                name="ethnicityName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.ethnicityId}
+                name="ethnicityId"
                 dropdownOptions={ethnicityOptions?.map((opt) => ({
                   value: opt.ethnicityName,
                   id: opt.ethnicityId,
@@ -281,9 +296,10 @@ const PatientInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               {/* student Status*/}
-              <CustomSelectBox
-                value={formik.values.studentStatusName}
-                name="studentStatusName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.studentStatusId}
+                name="studentStatusId"
                 dropdownOptions={studentStatusOpt?.map((opt) => ({
                   value: opt.studentStatusName,
                   id: opt.studentStatusId,
@@ -294,17 +310,27 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
-          
         </Accordion>
 
         {/* contact details */}
         <Accordion>
-          <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+          <AccordionSummary
+            className="accordianSummary"
+            expandIcon={
+              <ExpandMore
+                sx={{
+                  fontSize: "25px",
+                  color: "#216FED",
+                  border: "1px solid #216FED",
+                  borderRadius: "50px",
+                }}
+              />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className="accordianSummaryHeading"
+            <Typography
+              className="accordianSummaryHeading"
               component="h3"
               fontWeight="600"
             >
@@ -365,17 +391,26 @@ const PatientInfo = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
-        
-       
 
         {/* Birth Details */}
         <Accordion>
-          <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+          <AccordionSummary
+            className="accordianSummary"
+            expandIcon={
+              <ExpandMore
+                sx={{
+                  fontSize: "25px",
+                  color: "#216FED",
+                  border: "1px solid #216FED",
+                  borderRadius: "50px",
+                }}
+              />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className="accordianSummaryHeading"
+            <Typography
+              className="accordianSummaryHeading"
               // variant="h5"
               component="h3"
               fontWeight="600"
@@ -383,7 +418,7 @@ const PatientInfo = ({ formik }) => {
               Birth Details:
             </Typography>
           </AccordionSummary>
-           
+
           <AccordionDetails>
             <Box
               display="grid"
@@ -396,53 +431,64 @@ const PatientInfo = ({ formik }) => {
                 },
               }}
             >
-
-<div>
-  <label className="customLabel">Date of Birth</label>
-  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <CustomDatePicker className="customDatePicker"
-      // label="Date of Death"
-      value={formik.values.dateOfBirth}
-      onChange={(value) =>
-        formik.setFieldValue("dateOfBirth", value)
-      }
-      onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
-      renderInput={(params) => <TextField {...params} />}
-      inputFormat="MM/DD/YYYY"
-    />
-  </LocalizationProvider>
-</div>
-  <div>
-  <label className="customLabel">Date of Death</label>
-  <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-    <CustomDatePicker className="customDatePicker"
-      // label="Date of Death"
-      value={formik.values.dateOfDeath}
-      onChange={(value) =>
-        formik.setFieldValue("dateOfDeath", value)
-      }
-      onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
-      renderInput={(params) => <TextField {...params} />}
-      inputFormat="MM/DD/YYYY"
-    />
-  </LocalizationProvider>
-</div>
+              <div>
+                <label className="customLabel">Date of Birth</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+                  <CustomDatePicker
+                    className="customDatePicker"
+                    // label="Date of Death"
+                    value={formik.values.dateOfBirth}
+                    onChange={(value) =>
+                      formik.setFieldValue("dateOfBirth", value)
+                    }
+                    onBlur={() => formik.setFieldTouched("dateOfBirth", true)}
+                    renderInput={(params) => <TextField {...params} />}
+                    inputFormat="MM/DD/YYYY"
+                  />
+                </LocalizationProvider>
+              </div>
+              <div>
+                <label className="customLabel">Date of Death</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
+                  <CustomDatePicker
+                    className="customDatePicker"
+                    // label="Date of Death"
+                    value={formik.values.dateOfDeath}
+                    onChange={(value) =>
+                      formik.setFieldValue("dateOfDeath", value)
+                    }
+                    onBlur={() => formik.setFieldTouched("dateOfDeath", true)}
+                    renderInput={(params) => <TextField {...params} />}
+                    inputFormat="MM/DD/YYYY"
+                  />
+                </LocalizationProvider>
+              </div>
             </Box>
           </AccordionDetails>
         </Accordion>
-        
 
         {/* addres details */}
         <Accordion>
-          <AccordionSummary className="accordianSummary"
-             expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+          <AccordionSummary
+            className="accordianSummary"
+            expandIcon={
+              <ExpandMore
+                sx={{
+                  fontSize: "25px",
+                  color: "#216FED",
+                  border: "1px solid #216FED",
+                  borderRadius: "50px",
+                }}
+              />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className="accordianSummaryHeading"
-                component="h3"
-                fontWeight="600"  
-                          >
+            <Typography
+              className="accordianSummaryHeading"
+              component="h3"
+              fontWeight="600"
+            >
               Address Details:
             </Typography>
           </AccordionSummary>
@@ -479,9 +525,10 @@ const PatientInfo = ({ formik }) => {
                 label="Zipcode"
               />
               {/* country types */}
-              <CustomSelectBox
-                value={formik.values.countryName}
-                name="countryName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.countryId}
+                name="countryId"
                 dropdownOptions={countryOptions?.map((opt) => ({
                   value: opt.countryName,
                   id: opt.countryId,
@@ -491,9 +538,10 @@ const PatientInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               {/* state options */}
-              <CustomSelectBox
-                value={formik.values.stateName}
-                name="stateName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.stateId}
+                name="stateId"
                 dropdownOptions={stateOptions?.map((opt) => ({
                   value: opt.stateName,
                   id: opt.stateId,
@@ -503,9 +551,10 @@ const PatientInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               {/* city types */}
-              <CustomSelectBox
-                value={formik.values.cityName}
-                name="cityName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.cityId}
+                name="cityId"
                 dropdownOptions={cityOptions?.map((opt) => ({
                   value: opt.cityName,
                   id: opt.cityId,
@@ -515,9 +564,10 @@ const PatientInfo = ({ formik }) => {
                 handleBlur={formik.handleBlur}
               />
               {/*  residence Type*/}
-              <CustomSelectBox
-                value={formik.values.residenceTypeName}
-                name="residenceTypeName"
+              <CustomSelectBox2
+                formik={formik}
+                value={formik.values.residenceTypeId}
+                name="residenceTypeId"
                 dropdownOptions={residenceOptions?.map((opt) => ({
                   value: opt.residenceTypeName,
                   id: opt.residenceTypeId,
@@ -529,22 +579,32 @@ const PatientInfo = ({ formik }) => {
             </Box>
           </AccordionDetails>
         </Accordion>
-       
 
         {/* emergency contact */}
         <Accordion>
-          <AccordionSummary className="accordianSummary"
-            expandIcon={<ExpandMore  sx={{fontSize:"25px", color:"#216FED", border:"1px solid #216FED", borderRadius:"50px"}}/>}
+          <AccordionSummary
+            className="accordianSummary"
+            expandIcon={
+              <ExpandMore
+                sx={{
+                  fontSize: "25px",
+                  color: "#216FED",
+                  border: "1px solid #216FED",
+                  borderRadius: "50px",
+                }}
+              />
+            }
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography className="accordianSummaryHeading"
-            component="h3"
-            fontWeight="600"
+            <Typography
+              className="accordianSummaryHeading"
+              component="h3"
+              fontWeight="600"
             >
               Emergency Contact:
             </Typography>
-          </AccordionSummary >
+          </AccordionSummary>
           <AccordionDetails>
             <Box
               display="grid"
