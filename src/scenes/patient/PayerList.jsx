@@ -1,12 +1,9 @@
-import React, { useState } from "react";
-import { getData } from "../../config/axiosFunctions";
-import path from "../../config/apiUrl";
+// import React, { useState } from "react";
 import { useEffect } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { getPayerAction } from "../../features/actions/payerAction";
 import { DataGrid } from "@mui/x-data-grid";
-import { useNavigate } from "react-router-dom";
 
 const PayerList = ({ handleSelectPayer, handlePaymentBy, modalFor }) => {
   const dispatch = useDispatch();
