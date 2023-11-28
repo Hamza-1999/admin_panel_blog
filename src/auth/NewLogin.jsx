@@ -48,8 +48,6 @@ const NewLogin = () => {
       top:{xs:"150px", sm:"150px",md:"-37px"},
       right:{xs:"0", sm:"0", md:"70px"},
       height:"100%",
-      // boxShadow: "-30px 0px 0px -2px rgba(0, 0, 0, 0.5)",
-     
     }}>
 
     <Box component={"form"} className='inner' sx={{
@@ -60,12 +58,12 @@ const NewLogin = () => {
         Login <span style={{ fontWeight: "lighter", fontSize: "40px" }}>Here</span>
       </Typography>
 
-      <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={2}>
+      <Typography variant='h6' fontWeight='600' color="#216FED" fontFamily="Radio Canada" marginTop={2}>
         Username
       </Typography>
       <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
 
-      <Typography variant='h6' color="#216FED" fontFamily="Poppins" marginTop={4}>
+      <Typography variant='h6' fontWeight='600' color="#216FED" fontFamily='Radio Canada' marginTop={4}>
         Password
       </Typography>
       <TextField style={{ width: "100%" }} id="outlined" defaultValue="" />
@@ -87,17 +85,17 @@ const NewLogin = () => {
       </label>
       <br />
 
-      <Button style={{
+      <Button sx={{
         color: "#FFF",
         position:'absolute',
         top:"400px",
-        // left:{lg:"110px",sm:"90px"},
-        left:{lg:"110px",xs:"0"},
+        left:{xs:"80px",lg:"100px"},
         backgroundColor: "#0464FF",
         borderRadius: "10px",
         border: "1px solid #0464FF",
-        // width:{lg:"48%",md:"45%",sm:"30%"}
         width:"48%",
+        fontFamily:'Radio Canada',
+        fontSize:{xs:'1rem',lg:'1.3rem'},
       }} variant="outlined" size="medium"  onClick={()=>navigate("/dashboard")}>
         Get started
       </Button>

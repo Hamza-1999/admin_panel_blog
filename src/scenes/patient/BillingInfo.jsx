@@ -18,6 +18,7 @@ import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomField from "../../components/CustomField";
 import CheckBox from "../../components/CheckBox";
 import { ExpandMore } from "@mui/icons-material";
+import CustomAccordion from "../../components/CustomAccordion";
 
 const BillingInfo = ({ formik }) => {
   const [statementType, setStatementType] = useState([]);
@@ -48,21 +49,9 @@ const BillingInfo = ({ formik }) => {
   }, []);
   return (
     <Box display="flex" flexDirection="column">
-      <Accordion defaultExpanded={true}>
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Statement Options
-          </Typography>
-        </AccordionSummary>
-
+      <CustomAccordion defaultExpanded={true} heading={'Statement Options'}>
         <AccordionDetails>
           <Box display="flex" gap="20px" flexDirection="column">
-            {/* <FormGroup>
-             <FormControlLabel 
-              className="customLabel"
-              control={<Checkbox />} label="Send Statement" />
-            </FormGroup> */}
-
             {/* statement type */}
             <Box
               display="grid"
@@ -130,14 +119,9 @@ const BillingInfo = ({ formik }) => {
             </Box>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* collection options */}
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Collection Options
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Collection Options'}>
         <AccordionDetails>
           <FormGroup>
             <FormControlLabel control={<Checkbox />} label="Send Statement" />
@@ -183,15 +167,9 @@ const BillingInfo = ({ formik }) => {
             </Box>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* payment portal */}
-      <Accordion>
-        {/* <AccordionSummary>Payment Portal Options</AccordionSummary> */}
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Payment Portal Options
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Payment Portal Options'}>
         <AccordionDetails>
           <Box>
             <Typography component="h4" fontWeight="500">
@@ -199,15 +177,9 @@ const BillingInfo = ({ formik }) => {
             </Typography>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* guarantor */}
-      <Accordion>
-        {/* <AccordionSummary>Guarantor</AccordionSummary> */}
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Guarantor
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Guarantor'}>
         <AccordionDetails>
           <Box display="flex" flexDirection="column" gap="20px">
             <Box width={{ xs: "100%", sm: "60%", md: "50%" }}>
@@ -418,7 +390,7 @@ const BillingInfo = ({ formik }) => {
             </Stack>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
     </Box>
   );
 };

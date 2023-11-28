@@ -15,15 +15,14 @@ const CustomDatePicker = ({
       <label className="customLabel" htmlFor="">
         {dateLabel}
       </label>
-      <LocalizationProvider dateAdapter={AdapterDayjs} locale="en">
-        <DatePicker
-          className="customDatePicker"
+      <LocalizationProvider  dateAdapter={AdapterDayjs} locale="en">
+        <DatePicker className="customDatePicker"
           sx={{
             width: "100%",
             background: "white",
             "& .MuiInputBase-input": {
-              fontSize: "1.3rem",
-              height: "1.2rem",
+              fontSize: "1.2rem",
+              height: ".7rem",
             },
             "& .MuiInputLabel-root": {
               fontSize: "1.5rem",
@@ -44,6 +43,7 @@ const CustomDatePicker = ({
           inputFormat="MM/DD/YYYY"
         />
       </LocalizationProvider>
+     
     </div>
   );
 };

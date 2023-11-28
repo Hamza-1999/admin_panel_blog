@@ -50,7 +50,7 @@ const CustomSearchField = ({
             }}
           >
             <IconButton onClick={handleModalOpen}>
-              <Search style={{ color: "black", fontSize: "2rem" }} />
+              <Search style={{ color: "black", fontSize: "1.9rem" }} />
             </IconButton>
           </div>
         </div>
