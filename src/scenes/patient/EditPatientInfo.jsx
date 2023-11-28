@@ -274,7 +274,7 @@ const EditPatientInfo = () => {
                 sx={{
                   marginRight: "30px",
                 }}
-                // onSubmit={formik.handleSubmit}
+                
               >
                 {loading ? "Updating..." : "Update"}
               </Button>

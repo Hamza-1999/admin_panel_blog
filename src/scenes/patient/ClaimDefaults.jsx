@@ -19,6 +19,7 @@ import { getData } from "../../config/axiosFunctions";
 import { useEffect } from "react";
 import { useState } from "react";
 import CustomDatePicker from "../../components/CustomDatePicker";
+import CustomAccordion from "../../components/CustomAccordion";
 
 const ClaimDefaults = ({ formik }) => {
   const [assignmentBenefits, setAssignmentBenefits] = useState([]);
@@ -97,13 +98,7 @@ const ClaimDefaults = ({ formik }) => {
         </FormControl>
       </Stack>
 
-      <Accordion>
-        <AccordionSummary>
-          Assignment
-          <Typography variant="h2" fontWeight="600">
-            Assignment
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Assignment'}>
         <AccordionDetails>
           <Box display="flex" flexDirection="column" gap="20px">
             <FormControl>
@@ -136,14 +131,9 @@ const ClaimDefaults = ({ formik }) => {
             </FormControl>
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* default codes */}
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Default Codes
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Default Codes'}>
         <AccordionDetails>
           <Box
             display="grid"
@@ -298,15 +288,9 @@ const ClaimDefaults = ({ formik }) => {
             />
           </Box>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* illness & accident information */}
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Illness & Accident Information
-          </Typography>
-        </AccordionSummary>
-
+      <CustomAccordion heading={'Illness & Accident Information'}>
         <AccordionDetails>
           <Stack gap="20px">
             <FormGroup>
@@ -351,14 +335,9 @@ const ClaimDefaults = ({ formik }) => {
             </FormControl>
           </Stack>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
       {/* other */}
-      <Accordion>
-        <AccordionSummary>
-          <Typography variant="h2" fontWeight="600">
-            Other
-          </Typography>
-        </AccordionSummary>
+      <CustomAccordion heading={'Other'}>
         <AccordionDetails>
           <Stack gap="20px">
             <CustomField
@@ -434,7 +413,7 @@ const ClaimDefaults = ({ formik }) => {
             </Box>
           </Stack>
         </AccordionDetails>
-      </Accordion>
+      </CustomAccordion>
     </Box>
   );
 };

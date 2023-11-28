@@ -27,6 +27,8 @@ import CustomSearchField from "../../components/CustomSearchField";
 import CustomButton from "../../components/CustomButton";
 import CustomDatePicker from "../../components/CustomDatePicker";
 import CustomSelectBox2 from "../../components/CustomSelectBox2";
+import CustomExpandIcon from "../../components/CustomExpandIcon";
+import CustomAccordion from "../../components/CustomAccordion";
 // import { createPatientSchema } from "../../schemas";
 
 const PatientInfo = ({ formik }) => {
@@ -96,31 +98,7 @@ const PatientInfo = ({ formik }) => {
     <>
       <Box display="flex" flexDirection="column">
         {/* general Info */}
-        <Accordion defaultExpanded={true}>
-          <AccordionSummary
-            className="accordianSummary"
-            expandIcon={
-              <ExpandMore
-                sx={{
-                  fontSize: "25px",
-                  color: "#216FED",
-                  border: "1px solid #216FED",
-                  borderRadius: "50px",
-                }}
-              />
-            }
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography
-              className="accordianSummaryHeading"
-              // variant="h5"
-              component="h3"
-              fontWeight="600"
-            >
-              General Information:
-            </Typography>
-          </AccordionSummary>
+        <CustomAccordion defaultExpanded={true} heading={"General Information"}>
 
           <AccordionDetails>
             <Box
@@ -310,34 +288,10 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </CustomAccordion>
 
         {/* contact details */}
-        <Accordion>
-          <AccordionSummary
-            className="accordianSummary"
-            expandIcon={
-              <ExpandMore
-                sx={{
-                  fontSize: "25px",
-                  color: "#216FED",
-                  border: "1px solid #216FED",
-                  borderRadius: "50px",
-                }}
-              />
-            }
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography
-              className="accordianSummaryHeading"
-              component="h3"
-              fontWeight="600"
-            >
-              Contact Details:
-            </Typography>
-          </AccordionSummary>
-
+        <CustomAccordion  heading="Contact Details">
           <AccordionDetails>
             <Box
               display="grid"
@@ -390,35 +344,10 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </CustomAccordion>
 
         {/* Birth Details */}
-        <Accordion>
-          <AccordionSummary
-            className="accordianSummary"
-            expandIcon={
-              <ExpandMore
-                sx={{
-                  fontSize: "25px",
-                  color: "#216FED",
-                  border: "1px solid #216FED",
-                  borderRadius: "50px",
-                }}
-              />
-            }
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography
-              className="accordianSummaryHeading"
-              // variant="h5"
-              component="h3"
-              fontWeight="600"
-            >
-              Birth Details:
-            </Typography>
-          </AccordionSummary>
-
+        <CustomAccordion  heading="Birth Details">
           <AccordionDetails>
             <Box
               display="grid"
@@ -465,33 +394,10 @@ const PatientInfo = ({ formik }) => {
               </div>
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </CustomAccordion>
 
         {/* addres details */}
-        <Accordion>
-          <AccordionSummary
-            className="accordianSummary"
-            expandIcon={
-              <ExpandMore
-                sx={{
-                  fontSize: "25px",
-                  color: "#216FED",
-                  border: "1px solid #216FED",
-                  borderRadius: "50px",
-                }}
-              />
-            }
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography
-              className="accordianSummaryHeading"
-              component="h3"
-              fontWeight="600"
-            >
-              Address Details:
-            </Typography>
-          </AccordionSummary>
+        <CustomAccordion  heading="Address Details">
           <AccordionDetails>
             <Box
               display="grid"
@@ -578,33 +484,10 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </CustomAccordion>
 
         {/* emergency contact */}
-        <Accordion>
-          <AccordionSummary
-            className="accordianSummary"
-            expandIcon={
-              <ExpandMore
-                sx={{
-                  fontSize: "25px",
-                  color: "#216FED",
-                  border: "1px solid #216FED",
-                  borderRadius: "50px",
-                }}
-              />
-            }
-            aria-controls="panel1a-content"
-            id="panel1a-header"
-          >
-            <Typography
-              className="accordianSummaryHeading"
-              component="h3"
-              fontWeight="600"
-            >
-              Emergency Contact:
-            </Typography>
-          </AccordionSummary>
+        <CustomAccordion heading="Emergency Contact">
           <AccordionDetails>
             <Box
               display="grid"
@@ -679,7 +562,7 @@ const PatientInfo = ({ formik }) => {
               />
             </Box>
           </AccordionDetails>
-        </Accordion>
+        </CustomAccordion>
       </Box>
     </>
   );

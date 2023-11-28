@@ -44,6 +44,7 @@ const Claim = () => {
               handleClick={() => navigate("/claims/new")}
               isBlue={true}
               padding="5px 30px"
+              margin={'10px'}
             >
                Add Claim
             </CustomButton>
